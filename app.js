@@ -1401,13 +1401,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initPersonalizadas();
   initLazyVideosPersonalizadas();
   
-  // Mostrar botón de WhatsApp después de que cargue la página
-  setTimeout(() => {
-    const whatsappBtn = document.getElementById('whatsapp-float-btn');
-    if (whatsappBtn) {
-      whatsappBtn.classList.add('loaded');
+  // Mostrar botón de WhatsApp inmediatamente (ya está visible por defecto)
+  const whatsappBtn = document.getElementById('whatsapp-float-btn');
+  if (whatsappBtn) {
+    whatsappBtn.classList.add('loaded');
+    // Asegurar que el SVG se renderice correctamente
+    const svg = whatsappBtn.querySelector('svg');
+    if (svg) {
+      svg.setAttribute('fill', 'white');
+      svg.style.fill = 'white';
+      svg.style.color = 'white';
     }
-  }, 800);
+  }
 });
 
 // Lazy loading para videos de personalizadas
