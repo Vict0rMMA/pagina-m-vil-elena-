@@ -1745,7 +1745,16 @@ function mostrarConfirmacion(mensaje, onConfirm) {
   const cancelButton = document.getElementById('confirm-cancel');
   const overlay = document.getElementById('confirm-overlay');
   
-  if (!modal || !messageElement || !okButton || !cancelButton) return;
+  if (!modal || !messageElement || !okButton || !cancelButton) {
+    console.error('Elementos del modal de confirmación no encontrados');
+    return;
+  }
+  
+  // Limpiar listeners anteriores
+  const newOkButton = okButton.cloneNode(true);
+  okButton.parentNode.replaceChild(newOkButton, okButton);
+  const newCancelButton = cancelButton.cloneNode(true);
+  cancelButton.parentNode.replaceChild(newCancelButton, cancelButton);
   
   // Establecer mensaje
   messageElement.textContent = mensaje;
@@ -1783,14 +1792,13 @@ function mostrarConfirmacion(mensaje, onConfirm) {
   const handleConfirm = () => {
     cerrar();
     if (onConfirm) onConfirm();
-    okButton.removeEventListener('click', handleConfirm);
-    cancelButton.removeEventListener('click', cerrar);
-    overlay.removeEventListener('click', cerrar);
   };
   
-  okButton.onclick = handleConfirm;
-  cancelButton.onclick = cerrar;
-  overlay.onclick = cerrar;
+  newOkButton.addEventListener('click', handleConfirm);
+  newCancelButton.addEventListener('click', cerrar);
+  if (overlay) {
+    overlay.addEventListener('click', cerrar);
+  }
   
   // Cerrar con ESC
   const handleEsc = (e) => {
@@ -1952,10 +1960,12 @@ function renderCarrito() {
   }
 }
 
-// Funciones globales para los botones del carrito
+// Exponer funciones globalmente para acceso desde HTML
+window.vaciarCarrito = vaciarCarrito;
+window.abrirCarrito = abrirCarrito;
+window.cerrarCarrito = cerrarCarrito;
 window.actualizarCantidad = actualizarCantidad;
 window.eliminarDelCarrito = eliminarDelCarrito;
-window.vaciarCarrito = vaciarCarrito;
 
 // Productos
 function initProductos() {
