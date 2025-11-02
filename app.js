@@ -1703,7 +1703,12 @@ function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
   }
   
   // Mostrar feedback visual mejorado con toast mejorado
-  mostrarToastProducto(producto);
+  if (typeof mostrarToastProducto === 'function') {
+    mostrarToastProducto(producto);
+  } else {
+    // Fallback si la función no existe
+    mostrarNotificacion(`${producto.nombre} agregado al carrito`, 'success');
+  }
 }
 
 function eliminarDelCarrito(index) {
@@ -1877,7 +1882,7 @@ function renderCarrito() {
     let detallesTexto = '';
     if (tipoTexto) detallesTexto += tipoTexto;
     if (tamanoTexto) detallesTexto += (detallesTexto ? ' • ' : '') + tamanoTexto;
-    if (presentacionTexto && !tamanoTexto) detallesTexto += (detallesTexto ? ' • ' : '') + presentacionTexto;
+    if (presentacionTexto) detallesTexto += (detallesTexto ? ' • ' : '') + presentacionTexto;
     
     const subtotal = item.precio * item.cantidad;
     
