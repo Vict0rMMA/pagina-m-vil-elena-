@@ -859,13 +859,19 @@ const productos = {
       id: "nad3",
       categoria: "navidad",
       nombre: "Vela Degrade Larga Marcada",
-      descripcion: "Velas largas con efecto degradado y personalización con nombres o mensajes. Disponible en múltiples colores vibrantes (rosa, amarillo, azul, verde). Disponible en dos tamaños: Grande y Pequeña, con presentación en bolsa o caja.",
+      descripcion: "Velas largas con efecto degradado y personalización con nombres o mensajes. Disponible en múltiples colores vibrantes (rosa, amarillo, azul, verde). Disponible en dos tamaños: Grande (17cm altura, 1.5cm diámetro) y Pequeña (14cm altura, 1.5cm diámetro), con presentación en bolsa o caja.",
       imagen: "assets/productos/Navidad/3.jpg",
       tamanos: [
-        { nombre: "Grande Bolsa", precio: 10800 },
-        { nombre: "Pequeña Bolsa", precio: 10500 },
-        { nombre: "Grande Caja", precio: 12500 },
-        { nombre: "Pequeña Caja", precio: 11500 }
+        { 
+          nombre: "Grande", 
+          detal: { bolsa: 10800, caja: 12500 },
+          mayorista: { bolsa: 9800, caja: 11500 }
+        },
+        { 
+          nombre: "Pequeña", 
+          detal: { bolsa: 10500, caja: 11500 },
+          mayorista: { bolsa: 9000, caja: 10500 }
+        }
       ]
     },
     {
@@ -1599,14 +1605,6 @@ function actualizarContadorCarrito() {
     }
   });
   
-  // Actualizar URL de WhatsApp flotante con productos del carrito
-  const whatsappFloatBtn = document.getElementById('whatsapp-float-btn');
-  if (whatsappFloatBtn && total > 0) {
-    const mensaje = generarMensajeWhatsApp();
-    whatsappFloatBtn.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(mensaje)}`;
-  } else if (whatsappFloatBtn) {
-    whatsappFloatBtn.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent('Hola, me interesa conocer más sobre sus productos')}`;
-  }
 }
 
 function generarMensajeWhatsApp() {
@@ -1631,11 +1629,39 @@ function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
   const producto = buscarProducto(productoId);
   if (!producto) return;
   
-  // Si presentacion es un tamaño (para productos de Navidad), usar como tamaño
-  const esTamano = producto.tamanos && producto.tamanos.some(t => t.nombre === presentacion);
+  // Verificar si presentacion contiene tamaño y presentación (ej: "Grande Bolsa")
+  let tamano = null;
+  let presentacionFinal = null;
   
-  // Crear identificador único basado en tipo de compra y presentación/tamaño
-  const identificador = presentacion ? `${tipoCompra}-${presentacion}` : tipoCompra;
+  if (presentacion) {
+    // Buscar si alguno de los tamaños coincide con el inicio del string
+    if (producto.tamanos && producto.tamanos.length > 0) {
+      const tamanoEncontrado = producto.tamanos.find(t => presentacion.startsWith(t.nombre));
+      if (tamanoEncontrado) {
+        tamano = tamanoEncontrado.nombre;
+        // Extraer la presentación del resto del string
+        const resto = presentacion.replace(tamano, '').trim().toLowerCase();
+        if (resto === 'bolsa' || resto === 'caja') {
+          presentacionFinal = resto;
+        }
+      } else {
+        // Si no coincide con ningún tamaño, verificar si es solo un tamaño
+        const esTamanoSolo = producto.tamanos.some(t => t.nombre === presentacion);
+        if (esTamanoSolo) {
+          tamano = presentacion;
+        } else {
+          // Si no es tamaño, asumir que es presentación
+          presentacionFinal = presentacion.toLowerCase();
+        }
+      }
+    } else {
+      // Si no tiene tamaños, asumir que es presentación
+      presentacionFinal = presentacion.toLowerCase();
+    }
+  }
+  
+  // Crear identificador único basado en tipo de compra, tamaño y presentación
+  const identificador = `${tipoCompra}-${tamano || ''}-${presentacionFinal || ''}`.replace(/-+$/, '').replace(/^-+/, '');
   
   // Buscar si ya existe en el carrito
   const itemExistente = state.carrito.find(
@@ -1649,8 +1675,8 @@ function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
       id: productoId,
       nombre: producto.nombre,
       tipoCompra: tipoCompra,
-      presentacion: esTamano ? null : (presentacion || null),
-      tamano: esTamano ? presentacion : null,
+      presentacion: presentacionFinal,
+      tamano: tamano,
       identificador: identificador,
       precio: precio,
       cantidad: 1,
@@ -2509,19 +2535,27 @@ function abrirModalProducto(productoId) {
     const esMayorista = producto.nombre.toLowerCase().includes('mayorista');
     
     // Verificar si los tamaños tienen precios detal/mayorista incorporados
-    const tamanosConPreciosMultiples = tamanos.some(t => t.precios && t.precios.detal && t.precios.mayorista);
+    const tamanosConPreciosMultiples = tamanos.some(t => t.detal && t.mayorista);
+    const tamanosConPreciosYPresentacion = tamanos.some(t => t.detal && typeof t.detal === 'object' && t.detal.bolsa);
     
-    let tamanosDetal, tamanosMayorista, tieneAmbos;
+    let tamanosDetal, tamanosMayorista, tieneAmbos, tienePresentacionEnTamanos = false;
     
-    if (tamanosConPreciosMultiples) {
-      // Los tamaños tienen precios detal/mayorista incorporados
+    if (tamanosConPreciosYPresentacion) {
+      // Los tamaños tienen precios detal/mayorista con presentación (bolsa/caja)
+      tienePresentacionEnTamanos = true;
+      tieneAmbos = true;
+      // Mantener la estructura completa para procesarla después
+      tamanosDetal = tamanos;
+      tamanosMayorista = tamanos;
+    } else if (tamanosConPreciosMultiples) {
+      // Los tamaños tienen precios detal/mayorista simples (sin presentación)
       tamanosDetal = tamanos.map(t => ({
         nombre: t.nombre,
-        precio: t.precios.detal
+        precio: typeof t.detal === 'object' ? t.detal.bolsa : t.detal
       }));
       tamanosMayorista = tamanos.map(t => ({
         nombre: t.nombre,
-        precio: t.precios.mayorista
+        precio: typeof t.mayorista === 'object' ? t.mayorista.bolsa : t.mayorista
       }));
       tieneAmbos = true;
     } else {
@@ -2600,7 +2634,51 @@ function abrirModalProducto(productoId) {
       </div>
       ` : ''}
       
-      <!-- Sección de tamaños disponibles -->
+      ${tienePresentacionEnTamanos ? `
+      <!-- Sección de tamaños disponibles (con presentación) -->
+      <div class="mb-6" id="tamanos-section" ${tieneAmbos ? 'style="display: none;"' : ''}>
+        <label class="block text-center text-sm font-semibold text-gray-800 dark:text-white mb-4">
+          Selecciona el tamaño:
+        </label>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md mx-auto" id="tamanos-grid">
+          ${tamanos.map((tamano, index) => `
+            <button 
+              data-tamano="${tamano.nombre}"
+              class="tamano-btn px-6 py-4 border-2 rounded-xl transition-all min-h-[90px] border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30"
+            >
+              <div class="font-bold text-lg">${tamano.nombre}</div>
+              <div class="text-xs text-gray-600 dark:text-gray-400 mt-1">Selecciona presentación</div>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+      
+      <!-- Sección de presentación (bolsa/caja) -->
+      <div class="mb-6" id="presentacion-tamanos-section" style="display: none;">
+        <label class="block text-center text-sm font-semibold text-gray-800 dark:text-white mb-4">
+          Selecciona presentación:
+        </label>
+        <div class="grid grid-cols-2 gap-4 max-w-md mx-auto" id="presentacion-tamanos-grid">
+          <button 
+            data-presentacion="bolsa"
+            class="presentacion-tamano-btn px-6 py-4 border-2 rounded-xl transition-all min-h-[100px] border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 flex flex-col items-center justify-center"
+          >
+            <div class="font-bold text-lg mb-1">Bolsa</div>
+            <div class="text-xs text-gray-600 dark:text-gray-400 mb-2">Presentación individual</div>
+            <div class="text-yellow-600 dark:text-yellow-400 font-bold text-xl" id="precio-bolsa-tamano-display">-</div>
+          </button>
+          <button 
+            data-presentacion="caja"
+            class="presentacion-tamano-btn px-6 py-4 border-2 rounded-xl transition-all min-h-[100px] border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 flex flex-col items-center justify-center"
+          >
+            <div class="font-bold text-lg mb-1">Caja</div>
+            <div class="text-xs text-gray-600 dark:text-gray-400 mb-2">Presentación completa</div>
+            <div class="text-yellow-600 dark:text-yellow-400 font-bold text-xl" id="precio-caja-tamano-display">-</div>
+          </button>
+        </div>
+      </div>
+      ` : `
+      <!-- Sección de tamaños disponibles (sin presentación) -->
       <div class="mb-6" id="tamanos-section" ${tieneAmbos ? 'style="display: none;"' : ''}>
         <label class="block text-center text-sm font-semibold text-gray-800 dark:text-white mb-4">
           Selecciona el tamaño:
@@ -2618,6 +2696,14 @@ function abrirModalProducto(productoId) {
           `).join('')}
         </div>
       </div>
+      `}
+      
+      <!-- Precio dinámico -->
+      <div class="mb-6 text-center" id="precio-tamano-container" style="display: none;">
+        <div id="precio-tamano-display" class="text-2xl md:text-3xl font-bold text-yellow-600 dark:text-yellow-400 opacity-0 transition-opacity duration-300">
+          <span class="text-xl">💛</span> Precio: <span id="precio-tamano-valor">-</span>
+        </div>
+      </div>
       
       <!-- Botón agregar al carrito -->
       <div class="text-center mt-8">
@@ -2626,7 +2712,7 @@ function abrirModalProducto(productoId) {
           disabled
           class="px-8 py-4 bg-gray-400 dark:bg-gray-600 text-white rounded-full font-bold text-lg transition-all duration-300 cursor-not-allowed"
         >
-          ${tieneAmbos ? 'Selecciona tipo de compra y tamaño' : 'Selecciona un tamaño'}
+          ${tienePresentacionEnTamanos ? 'Selecciona tipo de compra, tamaño y presentación' : (tieneAmbos ? 'Selecciona tipo de compra y tamaño' : 'Selecciona un tamaño')}
         </button>
       </div>
     `;
@@ -2634,6 +2720,7 @@ function abrirModalProducto(productoId) {
     // Event listeners para selección de tamaño
     let tamanoSeleccionado = null;
     let precioSeleccionado = null;
+    let presentacionSeleccionada = null;
     let tipoCompraSeleccionado = tieneAmbos ? null : (esMayorista ? 'mayorista' : 'detal');
     
     const btnAgregar = document.getElementById('btn-agregar-carrito');
@@ -2643,11 +2730,41 @@ function abrirModalProducto(productoId) {
       return;
     }
     
+    // Función para actualizar el botón de agregar al carrito
+    function actualizarBotónAgregar() {
+      if (tienePresentacionEnTamanos) {
+        if (tipoCompraSeleccionado && tamanoSeleccionado && presentacionSeleccionada) {
+          btnAgregar.disabled = false;
+          btnAgregar.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
+          btnAgregar.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
+          btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
+        } else {
+          btnAgregar.disabled = true;
+          btnAgregar.classList.add('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
+          btnAgregar.classList.remove('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
+          btnAgregar.textContent = 'Selecciona tipo de compra, tamaño y presentación';
+        }
+      } else {
+        if (tipoCompraSeleccionado && tamanoSeleccionado) {
+          btnAgregar.disabled = false;
+          btnAgregar.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
+          btnAgregar.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
+          btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
+        } else {
+          btnAgregar.disabled = true;
+          btnAgregar.classList.add('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
+          btnAgregar.classList.remove('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
+          btnAgregar.textContent = tieneAmbos ? 'Selecciona tipo de compra y tamaño' : 'Selecciona un tamaño';
+        }
+      }
+    }
+    
     // Si tiene ambos tipos, agregar listeners para selección de tipo
     if (tieneAmbos) {
       const tipoBtns = content.querySelectorAll('.tipo-compra-btn-tamanos');
       const tamanosSection = document.getElementById('tamanos-section');
       const tamanosGrid = document.getElementById('tamanos-grid');
+      const presentacionSection = document.getElementById('presentacion-tamanos-section');
       
       tipoBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2668,71 +2785,59 @@ function abrirModalProducto(productoId) {
           btn.classList.remove('bg-gradient-to-br', 'from-blue-50', 'to-blue-100', 'dark:from-blue-900/30', 'dark:to-blue-800/30', 'from-purple-50', 'to-purple-100', 'dark:from-purple-900/30', 'dark:to-purple-800/30');
           tipoCompraSeleccionado = btn.dataset.tipo;
           
-          // Mostrar tamaños correspondientes
-          const tamanosAMostrar = tipoCompraSeleccionado === 'detal' ? tamanosDetal : tamanosMayorista;
-          tamanosGrid.innerHTML = tamanosAMostrar.map(tamano => `
-            <button 
-              data-tamano="${tamano.nombre}"
-              data-precio="${tamano.precio}"
-              class="tamano-btn px-6 py-4 border-2 rounded-xl transition-all min-h-[90px] border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30"
-            >
-              <div class="font-bold text-lg">${tamano.nombre}</div>
-              <div class="text-yellow-600 dark:text-yellow-400 font-semibold mt-2">$${tamano.precio.toLocaleString()}</div>
-            </button>
-          `).join('');
+          if (tienePresentacionEnTamanos) {
+            // Mostrar tamaños sin precios (se mostrarán al seleccionar)
+            tamanosGrid.innerHTML = tamanos.map(tamano => `
+              <button 
+                data-tamano="${tamano.nombre}"
+                class="tamano-btn px-6 py-4 border-2 rounded-xl transition-all min-h-[90px] border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30"
+              >
+                <div class="font-bold text-lg">${tamano.nombre}</div>
+                <div class="text-xs text-gray-600 dark:text-gray-400 mt-1">Selecciona presentación</div>
+              </button>
+            `).join('');
+          } else {
+            // Mostrar tamaños con precios
+            const tamanosAMostrar = tipoCompraSeleccionado === 'detal' ? tamanosDetal : tamanosMayorista;
+            tamanosGrid.innerHTML = tamanosAMostrar.map(tamano => `
+              <button 
+                data-tamano="${tamano.nombre}"
+                data-precio="${tamano.precio}"
+                class="tamano-btn px-6 py-4 border-2 rounded-xl transition-all min-h-[90px] border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30"
+              >
+                <div class="font-bold text-lg">${tamano.nombre}</div>
+                <div class="text-yellow-600 dark:text-yellow-400 font-semibold mt-2">$${tamano.precio.toLocaleString()}</div>
+              </button>
+            `).join('');
+          }
           
-          // Resetear selección de tamaño
+          // Resetear selecciones
           tamanoSeleccionado = null;
           precioSeleccionado = null;
-          btnAgregar.disabled = true;
-          btnAgregar.classList.add('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
-          btnAgregar.classList.remove('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
-          btnAgregar.textContent = 'Selecciona un tamaño';
+          presentacionSeleccionada = null;
+          
+          // Ocultar sección de presentación si existe
+          if (presentacionSection) {
+            presentacionSection.style.display = 'none';
+          }
+          
+          // Ocultar precio
+          const precioContainer = document.getElementById('precio-tamano-container');
+          if (precioContainer) {
+            precioContainer.style.display = 'none';
+          }
           
           // Mostrar sección de tamaños
           if (tamanosSection) {
             tamanosSection.style.display = 'block';
           }
           
-          // Agregar listeners a los nuevos botones de tamaño usando delegación de eventos
-          // Esto evita acumulación de listeners cuando se actualiza el HTML
-          const tamanosGridContainer = tamanosGrid.parentElement;
-          if (tamanosGridContainer) {
-            // Usar delegación de eventos directamente en el contenedor
-            // Esto funciona incluso cuando se actualiza el innerHTML
-            tamanosGridContainer.addEventListener('click', (e) => {
-              const tamanoBtn = e.target.closest('.tamano-btn');
-              if (!tamanoBtn || !tamanosGrid.contains(tamanoBtn)) return;
-              
-              // Remover selección anterior
-              const tamanoBtns = tamanosGrid.querySelectorAll('.tamano-btn');
-              tamanoBtns.forEach(b => {
-                b.classList.remove('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
-                b.classList.add('border-gray-300', 'dark:border-gray-600');
-              });
-              
-              // Agregar selección actual
-              tamanoBtn.classList.add('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
-              tamanoBtn.classList.remove('border-gray-300', 'dark:border-gray-600');
-              
-              tamanoSeleccionado = tamanoBtn.dataset.tamano;
-              precioSeleccionado = parseInt(tamanoBtn.dataset.precio);
-              
-              // Habilitar botón agregar
-              const btnAgregarActual = document.getElementById('btn-agregar-carrito');
-              if (btnAgregarActual) {
-                btnAgregarActual.disabled = false;
-                btnAgregarActual.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
-                btnAgregarActual.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
-                btnAgregarActual.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
-              }
-            }, { once: false });
-          }
+          actualizarBotónAgregar();
         });
       });
     }
     
-    // Listeners para botones de tamaño iniciales usando delegación de eventos
+    // Listeners para botones de tamaño usando delegación de eventos
     const tamanosSection = content.querySelector('#tamanos-section');
     if (tamanosSection) {
       tamanosSection.addEventListener('click', (e) => {
@@ -2751,16 +2856,91 @@ function abrirModalProducto(productoId) {
         tamanoBtn.classList.remove('border-gray-300', 'dark:border-gray-600');
         
         tamanoSeleccionado = tamanoBtn.dataset.tamano;
-        precioSeleccionado = parseInt(tamanoBtn.dataset.precio);
         
-        // Habilitar botón agregar
-        if (btnAgregar) {
-          btnAgregar.disabled = false;
-          btnAgregar.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
-          btnAgregar.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
-          btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
+        if (tienePresentacionEnTamanos) {
+          // Si tiene presentación, mostrar sección de presentación
+          const presentacionSection = document.getElementById('presentacion-tamanos-section');
+          const precioBolsaDisplay = document.getElementById('precio-bolsa-tamano-display');
+          const precioCajaDisplay = document.getElementById('precio-caja-tamano-display');
+          
+          // Buscar el tamaño seleccionado en el array
+          const tamanoData = tamanos.find(t => t.nombre === tamanoSeleccionado);
+          if (tamanoData && tipoCompraSeleccionado) {
+            const preciosTamano = tamanoData[tipoCompraSeleccionado];
+            if (preciosTamano) {
+              if (precioBolsaDisplay) precioBolsaDisplay.textContent = `$${preciosTamano.bolsa.toLocaleString()}`;
+              if (precioCajaDisplay) precioCajaDisplay.textContent = `$${preciosTamano.caja.toLocaleString()}`;
+            }
+          }
+          
+          // Mostrar sección de presentación
+          if (presentacionSection) {
+            presentacionSection.style.display = 'block';
+          }
+          
+          // Resetear presentación seleccionada
+          presentacionSeleccionada = null;
+          precioSeleccionado = null;
+          
+          // Ocultar precio hasta seleccionar presentación
+          const precioContainer = document.getElementById('precio-tamano-container');
+          if (precioContainer) {
+            precioContainer.style.display = 'none';
+          }
+        } else {
+          // Si no tiene presentación, usar precio directo
+          precioSeleccionado = parseInt(tamanoBtn.dataset.precio);
+          
+          // Ocultar sección de presentación si existe
+          const presentacionSection = document.getElementById('presentacion-tamanos-section');
+          if (presentacionSection) {
+            presentacionSection.style.display = 'none';
+          }
         }
+        
+        actualizarBotónAgregar();
       });
+    }
+    
+    // Listeners para botones de presentación (solo si tiene presentación en tamaños)
+    if (tienePresentacionEnTamanos) {
+      const presentacionSection = document.getElementById('presentacion-tamanos-section');
+      if (presentacionSection) {
+        presentacionSection.addEventListener('click', (e) => {
+          const presentacionBtn = e.target.closest('.presentacion-tamano-btn');
+          if (!presentacionBtn || !tipoCompraSeleccionado || !tamanoSeleccionado) return;
+          
+          // Remover selección anterior
+          const presentacionBtns = presentacionSection.querySelectorAll('.presentacion-tamano-btn');
+          presentacionBtns.forEach(b => {
+            b.classList.remove('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
+          });
+          
+          // Agregar selección actual
+          presentacionBtn.classList.add('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
+          presentacionSeleccionada = presentacionBtn.dataset.presentacion;
+          
+          // Buscar el tamaño seleccionado y obtener el precio
+          const tamanoData = tamanos.find(t => t.nombre === tamanoSeleccionado);
+          if (tamanoData && tamanoData[tipoCompraSeleccionado]) {
+            precioSeleccionado = tamanoData[tipoCompraSeleccionado][presentacionSeleccionada];
+            
+            // Mostrar precio
+            const precioContainer = document.getElementById('precio-tamano-container');
+            const precioValor = document.getElementById('precio-tamano-valor');
+            if (precioContainer && precioValor) {
+              precioValor.textContent = `$${precioSeleccionado.toLocaleString()}`;
+              precioContainer.style.display = 'block';
+              setTimeout(() => {
+                const precioDisplay = document.getElementById('precio-tamano-display');
+                if (precioDisplay) precioDisplay.style.opacity = '1';
+              }, 10);
+            }
+          }
+          
+          actualizarBotónAgregar();
+        });
+      }
     }
     
     // Event listener para agregar al carrito (usar una función nombrada para poder removerla si es necesario)
@@ -2772,7 +2952,13 @@ function abrirModalProducto(productoId) {
       nuevoBtnAgregar.addEventListener('click', () => {
         if (!tamanoSeleccionado || !precioSeleccionado) return;
         
-        agregarAlCarrito(producto.id, tipoCompraSeleccionado || (esMayorista ? 'mayorista' : 'detal'), tamanoSeleccionado, precioSeleccionado);
+        const tipoCompra = tipoCompraSeleccionado || (esMayorista ? 'mayorista' : 'detal');
+        // Si tiene presentación, combinarla con el tamaño
+        const presentacionOTamano = tienePresentacionEnTamanos && presentacionSeleccionada 
+          ? `${tamanoSeleccionado} ${presentacionSeleccionada.charAt(0).toUpperCase() + presentacionSeleccionada.slice(1)}`
+          : tamanoSeleccionado;
+        
+        agregarAlCarrito(producto.id, tipoCompra, presentacionOTamano, precioSeleccionado);
         cerrarModalProducto();
       });
     }
