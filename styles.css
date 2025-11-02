@@ -1499,36 +1499,34 @@ a.bg-yellow-600:hover {
   transform: scale(1.05);
 }
 
-/* WhatsApp Floating Button - Diseño Profesional */
+/* WhatsApp Floating Button - Diseño Natural como Icono Oficial */
 .whatsapp-float-btn {
   position: fixed;
   bottom: 90px;
   right: 20px;
   z-index: 999;
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   background: #25D366;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.5), 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  transition: all 0.2s ease;
   text-decoration: none;
   cursor: pointer;
-  border: 3px solid rgba(255, 255, 255, 0.2);
+  border: none;
 }
 
 .whatsapp-float-btn:hover {
-  background: #20BA5A;
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6), 0 4px 12px rgba(0, 0, 0, 0.3);
-  transform: translateY(-4px) scale(1.05);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: #25D366;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  transform: scale(1.05);
 }
 
 .whatsapp-float-btn:active {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 2px 12px rgba(37, 211, 102, 0.4), 0 1px 6px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
 }
 
 .whatsapp-icon {
@@ -1536,11 +1534,6 @@ a.bg-yellow-600:hover {
   height: 32px;
   display: block;
   fill: white;
-  transition: transform 0.3s ease;
-}
-
-.whatsapp-float-btn:hover .whatsapp-icon {
-  transform: scale(1.1);
 }
 
 @media (max-width: 767px) {
@@ -1549,7 +1542,6 @@ a.bg-yellow-600:hover {
     right: 16px;
     width: 56px;
     height: 56px;
-    border-width: 2px;
   }
   
   .whatsapp-icon {
@@ -1562,8 +1554,8 @@ a.bg-yellow-600:hover {
   .whatsapp-float-btn {
     bottom: 24px;
     right: 24px;
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
   }
   
   .whatsapp-icon {
