@@ -1387,24 +1387,42 @@ function initDarkMode() {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
   const currentTheme = localStorage.getItem('theme');
   
+  // Aplicar dark mode tanto al html como al body para asegurar compatibilidad con Tailwind
   if (currentTheme === 'dark' || (!currentTheme && prefersDark.matches)) {
+    document.documentElement.classList.add('dark');
     document.body.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    document.body.classList.remove('dark');
   }
   
   // Botón de toggle
   const themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
       const isDark = document.body.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
     });
   }
   
   // Escuchar cambios del sistema
   prefersDark.addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
-      document.body.classList.toggle('dark', e.matches);
+      if (e.matches) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+      }
     }
   });
 }
