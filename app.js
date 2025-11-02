@@ -1359,6 +1359,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializar partículas laterales
   initSideParticles();
   
+  // Mostrar elementos de fondo después de que cargue la página
+  setTimeout(() => {
+    const candlesContainer = document.getElementById('candles-container');
+    const heroCandles = document.getElementById('hero-candles-container');
+    const catalogCandles = document.getElementById('catalog-candles-container');
+    const catalogParticles = document.getElementById('catalog-particles-container');
+    const sideParticlesLeft = document.getElementById('side-particles-left');
+    const sideParticlesRight = document.getElementById('side-particles-right');
+    
+    if (candlesContainer) candlesContainer.classList.add('loaded');
+    if (heroCandles) heroCandles.classList.add('loaded');
+    if (catalogCandles) catalogCandles.classList.add('loaded');
+    if (catalogParticles) catalogParticles.classList.add('loaded');
+    if (sideParticlesLeft) sideParticlesLeft.classList.add('loaded');
+    if (sideParticlesRight) sideParticlesRight.classList.add('loaded');
+  }, 300);
+  
   // Manejar redimensionamiento de ventana
   let resizeTimeout;
   window.addEventListener('resize', () => {
@@ -1385,6 +1402,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initWhatsApp();
   initPersonalizadas();
   initLazyVideosPersonalizadas();
+  
+  // Mostrar botón de WhatsApp después de que cargue la página
+  setTimeout(() => {
+    const whatsappBtn = document.getElementById('whatsapp-float-btn');
+    if (whatsappBtn) {
+      whatsappBtn.classList.add('loaded');
+    }
+  }, 800);
 });
 
 // Lazy loading para videos de personalizadas

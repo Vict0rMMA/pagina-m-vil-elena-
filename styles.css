@@ -1516,18 +1516,40 @@ a[aria-label="Contactar por WhatsApp"] {
   justify-content: center;
   transition: all 0.3s ease;
   border: 3px solid rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  transform: scale(0.8);
+  animation-delay: 0.5s;
+}
+
+a[aria-label="Contactar por WhatsApp"].loaded {
+  opacity: 1;
+  transform: scale(1);
+  animation: pulse-whatsapp 2s ease-in-out infinite, float-whatsapp 3s ease-in-out infinite;
 }
 
 a[aria-label="Contactar por WhatsApp"]:hover {
   animation: none;
-  transform: scale(1.15);
+  transform: scale(1.15) !important;
   box-shadow: 0 12px 35px rgba(37, 211, 102, 0.7), 0 0 0 8px rgba(37, 211, 102, 0.2);
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-a[aria-label="Contactar por WhatsApp"] i {
-  font-size: 2rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+a[aria-label="Contactar por WhatsApp"] svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+a[aria-label="Contactar por WhatsApp"]:hover svg {
+  transform: scale(1.1);
+}
+
+@media (min-width: 768px) {
+  a[aria-label="Contactar por WhatsApp"] svg {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 /* Badge con contador en WhatsApp */
@@ -2068,6 +2090,12 @@ h1::before, h2.font-playfair::before {
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.side-particles-container.loaded {
+  opacity: 1;
 }
 
 #side-particles-left {
@@ -2367,6 +2395,12 @@ header img:hover {
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#candles-container.loaded {
+  opacity: 1;
 }
 
 .candle-floating {
@@ -2421,6 +2455,30 @@ header img:hover {
 /* Velas del Hero - efecto brillante */
 #hero-candles-container {
   z-index: 1;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#hero-candles-container.loaded {
+  opacity: 1;
+}
+
+#catalog-candles-container {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#catalog-candles-container.loaded {
+  opacity: 1;
+}
+
+#catalog-particles-container {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#catalog-particles-container.loaded {
+  opacity: 1;
 }
 
 #hero-candles-container svg {
