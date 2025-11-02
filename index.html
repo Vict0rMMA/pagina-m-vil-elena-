@@ -94,9 +94,6 @@
 </head>
 <body class="font-montserrat antialiased transition-colors duration-300">
     
-    <!-- Velas Animadas de Fondo -->
-    <div id="candles-container"></div>
-    
     <!-- Partículas Laterales -->
     <div id="side-particles-left" class="side-particles-container"></div>
     <div id="side-particles-right" class="side-particles-container"></div>
@@ -829,8 +826,10 @@
     <!-- Scripts -->
     <script src="app.js"></script>
     <script>
-      // Generar velas animadas de fondo
+      // Generar velas animadas de fondo (deshabilitado - se ve mal al inicio)
       function crearVelasAnimadas() {
+        // Deshabilitado para evitar que se vea mal al inicio
+        return;
         const container = document.getElementById('candles-container');
         if (!container) return;
         
