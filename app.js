@@ -1401,7 +1401,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initPersonalizadas();
   initLazyVideosPersonalizadas();
   
-  // Botón de WhatsApp ya está visible por defecto
 });
 
 // Lazy loading para videos de personalizadas
@@ -1599,27 +1598,6 @@ function actualizarContadorCarrito() {
     }
   });
   
-  // Actualizar badge de WhatsApp
-  const whatsappBadge = document.getElementById('whatsapp-badge');
-  if (whatsappBadge) {
-    if (total > 0) {
-      whatsappBadge.textContent = total > 99 ? '99+' : total;
-      whatsappBadge.classList.remove('hidden');
-    } else {
-      whatsappBadge.classList.add('hidden');
-    }
-  }
-  
-  // Actualizar URL de WhatsApp con productos del carrito si hay items
-  const whatsappBtn = document.getElementById('whatsapp-float-btn');
-  if (whatsappBtn) {
-    if (total > 0) {
-      const mensaje = generarMensajeWhatsApp();
-      whatsappBtn.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(mensaje)}`;
-    } else {
-      whatsappBtn.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent('Hola, me interesa conocer más sobre sus productos')}`;
-    }
-  }
 }
 
 function generarMensajeWhatsApp() {
