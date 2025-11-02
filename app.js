@@ -1627,7 +1627,21 @@ function generarMensajeWhatsApp() {
 
 function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
   const producto = buscarProducto(productoId);
-  if (!producto) return;
+  if (!producto) {
+    console.error('Producto no encontrado:', productoId);
+    if (typeof mostrarNotificacion === 'function') {
+      mostrarNotificacion('Error: Producto no encontrado', 'error');
+    }
+    return;
+  }
+  
+  if (!precio || precio <= 0) {
+    console.error('Precio inválido:', precio);
+    if (typeof mostrarNotificacion === 'function') {
+      mostrarNotificacion('Error: Precio inválido', 'error');
+    }
+    return;
+  }
   
   // Verificar si presentacion contiene tamaño y presentación (ej: "Grande Bolsa")
   let tamano = null;
