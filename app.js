@@ -3721,6 +3721,25 @@ function initBottomDock() {
       }
     });
   });
+  
+  // Ocultar/mostrar dock al hacer scroll
+  let lastScrollTop = 0;
+  const dock = document.getElementById('bottom-dock');
+  if (!dock) return;
+  
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      // Scrolling down - ocultar dock
+      dock.style.transform = 'translateY(100%)';
+    } else {
+      // Scrolling up - mostrar dock
+      dock.style.transform = 'translateY(0)';
+    }
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  }, { passive: true });
 }
 
 // WhatsApp

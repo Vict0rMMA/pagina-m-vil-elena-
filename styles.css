@@ -631,6 +631,47 @@ body {
   }
 }
 
+/* Mejoras para Bottom Dock */
+#bottom-dock {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.dark #bottom-dock {
+  background: rgba(17, 24, 39, 0.95);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3), 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+#bottom-dock a,
+#bottom-dock button {
+  transition: all 0.2s ease;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+#bottom-dock a:hover,
+#bottom-dock button:hover {
+  background: rgba(234, 179, 8, 0.1);
+  transform: translateY(-2px);
+}
+
+#bottom-dock a:active,
+#bottom-dock button:active {
+  transform: translateY(0);
+}
+
+#bottom-dock i {
+  transition: all 0.2s ease;
+}
+
+#bottom-dock a:hover i,
+#bottom-dock button:hover i {
+  color: #eab308;
+  transform: scale(1.1);
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
