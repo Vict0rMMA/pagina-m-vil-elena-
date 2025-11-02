@@ -1,0 +1,1781 @@
+/* Elena Velas y Aromas - Estilos Personalizados */
+
+/* Variables CSS para Dark Mode */
+:root {
+  --primary-gold: #D4AF37;
+  --gold-rich: #B8860B;
+  --gold-metallic: #C9A961;
+  --gold-pale: #F5E6D3;
+  --gold-cream: #FFF8DC;
+  --gold-dark: #8B6914;
+  --gold-light: #FFD700;
+  --gold-intense: #FFC107;
+  --gold-shine: #FFD54F;
+  --black-elegant: #1a1a1a;
+  --black-rich: #0f0f0f;
+  --bg-dark: #0f0f0f;
+  --bg-darker: #050505;
+}
+
+/* Mejoras Tipográficas Generales */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tipografía Elegante para Títulos */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.font-playfair {
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+/* Títulos Principales con Text Shadow Elegante */
+.font-playfair.text-4xl,
+.font-playfair.text-5xl,
+.font-playfair.text-6xl {
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+  letter-spacing: -0.02em;
+}
+
+/* Textos con Sombra Suave */
+body, p, span {
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+}
+
+/* Botones con Tipografía Mejorada */
+button, .btn {
+  letter-spacing: 0.03em;
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* Textos en Cards de Productos */
+.producto h3 {
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.producto p {
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+}
+
+/* Navegación y Menú */
+nav a, nav button {
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+/* Enlaces de navegación con mejor contraste en hover */
+nav a {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  color: #1f2937 !important; /* Gris oscuro para modo claro */
+}
+
+.dark nav a {
+  color: #e5e7eb !important; /* Gris claro para modo oscuro */
+}
+
+nav a:hover {
+  background-color: rgba(212, 175, 55, 0.15);
+  color: var(--primary-gold) !important;
+}
+
+.dark nav a:hover {
+  background-color: rgba(212, 175, 55, 0.25);
+  color: var(--gold-light) !important;
+}
+
+/* Precios con Estilo Elegante */
+.text-yellow-600, .text-yellow-400 {
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Textos en Dark Mode */
+.dark h1, .dark h2, .dark h3 {
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark p, .dark span {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Subtítulos y Descripciones */
+p, .text-sm, .text-base {
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+}
+
+/* Mejoras para Botones de Categoría */
+.filter-btn {
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn.active {
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Hero Section */
+#inicio h1 {
+  letter-spacing: -0.03em;
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+#inicio p {
+  letter-spacing: 0.02em;
+  text-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Mejora para Labels y Etiquetas */
+label {
+  letter-spacing: 0.01em;
+  font-weight: 600;
+}
+
+/* Textos en Inputs */
+input, textarea {
+  letter-spacing: 0.01em;
+}
+
+input::placeholder {
+  letter-spacing: 0.01em;
+  opacity: 0.7;
+}
+
+/* Fondos elegantes gris claro */
+body {
+  background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%) !important;
+  background-attachment: fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255, 193, 7, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 143, 0, 0.05) 0%, transparent 50%),
+    url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23FFC107" fill-opacity="0.02"%3E%3Cpath d="M50 50 L60 40 L70 50 L60 60 Z"/%3E%3C/g%3E%3C/svg%3E');
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dark body {
+  background: linear-gradient(to bottom, #050505 0%, #0a0a0a 50%, #0f0f0f 100%) !important;
+}
+
+.dark body::before {
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(201, 169, 97, 0.05) 0%, transparent 50%);
+}
+
+/* Fondo claro por defecto (dark mode opcional) */
+
+/* Efecto Glow para textos dorados - Estilo del logo */
+.glow-gold {
+  color: #D4AF37;
+  text-shadow: 
+    0 2px 4px rgba(212, 175, 55, 0.5),
+    0 0 10px rgba(212, 175, 55, 0.4),
+    0 0 20px rgba(212, 175, 55, 0.3),
+    inset 0 -1px 2px rgba(139, 105, 20, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+/* Efecto Glow púrpura para título */
+.glow-purple {
+  color: #a855f7;
+  text-shadow: 
+    0 0 15px rgba(168, 85, 247, 0.8),
+    0 0 30px rgba(168, 85, 247, 0.6),
+    0 0 45px rgba(168, 85, 247, 0.4),
+    0 0 60px rgba(168, 85, 247, 0.3);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    text-shadow: 
+      0 0 15px rgba(168, 85, 247, 0.8),
+      0 0 30px rgba(168, 85, 247, 0.6),
+      0 0 45px rgba(168, 85, 247, 0.4),
+      0 0 60px rgba(168, 85, 247, 0.3);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(168, 85, 247, 1),
+      0 0 40px rgba(168, 85, 247, 0.8),
+      0 0 60px rgba(168, 85, 247, 0.6),
+      0 0 80px rgba(168, 85, 247, 0.4);
+  }
+}
+
+/* Glow para contenedor dorado */
+.glow-gold-container {
+  box-shadow: 
+    0 0 30px rgba(255, 193, 7, 0.7),
+    0 0 60px rgba(255, 193, 7, 0.5),
+    0 0 90px rgba(255, 193, 7, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Glow para botones verdes de WhatsApp */
+.glow-green {
+  box-shadow: 
+    0 0 15px rgba(34, 197, 94, 0.6),
+    0 0 30px rgba(34, 197, 94, 0.4);
+}
+
+/* Sparkle animation */
+.fa-sparkles {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1) rotate(180deg);
+  }
+}
+
+/* Background pattern */
+.bg-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.glow-pink {
+  color: #FF69B4;
+  text-shadow: 
+    0 0 10px rgba(255, 105, 180, 0.5),
+    0 0 20px rgba(255, 105, 180, 0.3),
+    0 0 30px rgba(255, 105, 180, 0.2);
+}
+
+.glow-blue {
+  color: #5C8AFF;
+  text-shadow: 
+    0 0 10px rgba(92, 138, 255, 0.5),
+    0 0 20px rgba(92, 138, 255, 0.3),
+    0 0 30px rgba(92, 138, 255, 0.2);
+}
+
+.glow-red {
+  color: #FF0000;
+  text-shadow: 
+    0 0 10px rgba(255, 0, 0, 0.5),
+    0 0 20px rgba(255, 0, 0, 0.3),
+    0 0 30px rgba(255, 0, 0, 0.2);
+}
+
+/* Partículas doradas flotantes */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #FFD700;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float 15s infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Banner dorado */
+.golden-banner {
+  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 50%, #FFB300 100%);
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  box-shadow: 
+    0 0 30px rgba(255, 193, 7, 0.6),
+    0 0 60px rgba(255, 193, 7, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Cards de estadísticas */
+.stats-card {
+  background: rgba(40, 40, 40, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+/* Botones de categoría con colores */
+.category-btn-gold {
+  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 50%, #FFB300 100%);
+  box-shadow: 0 0 25px rgba(255, 193, 7, 0.6), 0 4px 15px rgba(255, 193, 7, 0.4);
+  transition: all 0.3s ease;
+}
+
+.category-btn-gold:hover {
+  box-shadow: 0 0 35px rgba(255, 193, 7, 0.8), 0 6px 20px rgba(255, 193, 7, 0.6);
+  transform: translateY(-2px);
+}
+
+.category-btn-pink {
+  background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+}
+
+.category-btn-blue {
+  background: linear-gradient(135deg, #5C8AFF 0%, #4169E1 100%);
+  box-shadow: 0 0 20px rgba(92, 138, 255, 0.4);
+}
+
+.category-btn-red {
+  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+/* Banner de catálogo individual */
+.catalog-banner {
+  background: rgba(60, 50, 30, 0.9);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.catalog-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Fuentes Personalizadas */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Utilidades */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+.fade-in-visible {
+  opacity: 1;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+/* Ripple Effect */
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mejoras para accesibilidad */
+*:focus-visible {
+  outline: 2px solid var(--primary-pink);
+  outline-offset: 2px;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Responsive Images */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Imágenes de productos con aspect ratio fijo y mejor visibilidad */
+#products-grid img,
+.catalog-banner img {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  width: 100%;
+  transition: transform 0.3s ease;
+  border-radius: 8px;
+}
+
+#products-grid img:hover,
+.catalog-banner img:hover {
+  transform: scale(1.05);
+}
+
+/* Modal de producto - imagen más grande */
+#product-modal img {
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Mejorar visibilidad de imágenes en cards */
+#products-grid .relative {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+#products-grid .relative img {
+  min-height: 200px;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+}
+
+.dark #products-grid .relative img {
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+}
+
+/* Line Clamp Utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Glassmorphism para cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Mejoras de Touch Targets (mínimo 44x44px) */
+button,
+a,
+input[type="button"],
+input[type="submit"] {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+/* Mejoras para Inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  font-size: 16px; /* Previene zoom en iOS */
+}
+
+/* Bottom Dock - Spacing para el dock */
+body {
+  padding-bottom: 70px; /* Espacio para el dock en mobile */
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-pink);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ec4899;
+}
+
+/* Loading States */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Mejoras para Modales */
+.modal-overlay {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Transiciones suaves para Dark Mode */
+body,
+button,
+a,
+input,
+select,
+textarea {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Mejoras para Cards */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Spinner para Loading */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 3px solid white;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mejoras para el carrito */
+.cart-item-enter {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Notificaciones */
+.notification {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mejoras para el hero */
+.hero-gradient {
+  background: linear-gradient(135deg, #f472b6 0%, #a78bfa 100%);
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+  h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+  
+  p {
+    font-size: clamp(0.875rem, 4vw, 1rem);
+  }
+}
+
+/* Prevenir selección de texto en botones */
+button {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Mejoras para el dock inferior */
+#bottom-dock {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark #bottom-dock {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Mejoras para el carrusel de promociones */
+#promo-carousel {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+#promo-slides {
+  overflow: visible;
+}
+
+#promo-slides > div {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  min-width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#promo-slides > div > div {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#promo-slides h3 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+#promo-slides p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+/* Colores personalizados Tailwind - Grises elegantes */
+.bg-cream-50 {
+  background-color: #f8f9fa;
+}
+
+.bg-warm-beige {
+  background-color: #e9ecef;
+}
+
+.bg-gold-cream {
+  background-color: #ffffff;
+}
+
+.from-cream-50 {
+  --tw-gradient-from: #FFF8DC;
+  --tw-gradient-to: rgba(255, 248, 220, 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-amber-50 {
+  --tw-gradient-to: rgba(255, 251, 235, 0);
+  --tw-gradient-stops: var(--tw-gradient-from), #F5E6D3, var(--tw-gradient-to);
+}
+
+.to-warm-beige {
+  --tw-gradient-to: #F5E6D3;
+}
+
+/* Cards de productos con fondo gris elegante */
+.producto {
+  background: linear-gradient(to bottom, #FFFFFF 0%, #f8f9fa 100%);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: all 0.3s ease;
+}
+
+.producto:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+}
+
+.dark .producto {
+  background: linear-gradient(to bottom, #1a1a1a 0%, #0f0f0f 100%);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* Inputs y formularios con fondo gris claro */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  background-color: #ffffff !important;
+  border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+  background-color: #FFFFFF !important;
+  border-color: #D4AF37 !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2) !important;
+}
+
+.dark input[type="text"],
+.dark input[type="email"],
+.dark textarea,
+.dark select {
+  background-color: #1a1a1a !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+/* Modales con fondo gris claro */
+#cart-modal,
+#product-modal {
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+}
+
+.dark #cart-modal,
+.dark #product-modal {
+  background: linear-gradient(to bottom, #0a0a0a 0%, #050505 100%);
+}
+
+/* Bottom dock con fondo blanco */
+#bottom-dock {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px);
+  border-top-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+.dark #bottom-dock {
+  background: rgba(10, 10, 10, 0.95) !important;
+  border-top-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+/* Animación suave para el logo */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Animación para emojis en el hero */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+#inicio p span {
+  display: inline-block;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+#inicio p span:last-child {
+  animation-delay: 1s;
+}
+
+/* Mejoras de fondo oscuro elegante */
+.dark body {
+  background: linear-gradient(to bottom, #050505 0%, #0a0a0a 50%, #0f0f0f 100%);
+}
+
+.dark .bg-gray-900 {
+  background-color: #0a0a0a !important;
+}
+
+.dark .bg-gray-800 {
+  background-color: #1a1a1a !important;
+}
+
+.dark .bg-gray-700 {
+  background-color: #2a2a2a !important;
+}
+
+/* Bordes dorados en modo oscuro */
+.dark .border-yellow-500 {
+  border-color: #D4AF37 !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.dark .text-yellow-400,
+.dark .text-yellow-500 {
+  color: #D4AF37 !important;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+}
+
+/* Botones dorados mejorados - Estilo del logo */
+.bg-gradient-to-r.from-yellow-500,
+.bg-gradient-to-r.from-yellow-600 {
+  background: linear-gradient(to right, #D4AF37, #C9A961, #B8860B) !important;
+}
+
+.bg-gradient-to-r.to-amber-600,
+.bg-gradient-to-r.to-amber-700 {
+  background: linear-gradient(to right, #D4AF37, #B8860B) !important;
+}
+
+/* Mejoras visuales adicionales - Dorados del logo */
+.bg-yellow-500,
+.bg-yellow-600 {
+  background-color: #D4AF37 !important;
+}
+
+.text-yellow-500,
+.text-yellow-600 {
+  color: #D4AF37 !important;
+}
+
+.border-yellow-500 {
+  border-color: #D4AF37 !important;
+}
+
+/* Gradientes dorados mejorados */
+.bg-gradient-to-r.from-yellow-500.to-amber-600 {
+  background: linear-gradient(to right, #D4AF37, #C9A961, #B8860B) !important;
+}
+
+/* Fondos negros elegantes mejorados */
+.dark {
+  background-color: #050505;
+}
+
+.dark .bg-gray-900 {
+  background: linear-gradient(to bottom, #050505, #0a0a0a) !important;
+}
+
+/* Efectos de brillo en elementos dorados */
+.text-yellow-500,
+.text-yellow-600,
+.text-yellow-400 {
+  filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.6));
+}
+
+/* Mejoras en botones dorados */
+button.bg-yellow-500,
+button.bg-yellow-600,
+a.bg-yellow-500,
+a.bg-yellow-600 {
+  background: linear-gradient(135deg, #D4AF37 0%, #C9A961 50%, #B8860B 100%) !important;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+}
+
+button.bg-yellow-500:hover,
+button.bg-yellow-600:hover,
+a.bg-yellow-500:hover,
+a.bg-yellow-600:hover {
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.7), 0 0 30px rgba(212, 175, 55, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Estilos mejorados para el botón de cambio de tema */
+#theme-toggle {
+  background: rgba(229, 231, 235, 0.9) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(209, 213, 219, 0.6) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+  background: rgba(209, 213, 219, 0.95) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+.dark #theme-toggle {
+  background: rgba(31, 41, 55, 0.9) !important;
+  border-color: rgba(75, 85, 99, 0.6) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dark #theme-toggle:hover {
+  background: rgba(55, 65, 81, 0.95) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#theme-toggle i {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#theme-toggle:hover i {
+  transform: scale(1.1);
+}
+
+.dark #theme-toggle .fa-sun {
+  filter: drop-shadow(0 0 4px rgba(255, 193, 7, 0.6));
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    #2d2d2d 25%,
+    #3d3d3d 50%,
+    #2d2d2d 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Animaciones para filtrado de productos */
+.producto-item {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.producto-item.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.producto-item.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.producto-item[style*="display: none"] {
+  display: none !important;
+}
+
+/* Botón activo mejorado */
+.filter-btn.active {
+  position: relative;
+}
+
+.filter-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+}
+
+/* Estilos para el modal de producto */
+.product-modal-image {
+  max-width: 100%;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: brightness(1.02) contrast(1.05) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
+}
+
+.product-modal-image:hover {
+  transform: scale(1.02);
+}
+
+/* Contenedor de imagen del modal */
+#product-image-container {
+  background: #ffffff !important;
+}
+
+.dark #product-image-container {
+  background: #111827 !important;
+}
+
+/* Contenedor de imagen del modal agrupado */
+#product-image-container-grupo {
+  background: #ffffff !important;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark #product-image-container-grupo {
+  background: #111827 !important;
+}
+
+#product-image-container-grupo img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+}
+
+/* WhatsApp Floating Button */
+a[aria-label="Contactar por WhatsApp"] {
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  z-index: 40;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+  animation: pulse-whatsapp 2s ease-in-out infinite;
+}
+
+a[aria-label="Contactar por WhatsApp"]:hover {
+  animation: none;
+  transform: scale(1.15);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+}
+
+@media (min-width: 768px) {
+  a[aria-label="Contactar por WhatsApp"] {
+    bottom: 24px;
+  }
+}
+
+@keyframes pulse-whatsapp {
+  0%, 100% {
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7);
+  }
+}
+
+/* Animación fade-in para precios */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Botones de tipo de compra */
+.tipo-compra-btn {
+  transition: all 0.3s ease;
+}
+
+.tipo-compra-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Botones de precio */
+.precio-btn {
+  transition: all 0.3s ease;
+}
+
+.precio-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.3);
+}
+
+/* Mejoras para imágenes en tarjetas de productos */
+.producto img {
+  filter: brightness(1.05) contrast(1.08) saturate(1.05);
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: high-quality;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.producto:hover img {
+  filter: brightness(1.1) contrast(1.12) saturate(1.08);
+  transform: scale(1.02);
+}
+
+/* Mejorar contenedor de imágenes de productos */
+.producto > div:first-child {
+  background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
+  border-radius: 1rem 1rem 0 0;
+}
+
+.dark .producto > div:first-child {
+  background: linear-gradient(to bottom, #374151 0%, #1f2937 100%);
+}
+
+/* Estilos para videos */
+#videos-container iframe {
+  width: 100%;
+  border-radius: 0.75rem;
+  min-height: 400px;
+}
+
+@media (max-width: 768px) {
+  #videos-container iframe {
+    min-height: 300px;
+  }
+}
+
+#videos-container .video-card {
+  aspect-ratio: 9/16;
+  max-width: 100%;
+}
+
+#videos-container embed {
+  width: 100%;
+  border-radius: 0.75rem;
+}
+
+/* Estilos para formulario de velas personalizadas */
+#form-personalizada input:focus,
+#form-personalizada textarea:focus {
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
+}
+
+#form-personalizada input:invalid:not(:placeholder-shown),
+#form-personalizada textarea:invalid:not(:placeholder-shown) {
+  border-color: #ef4444;
+}
+
+#form-personalizada input:valid:not(:placeholder-shown),
+#form-personalizada textarea:valid:not(:placeholder-shown) {
+  border-color: #10b981;
+}
+
+/* ============================================
+   MEJORAS VISUALES IMPLEMENTADAS
+   ============================================ */
+
+/* 1. SEPARADORES ENTRE SECCIONES */
+section:not(:first-child) {
+  position: relative;
+}
+
+section:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+.dark section:not(:first-child)::before {
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  opacity: 0.8;
+}
+
+/* Separador decorativo con icono */
+section:not(:first-child)::after {
+  content: '🕯️';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  background: var(--bg-light, #f8f9fa);
+  padding: 0 0.5rem;
+  z-index: 1;
+}
+
+.dark section:not(:first-child)::after {
+  background: var(--bg-dark, #0f0f0f);
+}
+
+/* 2. MEJORAR SOMBRAS Y PROFUNDIDAD */
+.producto {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.producto:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(212, 175, 55, 0.2);
+  transform: translateY(-4px);
+}
+
+.dark .producto {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark .producto:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5), 0 10px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Sombras mejoradas en botones */
+button, .btn, a[class*="bg-"] {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, .btn:hover, a[class*="bg-"]:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Sombras en modales */
+#product-modal, #cart-modal {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dark #product-modal, .dark #cart-modal {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. MICROINTERACCIONES */
+/* Loading state para productos */
+.producto.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.producto.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(212, 175, 55, 0.3);
+  border-top-color: var(--primary-gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Indicador visual al agregar al carrito */
+@keyframes cart-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.cart-icon-bounce {
+  animation: cart-bounce 0.5s ease;
+}
+
+/* Transiciones suaves en botones */
+button, .btn, a[class*="bg-"], a[class*="border-"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+button:active, .btn:active {
+  transform: scale(0.98);
+}
+
+/* Efecto de pulso en botones importantes */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
+  }
+}
+
+.button-pulse {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Notificación de éxito */
+.notification-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  animation: slideDown 0.3s ease-out;
+}
+
+/* 5. BARRA DE BÚSQUEDA MEJORADA */
+#product-search {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#product-search:focus {
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2), 0 4px 12px rgba(212, 175, 55, 0.15);
+  border-color: var(--primary-gold);
+  transform: translateY(-2px);
+}
+
+#product-search::placeholder {
+  color: #9ca3af;
+  transition: opacity 0.3s;
+}
+
+#product-search:focus::placeholder {
+  opacity: 0.5;
+}
+
+/* Icono de búsqueda animado */
+#product-search:focus + .fa-search,
+#product-search:focus ~ .fa-search {
+  color: var(--primary-gold);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.relative .fa-search {
+  transition: all 0.3s ease;
+}
+
+/* Contenedor de búsqueda con efecto hover */
+.max-w-md.relative:hover #product-search {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 6. MEJORAR CONTRASTE EN BOTONES */
+/* Botones principales con mejor contraste */
+.bg-yellow-500, .bg-yellow-600 {
+  background: linear-gradient(135deg, var(--primary-gold) 0%, var(--gold-rich) 100%) !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 6px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.bg-yellow-500:hover, .bg-yellow-600:hover {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--primary-gold) 100%) !important;
+  box-shadow: 0 6px 12px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.bg-yellow-500:active, .bg-yellow-600:active,
+.bg-yellow-500:focus, .bg-yellow-600:focus {
+  background: linear-gradient(135deg, var(--gold-rich) 0%, var(--primary-gold) 100%) !important;
+  color: #000000 !important;
+  box-shadow: 0 2px 4px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+}
+
+/* Botones con borde dorado mejorados */
+.border-\[#D4AF37\], .border-yellow-500 {
+  border-width: 2px !important;
+  border-color: var(--primary-gold) !important;
+  font-weight: 600 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.border-\[#D4AF37\]::before, .border-yellow-500::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.border-\[#D4AF37\]:hover::before, .border-yellow-500:hover::before {
+  left: 100%;
+}
+
+.border-\[#D4AF37\]:hover, .border-yellow-500:hover {
+  border-color: var(--gold-light) !important;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5), inset 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+/* Botones blancos mejorados */
+.bg-white {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.bg-white:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 1);
+  background: #f9fafb !important;
+}
+
+/* Estados activos más claros */
+button:focus-visible, a:focus-visible {
+  outline: 3px solid rgba(212, 175, 55, 0.5);
+  outline-offset: 2px;
+}
+
+/* 8. EFECTOS VISUALES SUTILES */
+/* Gradientes sutiles en fondos de secciones */
+section {
+  position: relative;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.02) 0%, transparent 50%, rgba(212, 175, 55, 0.02) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark section::before {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%, rgba(212, 175, 55, 0.05) 100%);
+}
+
+/* Bordes dorados sutiles en elementos importantes */
+.glow-gold {
+  position: relative;
+}
+
+.glow-gold::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+/* Brillo sutil en logos y títulos */
+h1, h2.font-playfair {
+  position: relative;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+h1::before, h2.font-playfair::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Efecto de resplandor en hover para elementos dorados */
+.text-\[#D4AF37\], .text-yellow-500, .text-yellow-400 {
+  transition: text-shadow 0.3s ease;
+}
+
+.text-\[#D4AF37\]:hover, .text-yellow-500:hover, .text-yellow-400:hover {
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+/* Partículas doradas sutiles en fondo */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.particle-gold {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--primary-gold);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 6s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Mejora en el logo con efecto sutil */
+header img {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2));
+}
+
+header img:hover {
+  filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.4));
+  transform: scale(1.05);
+}
+
+/* Cards con efecto de vidrio sutil */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-effect {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+#imagen-preview img {
+  object-fit: contain;
+  background: #374151;
+  padding: 0.5rem;
+}
+
+#imagen-preview button:hover {
+  transform: scale(1.05);
+}
+
+/* Animación para errores del formulario */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.text-red-400:not(.hidden) {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Estilos para videos en sección personalizadas */
+#personalizadas video {
+  transition: transform 0.3s ease;
+}
+
+#personalizadas video:hover {
+  transform: scale(1.02);
+}
+

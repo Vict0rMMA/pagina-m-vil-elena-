@@ -1,0 +1,37 @@
+EJEMPLO DE ESTRUCTURA PARA PRODUCTOS
+=====================================
+
+📸 FOTO DEL PRODUCTO
+---------------------
+Nombre: amor-y-amistad-vela-corazon.webp
+Ubicación: assets/productos/amor-y-amistad/vela-corazon.webp
+
+💰 PRECIOS (configurar en app.js)
+-----------------------------------
+Pequeña: $15.000
+Mediana: $25.000
+Grande: $35.000
+
+🌸 FRAGANCIAS
+--------------
+- Rosa
+- Vainilla
+- Lavanda
+- Fresas con Crema
+
+📝 CÓDIGO PARA app.js
+----------------------
+{
+  id: "aa1",
+  categoria: "amorYAmistad",
+  nombre: "Vela Romántica Corazón",
+  descripcion: "Vela aromática artesanal con fragancia floral y forma de corazón.",
+  imagen: "assets/productos/amor-y-amistad/vela-corazon.webp",
+  tamanos: [
+    { nombre: "Pequeña", precio: 15000 },
+    { nombre: "Mediana", precio: 25000 },
+    { nombre: "Grande", precio: 35000 }
+  ],
+  fragancias: ["Rosa", "Vainilla", "Lavanda", "Fresas con Crema"]
+}
+
