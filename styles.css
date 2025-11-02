@@ -1499,121 +1499,83 @@ a.bg-yellow-600:hover {
   transform: scale(1.05);
 }
 
-/* WhatsApp Floating Button Mejorado - Diseño Elegante */
-.whatsapp-button,
+/* WhatsApp Floating Button - Diseño Limpio y Simple */
 a[aria-label="Contactar por WhatsApp"] {
   position: fixed;
   bottom: 90px;
   right: 20px;
   z-index: 50;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   background: #25D366;
-  box-shadow: 0 2px 12px rgba(37, 211, 102, 0.25), 
-              0 0 0 1px rgba(255, 255, 255, 0.1) inset,
-              0 1px 3px rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  border: none;
-  opacity: 1;
-  transform: scale(1);
-  animation: none;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
   text-decoration: none;
-  color: white;
+  border: none;
 }
 
 @media (max-width: 767px) {
-  .whatsapp-button,
   a[aria-label="Contactar por WhatsApp"] {
     bottom: 85px;
     right: 18px;
-    width: 50px;
-    height: 50px;
+    width: 54px;
+    height: 54px;
   }
 }
 
-.whatsapp-button.loaded,
-a[aria-label="Contactar por WhatsApp"].loaded {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-.whatsapp-button:hover,
 a[aria-label="Contactar por WhatsApp"]:hover {
-  animation: none;
-  transform: scale(1.08) translateY(-3px) !important;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35), 
-              0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-              0 2px 6px rgba(0, 0, 0, 0.2);
   background: #20BA5A;
-  color: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
-.whatsapp-button:active,
 a[aria-label="Contactar por WhatsApp"]:active {
-  transform: scale(1.02) translateY(-1px) !important;
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.whatsapp-icon,
-.whatsapp-button svg,
 a[aria-label="Contactar por WhatsApp"] svg {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   display: block;
-  transition: transform 0.2s ease;
   flex-shrink: 0;
-  color: white;
-  fill: white;
-}
-
-.whatsapp-button:hover .whatsapp-icon,
-.whatsapp-button:hover svg,
-a[aria-label="Contactar por WhatsApp"]:hover svg {
-  transform: scale(1.03);
-  color: white;
-  fill: white;
 }
 
 @media (min-width: 768px) {
-  .whatsapp-button,
   a[aria-label="Contactar por WhatsApp"] {
     bottom: 24px;
     right: 24px;
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
   }
   
-  .whatsapp-icon,
-  .whatsapp-button svg,
   a[aria-label="Contactar por WhatsApp"] svg {
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
   }
 }
 
 /* Badge con contador en WhatsApp */
 .whatsapp-badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: -6px;
+  right: -6px;
   background: #FF4444;
   color: white;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  box-shadow: 0 2px 6px rgba(255, 68, 68, 0.4), 0 0 0 2px rgba(37, 211, 102, 0.1);
-  border: 1.5px solid white;
-  animation: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
   line-height: 1;
 }
 
@@ -1624,11 +1586,11 @@ a[aria-label="Contactar por WhatsApp"]:hover svg {
 
 @media (min-width: 768px) {
   .whatsapp-badge {
-    width: 22px;
-    height: 22px;
-    font-size: 0.7rem;
-    top: -5px;
-    right: -5px;
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+    top: -6px;
+    right: -6px;
   }
 }
 

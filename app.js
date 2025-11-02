@@ -1401,18 +1401,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPersonalizadas();
   initLazyVideosPersonalizadas();
   
-  // Mostrar botón de WhatsApp inmediatamente (ya está visible por defecto)
-  const whatsappBtn = document.getElementById('whatsapp-float-btn');
-  if (whatsappBtn) {
-    whatsappBtn.classList.add('loaded');
-    // Asegurar que el SVG se renderice correctamente
-    const svg = whatsappBtn.querySelector('svg');
-    if (svg) {
-      svg.setAttribute('fill', 'white');
-      svg.style.fill = 'white';
-      svg.style.color = 'white';
-    }
-  }
+  // Botón de WhatsApp ya está visible por defecto
 });
 
 // Lazy loading para videos de personalizadas
