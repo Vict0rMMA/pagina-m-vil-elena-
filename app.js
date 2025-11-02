@@ -1648,17 +1648,17 @@ function renderCarrito() {
         </p>
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <button onclick="actualizarCantidad(${index}, ${item.cantidad - 1})" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition" aria-label="Disminuir">
+            <button onclick="actualizarCantidad(${index}, ${item.cantidad - 1})" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center transition" aria-label="Disminuir">
               <i class="fas fa-minus text-xs"></i>
             </button>
             <span class="w-8 text-center font-semibold text-gray-800 dark:text-white">${item.cantidad}</span>
-            <button onclick="actualizarCantidad(${index}, ${item.cantidad + 1})" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition" aria-label="Aumentar">
+            <button onclick="actualizarCantidad(${index}, ${item.cantidad + 1})" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center transition" aria-label="Aumentar">
               <i class="fas fa-plus text-xs"></i>
             </button>
           </div>
           <div class="text-right">
             <p class="font-bold text-yellow-600 dark:text-yellow-400">$${(item.precio * item.cantidad).toLocaleString()}</p>
-            <button onclick="eliminarDelCarrito(${index})" class="text-red-500 hover:text-red-700 text-sm mt-1" aria-label="Eliminar">
+            <button onclick="eliminarDelCarrito(${index})" class="text-red-500 text-sm mt-1" aria-label="Eliminar">
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -1768,7 +1768,7 @@ function renderCategorias() {
       class="px-6 py-3 rounded-full border-2 transition-all min-h-[44px] flex items-center gap-2 filter-btn ${
         filterActual === cat.filter 
           ? 'bg-yellow-500 border-yellow-500 text-white active' 
-          : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500'
+          : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300'
       }"
     >
       <i class="${cat.icon}"></i>
@@ -1849,7 +1849,7 @@ function renderProductos() {
       
       return `
     <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${producto.imagen}" data-nombre="${producto.nombre.toLowerCase()}" data-descripcion="${producto.descripcion ? producto.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center">
+      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
         <img 
           src="${producto.imagen}" 
           alt="${producto.nombre}"
@@ -1858,6 +1858,9 @@ function renderProductos() {
           style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; image-rendering: high-quality;"
           onerror="console.error('Error cargando imagen:', '${producto.imagen}');"
         >
+        <div class="absolute bottom-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold opacity-90 shadow-md border border-yellow-600">
+          <i class="fas fa-search-plus mr-1"></i> Doble clic
+        </div>
       </div>
       <div class="p-4">
         <h3 class="font-playfair text-lg font-bold mb-3 text-gray-800 dark:text-[#D4AF37] text-center">
@@ -1865,7 +1868,7 @@ function renderProductos() {
         </h3>
         <button 
           onclick="abrirModalProducto('${producto.id}')"
-          class="w-full py-2.5 bg-yellow-500 hover:bg-yellow-600 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="w-full py-2.5 bg-yellow-500 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
         >
           Ver Precios
         </button>
@@ -1928,7 +1931,7 @@ function renderProductos() {
         
         return `
     <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${tituloTarjeta.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center">
+      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${imagen}', '${tituloTarjeta}')">
         <img 
           src="${imagen}" 
           alt="${nombresProductos}"
@@ -1937,6 +1940,9 @@ function renderProductos() {
           style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; image-rendering: high-quality;"
           onerror="console.error('Error cargando imagen:', '${imagen}');"
         >
+        <div class="absolute bottom-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold opacity-90 shadow-md border border-yellow-600">
+          <i class="fas fa-search-plus mr-1"></i> Doble clic
+        </div>
       </div>
       <div class="p-4">
         <h3 class="font-playfair text-lg font-bold mb-3 text-gray-800 dark:text-[#D4AF37] text-center">
@@ -1944,7 +1950,7 @@ function renderProductos() {
         </h3>
         <button 
           onclick="abrirModalProductoGrupo('${imagen}')"
-          class="w-full py-2.5 bg-yellow-500 hover:bg-yellow-600 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="w-full py-2.5 bg-yellow-500 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
         >
           Ver Precios
         </button>
@@ -1955,7 +1961,7 @@ function renderProductos() {
       // Producto único - mostrar normalmente
       return `
     <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${productoPrincipal.nombre.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center">
+      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${imagen}', '${productoPrincipal.nombre}')">
         <img 
           src="${imagen}" 
           alt="${productoPrincipal.nombre}"
@@ -1964,6 +1970,9 @@ function renderProductos() {
           style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; image-rendering: high-quality;"
           onerror="console.error('Error cargando imagen:', '${imagen}');"
         >
+        <div class="absolute bottom-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold opacity-90 shadow-md border border-yellow-600">
+          <i class="fas fa-search-plus mr-1"></i> Doble clic
+        </div>
       </div>
       <div class="p-4">
         <h3 class="font-playfair text-lg font-bold mb-3 text-gray-800 dark:text-[#D4AF37] text-center">
@@ -1971,7 +1980,7 @@ function renderProductos() {
         </h3>
         <button 
           onclick="abrirModalProducto('${productoPrincipal.id}')"
-          class="w-full py-2.5 bg-yellow-500 hover:bg-yellow-600 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="w-full py-2.5 bg-yellow-500 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
         >
           Ver Precios
         </button>
@@ -2106,7 +2115,7 @@ function abrirModalProductoGrupo(imagen) {
       <h3 class="font-playfair text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2">
         Productos Disponibles
       </h3>
-      <button onclick="cerrarModalProducto()" class="absolute top-0 right-0 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition" aria-label="Cerrar">
+      <button onclick="cerrarModalProducto()" class="absolute top-0 right-0 p-2 rounded-full transition" aria-label="Cerrar">
         <i class="fas fa-times text-xl text-gray-600 dark:text-gray-400"></i>
       </button>
     </div>
@@ -2120,7 +2129,7 @@ function abrirModalProductoGrupo(imagen) {
           style="filter: brightness(1.05) contrast(1.1) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.2));"
           onerror="this.parentElement.parentElement.style.display='none'"
         >
-        <div class="absolute bottom-4 right-4 bg-yellow-500 text-white px-4 py-2 rounded-full text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+        <div class="absolute bottom-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-4 py-2 rounded-full text-sm font-bold opacity-90 shadow-lg border-2 border-yellow-600">
           <i class="fas fa-search-plus mr-2"></i> Doble clic para ampliar
         </div>
       </div>
@@ -2250,7 +2259,7 @@ function abrirModalProducto(productoId) {
         <h3 class="font-playfair text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2">
           ${producto.nombre.replace(' Mayorista', '').replace('Detal', '').trim()}
         </h3>
-        <button onclick="cerrarModalProducto()" class="absolute top-0 right-0 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition" aria-label="Cerrar">
+        <button onclick="cerrarModalProducto()" class="absolute top-0 right-0 p-2 rounded-full transition" aria-label="Cerrar">
           <i class="fas fa-times text-xl text-gray-600 dark:text-gray-400"></i>
         </button>
       </div>
@@ -2266,7 +2275,7 @@ function abrirModalProducto(productoId) {
             onerror="this.parentElement.parentElement.style.display='none'"
             style="filter: brightness(1.02) contrast(1.05);"
           >
-          <div class="absolute bottom-3 right-3 bg-yellow-500 text-white px-3 py-1.5 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+          <div class="absolute bottom-3 right-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-3 py-1.5 rounded-full text-xs font-bold opacity-90 shadow-lg border-2 border-yellow-600">
             <i class="fas fa-search-plus mr-1"></i> Doble clic para ampliar
           </div>
         </div>
@@ -2356,10 +2365,18 @@ function abrirModalProducto(productoId) {
           // Remover selección anterior
           tipoBtns.forEach(b => {
             b.classList.remove('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
+            // Restaurar gradientes originales
+            if (b.dataset.tipo === 'detal') {
+              b.classList.add('bg-gradient-to-br', 'from-blue-50', 'to-blue-100', 'dark:from-blue-900/30', 'dark:to-blue-800/30');
+            } else if (b.dataset.tipo === 'mayorista') {
+              b.classList.add('bg-gradient-to-br', 'from-purple-50', 'to-purple-100', 'dark:from-purple-900/30', 'dark:to-purple-800/30');
+            }
           });
           
           // Agregar selección actual
-          btn.classList.add('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
+          btn.classList.add('border-yellow-500', 'active');
+          // Remover gradientes originales cuando está activo
+          btn.classList.remove('bg-gradient-to-br', 'from-blue-50', 'to-blue-100', 'dark:from-blue-900/30', 'dark:to-blue-800/30', 'from-purple-50', 'to-purple-100', 'dark:from-purple-900/30', 'dark:to-purple-800/30');
           tipoCompraSeleccionado = btn.dataset.tipo;
           
           // Mostrar tamaños correspondientes
@@ -2530,7 +2547,7 @@ function abrirModalProducto(productoId) {
       <h3 class="font-playfair text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2">
         ${producto.nombre}
       </h3>
-      <button onclick="cerrarModalProducto()" class="absolute top-0 right-0 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition" aria-label="Cerrar">
+      <button onclick="cerrarModalProducto()" class="absolute top-0 right-0 p-2 rounded-full transition" aria-label="Cerrar">
         <i class="fas fa-times text-xl text-gray-600 dark:text-gray-400"></i>
       </button>
     </div>
@@ -2644,10 +2661,18 @@ function abrirModalProducto(productoId) {
       // Remover clase active de todos los botones de tipo
       tipoBtns.forEach(b => {
         b.classList.remove('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
+        // Restaurar gradientes originales
+        if (b.dataset.tipo === 'detal') {
+          b.classList.add('bg-gradient-to-br', 'from-blue-50', 'to-blue-100', 'dark:from-blue-900/30', 'dark:to-blue-800/30');
+        } else if (b.dataset.tipo === 'mayorista') {
+          b.classList.add('bg-gradient-to-br', 'from-purple-50', 'to-purple-100', 'dark:from-purple-900/30', 'dark:to-purple-800/30');
+        }
       });
       
       // Agregar clase active al botón seleccionado
-      btn.classList.add('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
+      btn.classList.add('border-yellow-500', 'active');
+      // Remover gradientes originales cuando está activo
+      btn.classList.remove('bg-gradient-to-br', 'from-blue-50', 'to-blue-100', 'dark:from-blue-900/30', 'dark:to-blue-800/30', 'from-purple-50', 'to-purple-100', 'dark:from-purple-900/30', 'dark:to-purple-800/30');
       tipoCompraSeleccionado = btn.dataset.tipo;
       
       if (tienePresentacion) {

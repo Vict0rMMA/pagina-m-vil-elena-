@@ -90,15 +90,6 @@ nav a {
   color: #e5e7eb !important; /* Gris claro para modo oscuro */
 }
 
-nav a:hover {
-  background-color: rgba(212, 175, 55, 0.15);
-  color: var(--primary-gold) !important;
-}
-
-.dark nav a:hover {
-  background-color: rgba(212, 175, 55, 0.25);
-  color: var(--gold-light) !important;
-}
 
 /* Precios con Estilo Elegante */
 .text-yellow-600, .text-yellow-400 {
@@ -1304,6 +1295,49 @@ a[aria-label="Contactar por WhatsApp"]:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Mantener colores cuando están activos o presionados */
+.tipo-compra-btn.active,
+.tipo-compra-btn-tamanos.active {
+  background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.3)) !important;
+  border-color: var(--primary-gold) !important;
+  color: #1f2937 !important;
+}
+
+.dark .tipo-compra-btn.active,
+.dark .tipo-compra-btn-tamanos.active {
+  background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.4)) !important;
+  border-color: var(--primary-gold) !important;
+  color: var(--gold-light) !important;
+}
+
+/* Evitar que se pongan blancos al presionar */
+.tipo-compra-btn:active,
+.tipo-compra-btn-tamanos:active {
+  background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.35)) !important;
+}
+
+.dark .tipo-compra-btn:active,
+.dark .tipo-compra-btn-tamanos:active {
+  background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.35), rgba(212, 175, 55, 0.45)) !important;
+}
+
+/* Mantener el gradiente original cuando NO está activo */
+.tipo-compra-btn:not(.active):not(:active) {
+  background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.2)) !important;
+}
+
+.tipo-compra-btn[data-tipo="mayorista"]:not(.active):not(:active) {
+  background: linear-gradient(to bottom right, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.2)) !important;
+}
+
+.dark .tipo-compra-btn:not(.active):not(:active) {
+  background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.25)) !important;
+}
+
+.dark .tipo-compra-btn[data-tipo="mayorista"]:not(.active):not(:active) {
+  background: linear-gradient(to bottom right, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.25)) !important;
+}
+
 /* Botones de precio */
 .precio-btn {
   transition: all 0.3s ease;
@@ -1581,11 +1615,6 @@ button:active, .btn:active {
   box-shadow: 0 4px 6px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.bg-yellow-500:hover, .bg-yellow-600:hover {
-  background: linear-gradient(135deg, var(--gold-light) 0%, var(--primary-gold) 100%) !important;
-  box-shadow: 0 6px 12px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-}
 
 .bg-yellow-500:active, .bg-yellow-600:active,
 .bg-yellow-500:focus, .bg-yellow-600:focus {
@@ -1629,10 +1658,6 @@ button:active, .btn:active {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.bg-white:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 1);
-  background: #f9fafb !important;
-}
 
 /* Estados activos más claros */
 button:focus-visible, a:focus-visible {
