@@ -2551,7 +2551,9 @@ function abrirModalProducto(productoId) {
     
     // Verificar si los tamaños tienen precios detal/mayorista incorporados
     const tamanosConPreciosMultiples = tamanos.some(t => t.detal && t.mayorista);
-    const tamanosConPreciosYPresentacion = tamanos.some(t => t.detal && typeof t.detal === 'object' && t.detal.bolsa);
+    const tamanosConPreciosYPresentacion = tamanos.some(t => {
+      return t.detal && typeof t.detal === 'object' && t.detal.bolsa !== undefined;
+    });
     
     let tamanosDetal, tamanosMayorista, tieneAmbos, tienePresentacionEnTamanos = false;
     
