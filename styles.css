@@ -1499,94 +1499,102 @@ a.bg-yellow-600:hover {
   transform: scale(1.05);
 }
 
-/* WhatsApp Floating Button Mejorado */
+/* WhatsApp Floating Button Mejorado - Diseño Elegante */
 a[aria-label="Contactar por WhatsApp"] {
   position: fixed;
-  bottom: 100px;
+  bottom: 90px;
   right: 20px;
   z-index: 50;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 50%, #075E54 100%);
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 52px;
+  height: 52px;
+  background: #25D366;
+  box-shadow: 0 2px 12px rgba(37, 211, 102, 0.25), 
+              0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+              0 1px 3px rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
   opacity: 0;
-  transform: scale(0.8) translateY(20px);
+  transform: scale(0.85) translateY(15px);
   animation: none;
+  backdrop-filter: blur(10px);
 }
 
 @media (max-width: 767px) {
   a[aria-label="Contactar por WhatsApp"] {
-    bottom: 90px;
-    right: 16px;
-    width: 56px;
-    height: 56px;
+    bottom: 85px;
+    right: 18px;
+    width: 50px;
+    height: 50px;
   }
 }
 
 a[aria-label="Contactar por WhatsApp"].loaded {
   opacity: 1;
   transform: scale(1) translateY(0);
-  animation: pulse-whatsapp 2s ease-in-out infinite;
 }
 
 a[aria-label="Contactar por WhatsApp"]:hover {
   animation: none;
-  transform: scale(1.1) translateY(-2px) !important;
-  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6), 0 4px 12px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 255, 255, 0.6);
-  background: linear-gradient(135deg, #25D366 0%, #20BA5A 50%, #128C7E 100%);
+  transform: scale(1.08) translateY(-3px) !important;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35), 
+              0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+              0 2px 6px rgba(0, 0, 0, 0.2);
+  background: #20BA5A;
+}
+
+a[aria-label="Contactar por WhatsApp"]:active {
+  transform: scale(1.02) translateY(-1px) !important;
 }
 
 a[aria-label="Contactar por WhatsApp"] svg {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   display: block;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
 }
 
 a[aria-label="Contactar por WhatsApp"]:hover svg {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 @media (min-width: 768px) {
   a[aria-label="Contactar por WhatsApp"] {
     bottom: 24px;
     right: 24px;
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
   }
   
   a[aria-label="Contactar por WhatsApp"] svg {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
   }
 }
 
 /* Badge con contador en WhatsApp */
 .whatsapp-badge {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);
+  top: -4px;
+  right: -4px;
+  background: #FF4444;
   color: white;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.5);
-  border: 2px solid white;
-  animation: bounce-badge 0.5s ease;
+  font-size: 0.65rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(255, 68, 68, 0.4), 0 0 0 2px rgba(37, 211, 102, 0.1);
+  border: 1.5px solid white;
+  animation: none;
+  line-height: 1;
 }
 
 @keyframes bounce-badge {
@@ -1595,33 +1603,15 @@ a[aria-label="Contactar por WhatsApp"]:hover svg {
 }
 
 @media (min-width: 768px) {
-  a[aria-label="Contactar por WhatsApp"] {
-    bottom: 24px;
-    right: 24px;
-    width: 64px;
-    height: 64px;
-  }
-  
-  a[aria-label="Contactar por WhatsApp"] svg {
-    width: 32px;
-    height: 32px;
-  }
-  
   .whatsapp-badge {
-    width: 28px;
-    height: 28px;
-    font-size: 0.875rem;
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+    top: -5px;
+    right: -5px;
   }
 }
 
-@keyframes pulse-whatsapp {
-  0%, 100% {
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  50% {
-    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6), 0 3px 10px rgba(0, 0, 0, 0.25);
-  }
-}
 
 /* Animación fade-in para precios */
 @keyframes fade-in {
