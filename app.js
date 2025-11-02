@@ -1598,6 +1598,14 @@ function actualizarContadorCarrito() {
     }
   });
   
+  // Actualizar URL de WhatsApp flotante con productos del carrito
+  const whatsappFloatBtn = document.getElementById('whatsapp-float-btn');
+  if (whatsappFloatBtn && total > 0) {
+    const mensaje = generarMensajeWhatsApp();
+    whatsappFloatBtn.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(mensaje)}`;
+  } else if (whatsappFloatBtn) {
+    whatsappFloatBtn.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent('Hola, me interesa conocer más sobre sus productos')}`;
+  }
 }
 
 function generarMensajeWhatsApp() {
