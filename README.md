@@ -11,7 +11,7 @@
 **Página web moderna y elegante para Elena Velas y Aromas**  
 *Iluminando momentos especiales con velas artesanales de calidad* ✨
 
-[![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?style=flat-square&logo=vercel&logoColor=white)](https://pagina-m-vil-elena.vercel.app)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR_BADGE_ID/badge.svg)](https://app.netlify.com)
 [![License](https://img.shields.io/badge/License-Private-red?style=flat-square)](LICENSE)
 
 </div>
@@ -119,7 +119,7 @@ pagina-movil-elena/
 
 ### 🌐 Acceso en línea
 
-**Sitio desplegado:** [pagina-m-vil-elena.vercel.app](https://pagina-m-vil-elena.vercel.app)
+**Sitio desplegado:** [velas-aroma-elena.netlify.app](https://velas-aroma-elena.netlify.app)
 
 ---
 
@@ -188,27 +188,26 @@ Modifica las variables CSS en `styles.css`:
 
 ## 🌐 Despliegue
 
-### Vercel (Desplegado) ✅
+### Netlify (Desplegado) ✅
 
-**Sitio en vivo:** [pagina-m-vil-elena.vercel.app](https://pagina-m-vil-elena.vercel.app)
+**Sitio en vivo:** [velas-aroma-elena.netlify.app](https://velas-aroma-elena.netlify.app)
 
 #### Despliegue automático desde GitHub:
 
-1. Conecta tu repositorio de GitHub a Vercel
-2. Vercel detectará automáticamente el proyecto
+1. Conecta tu repositorio de GitHub a Netlify
+2. Netlify detectará automáticamente el proyecto
 3. Cada push a `main` desplegará automáticamente
 4. ¡Listo! Tu sitio estará en línea en segundos
 
-#### Despliegue manual:
+#### Despliegue manual con Netlify Drop:
 
-1. Instala Vercel CLI: `npm i -g vercel`
-2. Ejecuta: `vercel` en la carpeta del proyecto
-3. Sigue las instrucciones
-4. ¡Listo!
+1. Ve a [Netlify Drop](https://app.netlify.com/drop)
+2. Arrastra la carpeta del proyecto
+3. ¡Listo! Tu sitio estará en línea
 
 ### Otros servicios compatibles:
 
-- **Netlify** - Deploy automático desde GitHub
+- **Vercel** - Deploy automático desde GitHub
 - **GitHub Pages** - Hosting gratuito
 - **Firebase Hosting** - Hosting de Google
 - **AWS S3 + CloudFront** - Hosting escalable
