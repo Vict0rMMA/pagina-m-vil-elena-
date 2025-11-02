@@ -64,6 +64,21 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     
+    <!-- Inicializar Dark Mode ANTES de cargar el contenido para evitar flash -->
+    <script>
+      // Detectar preferencia del sistema y localStorage ANTES de que se renderice el body
+      (function() {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const storedTheme = localStorage.getItem('theme');
+        const shouldBeDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
+        
+        if (shouldBeDark) {
+          document.documentElement.classList.add('dark');
+          document.body.classList.add('dark');
+        }
+      })();
+    </script>
+    
     <!-- Schema.org -->
     <script type="application/ld+json">
     {
