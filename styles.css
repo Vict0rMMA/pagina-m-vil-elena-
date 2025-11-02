@@ -2223,6 +2223,47 @@ header img:hover {
   }
 }
 
+/* Estilos mejorados para video placeholder */
+.video-placeholder {
+  position: relative;
+  border: 2px solid rgba(234, 179, 8, 0.3);
+  transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+  border-color: rgba(234, 179, 8, 0.6);
+  box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
+}
+
+.video-placeholder .fa-play {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+  }
+}
+
+.video-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(234, 179, 8, 0.1),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+}
+
 /* Partículas animadas para Hero */
 #particles-container {
   position: absolute;
