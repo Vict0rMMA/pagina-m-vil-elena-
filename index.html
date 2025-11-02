@@ -94,6 +94,13 @@
 </head>
 <body class="font-montserrat antialiased transition-colors duration-300">
     
+    <!-- Velas Animadas de Fondo -->
+    <div id="candles-container"></div>
+    
+    <!-- Partículas Laterales -->
+    <div id="side-particles-left" class="side-particles-container"></div>
+    <div id="side-particles-right" class="side-particles-container"></div>
+    
     <!-- Skip to Content -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-yellow-500 focus:text-white focus:rounded-lg">
         Saltar al contenido
@@ -105,7 +112,7 @@
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <img src="assets/logos/logovl.png" alt="Elena Velas y Aromas" class="h-10 w-auto object-contain">
+                    <img src="assets/logos/logovl.png" alt="Elena Velas y Aromas - Logo" class="h-10 w-auto object-contain" loading="eager" width="40" height="40">
                     <span class="font-playfair text-xl font-bold glow-gold hidden sm:inline">Elena Velas</span>
                 </div>
                 
@@ -151,13 +158,19 @@
     </header>
     
     <!-- Main Content -->
-    <main id="main-content">
+    <main id="main-content" style="position: relative; z-index: 10;">
         
         <!-- Hero Section -->
         <section id="inicio" class="relative min-h-[clamp(400px,70vh,600px)] flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-950"></div>
             <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23D4AF37" fill-opacity="0.08"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3Ccircle cx="10" cy="10" r="1.5"/%3E%3Ccircle cx="50" cy="50" r="1.5"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+            
+            <!-- Partículas Animadas -->
+            <div id="particles-container"></div>
+            
+            <!-- Velas Animadas de Fondo -->
+            <div id="hero-candles-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
             
             <div class="relative z-10 text-center px-4 max-w-3xl mx-auto fade-in-up">
                 <h1 class="font-playfair text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg" style="background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 30px rgba(212, 175, 55, 0.5), 0 2px 4px rgba(212, 175, 55, 0.3);">
@@ -235,9 +248,23 @@
                     <i class="fas fa-magic text-yellow-400 mr-3"></i>
                     Velas Personalizadas
                 </h2>
-                <p class="text-center text-gray-300 dark:text-gray-400 mb-12 text-lg">
+                <p class="text-center text-gray-300 dark:text-gray-400 mb-4 text-lg">
                     Haz tu vela única y especial con nosotros
                 </p>
+                
+                <!-- Texto descriptivo de videos -->
+                <div class="text-center mb-8 max-w-2xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 backdrop-blur-sm rounded-full border border-yellow-400/30 mb-3">
+                        <i class="fas fa-video text-yellow-400"></i>
+                        <p class="text-white text-sm md:text-base font-semibold">
+                            Mira estos videos de ejemplo para inspirarte
+                        </p>
+                    </div>
+                    <p class="text-gray-400 dark:text-gray-500 text-xs md:text-sm italic">
+                        Estos son solo algunos de los muchos trabajos que hemos realizado. 
+                        <span class="text-yellow-400 font-semibold">Si quieres saber más, en nuestro WhatsApp te resolvemos todas tus dudas</span>
+                    </p>
+                </div>
                 
                 <!-- Videos Section -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
@@ -279,17 +306,17 @@
                 
                 <!-- Formulario -->
                 <div class="max-w-3xl mx-auto">
-                    <div class="bg-gray-800/95 backdrop-blur-md rounded-3xl p-8 md:p-10 border-2 border-yellow-500/30 shadow-2xl">
-                        <h3 class="text-center text-white text-2xl md:text-3xl font-bold mb-8 flex items-center justify-center gap-3">
-                            <i class="fas fa-pen-fancy text-yellow-400"></i>
+                    <div class="bg-gray-800/95 backdrop-blur-md rounded-2xl md:rounded-3xl p-4 md:p-8 lg:p-10 border-2 border-yellow-500/30 shadow-2xl">
+                        <h3 class="text-center text-white text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 flex items-center justify-center gap-2 md:gap-3">
+                            <i class="fas fa-pen-fancy text-yellow-400 text-lg md:text-xl lg:text-2xl"></i>
                             <span>Cuéntanos tu idea</span>
                         </h3>
                         
-                        <form id="form-personalizada" class="space-y-6">
+                        <form id="form-personalizada" class="space-y-3 md:space-y-4 lg:space-y-6">
                             <!-- Nombre -->
                             <div>
-                                <label for="nombre-personalizada" class="block text-white font-semibold mb-2 text-lg">
-                                    <i class="fas fa-user text-yellow-400 mr-2"></i>
+                                <label for="nombre-personalizada" class="block text-white font-semibold mb-1.5 md:mb-2 text-sm md:text-base lg:text-lg">
+                                    <i class="fas fa-user text-yellow-400 mr-1.5 md:mr-2"></i>
                                     Nombre Completo
                                 </label>
                                 <input 
@@ -297,16 +324,16 @@
                                     id="nombre-personalizada" 
                                     name="nombre"
                                     placeholder="Ej: María González"
-                                    class="w-full px-4 py-3 rounded-xl bg-gray-700/50 border-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 transition-all"
+                                    class="w-full px-3 md:px-4 py-2 md:py-2.5 lg:py-3 rounded-lg md:rounded-xl bg-gray-700/50 border-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 transition-all text-sm md:text-base"
                                     required
                                 >
-                                <p class="text-red-400 text-sm mt-1 hidden" id="error-nombre">Por favor ingresa tu nombre</p>
+                                <p class="text-red-400 text-xs md:text-sm mt-1 hidden" id="error-nombre">Por favor ingresa tu nombre</p>
                             </div>
                             
                             <!-- Motivo -->
                             <div>
-                                <label for="motivo-personalizada" class="block text-white font-semibold mb-2 text-lg">
-                                    <i class="fas fa-heart text-yellow-400 mr-2"></i>
+                                <label for="motivo-personalizada" class="block text-white font-semibold mb-1.5 md:mb-2 text-sm md:text-base lg:text-lg">
+                                    <i class="fas fa-heart text-yellow-400 mr-1.5 md:mr-2"></i>
                                     Motivo o Tipo de Vela
                                 </label>
                                 <input 
@@ -314,50 +341,51 @@
                                     id="motivo-personalizada" 
                                     name="motivo"
                                     placeholder="Ej: Cumpleaños, Logo empresarial, San Valentín, Aniversario..."
-                                    class="w-full px-4 py-3 rounded-xl bg-gray-700/50 border-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 transition-all"
+                                    class="w-full px-3 md:px-4 py-2 md:py-2.5 lg:py-3 rounded-lg md:rounded-xl bg-gray-700/50 border-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 transition-all text-sm md:text-base"
                                     required
                                 >
-                                <p class="text-red-400 text-sm mt-1 hidden" id="error-motivo">Por favor ingresa el motivo o tipo de vela</p>
+                                <p class="text-red-400 text-xs md:text-sm mt-1 hidden" id="error-motivo">Por favor ingresa el motivo o tipo de vela</p>
                             </div>
                             
                             <!-- Descripción del Diseño -->
                             <div>
-                                <label for="diseno-personalizada" class="block text-white font-semibold mb-2 text-lg">
-                                    <i class="fas fa-paint-brush text-yellow-400 mr-2"></i>
+                                <label for="diseno-personalizada" class="block text-white font-semibold mb-1.5 md:mb-2 text-sm md:text-base lg:text-lg">
+                                    <i class="fas fa-paint-brush text-yellow-400 mr-1.5 md:mr-2"></i>
                                     Describe tu diseño
                                 </label>
                                 <textarea 
                                     id="diseno-personalizada" 
                                     name="diseno"
-                                    rows="6"
+                                    rows="4"
                                     placeholder="Describe cómo quieres que se vea tu vela personalizada: colores, formas, texto, decoraciones, tamaño, etc..."
-                                    class="w-full px-4 py-3 rounded-xl bg-gray-700/50 border-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 transition-all resize-none"
+                                    class="w-full px-3 md:px-4 py-2 md:py-2.5 lg:py-3 rounded-lg md:rounded-xl bg-gray-700/50 border-2 border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 transition-all resize-none text-sm md:text-base"
                                     required
+                                    style="min-height: 100px;"
                                 ></textarea>
-                                <p class="text-red-400 text-sm mt-1 hidden" id="error-diseno">Por favor describe tu idea de diseño</p>
+                                <p class="text-red-400 text-xs md:text-sm mt-1 hidden" id="error-diseno">Por favor describe tu idea de diseño</p>
                             </div>
                             
                             <!-- Imagen de Referencia -->
                             <div>
-                                <label class="block text-white font-semibold mb-4 text-lg">
-                                    <i class="fas fa-image text-yellow-400 mr-2"></i>
+                                <label class="block text-white font-semibold mb-2 md:mb-3 lg:mb-4 text-sm md:text-base lg:text-lg">
+                                    <i class="fas fa-image text-yellow-400 mr-1.5 md:mr-2"></i>
                                     ¿Tienes alguna imagen de referencia para guiarnos?
                                 </label>
-                                <div class="flex gap-4">
+                                <div class="flex gap-2 md:gap-3 lg:gap-4">
                                     <button 
                                         type="button"
                                         id="tiene-imagen-si"
-                                        class="flex-1 py-4 bg-gray-700/50 border-2 border-gray-600 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2"
+                                        class="flex-1 py-2.5 md:py-3 lg:py-4 bg-gray-700/50 border-2 border-gray-600 text-white rounded-lg md:rounded-xl font-semibold transition-all flex items-center justify-center gap-1.5 md:gap-2 text-sm md:text-base"
                                     >
-                                        <i class="fas fa-check-circle"></i>
+                                        <i class="fas fa-check-circle text-sm md:text-base"></i>
                                         Sí, tengo
                                     </button>
                                     <button 
                                         type="button"
                                         id="tiene-imagen-no"
-                                        class="flex-1 py-4 bg-gray-700/50 border-2 border-gray-600 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-2"
+                                        class="flex-1 py-2.5 md:py-3 lg:py-4 bg-gray-700/50 border-2 border-gray-600 text-white rounded-lg md:rounded-xl font-semibold transition-all flex items-center justify-center gap-1.5 md:gap-2 text-sm md:text-base"
                                     >
-                                        <i class="fas fa-times-circle"></i>
+                                        <i class="fas fa-times-circle text-sm md:text-base"></i>
                                         No tengo
                                     </button>
                                 </div>
@@ -365,13 +393,13 @@
                             </div>
                             
                             <!-- Botón Enviar -->
-                            <div class="pt-4">
+                            <div class="pt-2 md:pt-3 lg:pt-4">
                                 <button 
                                     type="submit"
-                                    class="w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white rounded-xl font-bold text-lg shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 min-h-[56px]"
+                                    class="w-full py-3 md:py-3.5 lg:py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white rounded-lg md:rounded-xl font-bold text-base md:text-lg shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 md:gap-3 min-h-[48px] md:min-h-[52px] lg:min-h-[56px]"
                                 >
-                                    <i class="fab fa-whatsapp text-2xl"></i>
-                                    Enviar pedido por WhatsApp
+                                    <i class="fab fa-whatsapp text-xl md:text-2xl"></i>
+                                    <span class="text-sm md:text-base lg:text-lg">Enviar pedido por WhatsApp</span>
                                 </button>
                             </div>
                         </form>
@@ -381,15 +409,31 @@
         </section>
         
         <!-- Catálogo de Productos -->
-        <section id="productos" class="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%236c757d" fill-opacity="0.02"%3E%3Cpath d="M40 40 L45 35 L50 40 L45 45 Z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-            <div class="container mx-auto px-4 relative z-10">
-                <h2 class="font-playfair text-3xl md:text-4xl font-bold text-center mb-4 glow-gold">
-                    Nuestros Catálogos
-                </h2>
-                <p class="text-center text-gray-600 dark:text-gray-400 mb-8">
-                    ¿De qué catálogo te interesa? Busca un producto
-                </p>
+        <section id="productos" class="relative overflow-hidden">
+            <!-- Hero del título con fondo similar al inicio -->
+            <div class="relative py-12 md:py-16 bg-gradient-to-br from-gray-900 via-black to-gray-950 overflow-hidden">
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23D4AF37" fill-opacity="0.08"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3Ccircle cx="10" cy="10" r="1.5"/%3E%3Ccircle cx="50" cy="50" r="1.5"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                
+                <!-- Partículas y velas animadas -->
+                <div id="catalog-particles-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+                <div id="catalog-candles-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+                
+                <div class="container mx-auto px-4 relative z-10 pb-2">
+                    <h2 class="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-3 drop-shadow-lg" style="background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 30px rgba(212, 175, 55, 0.5), 0 2px 4px rgba(212, 175, 55, 0.3); line-height: 1.4; padding-bottom: 0.75rem; display: inline-block; width: 100%;">
+                        Nuestros Catálogos
+                    </h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mb-4"></div>
+                    <p class="text-center text-white/90 text-lg md:text-xl mb-0 drop-shadow-lg" style="text-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 2px 10px rgba(0, 0, 0, 0.5);">
+                        ¿De qué catálogo te interesa? Busca un producto
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Contenido de productos -->
+            <div class="pt-8 pb-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative">
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%236c757d" fill-opacity="0.02"%3E%3Cpath d="M40 40 L45 35 L50 40 L45 45 Z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+                <div class="container mx-auto px-4 relative z-10">
                 
                 <!-- Search Bar -->
                 <div class="max-w-md mx-auto mb-8">
@@ -418,6 +462,7 @@
                 <div id="no-results" class="hidden text-center py-12">
                     <i class="fas fa-search text-6xl text-gray-300 dark:text-gray-600 mb-4"></i>
                     <p class="text-xl text-gray-600 dark:text-gray-400">No se encontraron productos</p>
+                </div>
                 </div>
             </div>
         </section>
@@ -455,20 +500,97 @@
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Envío a Domicilio -->
-                            <div class="bg-gradient-to-br from-green-900/90 to-green-800/70 rounded-2xl p-8 border-2 border-green-400/50 shadow-xl hover:shadow-green-500/20 transition-all">
+                            <div class="bg-gradient-to-br from-green-900/90 to-green-800/70 rounded-2xl p-8 border-2 border-green-400/50 shadow-xl hover:shadow-green-500/20 transition-all transform hover:scale-[1.02]">
                                 <div class="flex flex-col items-center text-center">
-                                    <i class="fas fa-globe-americas text-5xl text-green-300 mb-4"></i>
-                                    <h4 class="text-white font-bold text-xl mb-3">Envío a Domicilio</h4>
-                                    <p class="text-green-200 text-base">Hacemos envío a todo Colombia</p>
+                                    <div class="mb-4 relative">
+                                        <div class="relative">
+                                            <div class="bg-green-500/20 rounded-full p-4 backdrop-blur-sm border-2 border-green-400/30">
+                                                <i class="fas fa-truck-fast text-5xl text-green-300 drop-shadow-lg"></i>
+                                            </div>
+                                            <div class="absolute -top-1 -right-1 w-6 h-6 bg-yellow-400 rounded-full border-2 border-green-900 animate-pulse shadow-lg flex items-center justify-center">
+                                                <i class="fas fa-check text-xs text-green-900"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h4 class="text-white font-bold text-xl mb-3 drop-shadow-md">
+                                        <i class="fas fa-map-marked-alt mr-2 text-green-300"></i>
+                                        Envío a Domicilio
+                                    </h4>
+                                    
+                                    <!-- Info principal destacada -->
+                                    <div class="bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 mb-4 border border-white/20 w-full">
+                                        <p class="text-green-100 text-base font-semibold flex items-center justify-center gap-2">
+                                            <i class="fas fa-globe-americas text-green-300"></i>
+                                            <span>Hacemos envío a todo Colombia</span>
+                                        </p>
+                                    </div>
+                                    
+                                    <!-- Badges informativos -->
+                                    <div class="flex flex-wrap justify-center gap-2 mt-2 w-full">
+                                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/20 flex items-center gap-1.5">
+                                            <i class="fas fa-shipping-fast text-green-300 text-sm"></i>
+                                            <span class="text-white text-xs font-semibold">Rápido</span>
+                                        </div>
+                                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/20 flex items-center gap-1.5">
+                                            <i class="fas fa-shield-alt text-green-300 text-sm"></i>
+                                            <span class="text-white text-xs font-semibold">Seguro</span>
+                                        </div>
+                                        <div class="bg-white/10 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-white/20 flex items-center gap-1.5">
+                                            <i class="fas fa-box text-green-300 text-sm"></i>
+                                            <span class="text-white text-xs font-semibold">Protegido</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
                             <!-- Método de Pago -->
-                            <div class="bg-gradient-to-br from-red-900/90 to-red-800/70 rounded-2xl p-8 border-2 border-red-400/50 shadow-xl hover:shadow-red-500/20 transition-all">
+                            <div class="bg-gradient-to-br from-red-900/90 to-red-800/70 rounded-2xl p-8 border-2 border-red-400/50 shadow-xl hover:shadow-red-500/20 transition-all transform hover:scale-[1.02]">
                                 <div class="flex flex-col items-center text-center">
-                                    <i class="fas fa-credit-card text-5xl text-red-300 mb-4"></i>
-                                    <h4 class="text-white font-bold text-xl mb-3">Método de Pago</h4>
-                                    <p class="text-red-200 text-base">Solo realizamos pagos contra entrega en Medellín</p>
+                                    <div class="mb-4 relative">
+                                        <div class="relative">
+                                            <i class="fas fa-credit-card text-5xl text-red-300 drop-shadow-lg"></i>
+                                            <div class="absolute -top-1 -right-1 w-5 h-5 bg-green-400 rounded-full border-2 border-red-900 animate-pulse shadow-lg"></div>
+                                        </div>
+                                    </div>
+                                    <h4 class="text-white font-bold text-xl mb-3 drop-shadow-md">
+                                        <i class="fas fa-wallet mr-2 text-yellow-300"></i>
+                                        Métodos de Pago
+                                    </h4>
+                                    
+                                    <!-- Info principal -->
+                                    <div class="bg-white/5 backdrop-blur-sm rounded-lg px-4 py-2 mb-5 border border-white/10">
+                                        <p class="text-red-100 text-sm font-semibold">
+                                            <i class="fas fa-map-marker-alt mr-2 text-red-300"></i>
+                                            Pagos contra entrega en Medellín
+                                        </p>
+                                    </div>
+                                    
+                                    <!-- Métodos de pago disponibles -->
+                                    <div class="flex flex-wrap justify-center gap-3 mt-2 w-full">
+                                        <!-- Efectivo -->
+                                        <div class="group bg-gradient-to-br from-green-600/20 to-green-700/20 backdrop-blur-sm rounded-xl px-5 py-3 border-2 border-green-400/30 flex items-center gap-2.5 hover:border-green-400/60 hover:bg-green-600/30 transition-all transform hover:scale-105 cursor-default shadow-lg hover:shadow-green-500/30">
+                                            <div class="bg-green-500/20 rounded-full p-2 group-hover:bg-green-500/30 transition-all">
+                                                <i class="fas fa-money-bill-wave text-green-300 text-xl group-hover:text-green-200 transition-colors"></i>
+                                            </div>
+                                            <span class="text-white text-sm font-bold">Efectivo</span>
+                                        </div>
+                                        
+                                        <!-- Nequi -->
+                                        <div class="group bg-gradient-to-br from-purple-600/20 to-purple-700/20 backdrop-blur-sm rounded-xl px-5 py-3 border-2 border-purple-400/30 flex items-center gap-2.5 hover:border-purple-400/60 hover:bg-purple-600/30 transition-all transform hover:scale-105 cursor-default shadow-lg hover:shadow-purple-500/30">
+                                            <div class="bg-white rounded-full p-2 group-hover:bg-white/90 transition-all flex items-center justify-center w-10 h-10">
+                                                <img src="assets/icons/nequi.png" alt="Nequi" class="w-8 h-8 object-contain" />
+                                            </div>
+                                            <span class="text-white text-sm font-bold">Nequi</span>
+                                        </div>
+                                        
+                                        <!-- Bancolombia -->
+                                        <div class="group bg-gradient-to-br from-blue-600/20 to-blue-700/20 backdrop-blur-sm rounded-xl px-5 py-3 border-2 border-blue-400/30 flex items-center gap-2.5 hover:border-blue-400/60 hover:bg-blue-600/30 transition-all transform hover:scale-105 cursor-default shadow-lg hover:shadow-blue-500/30">
+                                            <div class="bg-white rounded-full p-2 group-hover:bg-white/90 transition-all flex items-center justify-center w-10 h-10">
+                                                <img src="assets/icons/bancolombia.png" alt="Bancolombia" class="w-8 h-8 object-contain" />
+                                            </div>
+                                            <span class="text-white text-sm font-bold">Bancolombia</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -507,7 +629,7 @@
                                 <i class="fab fa-whatsapp text-4xl text-white"></i>
                                 <span class="text-white font-bold text-lg">WhatsApp 1</span>
                             </a>
-                            <a href="https://api.whatsapp.com/send?phone=573008220389&text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos" 
+                            <a href="https://api.whatsapp.com/send?phone=573246445897&text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos" 
                                target="_blank" 
                                rel="noopener noreferrer"
                                class="flex items-center justify-center gap-4 p-6 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105 shadow-lg glow-green min-h-[90px]">
@@ -603,26 +725,45 @@
     <div id="cart-modal" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="cart-overlay"></div>
         <div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-gray-900 rounded-t-3xl shadow-2xl max-h-[85vh] overflow-hidden flex flex-col">
-            <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-                <h3 class="font-playfair text-2xl font-bold text-gray-800 dark:text-white">Carrito de Compras</h3>
-                <button id="cart-close" class="p-2 rounded-full transition" aria-label="Cerrar carrito">
-                    <i class="fas fa-times text-xl text-gray-600 dark:text-gray-400"></i>
-                </button>
+            <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-gray-800 dark:to-gray-800">
+                <div>
+                    <h3 class="font-playfair text-2xl font-bold text-gray-800 dark:text-white mb-1">Carrito de Compras</h3>
+                    <p id="cart-items-count" class="text-sm text-gray-600 dark:text-gray-400">0 productos</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="vaciar-carrito" onclick="vaciarCarrito()" class="hidden px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition" aria-label="Vaciar carrito">
+                        <i class="fas fa-trash-alt mr-1"></i>
+                        Vaciar
+                    </button>
+                    <button id="cart-close" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition" aria-label="Cerrar carrito">
+                        <i class="fas fa-times text-xl text-gray-600 dark:text-gray-400"></i>
+                    </button>
+                </div>
             </div>
             
             <div id="cart-items" class="flex-1 overflow-y-auto p-6">
                 <!-- Cart items will be injected by JS -->
             </div>
             
-            <div class="p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-lg font-semibold text-gray-800 dark:text-white">Total:</span>
-                    <span id="cart-total" class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">$0</span>
+            <div class="p-6 border-t-2 border-gray-200 dark:border-gray-700 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-4 mb-4 border border-gray-200 dark:border-gray-700">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Subtotal:</span>
+                        <span id="cart-subtotal" class="text-base font-semibold text-gray-700 dark:text-gray-300">$0</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-2 border-t border-gray-200 dark:border-gray-700">
+                        <span class="text-lg font-bold text-gray-800 dark:text-white">Total:</span>
+                        <span id="cart-total" class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">$0</span>
+                    </div>
                 </div>
-                <button id="checkout-whatsapp" class="w-full py-4 bg-green-500 text-white rounded-full font-semibold shadow-lg transition-all duration-300 min-h-[48px] flex items-center justify-center">
-                    <i class="fab fa-whatsapp text-xl mr-2"></i>
-                    Comprar por WhatsApp
+                <button id="checkout-whatsapp" class="w-full py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 min-h-[52px] flex items-center justify-center gap-2 text-lg">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                    <span>Comprar por WhatsApp</span>
                 </button>
+                <p class="text-xs text-center text-gray-500 dark:text-gray-400 mt-3">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Te redirigiremos a WhatsApp para completar tu pedido
+                </p>
             </div>
         </div>
     </div>
@@ -640,17 +781,409 @@
     <!-- Mobile Menu Overlay -->
     <div id="mobile-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 hidden md:hidden"></div>
     
-    <!-- WhatsApp Floating Button -->
+    <!-- Modal de Confirmación Personalizado -->
+    <div id="confirm-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="confirm-overlay"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md mx-4">
+            <div class="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden">
+                <!-- Header con icono -->
+                <div class="bg-gradient-to-r from-red-500 to-red-600 p-6 text-center">
+                    <div class="inline-block p-4 bg-white/20 rounded-full mb-3">
+                        <i class="fas fa-exclamation-triangle text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white font-playfair">Confirmar acción</h3>
+                </div>
+                
+                <!-- Contenido -->
+                <div class="p-6 text-center">
+                    <p id="confirm-message" class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed"></p>
+                    
+                    <!-- Botones -->
+                    <div class="flex gap-3">
+                        <button id="confirm-cancel" class="flex-1 py-3 px-6 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 shadow-sm hover:shadow-md">
+                            <i class="fas fa-times mr-2"></i>
+                            Cancelar
+                        </button>
+                        <button id="confirm-ok" class="flex-1 py-3 px-6 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-semibold hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-check mr-2"></i>
+                            Confirmar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- WhatsApp Floating Button Mejorado -->
     <a href="https://api.whatsapp.com/send?phone=573008220389&text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos" 
        target="_blank" 
-       class="fixed bottom-20 md:bottom-6 right-4 z-40 bg-green-500 text-white rounded-full p-4 shadow-2xl transition-all duration-300 animate-pulse"
+       rel="noopener noreferrer"
+       id="whatsapp-float-btn"
        aria-label="Contactar por WhatsApp">
-        <i class="fab fa-whatsapp text-3xl md:text-4xl"></i>
+        <i class="fab fa-whatsapp"></i>
+        <span id="whatsapp-badge" class="whatsapp-badge hidden">0</span>
     </a>
     
     <!-- Scripts -->
     <script src="app.js"></script>
     <script>
+      // Generar velas animadas de fondo
+      function crearVelasAnimadas() {
+        const container = document.getElementById('candles-container');
+        if (!container) return;
+        
+        const numVelas = 12; // Número de velas aumentado para mejor visibilidad
+        const sizes = ['candle-small', 'candle-medium', 'candle-large'];
+        const colors = ['#D4AF37', '#FFD700', '#FFA500', '#FF8C00']; // Colores dorados/naranjas
+        
+        // Crear un SVG maestro con el gradiente (una sola vez)
+        const svgMaster = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svgMaster.setAttribute('width', '0');
+        svgMaster.setAttribute('height', '0');
+        svgMaster.style.position = 'absolute';
+        svgMaster.style.visibility = 'hidden';
+        
+        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+        gradient.setAttribute('id', 'flameGradient');
+        gradient.setAttribute('x1', '0%');
+        gradient.setAttribute('y1', '0%');
+        gradient.setAttribute('x2', '0%');
+        gradient.setAttribute('y2', '100%');
+        
+        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop1.setAttribute('offset', '0%');
+        stop1.setAttribute('stop-color', '#FFD700');
+        stop1.setAttribute('stop-opacity', '1');
+        
+        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop2.setAttribute('offset', '50%');
+        stop2.setAttribute('stop-color', '#FFA500');
+        stop2.setAttribute('stop-opacity', '0.9');
+        
+        const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+        stop3.setAttribute('offset', '100%');
+        stop3.setAttribute('stop-color', '#FF4500');
+        stop3.setAttribute('stop-opacity', '0.7');
+        
+        gradient.appendChild(stop1);
+        gradient.appendChild(stop2);
+        gradient.appendChild(stop3);
+        defs.appendChild(gradient);
+        svgMaster.appendChild(defs);
+        document.body.appendChild(svgMaster);
+        
+        for (let i = 0; i < numVelas; i++) {
+          const candle = document.createElement('div');
+          const size = sizes[Math.floor(Math.random() * sizes.length)];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          
+          candle.className = `candle-floating ${size}`;
+          
+          // Posición horizontal aleatoria
+          candle.style.left = Math.random() * 100 + '%';
+          
+          // Delay aleatorio para que aparezcan en diferentes momentos (más rápido)
+          candle.style.animationDelay = Math.random() * 5 + 's';
+          
+          // Empezar desde diferentes alturas para que siempre haya velas visibles
+          const startHeight = Math.random() * 30; // 0-30% desde abajo
+          candle.style.bottom = `-${startHeight}%`;
+          
+          // SVG de la vela con llama
+          const candleHeight = size === 'candle-small' ? 60 : size === 'candle-medium' ? 80 : 100;
+          const candleWidth = size === 'candle-small' ? 30 : size === 'candle-medium' ? 40 : 50;
+          
+          candle.innerHTML = `
+            <svg class="candle-svg" width="${candleWidth}" height="${candleHeight}" viewBox="0 0 40 100" xmlns="http://www.w3.org/2000/svg">
+              <!-- Llama parpadeante -->
+              <g class="candle-flame" transform="translate(20, 10)">
+                <path d="M 0 0 Q -3 -8 -2 -15 Q 0 -18 2 -15 Q 3 -8 0 0" fill="url(#flameGradient)">
+                  <animate attributeName="opacity" values="1;0.8;1" dur="1.5s" repeatCount="indefinite"/>
+                </path>
+                <!-- Brillo de la llama -->
+                <ellipse cx="0" cy="-5" rx="2" ry="4" fill="#FFD700" opacity="0.6">
+                  <animate attributeName="cy" values="-5;-7;-5" dur="1s" repeatCount="indefinite"/>
+                </ellipse>
+              </g>
+              <!-- Cuerpo de la vela -->
+              <rect x="15" y="20" width="10" height="${candleHeight - 20}" fill="${color}" opacity="0.7" rx="2"/>
+              <!-- Base de la vela -->
+              <ellipse cx="20" cy="${candleHeight - 5}" rx="8" ry="3" fill="${color}" opacity="0.5"/>
+              <!-- Brillo en el cuerpo -->
+              <rect x="17" y="25" width="3" height="${candleHeight - 30}" fill="#FFFFFF" opacity="0.3" rx="1"/>
+            </svg>
+          `;
+          
+          container.appendChild(candle);
+        }
+      }
+      
+      // Generar partículas animadas para el Hero
+      function crearParticulas() {
+        const container = document.getElementById('particles-container');
+        if (!container) return;
+        
+        const numParticulas = 30; // Número de partículas
+        const sizes = ['particle-small', 'particle-medium', 'particle-large'];
+        
+        for (let i = 0; i < numParticulas; i++) {
+          const particle = document.createElement('div');
+          particle.className = `particle ${sizes[Math.floor(Math.random() * sizes.length)]}`;
+          
+          // Posición aleatoria inicial
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          
+          // Delay aleatorio para que no todas empiecen al mismo tiempo
+          particle.style.animationDelay = Math.random() * 5 + 's';
+          
+          // Variación adicional en la animación
+          const randomDelay = Math.random() * 3;
+          particle.style.animationDelay = `-${randomDelay}s`;
+          
+          container.appendChild(particle);
+        }
+      }
+      
+      // Generar velas pequeñas y brillantes para el Hero (como partículas)
+      function crearVelasHero() {
+        const container = document.getElementById('hero-candles-container');
+        if (!container) return;
+        
+        const numVelas = 20; // Número de velas pequeñas
+        const sizes = [12, 16, 20, 24]; // Tamaños en píxeles
+        
+        // Crear gradiente para las llamas
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svgDefs = document.createElementNS(svgNS, 'svg');
+        svgDefs.style.position = 'absolute';
+        svgDefs.style.width = '0';
+        svgDefs.style.height = '0';
+        const defs = document.createElementNS(svgNS, 'defs');
+        const flameGradient = document.createElementNS(svgNS, 'radialGradient');
+        flameGradient.setAttribute('id', 'heroFlameGradient');
+        flameGradient.setAttribute('cx', '50%');
+        flameGradient.setAttribute('cy', '50%');
+        
+        const stop1 = document.createElementNS(svgNS, 'stop');
+        stop1.setAttribute('offset', '0%');
+        stop1.setAttribute('stop-color', '#FFD700');
+        stop1.setAttribute('stop-opacity', '1');
+        
+        const stop2 = document.createElementNS(svgNS, 'stop');
+        stop2.setAttribute('offset', '50%');
+        stop2.setAttribute('stop-color', '#FFA500');
+        stop2.setAttribute('stop-opacity', '0.8');
+        
+        const stop3 = document.createElementNS(svgNS, 'stop');
+        stop3.setAttribute('offset', '100%');
+        stop3.setAttribute('stop-color', '#FF4500');
+        stop3.setAttribute('stop-opacity', '0');
+        
+        flameGradient.appendChild(stop1);
+        flameGradient.appendChild(stop2);
+        flameGradient.appendChild(stop3);
+        defs.appendChild(flameGradient);
+        svgDefs.appendChild(defs);
+        container.appendChild(svgDefs);
+        
+        for (let i = 0; i < numVelas; i++) {
+          const candle = document.createElement('div');
+          const size = sizes[Math.floor(Math.random() * sizes.length)];
+          const candleSize = size;
+          const flameSize = size * 0.4;
+          
+          candle.style.position = 'absolute';
+          candle.style.width = candleSize + 'px';
+          candle.style.height = candleSize * 1.5 + 'px';
+          candle.style.left = Math.random() * 100 + '%';
+          candle.style.top = Math.random() * 100 + '%';
+          candle.style.opacity = '0';
+          candle.style.filter = 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.6)) drop-shadow(0 0 4px rgba(255, 165, 0, 0.4))';
+          candle.style.animation = `fadeInCandle ${2 + Math.random() * 2}s ease-in forwards, floatCandleHero ${8 + Math.random() * 4}s ease-in-out infinite`;
+          candle.style.animationDelay = `${Math.random() * 3}s, ${Math.random() * 2}s`;
+          candle.style.transform = `scale(${0.6 + Math.random() * 0.4})`;
+          
+          const svg = document.createElementNS(svgNS, 'svg');
+          svg.setAttribute('width', candleSize);
+          svg.setAttribute('height', candleSize * 1.5);
+          svg.setAttribute('viewBox', `0 0 ${candleSize} ${candleSize * 1.5}`);
+          
+          // Llama brillante
+          const flame = document.createElementNS(svgNS, 'circle');
+          flame.setAttribute('cx', candleSize / 2);
+          flame.setAttribute('cy', flameSize / 2);
+          flame.setAttribute('r', flameSize / 2);
+          flame.setAttribute('fill', 'url(#heroFlameGradient)');
+          
+          const flameAnim = document.createElementNS(svgNS, 'animate');
+          flameAnim.setAttribute('attributeName', 'r');
+          flameAnim.setAttribute('values', `${flameSize/2};${flameSize/2.2};${flameSize/2}`);
+          flameAnim.setAttribute('dur', '1.5s');
+          flameAnim.setAttribute('repeatCount', 'indefinite');
+          flame.appendChild(flameAnim);
+          
+          const glowAnim = document.createElementNS(svgNS, 'animate');
+          glowAnim.setAttribute('attributeName', 'opacity');
+          glowAnim.setAttribute('values', '1;0.7;1');
+          glowAnim.setAttribute('dur', '1s');
+          glowAnim.setAttribute('repeatCount', 'indefinite');
+          flame.appendChild(glowAnim);
+          
+          // Cuerpo de la vela (muy pequeño y discreto)
+          const body = document.createElementNS(svgNS, 'rect');
+          body.setAttribute('x', candleSize * 0.35);
+          body.setAttribute('y', flameSize);
+          body.setAttribute('width', candleSize * 0.3);
+          body.setAttribute('height', candleSize * 0.8);
+          body.setAttribute('fill', '#D4AF37');
+          body.setAttribute('opacity', '0.4');
+          body.setAttribute('rx', '2');
+          
+          svg.appendChild(flame);
+          svg.appendChild(body);
+          candle.appendChild(svg);
+          container.appendChild(candle);
+        }
+      }
+      
+      // Generar partículas para la sección de catálogos
+      function crearParticulasCatalogo() {
+        const container = document.getElementById('catalog-particles-container');
+        if (!container) return;
+        
+        const numParticulas = 20;
+        const sizes = ['particle-small', 'particle-medium', 'particle-large'];
+        
+        for (let i = 0; i < numParticulas; i++) {
+          const particle = document.createElement('div');
+          particle.className = `particle ${sizes[Math.floor(Math.random() * sizes.length)]}`;
+          
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.animationDelay = `${Math.random() * 5}s`;
+          
+          container.appendChild(particle);
+        }
+      }
+      
+      // Generar velas para la sección de catálogos
+      function crearVelasCatalogo() {
+        const container = document.getElementById('catalog-candles-container');
+        if (!container) return;
+        
+        const numVelas = 15;
+        const sizes = [10, 14, 18, 22];
+        
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svgDefs = document.createElementNS(svgNS, 'svg');
+        svgDefs.style.position = 'absolute';
+        svgDefs.style.width = '0';
+        svgDefs.style.height = '0';
+        const defs = document.createElementNS(svgNS, 'defs');
+        const flameGradient = document.createElementNS(svgNS, 'radialGradient');
+        flameGradient.setAttribute('id', 'catalogFlameGradient');
+        flameGradient.setAttribute('cx', '50%');
+        flameGradient.setAttribute('cy', '50%');
+        
+        const stop1 = document.createElementNS(svgNS, 'stop');
+        stop1.setAttribute('offset', '0%');
+        stop1.setAttribute('stop-color', '#FFD700');
+        stop1.setAttribute('stop-opacity', '1');
+        
+        const stop2 = document.createElementNS(svgNS, 'stop');
+        stop2.setAttribute('offset', '50%');
+        stop2.setAttribute('stop-color', '#FFA500');
+        stop2.setAttribute('stop-opacity', '0.8');
+        
+        const stop3 = document.createElementNS(svgNS, 'stop');
+        stop3.setAttribute('offset', '100%');
+        stop3.setAttribute('stop-color', '#FF4500');
+        stop3.setAttribute('stop-opacity', '0');
+        
+        flameGradient.appendChild(stop1);
+        flameGradient.appendChild(stop2);
+        flameGradient.appendChild(stop3);
+        defs.appendChild(flameGradient);
+        svgDefs.appendChild(defs);
+        container.appendChild(svgDefs);
+        
+        for (let i = 0; i < numVelas; i++) {
+          const candle = document.createElement('div');
+          const size = sizes[Math.floor(Math.random() * sizes.length)];
+          const candleSize = size;
+          const flameSize = size * 0.4;
+          
+          candle.style.position = 'absolute';
+          candle.style.width = candleSize + 'px';
+          candle.style.height = candleSize * 1.5 + 'px';
+          candle.style.left = Math.random() * 100 + '%';
+          candle.style.top = Math.random() * 100 + '%';
+          candle.style.opacity = '0';
+          candle.style.filter = 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.6)) drop-shadow(0 0 4px rgba(255, 165, 0, 0.4))';
+          candle.style.animation = `fadeInCandle ${2 + Math.random() * 2}s ease-in forwards, floatCandleHero ${8 + Math.random() * 4}s ease-in-out infinite`;
+          candle.style.animationDelay = `${Math.random() * 3}s, ${Math.random() * 2}s`;
+          candle.style.transform = `scale(${0.6 + Math.random() * 0.4})`;
+          
+          const svg = document.createElementNS(svgNS, 'svg');
+          svg.setAttribute('width', candleSize);
+          svg.setAttribute('height', candleSize * 1.5);
+          svg.setAttribute('viewBox', `0 0 ${candleSize} ${candleSize * 1.5}`);
+          
+          const flame = document.createElementNS(svgNS, 'circle');
+          flame.setAttribute('cx', candleSize / 2);
+          flame.setAttribute('cy', flameSize / 2);
+          flame.setAttribute('r', flameSize / 2);
+          flame.setAttribute('fill', 'url(#catalogFlameGradient)');
+          
+          const flameAnim = document.createElementNS(svgNS, 'animate');
+          flameAnim.setAttribute('attributeName', 'r');
+          flameAnim.setAttribute('values', `${flameSize/2};${flameSize/2.2};${flameSize/2}`);
+          flameAnim.setAttribute('dur', '1.5s');
+          flameAnim.setAttribute('repeatCount', 'indefinite');
+          flame.appendChild(flameAnim);
+          
+          const glowAnim = document.createElementNS(svgNS, 'animate');
+          glowAnim.setAttribute('attributeName', 'opacity');
+          glowAnim.setAttribute('values', '1;0.7;1');
+          glowAnim.setAttribute('dur', '1s');
+          glowAnim.setAttribute('repeatCount', 'indefinite');
+          flame.appendChild(glowAnim);
+          
+          const body = document.createElementNS(svgNS, 'rect');
+          body.setAttribute('x', candleSize * 0.35);
+          body.setAttribute('y', flameSize);
+          body.setAttribute('width', candleSize * 0.3);
+          body.setAttribute('height', candleSize * 0.8);
+          body.setAttribute('fill', '#D4AF37');
+          body.setAttribute('opacity', '0.4');
+          body.setAttribute('rx', '2');
+          
+          svg.appendChild(flame);
+          svg.appendChild(body);
+          candle.appendChild(svg);
+          container.appendChild(candle);
+        }
+      }
+      
+      // Inicializar velas y partículas cuando el DOM esté listo
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          crearVelasAnimadas();
+          crearParticulas();
+          crearVelasHero();
+          crearParticulasCatalogo();
+          crearVelasCatalogo();
+        });
+      } else {
+        crearVelasAnimadas();
+        crearParticulas();
+        crearVelasHero();
+        crearParticulasCatalogo();
+        crearVelasCatalogo();
+      }
+      
       // Registrar Service Worker con actualización forzada
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {

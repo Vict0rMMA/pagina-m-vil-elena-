@@ -1174,8 +1174,20 @@ const productos = {
       descripcion: "Velas navideñas en forma de ángel blanco con un corte en forma de corazón en el centro. Disponibles en dos tamaños: Grande y Pequeño. Disponible en bolsa transparente con lazo dorado y etiqueta navideña. Disponible solo en bolsa.",
       imagen: "assets/productos/Navidad/23.jpg",
       tamanos: [
-        { nombre: "Grande Bolsa", precio: 5500 },
-        { nombre: "Pequeño Bolsa", precio: 4500 }
+        { 
+          nombre: "Grande Bolsa", 
+          precios: {
+            detal: 5500,
+            mayorista: 4500
+          }
+        },
+        { 
+          nombre: "Pequeño Bolsa", 
+          precios: {
+            detal: 4500,
+            mayorista: 4000
+          }
+        }
       ]
     },
     {
@@ -1344,6 +1356,23 @@ const videos = [
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+  // Inicializar partículas laterales
+  initSideParticles();
+  
+  // Manejar redimensionamiento de ventana
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const leftContainer = document.getElementById('side-particles-left');
+      const rightContainer = document.getElementById('side-particles-right');
+      if (leftContainer && rightContainer) {
+        leftContainer.innerHTML = '';
+        rightContainer.innerHTML = '';
+        initSideParticles();
+      }
+    }, 250);
+  });
   initDarkMode();
   initMobileMenu();
   initCarrito();
@@ -1540,20 +1569,58 @@ function guardarCarrito() {
 }
 
 function actualizarContadorCarrito() {
+  // Actualizar contadores del carrito
   const total = state.carrito.reduce((sum, item) => sum + item.cantidad, 0);
+  const cartCounts = document.querySelectorAll('#cart-count, #cart-count-dock');
   
-  const counters = ['cart-count', 'cart-count-dock'];
-  counters.forEach(id => {
-    const counter = document.getElementById(id);
-    if (counter) {
-      if (total > 0) {
-        counter.textContent = total;
-        counter.classList.remove('hidden');
-      } else {
-        counter.classList.add('hidden');
-      }
+  cartCounts.forEach(count => {
+    if (total > 0) {
+      count.textContent = total;
+      count.classList.remove('hidden');
+    } else {
+      count.classList.add('hidden');
     }
   });
+  
+  // Actualizar badge de WhatsApp
+  const whatsappBadge = document.getElementById('whatsapp-badge');
+  if (whatsappBadge) {
+    if (total > 0) {
+      whatsappBadge.textContent = total > 99 ? '99+' : total;
+      whatsappBadge.classList.remove('hidden');
+    } else {
+      whatsappBadge.classList.add('hidden');
+    }
+  }
+  
+  // Actualizar URL de WhatsApp con productos del carrito si hay items
+  const whatsappBtn = document.getElementById('whatsapp-float-btn');
+  if (whatsappBtn) {
+    if (total > 0) {
+      const mensaje = generarMensajeWhatsApp();
+      whatsappBtn.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(mensaje)}`;
+    } else {
+      whatsappBtn.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent('Hola, me interesa conocer más sobre sus productos')}`;
+    }
+  }
+}
+
+function generarMensajeWhatsApp() {
+  if (state.carrito.length === 0) {
+    return 'Hola, me interesa conocer más sobre sus productos';
+  }
+  
+  let mensaje = 'Hola, me interesa comprar los siguientes productos:\n\n';
+  state.carrito.forEach((item, index) => {
+    mensaje += `${index + 1}. ${item.nombre}`;
+    if (item.tamano) mensaje += ` - Tamaño: ${item.tamano}`;
+    if (item.presentacion) mensaje += ` - Presentación: ${item.presentacion}`;
+    if (item.cantidad > 1) mensaje += ` (x${item.cantidad})`;
+    mensaje += `\n`;
+  });
+  mensaje += `\nTotal: $${state.carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toLocaleString()}`;
+  
+  return mensaje;
 }
 
 function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
@@ -1605,15 +1672,104 @@ function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
     navigator.vibrate(50);
   }
   
-  // Mostrar feedback visual mejorado
-  mostrarNotificacion('Producto agregado al carrito ✓', 'success');
+  // Mostrar feedback visual mejorado con toast mejorado
+  mostrarToastProducto(producto);
 }
 
 function eliminarDelCarrito(index) {
+  const item = state.carrito[index];
   state.carrito.splice(index, 1);
   guardarCarrito();
   actualizarContadorCarrito();
   renderCarrito();
+  
+  // Feedback visual
+  mostrarNotificacion(`${item.nombre} eliminado del carrito`, 'info');
+  
+  // Vibración si está disponible
+  if (navigator.vibrate) {
+    navigator.vibrate(50);
+  }
+}
+
+function vaciarCarrito() {
+  if (state.carrito.length === 0) return;
+  
+  mostrarConfirmacion(
+    '¿Estás seguro de que quieres vaciar el carrito?',
+    () => {
+      state.carrito = [];
+      guardarCarrito();
+      actualizarContadorCarrito();
+      renderCarrito();
+      mostrarNotificacion('Carrito vaciado', 'info');
+    }
+  );
+}
+
+// Función para mostrar modal de confirmación personalizado
+function mostrarConfirmacion(mensaje, onConfirm) {
+  const modal = document.getElementById('confirm-modal');
+  const messageElement = document.getElementById('confirm-message');
+  const okButton = document.getElementById('confirm-ok');
+  const cancelButton = document.getElementById('confirm-cancel');
+  const overlay = document.getElementById('confirm-overlay');
+  
+  if (!modal || !messageElement || !okButton || !cancelButton) return;
+  
+  // Establecer mensaje
+  messageElement.textContent = mensaje;
+  
+  // Mostrar modal
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  
+  // Forzar reflow para que la animación funcione
+  void modal.offsetWidth;
+  
+  // Animación de entrada
+  requestAnimationFrame(() => {
+    const modalContent = modal.querySelector('.rounded-3xl');
+    if (modalContent) {
+      modalContent.style.transform = 'scale(1)';
+      modalContent.style.opacity = '1';
+    }
+  });
+  
+  // Función para cerrar
+  const cerrar = () => {
+    const modalContent = modal.querySelector('.rounded-3xl');
+    if (modalContent) {
+      modalContent.style.transform = 'scale(0.9)';
+      modalContent.style.opacity = '0';
+    }
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 200);
+  };
+  
+  // Event listeners
+  const handleConfirm = () => {
+    cerrar();
+    if (onConfirm) onConfirm();
+    okButton.removeEventListener('click', handleConfirm);
+    cancelButton.removeEventListener('click', cerrar);
+    overlay.removeEventListener('click', cerrar);
+  };
+  
+  okButton.onclick = handleConfirm;
+  cancelButton.onclick = cerrar;
+  overlay.onclick = cerrar;
+  
+  // Cerrar con ESC
+  const handleEsc = (e) => {
+    if (e.key === 'Escape') {
+      cerrar();
+      document.removeEventListener('keydown', handleEsc);
+    }
+  };
+  document.addEventListener('keydown', handleEsc);
 }
 
 function actualizarCantidad(index, nuevaCantidad) {
@@ -1622,10 +1778,22 @@ function actualizarCantidad(index, nuevaCantidad) {
     return;
   }
   
+  // Limitar a máximo 99 unidades
+  if (nuevaCantidad > 99) {
+    mostrarNotificacion('Máximo 99 unidades por producto', 'warning');
+    nuevaCantidad = 99;
+  }
+  
+  const cambio = nuevaCantidad - state.carrito[index].cantidad;
   state.carrito[index].cantidad = nuevaCantidad;
   guardarCarrito();
   actualizarContadorCarrito();
   renderCarrito();
+  
+  // Vibración sutil si está disponible
+  if (navigator.vibrate) {
+    navigator.vibrate(30);
+  }
 }
 
 function renderCarrito() {
@@ -1634,14 +1802,33 @@ function renderCarrito() {
   
   if (state.carrito.length === 0) {
     container.innerHTML = `
-      <div class="text-center py-12">
-        <i class="fas fa-shopping-cart text-6xl text-gray-300 dark:text-gray-600 mb-4"></i>
-        <p class="text-xl text-gray-600 dark:text-gray-400 mb-2">Tu carrito está vacío</p>
-        <p class="text-gray-500 dark:text-gray-500">Agrega productos para comenzar</p>
+      <div class="text-center py-16">
+        <div class="inline-block p-6 bg-gray-100 dark:bg-gray-800 rounded-full mb-4">
+          <i class="fas fa-shopping-cart text-6xl text-gray-300 dark:text-gray-600"></i>
+        </div>
+        <p class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Tu carrito está vacío</p>
+        <p class="text-gray-500 dark:text-gray-400 mb-6">Agrega productos para comenzar</p>
+        <button onclick="cerrarCarrito(); document.getElementById('productos')?.scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
+          Ver Productos
+        </button>
       </div>
     `;
+    
+    // Ocultar botón de vaciar carrito si existe
+    const vaciarBtn = document.getElementById('vaciar-carrito');
+    if (vaciarBtn) vaciarBtn.classList.add('hidden');
+    
+    // Actualizar total a 0
+    const totalElement = document.getElementById('cart-total');
+    if (totalElement) {
+      totalElement.textContent = '$0';
+    }
     return;
   }
+  
+  // Mostrar botón de vaciar carrito
+  const vaciarBtn = document.getElementById('vaciar-carrito');
+  if (vaciarBtn) vaciarBtn.classList.remove('hidden');
   
   container.innerHTML = state.carrito.map((item, index) => {
     const tipoTexto = item.tipoCompra ? item.tipoCompra.charAt(0).toUpperCase() + item.tipoCompra.slice(1) : '';
@@ -1649,36 +1836,61 @@ function renderCarrito() {
     const tamanoTexto = item.tamano ? item.tamano : '';
     
     // Construir texto de detalles
-    let detallesTexto = tipoTexto;
-    if (tamanoTexto) {
-      detallesTexto += tamanoTexto ? ' - ' + tamanoTexto : '';
-    } else if (presentacionTexto) {
-      detallesTexto += presentacionTexto ? ' - ' + presentacionTexto : '';
-    }
+    let detallesTexto = '';
+    if (tipoTexto) detallesTexto += tipoTexto;
+    if (tamanoTexto) detallesTexto += (detallesTexto ? ' • ' : '') + tamanoTexto;
+    if (presentacionTexto && !tamanoTexto) detallesTexto += (detallesTexto ? ' • ' : '') + presentacionTexto;
+    
+    const subtotal = item.precio * item.cantidad;
     
     return `
-    <div class="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl mb-4">
-      <img src="${item.imagen}" alt="${item.nombre}" class="w-20 h-20 object-cover rounded-lg" onerror="this.src='https://via.placeholder.com/80x80?text=Vela'">
-      <div class="flex-1">
-        <h4 class="font-semibold text-gray-800 dark:text-white mb-1">${item.nombre}</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
-          ${detallesTexto}
-        </p>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <button onclick="actualizarCantidad(${index}, ${item.cantidad - 1})" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center transition" aria-label="Disminuir">
-              <i class="fas fa-minus text-xs"></i>
-            </button>
-            <span class="w-8 text-center font-semibold text-gray-800 dark:text-white">${item.cantidad}</span>
-            <button onclick="actualizarCantidad(${index}, ${item.cantidad + 1})" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center transition" aria-label="Aumentar">
-              <i class="fas fa-plus text-xs"></i>
-            </button>
-          </div>
-          <div class="text-right">
-            <p class="font-bold text-yellow-600 dark:text-yellow-400">$${(item.precio * item.cantidad).toLocaleString()}</p>
-            <button onclick="eliminarDelCarrito(${index})" class="text-red-500 text-sm mt-1" aria-label="Eliminar">
-              <i class="fas fa-trash"></i>
-            </button>
+    <div class="group bg-white dark:bg-gray-800 rounded-2xl p-4 mb-4 border-2 border-gray-100 dark:border-gray-700 hover:border-yellow-400 dark:hover:border-yellow-500 transition-all shadow-sm hover:shadow-md">
+      <div class="flex gap-4">
+        <!-- Imagen del producto -->
+        <div class="flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-xl p-2 border-2 border-gray-200 dark:border-gray-700 group-hover:border-yellow-400 transition-colors">
+          <img src="${item.imagen}" alt="${item.nombre}" 
+               class="w-24 h-24 md:w-28 md:h-28 object-contain rounded-lg" 
+               onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'112\' height=\'112\'%3E%3Crect fill=\'%23f3f4f6\' width=\'112\' height=\'112\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%239ca3af\' font-family=\'sans-serif\' font-size=\'14\'%3EVela%3C/text%3E%3C/svg%3E';">
+        </div>
+        
+        <!-- Información del producto -->
+        <div class="flex-1 min-w-0">
+          <h4 class="font-bold text-gray-800 dark:text-white mb-1 text-base md:text-lg line-clamp-2">${item.nombre}</h4>
+          ${detallesTexto ? `<p class="text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-1">
+            <i class="fas fa-info-circle text-yellow-500"></i>
+            ${detallesTexto}
+          </p>` : ''}
+          
+          <!-- Controles de cantidad y precio -->
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <!-- Controles de cantidad -->
+            <div class="flex items-center gap-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl p-1">
+              <button onclick="actualizarCantidad(${index}, ${item.cantidad - 1})" 
+                      class="w-10 h-10 rounded-lg bg-white dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-900/30 hover:text-red-600 dark:hover:text-red-400 flex items-center justify-center transition-all font-bold shadow-sm" 
+                      aria-label="Disminuir cantidad">
+                <i class="fas fa-minus text-sm"></i>
+              </button>
+              <span class="w-12 text-center font-bold text-lg text-gray-800 dark:text-white">${item.cantidad}</span>
+              <button onclick="actualizarCantidad(${index}, ${item.cantidad + 1})" 
+                      class="w-10 h-10 rounded-lg bg-white dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-green-100 dark:hover:bg-green-900/30 hover:text-green-600 dark:hover:text-green-400 flex items-center justify-center transition-all font-bold shadow-sm" 
+                      aria-label="Aumentar cantidad">
+                <i class="fas fa-plus text-sm"></i>
+              </button>
+            </div>
+            
+            <!-- Precio y eliminar -->
+            <div class="flex items-center gap-4">
+              <div class="text-right">
+                <p class="text-xs text-gray-500 dark:text-gray-400">Precio unitario</p>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">$${item.precio.toLocaleString()}</p>
+                <p class="text-lg md:text-xl font-bold text-yellow-600 dark:text-yellow-400 mt-1">$${subtotal.toLocaleString()}</p>
+              </div>
+              <button onclick="eliminarDelCarrito(${index})" 
+                      class="w-10 h-10 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 flex items-center justify-center transition-all shadow-sm" 
+                      aria-label="Eliminar producto">
+                <i class="fas fa-trash text-sm"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1686,17 +1898,34 @@ function renderCarrito() {
     `;
   }).join('');
   
-  // Actualizar total
+  // Calcular totales
   const total = state.carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+  const subtotal = total; // Por ahora subtotal = total (se puede agregar descuentos después)
+  
+  // Actualizar total
   const totalElement = document.getElementById('cart-total');
   if (totalElement) {
     totalElement.textContent = `$${total.toLocaleString()}`;
+  }
+  
+  // Actualizar subtotal
+  const subtotalElement = document.getElementById('cart-subtotal');
+  if (subtotalElement) {
+    subtotalElement.textContent = `$${subtotal.toLocaleString()}`;
+  }
+  
+  // Actualizar cantidad total de items
+  const totalItems = state.carrito.reduce((sum, item) => sum + item.cantidad, 0);
+  const totalItemsElement = document.getElementById('cart-items-count');
+  if (totalItemsElement) {
+    totalItemsElement.textContent = `${totalItems} ${totalItems === 1 ? 'producto' : 'productos'}`;
   }
 }
 
 // Funciones globales para los botones del carrito
 window.actualizarCantidad = actualizarCantidad;
 window.eliminarDelCarrito = eliminarDelCarrito;
+window.vaciarCarrito = vaciarCarrito;
 
 // Productos
 function initProductos() {
@@ -1866,18 +2095,22 @@ function renderProductos() {
       const dataCategory = getProductCategory(producto);
       
       return `
-    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${producto.imagen}" data-nombre="${producto.nombre.toLowerCase()}" data-descripcion="${producto.descripcion ? producto.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
+    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${producto.imagen}" data-nombre="${producto.nombre.toLowerCase()}" data-descripcion="${producto.descripcion ? producto.descripcion.toLowerCase() : ''}">
+      <div class="relative h-72 bg-gray-50 dark:bg-gray-700/30 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
+        <div class="skeleton-image absolute inset-0"></div>
         <img 
           src="${producto.imagen}" 
           alt="${producto.nombre}"
-          class="max-w-full max-h-full w-auto h-auto object-contain"
+          class="max-w-full max-h-full w-auto h-auto object-contain relative z-10 rounded-lg"
           loading="lazy"
-          style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; image-rendering: high-quality;"
-          onerror="console.error('Error cargando imagen:', '${producto.imagen}');"
+          decoding="async"
+          style="opacity: 0; transition: opacity 0.3s ease;"
+          onload="this.style.opacity='1'; this.classList.add('loaded');"
+          onerror="console.error('Error cargando imagen:', '${producto.imagen}'); this.style.opacity='1'; this.style.filter='grayscale(100%) opacity(0.5)';"
         >
-        <div class="absolute bottom-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold opacity-90 shadow-md border border-yellow-600">
-          <i class="fas fa-search-plus mr-1"></i> Doble clic
+        <div class="double-click-badge">
+          <i class="fas fa-search-plus"></i>
+          <span>Doble clic</span>
         </div>
       </div>
       <div class="p-4">
@@ -1886,7 +2119,7 @@ function renderProductos() {
         </h3>
         <button 
           onclick="abrirModalProducto('${producto.id}')"
-          class="w-full py-2.5 bg-yellow-500 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="w-full py-2.5 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
         >
           Ver Precios
         </button>
@@ -1948,18 +2181,22 @@ function renderProductos() {
         }
         
         return `
-    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${tituloTarjeta.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${imagen}', '${tituloTarjeta}')">
+    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${tituloTarjeta.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
+      <div class="relative h-72 bg-gray-50 dark:bg-gray-700/30 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${imagen}', '${tituloTarjeta}')">
+        <div class="skeleton-image absolute inset-0"></div>
         <img 
           src="${imagen}" 
           alt="${nombresProductos}"
-          class="max-w-full max-h-full w-auto h-auto object-contain"
+          class="max-w-full max-h-full w-auto h-auto object-contain relative z-10 rounded-lg"
           loading="lazy"
-          style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; image-rendering: high-quality;"
-          onerror="console.error('Error cargando imagen:', '${imagen}');"
+          decoding="async"
+          style="opacity: 0; transition: opacity 0.3s ease;"
+          onload="this.style.opacity='1'; this.classList.add('loaded');"
+          onerror="console.error('Error cargando imagen:', '${imagen}'); this.style.opacity='1'; this.style.filter='grayscale(100%) opacity(0.5)';"
         >
-        <div class="absolute bottom-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold opacity-90 shadow-md border border-yellow-600">
-          <i class="fas fa-search-plus mr-1"></i> Doble clic
+        <div class="double-click-badge">
+          <i class="fas fa-search-plus"></i>
+          <span>Doble clic</span>
         </div>
       </div>
       <div class="p-4">
@@ -1968,7 +2205,7 @@ function renderProductos() {
         </h3>
         <button 
           onclick="abrirModalProductoGrupo('${imagen}')"
-          class="w-full py-2.5 bg-yellow-500 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="w-full py-2.5 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
         >
           Ver Precios
         </button>
@@ -1978,18 +2215,22 @@ function renderProductos() {
     } else {
       // Producto único - mostrar normalmente
       return `
-    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${productoPrincipal.nombre.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${imagen}', '${productoPrincipal.nombre}')">
+    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${productoPrincipal.nombre.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
+      <div class="relative h-72 bg-gray-50 dark:bg-gray-700/30 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${imagen}', '${productoPrincipal.nombre}')">
+        <div class="skeleton-image absolute inset-0"></div>
         <img 
           src="${imagen}" 
           alt="${productoPrincipal.nombre}"
-          class="max-w-full max-h-full w-auto h-auto object-contain"
+          class="max-w-full max-h-full w-auto h-auto object-contain relative z-10 rounded-lg"
           loading="lazy"
-          style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; image-rendering: high-quality;"
-          onerror="console.error('Error cargando imagen:', '${imagen}');"
+          decoding="async"
+          style="opacity: 0; transition: opacity 0.3s ease;"
+          onload="this.style.opacity='1'; this.classList.add('loaded');"
+          onerror="console.error('Error cargando imagen:', '${imagen}'); this.style.opacity='1'; this.style.filter='grayscale(100%) opacity(0.5)';"
         >
-        <div class="absolute bottom-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold opacity-90 shadow-md border border-yellow-600">
-          <i class="fas fa-search-plus mr-1"></i> Doble clic
+        <div class="double-click-badge">
+          <i class="fas fa-search-plus"></i>
+          <span>Doble clic</span>
         </div>
       </div>
       <div class="p-4">
@@ -1998,7 +2239,7 @@ function renderProductos() {
         </h3>
         <button 
           onclick="abrirModalProducto('${productoPrincipal.id}')"
-          class="w-full py-2.5 bg-yellow-500 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="w-full py-2.5 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
         >
           Ver Precios
         </button>
@@ -2023,6 +2264,12 @@ function renderProductos() {
   // Aplicar filtro inicial después de que el DOM esté actualizado
   setTimeout(() => {
     filtrarYMostrarProductos();
+    // Reiniciar animaciones para productos visibles
+    const productosVisibles = container.querySelectorAll('.producto-item:not([style*="display: none"])');
+    productosVisibles.forEach((producto, index) => {
+      producto.style.animationDelay = `${index * 0.05}s`;
+      producto.classList.add('fade-in');
+    });
   }, 100);
 }
 
@@ -2139,16 +2386,17 @@ function abrirModalProductoGrupo(imagen) {
     </div>
     
     <div class="mb-6 flex justify-center px-2">
-      <div class="w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-2xl border-4 border-yellow-400 cursor-pointer group relative" id="product-image-container-grupo" ondblclick="ampliarImagenProducto('${imagen}', 'Productos Disponibles')">
+      <div class="w-full max-w-2xl bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 md:p-8 shadow-2xl border-4 border-yellow-400 cursor-pointer group relative" id="product-image-container-grupo" ondblclick="ampliarImagenProducto('${imagen}', 'Productos Disponibles')">
         <img 
           src="${imagen}" 
           alt="Productos"
-          class="w-full h-auto max-h-[500px] md:max-h-[600px] object-contain mx-auto transition-transform duration-300 group-hover:scale-105"
-          style="filter: brightness(1.05) contrast(1.1) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.2));"
-          onerror="this.parentElement.parentElement.style.display='none'"
+          class="w-full h-auto max-h-[500px] md:max-h-[600px] object-contain mx-auto rounded-lg transition-transform duration-300 group-hover:scale-105"
+          style=""
+          onerror="this.style.filter='grayscale(100%) opacity(0.5)'; this.style.padding='20px';"
         >
-        <div class="absolute bottom-4 right-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-4 py-2 rounded-full text-sm font-bold opacity-90 shadow-lg border-2 border-yellow-600">
-          <i class="fas fa-search-plus mr-2"></i> Doble clic para ampliar
+        <div class="double-click-badge">
+          <i class="fas fa-search-plus"></i>
+          <span>Doble clic</span>
         </div>
       </div>
     </div>
@@ -2256,20 +2504,38 @@ function abrirModalProducto(productoId) {
     const tamanos = producto.tamanos;
     const esMayorista = producto.nombre.toLowerCase().includes('mayorista');
     
-    // Buscar si hay un producto correspondiente (Detal/Mayorista) con la misma imagen
-    const todosLosProductos = obtenerTodosLosProductos();
-    const productoCorrespondiente = todosLosProductos.find(p => 
-      p.imagen === producto.imagen && 
-      p.id !== producto.id && 
-      p.tamanos && 
-      p.tamanos.length > 0 &&
-      ((esMayorista && !p.nombre.toLowerCase().includes('mayorista')) ||
-       (!esMayorista && p.nombre.toLowerCase().includes('mayorista')))
-    );
+    // Verificar si los tamaños tienen precios detal/mayorista incorporados
+    const tamanosConPreciosMultiples = tamanos.some(t => t.precios && t.precios.detal && t.precios.mayorista);
     
-    const tamanosDetal = esMayorista ? (productoCorrespondiente?.tamanos || []) : tamanos;
-    const tamanosMayorista = esMayorista ? tamanos : (productoCorrespondiente?.tamanos || []);
-    const tieneAmbos = tamanosDetal.length > 0 && tamanosMayorista.length > 0;
+    let tamanosDetal, tamanosMayorista, tieneAmbos;
+    
+    if (tamanosConPreciosMultiples) {
+      // Los tamaños tienen precios detal/mayorista incorporados
+      tamanosDetal = tamanos.map(t => ({
+        nombre: t.nombre,
+        precio: t.precios.detal
+      }));
+      tamanosMayorista = tamanos.map(t => ({
+        nombre: t.nombre,
+        precio: t.precios.mayorista
+      }));
+      tieneAmbos = true;
+    } else {
+      // Buscar si hay un producto correspondiente (Detal/Mayorista) con la misma imagen
+      const todosLosProductos = obtenerTodosLosProductos();
+      const productoCorrespondiente = todosLosProductos.find(p => 
+        p.imagen === producto.imagen && 
+        p.id !== producto.id && 
+        p.tamanos && 
+        p.tamanos.length > 0 &&
+        ((esMayorista && !p.nombre.toLowerCase().includes('mayorista')) ||
+         (!esMayorista && p.nombre.toLowerCase().includes('mayorista')))
+      );
+      
+      tamanosDetal = esMayorista ? (productoCorrespondiente?.tamanos || []) : tamanos;
+      tamanosMayorista = esMayorista ? tamanos : (productoCorrespondiente?.tamanos || []);
+      tieneAmbos = tamanosDetal.length > 0 && tamanosMayorista.length > 0;
+    }
     
     content.innerHTML = `
       <!-- Título centrado -->
@@ -2284,17 +2550,18 @@ function abrirModalProducto(productoId) {
       
       <!-- Imagen del producto -->
       <div class="mb-6 flex justify-center px-2">
-        <div class="w-full max-w-lg bg-white dark:bg-gray-900 rounded-2xl p-4 md:p-6 shadow-xl border-2 border-yellow-400 cursor-pointer group relative" id="product-image-container" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
+        <div class="w-full max-w-lg bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 md:p-6 shadow-xl border-2 border-yellow-400 cursor-pointer group relative" id="product-image-container" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
           <img 
             src="${producto.imagen}" 
             alt="${producto.nombre}"
-            class="w-full h-auto max-h-[400px] md:max-h-[500px] object-contain mx-auto transition-transform duration-300 group-hover:scale-105"
+            class="w-full h-auto max-h-[400px] md:max-h-[500px] object-contain mx-auto rounded-lg transition-transform duration-300 group-hover:scale-105"
             id="product-image-${producto.id}"
-            onerror="this.parentElement.parentElement.style.display='none'"
-            style="filter: brightness(1.02) contrast(1.05);"
+            onerror="this.style.filter='grayscale(100%) opacity(0.5)'; this.style.padding='20px';"
+            style=""
           >
-          <div class="absolute bottom-3 right-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-3 py-1.5 rounded-full text-xs font-bold opacity-90 shadow-lg border-2 border-yellow-600">
-            <i class="fas fa-search-plus mr-1"></i> Doble clic para ampliar
+          <div class="double-click-badge">
+            <i class="fas fa-search-plus"></i>
+            <span>Doble clic</span>
           </div>
         </div>
       </div>
@@ -2503,7 +2770,6 @@ function abrirModalProducto(productoId) {
         
         agregarAlCarrito(producto.id, tipoCompraSeleccionado || (esMayorista ? 'mayorista' : 'detal'), tamanoSeleccionado, precioSeleccionado);
         cerrarModalProducto();
-        mostrarNotificacion('Producto agregado al carrito ✓');
       });
     }
     
@@ -2572,17 +2838,20 @@ function abrirModalProducto(productoId) {
     
     <!-- Imagen del producto centrada y bien formateada -->
     <div class="mb-6 flex justify-center px-2">
-      <div class="w-full max-w-lg bg-white dark:bg-gray-900 rounded-2xl p-4 md:p-6 shadow-xl border-2 border-yellow-400 cursor-pointer group relative" id="product-image-container" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
+      <div class="w-full max-w-lg bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 md:p-6 shadow-xl border-2 border-yellow-400 cursor-pointer group relative" id="product-image-container" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
         <img 
           src="${producto.imagen}" 
-          alt="${producto.nombre}"
-          class="w-full h-auto max-h-[400px] md:max-h-[500px] object-contain mx-auto transition-transform duration-300 group-hover:scale-105"
+          alt="${producto.nombre} - ${producto.descripcion ? producto.descripcion.substring(0, 100) : 'Vela artesanal'}"
+          class="w-full h-auto max-h-[400px] md:max-h-[500px] object-contain mx-auto rounded-lg transition-transform duration-300 group-hover:scale-105"
           id="product-image-${producto.id}"
-          onerror="this.parentElement.parentElement.style.display='none'"
-          style="filter: brightness(1.02) contrast(1.05);"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.filter='grayscale(100%) opacity(0.5)'; this.style.padding='20px';"
+          style=""
         >
-        <div class="absolute bottom-3 right-3 bg-yellow-500 text-white px-3 py-1.5 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-          <i class="fas fa-search-plus mr-1"></i> Doble clic para ampliar
+        <div class="double-click-badge">
+          <i class="fas fa-search-plus"></i>
+          <span>Doble clic</span>
         </div>
       </div>
     </div>
@@ -2852,9 +3121,11 @@ function ampliarImagenProducto(imagenSrc, nombreProducto) {
         <div class="max-w-7xl max-h-[95vh] w-full h-full flex items-center justify-center">
           <img 
             src="${imagenSrc}" 
-            alt="${nombreProducto}"
+            alt="${nombreProducto} - Vista ampliada"
             class="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
             id="zoomed-image"
+            loading="eager"
+            decoding="async"
           >
         </div>
         <p class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-lg font-semibold bg-black/50 px-4 py-2 rounded-full">
@@ -3561,6 +3832,49 @@ function initParticles() {
   }
 }
 
+// Partículas laterales para los márgenes
+function initSideParticles() {
+  const leftContainer = document.getElementById('side-particles-left');
+  const rightContainer = document.getElementById('side-particles-right');
+  
+  if (!leftContainer || !rightContainer) return;
+  
+  // Solo mostrar en pantallas medianas y grandes
+  if (window.innerWidth < 768) {
+    leftContainer.style.display = 'none';
+    rightContainer.style.display = 'none';
+    return;
+  }
+  
+  const particleCount = 20; // 20 partículas por lado
+  
+  // Partículas lado izquierdo
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'side-particle';
+    particle.style.width = (2 + Math.random() * 4) + 'px';
+    particle.style.height = particle.style.width;
+    particle.style.opacity = 0.3 + Math.random() * 0.4;
+    particle.style.animationDelay = Math.random() * 20 + 's';
+    particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+    particle.style.left = (10 + Math.random() * 20) + '%'; // Entre 10% y 30% desde el borde
+    leftContainer.appendChild(particle);
+  }
+  
+  // Partículas lado derecho
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'side-particle';
+    particle.style.width = (2 + Math.random() * 4) + 'px';
+    particle.style.height = particle.style.width;
+    particle.style.opacity = 0.3 + Math.random() * 0.4;
+    particle.style.animationDelay = Math.random() * 20 + 's';
+    particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+    particle.style.right = (10 + Math.random() * 20) + '%'; // Entre 10% y 30% desde el borde
+    rightContainer.appendChild(particle);
+  }
+}
+
 // Banners de catálogo
 function initCatalogoBanners() {
   renderCatalogoBanners();
@@ -3619,7 +3933,7 @@ function renderCatalogoBanners() {
           ${productos.slice(0, 3).map(p => `
             <div class="bg-gray-900 rounded-xl p-3 border border-yellow-500/20 hover:border-yellow-500/50 transition cursor-pointer" onclick="abrirModalProducto('${p.id}')">
               <div class="bg-gray-800 rounded-lg p-2 mb-2 flex items-center justify-center h-32">
-                <img src="${p.imagen}" alt="${p.nombre}" class="max-w-full max-h-full w-auto h-auto object-contain" onerror="this.parentElement.parentElement.style.display='none'">
+                <img src="${p.imagen}" alt="${p.nombre}" class="max-w-full max-h-full w-auto h-auto object-contain" loading="lazy" decoding="async" onerror="this.parentElement.parentElement.style.display='none'">
               </div>
               <h4 class="font-bold text-white mb-2 text-sm text-center">${p.nombre}</h4>
             </div>
@@ -3674,6 +3988,57 @@ window.mostrarCatalogo = mostrarCatalogo;
 window.mostrarTodosProductos = mostrarTodosProductos;
 
 // Utilidades
+// Toast mejorado para productos agregados al carrito
+function mostrarToastProducto(producto) {
+  // Remover toast anterior si existe
+  const toastAnterior = document.getElementById('product-toast');
+  if (toastAnterior) {
+    toastAnterior.remove();
+  }
+  
+  const toast = document.createElement('div');
+  toast.id = 'product-toast';
+  toast.className = 'fixed top-4 right-4 md:top-6 md:right-6 z-50 animate-slide-in-right';
+  
+  toast.innerHTML = `
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border-2 border-yellow-400/50 p-4 max-w-sm w-full flex items-center gap-4 backdrop-blur-md">
+      <div class="flex-shrink-0">
+        <img src="${producto.imagen}" alt="${producto.nombre}" 
+             class="w-16 h-16 object-cover rounded-xl border-2 border-yellow-400/30"
+             onerror="this.src='https://via.placeholder.com/64x64?text=Vela'">
+      </div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-1">
+          <i class="fas fa-check-circle text-green-500 text-lg"></i>
+          <p class="text-sm font-semibold text-gray-800 dark:text-white truncate">¡Agregado!</p>
+        </div>
+        <p class="text-xs text-gray-600 dark:text-gray-300 truncate mb-2">${producto.nombre}</p>
+        <button onclick="abrirCarrito(); document.getElementById('product-toast')?.remove();" 
+                class="w-full py-2 px-3 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
+          <i class="fas fa-shopping-cart"></i>
+          Ver Carrito
+        </button>
+      </div>
+      <button onclick="document.getElementById('product-toast')?.remove();" 
+              class="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+        <i class="fas fa-times text-sm"></i>
+      </button>
+    </div>
+  `;
+  
+  document.body.appendChild(toast);
+  
+  // Auto-ocultar después de 5 segundos
+  setTimeout(() => {
+    if (toast.parentNode) {
+      toast.classList.add('animate-slide-out-right');
+      setTimeout(() => {
+        toast.remove();
+      }, 300);
+    }
+  }, 5000);
+}
+
 function mostrarNotificacion(mensaje, tipo = 'success') {
   const notification = document.createElement('div');
   notification.className = `fixed top-20 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-full shadow-lg ${

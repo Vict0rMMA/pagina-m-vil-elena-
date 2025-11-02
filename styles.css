@@ -34,6 +34,7 @@ h1, h2, h3, h4, h5, h6 {
 .font-playfair {
   letter-spacing: -0.01em;
   font-weight: 600;
+  line-height: 1.3;
 }
 
 /* Títulos Principales con Text Shadow Elegante */
@@ -201,11 +202,7 @@ body > * {
 .glow-gold {
   color: #D4AF37;
   text-shadow: 
-    0 2px 4px rgba(212, 175, 55, 0.5),
-    0 0 10px rgba(212, 175, 55, 0.4),
-    0 0 20px rgba(212, 175, 55, 0.3),
-    inset 0 -1px 2px rgba(139, 105, 20, 0.5),
-    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    0 1px 2px rgba(212, 175, 55, 0.3);
   background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1168,9 +1165,138 @@ a.bg-yellow-600:hover {
   transform: scale(0.95);
 }
 
+/* Animaciones de entrada mejoradas para productos */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animaciones de entrada mejoradas para productos */
+.producto-item {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Delay escalonado para cada producto */
+.producto-item:nth-child(1) { animation-delay: 0.05s; }
+.producto-item:nth-child(2) { animation-delay: 0.1s; }
+.producto-item:nth-child(3) { animation-delay: 0.15s; }
+.producto-item:nth-child(4) { animation-delay: 0.2s; }
+.producto-item:nth-child(5) { animation-delay: 0.25s; }
+.producto-item:nth-child(6) { animation-delay: 0.3s; }
+.producto-item:nth-child(7) { animation-delay: 0.35s; }
+.producto-item:nth-child(8) { animation-delay: 0.4s; }
+.producto-item:nth-child(9) { animation-delay: 0.45s; }
+.producto-item:nth-child(10) { animation-delay: 0.5s; }
+.producto-item:nth-child(n+11) { animation-delay: 0.55s; }
+
 .producto-item.fade-in {
   opacity: 1;
   transform: scale(1);
+}
+
+/* Gradientes sutiles en botones */
+.producto button {
+  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%);
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+  transition: all 0.3s ease;
+}
+
+.producto button:hover {
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%);
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Gradientes sutiles en fondos de tarjetas */
+.producto {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.dark .producto {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.producto:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.dark .producto:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradientes sutiles en botones principales del hero */
+#inicio a {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  transition: all 0.3s ease;
+}
+
+#inicio a:hover {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+#inicio a[href="#videos"],
+#inicio a[href="#contacto"] {
+  background: transparent;
+  border: 2px solid #D4AF37;
+}
+
+#inicio a[href="#videos"]:hover,
+#inicio a[href="#contacto"]:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.2) 100%);
+  border-color: #FFD700;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+}
+
+/* Gradientes sutiles en botones de categorías */
+.filter-btn {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  transition: all 0.3s ease;
+}
+
+.dark .filter-btn {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+}
+
+.filter-btn:hover {
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+  transform: translateY(-2px);
+}
+
+.dark .filter-btn:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+}
+
+.dark .filter-btn.active {
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
 }
 
 .producto-item[style*="display: none"] {
@@ -1237,35 +1363,234 @@ a.bg-yellow-600:hover {
   image-rendering: high-quality;
 }
 
-/* WhatsApp Floating Button */
+/* Skeleton Loaders Mejorados para Imágenes */
+.skeleton-image {
+  width: 100%;
+  height: 288px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+.dark .skeleton-image {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+  opacity: 0.4;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-text {
+  height: 20px;
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dark .skeleton-text {
+  background: linear-gradient(
+    90deg,
+    #2d2d2d 25%,
+    #3d3d3d 50%,
+    #2d2d2d 75%
+  );
+  background-size: 200% 100%;
+}
+
+.skeleton-button {
+  height: 44px;
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 9999px;
+  margin-top: 0.75rem;
+}
+
+.dark .skeleton-button {
+  background: linear-gradient(
+    90deg,
+    #2d2d2d 25%,
+    #3d3d3d 50%,
+    #2d2d2d 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* Ocultar skeleton cuando la imagen carga */
+.producto-item img.loaded + .skeleton-image,
+.producto-item img.loaded ~ .skeleton-image {
+  display: none;
+}
+
+/* Badge de "Doble clic" elegante y discreto */
+.double-click-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.6;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 20;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.producto:hover .double-click-badge,
+.producto-item:hover .double-click-badge {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.double-click-badge i {
+  font-size: 0.65rem;
+  color: #FFD700;
+}
+
+/* Badge en modales - más visible */
+#product-image-container .double-click-badge,
+#product-image-container-grupo .double-click-badge {
+  opacity: 0.75;
+  bottom: 12px;
+  left: 12px;
+  font-size: 0.75rem;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+#product-image-container:hover .double-click-badge,
+#product-image-container-grupo:hover .double-click-badge {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.05);
+}
+
+/* WhatsApp Floating Button Mejorado */
 a[aria-label="Contactar por WhatsApp"] {
   position: fixed;
   bottom: 80px;
   right: 16px;
   z-index: 40;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-  animation: pulse-whatsapp 2s ease-in-out infinite;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 50%, #075E54 100%);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5), 0 0 0 0 rgba(37, 211, 102, 0.7);
+  animation: pulse-whatsapp 2s ease-in-out infinite, float-whatsapp 3s ease-in-out infinite;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 a[aria-label="Contactar por WhatsApp"]:hover {
   animation: none;
   transform: scale(1.15);
-  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.7), 0 0 0 8px rgba(37, 211, 102, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+a[aria-label="Contactar por WhatsApp"] i {
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Badge con contador en WhatsApp */
+.whatsapp-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.5);
+  border: 2px solid white;
+  animation: bounce-badge 0.5s ease;
+}
+
+@keyframes bounce-badge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
 @media (min-width: 768px) {
   a[aria-label="Contactar por WhatsApp"] {
     bottom: 24px;
+    width: 72px;
+    height: 72px;
+  }
+  
+  a[aria-label="Contactar por WhatsApp"] i {
+    font-size: 2.5rem;
+  }
+  
+  .whatsapp-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
   }
 }
 
 @keyframes pulse-whatsapp {
-  0%, 100% {
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+  0% {
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5), 0 0 0 0 rgba(37, 211, 102, 0.7);
   }
   50% {
-    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5), 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5), 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+@keyframes float-whatsapp {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
 
@@ -1734,6 +2059,88 @@ h1::before, h2.font-playfair::before {
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
+/* Partículas laterales para los márgenes */
+.side-particles-container {
+  position: fixed;
+  top: 0;
+  width: 150px;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+#side-particles-left {
+  left: 0;
+}
+
+#side-particles-right {
+  right: 0;
+}
+
+.side-particle {
+  position: absolute;
+  background: radial-gradient(circle, #FFD700 0%, #D4AF37 50%, transparent 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.6), 0 0 12px rgba(212, 175, 55, 0.4);
+  animation: float-side 20s infinite ease-in-out;
+}
+
+@keyframes float-side {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+    transform: translateY(90vh) translateX(10px) scale(1);
+  }
+  50% {
+    transform: translateY(50vh) translateX(-5px) scale(1.2);
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.7;
+    transform: translateY(10vh) translateX(5px) scale(1);
+  }
+  100% {
+    transform: translateY(-10vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Ocultar en móviles */
+@media (max-width: 767px) {
+  .side-particles-container {
+    display: none !important;
+  }
+}
+
+/* Modal de Confirmación */
+#confirm-modal .rounded-3xl {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#confirm-modal:not(.hidden) .rounded-3xl {
+  transform: scale(1);
+  opacity: 1;
+}
+
+#confirm-modal #confirm-overlay {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Partículas doradas sutiles en fondo */
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -1802,5 +2209,320 @@ header img:hover {
 
 #personalizadas video:hover {
   transform: scale(1.02);
+}
+
+/* Animaciones para Toast Mejorado */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+.animate-slide-out-right {
+  animation: slideOutRight 0.3s ease-out forwards;
+}
+
+/* Estilos adicionales para el toast */
+#product-toast {
+  backdrop-filter: blur(10px);
+  max-width: calc(100vw - 2rem);
+}
+
+#product-toast button:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive para toast en móviles */
+@media (max-width: 640px) {
+  #product-toast {
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
+  
+  #product-toast .flex {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  #product-toast img {
+    margin: 0 auto;
+  }
+}
+
+/* Partículas animadas para Hero */
+#particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.6;
+  animation: float 15s infinite ease-in-out;
+}
+
+.particle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, rgba(212, 175, 55, 0) 70%);
+  filter: blur(2px);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-40px) translateX(-10px) scale(0.9);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-20px) translateX(5px) scale(1.05);
+    opacity: 0.5;
+  }
+}
+
+.particle-small {
+  width: 4px;
+  height: 4px;
+  background: #D4AF37;
+  box-shadow: 0 0 6px #FFD700, 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+.particle-medium {
+  width: 6px;
+  height: 6px;
+  background: #FFD700;
+  box-shadow: 0 0 8px #FFD700, 0 0 16px rgba(255, 215, 0, 0.6);
+}
+
+.particle-large {
+  width: 8px;
+  height: 8px;
+  background: #FFD700;
+  box-shadow: 0 0 10px #FFD700, 0 0 20px rgba(255, 215, 0, 0.7);
+}
+
+/* Variaciones de animación para diferentes partículas */
+.particle:nth-child(3n) {
+  animation-duration: 18s;
+  animation-delay: -2s;
+}
+
+.particle:nth-child(3n+1) {
+  animation-duration: 20s;
+  animation-delay: -4s;
+}
+
+.particle:nth-child(3n+2) {
+  animation-duration: 16s;
+  animation-delay: -6s;
+}
+
+/* Velas Animadas de Fondo */
+#candles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.candle-floating {
+  position: absolute;
+  bottom: -50px;
+  opacity: 0.25;
+  animation: floatCandle 20s infinite ease-in-out;
+  filter: blur(0.3px);
+}
+
+.candle-floating:nth-child(odd) {
+  animation-duration: 25s;
+  animation-direction: reverse;
+}
+
+.candle-floating:nth-child(3n) {
+  animation-duration: 18s;
+}
+
+.candle-floating:nth-child(4n) {
+  animation-duration: 22s;
+  animation-direction: reverse;
+}
+
+/* Animaciones para velas del Hero */
+@keyframes fadeInCandle {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatCandleHero {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10px, -15px) scale(1.05);
+  }
+  50% {
+    transform: translate(-5px, -25px) scale(0.95);
+  }
+  75% {
+    transform: translate(-10px, -10px) scale(1.02);
+  }
+}
+
+/* Velas del Hero - efecto brillante */
+#hero-candles-container {
+  z-index: 1;
+}
+
+#hero-candles-container svg {
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 3px rgba(255, 165, 0, 0.6));
+  animation: candleGlow 2s ease-in-out infinite;
+}
+
+@keyframes candleGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 3px rgba(255, 165, 0, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1)) drop-shadow(0 0 6px rgba(255, 165, 0, 0.8)) drop-shadow(0 0 3px rgba(255, 69, 0, 0.6));
+  }
+}
+
+@keyframes floatCandle {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0.2;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-80vh) translateX(20px) rotate(5deg);
+    opacity: 0.35;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(-20px) rotate(-5deg);
+    opacity: 0.15;
+  }
+}
+
+/* Estilos de la vela SVG */
+.candle-svg {
+  width: 40px;
+  height: 80px;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+
+/* Animación de la llama */
+.candle-flame {
+  animation: flicker 1.5s infinite ease-in-out;
+  transform-origin: center bottom;
+}
+
+.candle-flame path {
+  fill: url(#flameGradient);
+}
+
+@keyframes flicker {
+  0%, 100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+  }
+  25% {
+    transform: scaleY(1.1) scaleX(0.95);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scaleY(0.95) scaleX(1.05);
+    opacity: 0.85;
+  }
+  75% {
+    transform: scaleY(1.05) scaleX(0.98);
+    opacity: 0.95;
+  }
+}
+
+/* Variaciones de tamaño para las velas */
+.candle-small {
+  width: 30px;
+  height: 60px;
+  opacity: 0.2;
+}
+
+.candle-medium {
+  width: 40px;
+  height: 80px;
+  opacity: 0.25;
+}
+
+.candle-large {
+  width: 50px;
+  height: 100px;
+  opacity: 0.22;
+}
+
+/* Responsive - menos velas en móviles */
+@media (max-width: 768px) {
+  .candle-floating {
+    opacity: 0.15;
+  }
+  
+  .candle-small,
+  .candle-medium,
+  .candle-large {
+    opacity: 0.15;
+  }
 }
 
