@@ -1841,7 +1841,21 @@ function actualizarCantidad(index, nuevaCantidad) {
 
 function renderCarrito() {
   const container = document.getElementById('cart-items');
-  if (!container) return;
+  if (!container) {
+    console.error('Contenedor del carrito no encontrado');
+    return;
+  }
+  
+  // Forzar actualización del estado
+  const carritoGuardado = localStorage.getItem('elena-velas-carrito');
+  if (carritoGuardado) {
+    try {
+      state.carrito = JSON.parse(carritoGuardado);
+    } catch (e) {
+      console.error('Error al cargar carrito en renderCarrito:', e);
+      state.carrito = [];
+    }
+  }
   
   if (state.carrito.length === 0) {
     container.innerHTML = `
@@ -2967,7 +2981,20 @@ function abrirModalProducto(productoId) {
       btnAgregar.parentNode.replaceChild(nuevoBtnAgregar, btnAgregar);
       
       nuevoBtnAgregar.addEventListener('click', () => {
-        if (!tamanoSeleccionado || !precioSeleccionado) return;
+        if (!tamanoSeleccionado || !precioSeleccionado) {
+          if (typeof mostrarNotificacion === 'function') {
+            mostrarNotificacion('Por favor completa todas las selecciones', 'error');
+          }
+          return;
+        }
+        
+        // Validar que si tiene presentación, esté seleccionada
+        if (tienePresentacionEnTamanos && !presentacionSeleccionada) {
+          if (typeof mostrarNotificacion === 'function') {
+            mostrarNotificacion('Por favor selecciona una presentación', 'error');
+          }
+          return;
+        }
         
         const tipoCompra = tipoCompraSeleccionado || (esMayorista ? 'mayorista' : 'detal');
         // Si tiene presentación, combinarla con el tamaño
@@ -2975,8 +3002,15 @@ function abrirModalProducto(productoId) {
           ? `${tamanoSeleccionado} ${presentacionSeleccionada.charAt(0).toUpperCase() + presentacionSeleccionada.slice(1)}`
           : tamanoSeleccionado;
         
-        agregarAlCarrito(producto.id, tipoCompra, presentacionOTamano, precioSeleccionado);
-        cerrarModalProducto();
+        try {
+          agregarAlCarrito(producto.id, tipoCompra, presentacionOTamano, precioSeleccionado);
+          cerrarModalProducto();
+        } catch (error) {
+          console.error('Error al agregar al carrito:', error);
+          if (typeof mostrarNotificacion === 'function') {
+            mostrarNotificacion('Error al agregar el producto. Intenta nuevamente.', 'error');
+          }
+        }
       });
     }
     
