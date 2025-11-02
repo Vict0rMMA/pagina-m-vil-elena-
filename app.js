@@ -1698,30 +1698,43 @@ function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
     });
   }
   
-  guardarCarrito();
-  actualizarContadorCarrito();
-  renderCarrito();
-  
-  // Animación del icono del carrito
-  const cartIcons = document.querySelectorAll('#cart-icon, #cart-icon-dock');
-  cartIcons.forEach(icon => {
-    icon.classList.add('cart-icon-bounce');
+  try {
+    guardarCarrito();
+    actualizarContadorCarrito();
+    
+    // Forzar re-render del carrito después de un pequeño delay
     setTimeout(() => {
-      icon.classList.remove('cart-icon-bounce');
-    }, 500);
-  });
-  
-  // Animación de vibración (si está disponible)
-  if (navigator.vibrate) {
-    navigator.vibrate(50);
-  }
-  
-  // Mostrar feedback visual mejorado con toast mejorado
-  if (typeof mostrarToastProducto === 'function') {
-    mostrarToastProducto(producto);
-  } else {
-    // Fallback si la función no existe
-    mostrarNotificacion(`${producto.nombre} agregado al carrito`, 'success');
+      renderCarrito();
+    }, 50);
+    
+    // Animación del icono del carrito
+    const cartIcons = document.querySelectorAll('#cart-icon, #cart-icon-dock');
+    cartIcons.forEach(icon => {
+      icon.classList.add('cart-icon-bounce');
+      setTimeout(() => {
+        icon.classList.remove('cart-icon-bounce');
+      }, 500);
+    });
+    
+    // Animación de vibración (si está disponible)
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
+    
+    // Mostrar feedback visual mejorado con toast mejorado
+    setTimeout(() => {
+      if (typeof mostrarToastProducto === 'function') {
+        mostrarToastProducto(producto);
+      } else if (typeof mostrarNotificacion === 'function') {
+        // Fallback si la función no existe
+        mostrarNotificacion(`${producto.nombre} agregado al carrito`, 'success');
+      }
+    }, 100);
+  } catch (error) {
+    console.error('Error al guardar en carrito:', error);
+    if (typeof mostrarNotificacion === 'function') {
+      mostrarNotificacion('Error al guardar en el carrito', 'error');
+    }
   }
 }
 
