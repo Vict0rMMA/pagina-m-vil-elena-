@@ -1368,14 +1368,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Mostrar elementos de fondo después de que cargue la página
   setTimeout(() => {
-    const heroCandles = document.getElementById('hero-candles-container');
-    const catalogCandles = document.getElementById('catalog-candles-container');
     const catalogParticles = document.getElementById('catalog-particles-container');
     const sideParticlesLeft = document.getElementById('side-particles-left');
     const sideParticlesRight = document.getElementById('side-particles-right');
     
-    if (heroCandles) heroCandles.classList.add('loaded');
-    if (catalogCandles) catalogCandles.classList.add('loaded');
     if (catalogParticles) catalogParticles.classList.add('loaded');
     if (sideParticlesLeft) sideParticlesLeft.classList.add('loaded');
     if (sideParticlesRight) sideParticlesRight.classList.add('loaded');

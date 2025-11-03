@@ -2419,25 +2419,17 @@ header img:hover {
   }
 }
 
-/* Velas del Hero - efecto brillante */
+/* Velas del Hero - deshabilitadas */
 #hero-candles-container {
-  z-index: 1;
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
-  pointer-events: none;
-}
-
-#hero-candles-container.loaded {
-  opacity: 1;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 #catalog-candles-container {
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-#catalog-candles-container.loaded {
-  opacity: 1;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 #catalog-particles-container {
