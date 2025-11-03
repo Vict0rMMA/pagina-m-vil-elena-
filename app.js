@@ -3634,10 +3634,22 @@ function renderVideos() {
             </div>
           </div>
           <div class="p-4 relative">
-            <div class="video-placeholder w-full rounded-xl shadow-lg bg-gray-200 dark:bg-gray-700 flex items-center justify-center" style="min-height: 300px; max-height: 600px; aspect-ratio: 16/9;">
-              <div class="text-center">
-                <i class="fas fa-play-circle text-6xl text-gray-400 dark:text-gray-500 mb-3"></i>
-                <p class="text-gray-600 dark:text-gray-400">Haz clic para cargar el video</p>
+            <div class="video-placeholder w-full rounded-xl shadow-lg bg-gradient-to-br from-gray-800 via-gray-700 to-gray-800 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 flex items-center justify-center cursor-pointer relative overflow-hidden group" style="min-height: 300px; max-height: 600px; aspect-ratio: 16/9;">
+              <!-- Efecto de brillo animado -->
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              <!-- Contenido central -->
+              <div class="text-center relative z-10">
+                <div class="relative inline-block mb-4">
+                  <div class="absolute inset-0 bg-yellow-400 rounded-full blur-xl opacity-50 animate-pulse"></div>
+                  <div class="relative bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full p-6 shadow-2xl transform group-hover:scale-110 transition-all duration-300">
+                    <i class="fas fa-play text-white text-4xl ml-1"></i>
+                  </div>
+                </div>
+                <p class="text-white font-semibold text-lg mb-2 group-hover:text-yellow-400 transition-colors duration-300">Haz clic para cargar el video</p>
+                <div class="flex items-center justify-center gap-2 text-yellow-400/80 text-sm">
+                  <i class="fas fa-video"></i>
+                  <span>Video disponible</span>
+                </div>
               </div>
             </div>
             <video 
