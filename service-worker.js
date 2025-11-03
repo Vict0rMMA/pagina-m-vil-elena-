@@ -33,7 +33,7 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// Fetch Event - Network First para HTML, Cache First para assets
+// Fetch Event - Network First para TODOS los recursos (fuerza actualización inmediata)
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
