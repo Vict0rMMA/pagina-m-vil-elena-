@@ -2225,18 +2225,18 @@ header img:hover {
 
 /* Estilos mejorados para video placeholder */
 .video-placeholder {
-  position: relative;
-  border: 2px solid rgba(234, 179, 8, 0.3);
-  transition: all 0.3s ease;
+  position: relative !important;
+  border: 2px solid rgba(234, 179, 8, 0.3) !important;
+  transition: all 0.3s ease !important;
 }
 
 .video-placeholder:hover {
-  border-color: rgba(234, 179, 8, 0.6);
-  box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
+  border-color: rgba(234, 179, 8, 0.6) !important;
+  box-shadow: 0 0 30px rgba(234, 179, 8, 0.3) !important;
 }
 
 .video-placeholder .fa-play {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) !important;
 }
 
 @keyframes shimmer {
@@ -2249,19 +2249,27 @@ header img:hover {
 }
 
 .video-placeholder::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   background: linear-gradient(
     90deg,
     transparent,
     rgba(234, 179, 8, 0.1),
     transparent
-  );
-  animation: shimmer 3s infinite;
+  ) !important;
+  animation: shimmer 3s infinite !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* Asegurar que el contenido del placeholder sea visible */
+.video-placeholder > div {
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 /* Partículas animadas para Hero */
