@@ -1431,50 +1431,12 @@ function initLazyVideosPersonalizadas() {
   });
 }
 
-// Dark Mode
+// Forzar modo oscuro siempre
 function initDarkMode() {
-  // Detectar preferencia del sistema
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  const currentTheme = localStorage.getItem('theme');
-  
-  // Aplicar dark mode tanto al html como al body para asegurar compatibilidad con Tailwind
-  if (currentTheme === 'dark' || (!currentTheme && prefersDark.matches)) {
-    document.documentElement.classList.add('dark');
-    document.body.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-    document.body.classList.remove('dark');
-  }
-  
-  // Botón de toggle
-  const themeToggle = document.getElementById('theme-toggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const isDark = document.body.classList.contains('dark');
-      if (isDark) {
-        document.documentElement.classList.remove('dark');
-        document.body.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      } else {
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      }
-    });
-  }
-  
-  // Escuchar cambios del sistema
-  prefersDark.addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      if (e.matches) {
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.body.classList.remove('dark');
-      }
-    }
-  });
+  // Siempre mantener modo oscuro (dark mode)
+  document.documentElement.classList.add('dark');
+  document.body.classList.add('dark');
+  localStorage.setItem('theme', 'dark');
 }
 
 // Mobile Menu
@@ -2793,7 +2755,13 @@ function abrirModalProducto(productoId) {
       }
       
       if (tienePresentacionEnTamanos) {
-        const todasSeleccionesCompletas = tipoCompraSeleccionado && tamanoSeleccionado && presentacionSeleccionada && precioSeleccionado && typeof precioSeleccionado === 'number' && precioSeleccionado > 0;
+        // Verificar cada condición individualmente para debug
+        const tieneTipoCompra = !!tipoCompraSeleccionado;
+        const tieneTamano = !!tamanoSeleccionado;
+        const tienePresentacion = !!presentacionSeleccionada;
+        const tienePrecio = precioSeleccionado && typeof precioSeleccionado === 'number' && precioSeleccionado > 0;
+        
+        const todasSeleccionesCompletas = tieneTipoCompra && tieneTamano && tienePresentacion && tienePrecio;
         
         // Debug temporal
         console.log('Actualizando botón - Tiene presentación:', {
@@ -2801,6 +2769,10 @@ function abrirModalProducto(productoId) {
           tamanoSeleccionado,
           presentacionSeleccionada,
           precioSeleccionado,
+          tieneTipoCompra,
+          tieneTamano,
+          tienePresentacion,
+          tienePrecio,
           todasSeleccionesCompletas
         });
         
@@ -2810,7 +2782,7 @@ function abrirModalProducto(productoId) {
           btnAgregar.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
           btnAgregar.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
           btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
-          console.log('Botón habilitado correctamente');
+          console.log('✅ Botón habilitado correctamente');
         } else {
           btnAgregar.disabled = true;
           btnAgregar.setAttribute('disabled', 'disabled');
@@ -3004,6 +2976,12 @@ function abrirModalProducto(productoId) {
           presentacionBtn.classList.add('border-yellow-500', 'bg-yellow-50', 'dark:bg-yellow-900', 'active');
           presentacionSeleccionada = presentacionBtn.dataset.presentacion;
           
+          console.log('Presentación seleccionada:', {
+            presentacionSeleccionada,
+            tipoCompraSeleccionado,
+            tamanoSeleccionado
+          });
+          
           // Buscar el tamaño seleccionado y obtener el precio
           const tamanoData = tamanos.find(t => t.nombre === tamanoSeleccionado);
           if (tamanoData && tamanoData[tipoCompraSeleccionado]) {
@@ -3037,10 +3015,13 @@ function abrirModalProducto(productoId) {
             precioSeleccionado = null;
           }
           
-          // Actualizar botón después de un pequeño delay para asegurar que el DOM esté actualizado
+          // Actualizar botón inmediatamente
+          actualizarBotónAgregar();
+          
+          // También actualizar después de un pequeño delay para asegurar que el DOM esté completamente actualizado
           setTimeout(() => {
             actualizarBotónAgregar();
-          }, 50);
+          }, 100);
         });
       }
     }

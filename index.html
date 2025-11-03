@@ -64,18 +64,13 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Inicializar Dark Mode ANTES de cargar el contenido para evitar flash -->
+    <!-- Forzar modo oscuro siempre -->
     <script>
-      // Detectar preferencia del sistema y localStorage ANTES de que se renderice el body
+      // Siempre mantener modo oscuro (dark mode)
       (function() {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const storedTheme = localStorage.getItem('theme');
-        const shouldBeDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
-        
-        if (shouldBeDark) {
-          document.documentElement.classList.add('dark');
-          document.body.classList.add('dark');
-        }
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
       })();
     </script>
     
@@ -123,12 +118,6 @@
                 
                 <!-- Right Side Icons -->
                 <div class="flex items-center space-x-4">
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="p-2.5 rounded-full bg-gray-200/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-gray-700/50 transition-all shadow-sm" aria-label="Cambiar tema">
-                        <i class="fas fa-moon text-lg text-gray-600 dark:text-gray-400 dark:hidden"></i>
-                        <i class="fas fa-sun text-lg text-[#D4AF37] hidden dark:inline"></i>
-                    </button>
-                    
                     <!-- Cart Icon -->
                     <button id="cart-button" class="relative p-2 rounded-full transition" aria-label="Abrir carrito">
                         <i id="cart-icon" class="fas fa-shopping-cart text-xl text-gray-700 dark:text-gray-300"></i>
