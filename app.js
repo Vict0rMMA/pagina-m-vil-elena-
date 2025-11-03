@@ -1681,6 +1681,23 @@ function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
       navigator.vibrate(50);
     }
     
+    // Rastrear evento en Google Analytics
+    if (typeof trackEvent === 'function') {
+      trackEvent('Carrito', 'Agregar Producto', `${producto.nombre} - ${tipoCompra} - ${presentacionFinal || tamano || ''} - $${precio}`);
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'add_to_cart', {
+          'currency': 'COP',
+          'value': precio,
+          'items': [{
+            'item_id': productoId,
+            'item_name': producto.nombre,
+            'price': precio,
+            'quantity': 1
+          }]
+        });
+      }
+    }
+    
     // Mostrar feedback visual mejorado con toast mejorado
     setTimeout(() => {
       if (typeof mostrarToastProducto === 'function') {
@@ -1992,6 +2009,17 @@ function initProductos() {
       // Convertir filtro a categoría real
       const categoriaReal = categoryMap[filterSeleccionado] || filterSeleccionado;
       state.categoriaActual = categoriaReal;
+      
+      // Rastrear selección de categoría en Google Analytics
+      if (typeof trackEvent === 'function') {
+        trackEvent('Navegación', 'Filtrar Categoría', categoriaReal);
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'select_content', {
+            'content_type': 'category',
+            'content_id': categoriaReal
+          });
+        }
+      }
       
       // Actualizar botones (solo actualiza el HTML, el listener sigue activo)
       renderCategorias();
@@ -2539,6 +2567,22 @@ function filtrarYMostrarProductos() {
 function abrirModalProducto(productoId) {
   const producto = buscarProducto(productoId);
   if (!producto) return;
+  
+  // Rastrear visualización de producto en Google Analytics
+  if (typeof trackEvent === 'function') {
+    trackEvent('Productos', 'Ver Producto', producto.nombre);
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'view_item', {
+        'currency': 'COP',
+        'value': producto.precios?.detal?.bolsa || producto.precios?.detal || 0,
+        'items': [{
+          'item_id': productoId,
+          'item_name': producto.nombre,
+          'item_category': producto.categoria
+        }]
+      });
+    }
+  }
   
   const modal = document.getElementById('product-modal');
   const content = document.getElementById('product-modal-content');
@@ -3757,6 +3801,20 @@ function initSearch() {
     
     searchInput.addEventListener('input', (e) => {
       state.busqueda = e.target.value;
+      
+      // Rastrear búsqueda en Google Analytics cuando hay texto
+      if (state.busqueda && state.busqueda.trim().length > 2 && typeof trackEvent === 'function') {
+        // Usar debounce para no saturar con eventos
+        clearTimeout(window.searchTrackingTimeout);
+        window.searchTrackingTimeout = setTimeout(() => {
+          trackEvent('Búsqueda', 'Buscar Producto', state.busqueda);
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'search', {
+              'search_term': state.busqueda
+            });
+          }
+        }, 1000); // Esperar 1 segundo después de dejar de escribir
+      }
       renderProductos();
     });
   }
@@ -4135,6 +4193,23 @@ function comprarPorWhatsApp() {
   
   mensaje += `💰 Total: $${total.toLocaleString()}\n\n`;
   mensaje += `Gracias por tu atención.`;
+  
+  // Rastrear evento en Google Analytics
+  if (typeof trackEvent === 'function') {
+    trackEvent('Compra', 'Clic WhatsApp', `Carrito con ${state.carrito.length} productos - Total: $${total.toLocaleString()}`);
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'begin_checkout', {
+        'currency': 'COP',
+        'value': total,
+        'items': state.carrito.map(item => ({
+          'item_id': item.id,
+          'item_name': item.nombre,
+          'price': item.precio,
+          'quantity': item.cantidad
+        }))
+      });
+    }
+  }
   
   const url = WHATSAPP_API + encodeURIComponent(mensaje);
   window.open(url, '_blank');
