@@ -1,6 +1,6 @@
 // Service Worker para PWA - Elena Velas y Aromas
-// Actualizado: v3 - Fuerza actualización de caché
-const CACHE_NAME = 'elena-velas-v3';
+// Actualizado: v4 - Network First para todos los recursos
+const CACHE_NAME = 'elena-velas-v4';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -60,52 +60,47 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
-  // Para otros recursos (CSS, JS, imágenes), usar Cache First
+  // Para otros recursos (CSS, JS, imágenes), usar Network First para forzar actualización
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then((response) => {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        
-        return fetch(event.request).then((response) => {
-          // Check if valid response
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-          
-          // Clone the response
+        // Si hay respuesta de red, actualizar caché y devolverla
+        if (response && response.status === 200) {
           const responseToCache = response.clone();
-          
-          caches.open(CACHE_NAME)
-            .then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-          
-          return response;
-        });
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return response;
+      })
+      .catch(() => {
+        // Si falla la red, usar caché como fallback
+        return caches.match(event.request);
       })
   );
 });
 
-// Activate Event - Limpia cachés antiguos
+// Activate Event - Limpia TODOS los cachés antiguos incluyendo v3 y anteriores
 self.addEventListener('activate', (event) => {
-  const cacheWhitelist = [CACHE_NAME];
-  
   event.waitUntil(
     caches.keys().then((cacheNames) => {
+      // Eliminar TODOS los cachés antiguos para forzar actualización completa
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            console.log('Eliminando caché antiguo:', cacheName);
-            return caches.delete(cacheName);
-          }
+          console.log('Eliminando caché antiguo:', cacheName);
+          return caches.delete(cacheName);
         })
       );
     }).then(() => {
       // Forzar que este service worker tome control inmediatamente
       return self.clients.claim();
+    }).then(() => {
+      // Notificar a todos los clientes que se actualice
+      return self.clients.matchAll().then((clients) => {
+        clients.forEach((client) => {
+          client.postMessage({ action: 'swUpdated' });
+        });
+      });
     })
   );
 });

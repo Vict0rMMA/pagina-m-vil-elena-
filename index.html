@@ -991,16 +991,23 @@
               registration.addEventListener('updatefound', () => {
                 const newWorker = registration.installing;
                 newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    // Hay una nueva versión disponible
+                  if (newWorker.state === 'installed') {
                     console.log('Nueva versión del Service Worker disponible');
-                    // Opcional: mostrar notificación al usuario
-                    if (confirm('Hay una nueva versión disponible. ¿Deseas actualizar?')) {
-                      newWorker.postMessage({ action: 'skipWaiting' });
-                      window.location.reload();
-                    }
+                    // Forzar actualización automática sin pedir confirmación
+                    newWorker.postMessage({ action: 'skipWaiting' });
+                    // Esperar un momento y recargar
+                    setTimeout(() => {
+                      window.location.reload(true);
+                    }, 500);
                   }
                 });
+              });
+              
+              // Escuchar mensajes del service worker
+              navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data && event.data.action === 'swUpdated') {
+                  window.location.reload(true);
+                }
               });
             })
             .catch((error) => {
