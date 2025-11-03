@@ -877,19 +877,21 @@ const productos = {
     {
       id: "nad4",
       categoria: "navidad",
-      nombre: "Vela Degrade Pequeña",
-      descripcion: "Velas degradadas pequeñas con efecto de color degradado. Disponibles en múltiples colores vibrantes (rosa, amarillo, azul, verde). Algunas incluyen palabras como Amor, Paz, Júbilo, Alegría, Prosperidad, Felicidad. Altura: 14cm, Diámetro: 1.5cm. Disponible en bolsa o caja.",
+      nombre: "Vela Marcada",
+      descripcion: "Velas largas con efecto degradado y personalización con nombres o mensajes. Disponible en múltiples colores vibrantes (rosa, amarillo, azul, verde). Disponible en dos tamaños: Grande (17cm altura, 1.5cm diámetro) y Pequeña (14cm altura, 1.5cm diámetro), con presentación en bolsa o caja.",
       imagen: "assets/productos/Navidad/4.jpg",
-      precios: {
-        detal: {
-          bolsa: 15500,
-          caja: 17000
+      tamanos: [
+        { 
+          nombre: "Grande", 
+          detal: { bolsa: 10800, caja: 12500 },
+          mayorista: { bolsa: 9800, caja: 11500 }
         },
-        mayorista: {
-          bolsa: 14000,
-          caja: 15900
+        { 
+          nombre: "Pequeña", 
+          detal: { bolsa: 10500, caja: 11500 },
+          mayorista: { bolsa: 9000, caja: 10500 }
         }
-      }
+      ]
     },
     {
       id: "nad5",
@@ -2777,35 +2779,57 @@ function abrirModalProducto(productoId) {
     let presentacionSeleccionada = null;
     let tipoCompraSeleccionado = tieneAmbos ? null : (esMayorista ? 'mayorista' : 'detal');
     
-    const btnAgregar = document.getElementById('btn-agregar-carrito');
-    
-    if (!btnAgregar) {
-      console.error('No se encontró el botón btn-agregar-carrito');
-      return;
+    // Función para obtener el botón actualizado del DOM cada vez
+    function obtenerBtnAgregar() {
+      return document.getElementById('btn-agregar-carrito');
     }
     
     // Función para actualizar el botón de agregar al carrito
     function actualizarBotónAgregar() {
+      const btnAgregar = obtenerBtnAgregar();
+      if (!btnAgregar) {
+        console.error('No se encontró el botón btn-agregar-carrito');
+        return;
+      }
+      
       if (tienePresentacionEnTamanos) {
-        if (tipoCompraSeleccionado && tamanoSeleccionado && presentacionSeleccionada) {
+        const todasSeleccionesCompletas = tipoCompraSeleccionado && tamanoSeleccionado && presentacionSeleccionada && precioSeleccionado && typeof precioSeleccionado === 'number' && precioSeleccionado > 0;
+        
+        // Debug temporal
+        console.log('Actualizando botón - Tiene presentación:', {
+          tipoCompraSeleccionado,
+          tamanoSeleccionado,
+          presentacionSeleccionada,
+          precioSeleccionado,
+          todasSeleccionesCompletas
+        });
+        
+        if (todasSeleccionesCompletas) {
           btnAgregar.disabled = false;
+          btnAgregar.removeAttribute('disabled');
           btnAgregar.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
           btnAgregar.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
           btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
+          console.log('Botón habilitado correctamente');
         } else {
           btnAgregar.disabled = true;
+          btnAgregar.setAttribute('disabled', 'disabled');
           btnAgregar.classList.add('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
           btnAgregar.classList.remove('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
           btnAgregar.textContent = 'Selecciona tipo de compra, tamaño y presentación';
         }
       } else {
-        if (tipoCompraSeleccionado && tamanoSeleccionado) {
+        const seleccionesCompletas = tipoCompraSeleccionado && tamanoSeleccionado && precioSeleccionado && typeof precioSeleccionado === 'number' && precioSeleccionado > 0;
+        
+        if (seleccionesCompletas) {
           btnAgregar.disabled = false;
+          btnAgregar.removeAttribute('disabled');
           btnAgregar.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
           btnAgregar.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
           btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
         } else {
           btnAgregar.disabled = true;
+          btnAgregar.setAttribute('disabled', 'disabled');
           btnAgregar.classList.add('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
           btnAgregar.classList.remove('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
           btnAgregar.textContent = tieneAmbos ? 'Selecciona tipo de compra y tamaño' : 'Selecciona un tamaño';
@@ -2943,7 +2967,13 @@ function abrirModalProducto(productoId) {
           }
         } else {
           // Si no tiene presentación, usar precio directo
-          precioSeleccionado = parseInt(tamanoBtn.dataset.precio);
+          precioSeleccionado = Number(tamanoBtn.dataset.precio);
+          
+          // Validar que el precio sea un número válido
+          if (isNaN(precioSeleccionado) || precioSeleccionado <= 0) {
+            console.error('Precio inválido:', tamanoBtn.dataset.precio);
+            precioSeleccionado = null;
+          }
           
           // Ocultar sección de presentación si existe
           const presentacionSection = document.getElementById('presentacion-tamanos-section');
@@ -2977,31 +3007,50 @@ function abrirModalProducto(productoId) {
           // Buscar el tamaño seleccionado y obtener el precio
           const tamanoData = tamanos.find(t => t.nombre === tamanoSeleccionado);
           if (tamanoData && tamanoData[tipoCompraSeleccionado]) {
-            precioSeleccionado = tamanoData[tipoCompraSeleccionado][presentacionSeleccionada];
-            
-            // Mostrar precio
-            const precioContainer = document.getElementById('precio-tamano-container');
-            const precioValor = document.getElementById('precio-tamano-valor');
-            if (precioContainer && precioValor) {
-              precioValor.textContent = `$${precioSeleccionado.toLocaleString()}`;
-              precioContainer.style.display = 'block';
-              setTimeout(() => {
-                const precioDisplay = document.getElementById('precio-tamano-display');
-                if (precioDisplay) precioDisplay.style.opacity = '1';
-              }, 10);
+            const preciosDelTamano = tamanoData[tipoCompraSeleccionado];
+            if (preciosDelTamano && preciosDelTamano[presentacionSeleccionada] !== undefined) {
+              precioSeleccionado = Number(preciosDelTamano[presentacionSeleccionada]);
+              
+              // Validar que el precio sea un número válido
+              if (isNaN(precioSeleccionado) || precioSeleccionado <= 0) {
+                console.error('Precio inválido:', preciosDelTamano[presentacionSeleccionada]);
+                precioSeleccionado = null;
+              } else {
+                // Mostrar precio
+                const precioContainer = document.getElementById('precio-tamano-container');
+                const precioValor = document.getElementById('precio-tamano-valor');
+                if (precioContainer && precioValor) {
+                  precioValor.textContent = `$${precioSeleccionado.toLocaleString()}`;
+                  precioContainer.style.display = 'block';
+                  setTimeout(() => {
+                    const precioDisplay = document.getElementById('precio-tamano-display');
+                    if (precioDisplay) precioDisplay.style.opacity = '1';
+                  }, 10);
+                }
+              }
+            } else {
+              console.error('No se encontró el precio para la presentación:', presentacionSeleccionada);
+              precioSeleccionado = null;
             }
+          } else {
+            console.error('No se encontraron datos del tamaño o tipo de compra');
+            precioSeleccionado = null;
           }
           
-          actualizarBotónAgregar();
+          // Actualizar botón después de un pequeño delay para asegurar que el DOM esté actualizado
+          setTimeout(() => {
+            actualizarBotónAgregar();
+          }, 50);
         });
       }
     }
     
-    // Event listener para agregar al carrito (usar una función nombrada para poder removerla si es necesario)
-    if (btnAgregar) {
-      // Remover listener anterior si existe
-      const nuevoBtnAgregar = btnAgregar.cloneNode(true);
-      btnAgregar.parentNode.replaceChild(nuevoBtnAgregar, btnAgregar);
+    // Event listener para agregar al carrito
+    const btnAgregarFinal = obtenerBtnAgregar();
+    if (btnAgregarFinal) {
+      // Remover todos los listeners anteriores agregando uno nuevo
+      const nuevoBtnAgregar = btnAgregarFinal.cloneNode(true);
+      btnAgregarFinal.parentNode.replaceChild(nuevoBtnAgregar, btnAgregarFinal);
       
       nuevoBtnAgregar.addEventListener('click', () => {
         if (!tamanoSeleccionado || !precioSeleccionado) {
@@ -3623,10 +3672,10 @@ function renderVideos() {
       const videoId = `video-${Math.random().toString(36).substr(2, 9)}`;
       return `
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 video-container-lazy" data-video-src="${video.videoSrc}">
-          <div class="bg-gradient-to-r ${colorPlataforma} p-4 text-white">
+          <div class="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 p-4 text-white shadow-lg">
             <div class="flex items-center gap-3">
-              <i class="${icono} text-2xl"></i>
-              <h3 class="font-playfair text-xl font-bold">${video.titulo}</h3>
+              <i class="${icono} text-2xl text-yellow-100"></i>
+              <h3 class="font-playfair text-xl font-bold text-white">${video.titulo}</h3>
             </div>
           </div>
           <div class="p-4 relative">
@@ -3667,10 +3716,10 @@ function renderVideos() {
     if (video.embedCode) {
       return `
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
-          <div class="bg-gradient-to-r ${colorPlataforma} p-4 text-white">
+          <div class="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 p-4 text-white shadow-lg">
             <div class="flex items-center gap-3">
-              <i class="${icono} text-2xl"></i>
-              <h3 class="font-playfair text-xl font-bold">${video.titulo}</h3>
+              <i class="${icono} text-2xl text-yellow-100"></i>
+              <h3 class="font-playfair text-xl font-bold text-white">${video.titulo}</h3>
             </div>
           </div>
           <div class="p-4">
@@ -3684,14 +3733,14 @@ function renderVideos() {
     if (video.url) {
       return `
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
-          <div class="bg-gradient-to-r ${colorPlataforma} p-4 text-white">
+          <div class="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 p-4 text-white shadow-lg">
             <div class="flex items-center gap-3">
-              <i class="${icono} text-2xl"></i>
-              <h3 class="font-playfair text-xl font-bold">${video.titulo}</h3>
+              <i class="${icono} text-2xl text-yellow-100"></i>
+              <h3 class="font-playfair text-xl font-bold text-white">${video.titulo}</h3>
             </div>
           </div>
           <div class="p-4">
-            <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="block w-full py-4 bg-gradient-to-r ${colorPlataforma} text-white rounded-xl font-semibold text-center hover:opacity-90 transition-all">
+            <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="block w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white rounded-xl font-semibold text-center hover:opacity-90 transition-all shadow-lg">
               <i class="${icono} mr-2"></i>
               Ver Video en ${video.plataforma === 'tiktok' ? 'TikTok' : video.plataforma === 'instagram' ? 'Instagram' : 'Ver Video'}
             </a>
