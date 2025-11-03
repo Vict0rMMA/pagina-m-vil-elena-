@@ -1,6 +1,6 @@
 // Elena Velas y Aromas - App Principal
 // ======================================
-// Versión: 1.0.3 - Última actualización
+// Versión: 1.0.4 - Última actualización - Placeholders mejorados
 
 // Configuración
 const WHATSAPP_PHONE = '573008220389';

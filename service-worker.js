@@ -1,6 +1,6 @@
 // Service Worker para PWA - Elena Velas y Aromas
-// Actualizado: v2 - Fuerza actualización de caché
-const CACHE_NAME = 'elena-velas-v2';
+// Actualizado: v3 - Fuerza actualización de caché
+const CACHE_NAME = 'elena-velas-v3';
 const urlsToCache = [
   '/',
   '/index.html',

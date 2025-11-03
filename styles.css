@@ -2223,7 +2223,8 @@ header img:hover {
   }
 }
 
-/* Estilos mejorados para video placeholder */
+/* Estilos mejorados para video placeholder - v1.0.4 */
+/* Actualizado: 2025-01-27 - Forzar actualización de caché */
 .video-placeholder {
   position: relative !important;
   border: 2px solid rgba(234, 179, 8, 0.3) !important;
