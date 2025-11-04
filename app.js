@@ -2105,13 +2105,9 @@ function initProductos() {
       // Actualizar botones (solo actualiza el HTML, el listener sigue activo)
       renderCategorias();
       
-      // Si cambió la categoría, re-renderizar productos primero
-      if (filterSeleccionado === 'navidad' || filterSeleccionado === 'todas') {
-        renderProductos();
-      } else {
-        // Para otras categorías, solo filtrar
-        filtrarYMostrarProductos();
-      }
+      // Siempre re-renderizar productos cuando se cambia de categoría
+      // para asegurar que los productos correctos estén en el DOM
+      renderProductos();
       
       // Scroll a productos si no está visible
       const productsSection = document.getElementById('productos');
