@@ -47,11 +47,17 @@ const productos = {
       id: "aa5",
       categoria: "amorYAmistad",
       nombre: "Flores con Aroma Empaque Especial",
-      descripcion: "Flores aromáticas en empaque especial con domo transparente. Disponible en múltiples colores (rosa, rojo, blanco, morado, azul claro, amarillo). Medidas: 5.5cm x 5.5cm, peso 30gr.",
+      descripcion: "Vela en forma de corazón rojo con base blanca texturizada. Diseño elegante y romántico ideal para ocasiones especiales. Disponible en múltiples colores. Medidas: 7.5cm altura x 7.8cm ancho, peso 100gr.",
       imagen: "assets/productos/Amor-y-amistad/5.png",
       precios: {
-        detal: 4700,
-        mayorista: 4000
+        detal: {
+          bolsa: 4700,
+          caja: 0
+        },
+        mayorista: {
+          bolsa: 4000,
+          caja: 0
+        }
       },
       tamanos: [
         { nombre: "Pequeña", precio: 17000 },
@@ -63,12 +69,18 @@ const productos = {
     {
       id: "aa6",
       categoria: "amorYAmistad",
-      nombre: "Flores con Aroma Empaque Especial",
-      descripcion: "Flores aromáticas en empaque especial con domo transparente. Disponible en múltiples colores (rosa, rojo, blanco, morado, azul claro, amarillo). Medidas: 5.5cm x 5.5cm, peso 30gr.",
+      nombre: "Matera Vela Corazón Rosas",
+      descripcion: "Flores aromáticas en empaque especial con domo transparente. Disponible en múltiples colores (rosa, rojo, blanco, morado, azul claro, amarillo). Medidas: 5.5cm altura x 5.5cm ancho, peso 30gr.",
       imagen: "assets/productos/Amor-y-amistad/6.png",
       precios: {
-        detal: 4700,
-        mayorista: 4000
+        detal: {
+          bolsa: 8900,
+          caja: 10500
+        },
+        mayorista: {
+          bolsa: 8000,
+          caja: 9300
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 30000 },
@@ -186,8 +198,14 @@ const productos = {
       descripcion: "Copa decorativa con vela blanca y elementos decorativos rojos. Incluye cinta roja en el tallo y mensajes personalizados. Medidas: 17.5cm altura x 7.8cm ancho, peso 120gr.",
       imagen: "assets/productos/Amor-y-amistad/13.png",
       precios: {
-        detal: 18500,
-        mayorista: 16000
+        detal: {
+          bolsa: 18500,
+          caja: 0
+        },
+        mayorista: {
+          bolsa: 16000,
+          caja: 0
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 30000 },
@@ -236,8 +254,14 @@ const productos = {
       descripcion: "Velas decorativas en frasco de vidrio transparente con diseños florales y corazones. Disponible en múltiples diseños y colores. Medidas: 7cm altura x 7.8cm ancho, peso 90gr.",
       imagen: "assets/productos/Amor-y-amistad/16.png",
       precios: {
-        detal: 10800,
-        mayorista: 9600
+        detal: {
+          bolsa: 10800,
+          caja: 0
+        },
+        mayorista: {
+          bolsa: 9600,
+          caja: 0
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 30000 },
@@ -270,8 +294,14 @@ const productos = {
       descripcion: "Velas en forma de corazón personalizadas con letras para formar nombres o mensajes. Disponibles en múltiples colores. Medidas: 9.5cm altura x 2.5cm ancho, peso 30gr.",
       imagen: "assets/productos/Amor-y-amistad/18.png",
       precios: {
-        detal: 3600,
-        mayorista: 3100
+        detal: {
+          bolsa: 3600,
+          caja: 0
+        },
+        mayorista: {
+          bolsa: 3100,
+          caja: 0
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 28000 },
@@ -302,8 +332,14 @@ const productos = {
       descripcion: "Velas decorativas en frasco de vidrio con tapa de corcho. Disponibles con estrellas y corazones de colores. Incluye cordel decorativo. Medidas: 3.5cm altura x 5.8cm ancho, peso 36gr.",
       imagen: "assets/productos/Amor-y-amistad/20.png",
       precios: {
-        detal: 8500,
-        mayorista: 7900
+        detal: {
+          bolsa: 0,
+          caja: 8500
+        },
+        mayorista: {
+          bolsa: 0,
+          caja: 7900
+        }
       },
       tamanos: [
         { nombre: "Pequeña", precio: 15000 },
@@ -336,8 +372,14 @@ const productos = {
       descripcion: "Velas personalizadas en forma de oso o flor dentro de taza blanca con texto personalizado. Ideal para regalos. Disponible en caja. Medidas: 12cm altura x 7cm ancho, peso 95gr.",
       imagen: "assets/productos/Amor-y-amistad/22.png",
       precios: {
-        detal: 11900,
-        mayorista: 9600
+        detal: {
+          bolsa: 0,
+          caja: 11900
+        },
+        mayorista: {
+          bolsa: 0,
+          caja: 9600
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 30000 },
@@ -438,8 +480,14 @@ const productos = {
       descripcion: "Vela en forma de león dentro de frasco de vidrio con tapa de corcho. Incluye etiqueta con nombre personalizado. Presentación única en frasco de vidrio. Medidas: 8cm altura x 5.5cm ancho, peso 60gr.",
       imagen: "assets/productos/Baby-Shower/2.png",
       precios: {
-        detal: 8500,
-        mayorista: 7900
+        detal: {
+          bolsa: 0,
+          caja: 8500
+        },
+        mayorista: {
+          bolsa: 0,
+          caja: 7900
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 30000 },
@@ -512,14 +560,20 @@ const productos = {
       fragancias: ["Algodón", "Vainilla", "Bebé", "Lavanda"]
     },
     {
-      id: "bs9",
+      id: "bs12",
       categoria: "celebracion",
       nombre: "COMPOTA 00",
       descripcion: "Compota en frasco de vidrio con tapa verde. Disponible en múltiples sabores. Presentación individual. Ideal como detalle para baby shower. Medidas: 4.2cm altura x 4.3cm ancho, peso 25gr.",
       imagen: "assets/productos/Baby-Shower/4.png",
       precios: {
-        detal: 5500,
-        mayorista: 5000
+        detal: {
+          bolsa: 5500,
+          caja: 0
+        },
+        mayorista: {
+          bolsa: 5000,
+          caja: 0
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 30000 },
@@ -534,8 +588,14 @@ const productos = {
       descripcion: "Vela decorativa con huellas de bebé. Disponible en color blanco con huellas azules. Presentación en bolsa. Ideal como detalle para baby shower. Medidas: 2cm altura x 4cm ancho, peso 22gr.",
       imagen: "assets/productos/Baby-Shower/4.png",
       precios: {
-        detal: 3500,
-        mayorista: 3100
+        detal: {
+          bolsa: 3500,
+          caja: 0
+        },
+        mayorista: {
+          bolsa: 3100,
+          caja: 0
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 30000 },
@@ -550,8 +610,14 @@ const productos = {
       descripcion: "Vela decorativa con huellas de bebé en lata. Disponible en lata con vela blanca y huellas rosadas. Presentación en lata. Ideal como detalle para baby shower. Medidas: 2cm altura x 5cm ancho, peso 18gr.",
       imagen: "assets/productos/Baby-Shower/4.png",
       precios: {
-        detal: 3300,
-        mayorista: 2900
+        detal: {
+          bolsa: 0,
+          caja: 3300
+        },
+        mayorista: {
+          bolsa: 0,
+          caja: 2900
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 30000 },
@@ -601,8 +667,14 @@ const productos = {
       descripcion: "Vela decorativa con estrellas en frasco de vidrio con tapa de corcho. Incluye mensaje 'Mi primera comunión' y cinta decorativa. Presentación única en frasco de vidrio. Medidas: 7cm altura x 6cm ancho, peso 74gr.",
       imagen: "assets/productos/Primera-Comunion/2.png",
       precios: {
-        detal: 8500,
-        mayorista: 7700
+        detal: {
+          bolsa: 0,
+          caja: 8500
+        },
+        mayorista: {
+          bolsa: 0,
+          caja: 7700
+        }
       },
       tamanos: [
         { nombre: "Mediana", precio: 32000 },
@@ -745,8 +817,14 @@ const productos = {
       descripcion: "Compota en frasco de vidrio con tapa dorada. Disponible en múltiples sabores. Presentación individual. Ideal como detalle para primera comunión. Medidas: 5.1cm altura x 5.9cm ancho, peso 100gr.",
       imagen: "assets/productos/Primera-Comunion/6.png",
       precios: {
-        detal: 7500,
-        mayorista: 6900
+        detal: {
+          bolsa: 0,
+          caja: 7500
+        },
+        mayorista: {
+          bolsa: 0,
+          caja: 6900
+        }
       },
       tamanos: [
         { nombre: "Grande", precio: 48000 },
@@ -761,8 +839,14 @@ const productos = {
       descripcion: "Compota pequeña en frasco redondo con tapa dorada-rosa. Disponible en múltiples sabores. Presentación individual. Ideal como detalle para primera comunión. Medidas: 4.2cm altura x 4.3cm ancho, peso 25gr.",
       imagen: "assets/productos/Primera-Comunion/6.png",
       precios: {
-        detal: 6500,
-        mayorista: 6000
+        detal: {
+          bolsa: 0,
+          caja: 6500
+        },
+        mayorista: {
+          bolsa: 0,
+          caja: 6000
+        }
       },
       tamanos: [
         { nombre: "Grande", precio: 48000 },
@@ -822,7 +906,7 @@ const productos = {
   navidad: [
     // Productos combinados Detal + Mayorista
     {
-      id: "nav1",
+      id: "nad1",
       categoria: "navidad",
       nombre: "Vela Papá Noel",
       descripcion: "Vela navideña Papá Noel para venta al detal. Diseño festivo y fragancias navideñas. Altura: 14cm, Diámetro: 3.2cm.",
@@ -985,8 +1069,14 @@ const productos = {
       descripcion: "Vela rectangular blanca individual con palabras de propósito como Gratitud. Empaquetada individualmente en bolsa transparente con lazo rojo. Cada vela tiene palabras escritas en cursiva, disponibles en diferentes colores (rojo, verde brillante).",
       imagen: "assets/productos/Navidad/10.jpg",
       precios: {
-        detal: 3400,
-        mayorista: 2900
+        detal: {
+          bolsa: 3400,
+          caja: 0
+        },
+        mayorista: {
+          bolsa: 2900,
+          caja: 0
+        }
       }
     },
     {
@@ -1184,18 +1274,14 @@ const productos = {
       imagen: "assets/productos/Navidad/23.jpg",
       tamanos: [
         { 
-          nombre: "Grande Bolsa", 
-          precios: {
-            detal: 5500,
-            mayorista: 4500
-          }
+          nombre: "Grande", 
+          detal: { bolsa: 5500, caja: 0 },
+          mayorista: { bolsa: 4500, caja: 0 }
         },
         { 
-          nombre: "Pequeño Bolsa", 
-          precios: {
-            detal: 4500,
-            mayorista: 4000
-          }
+          nombre: "Pequeño", 
+          detal: { bolsa: 4500, caja: 0 },
+          mayorista: { bolsa: 4000, caja: 0 }
         }
       ]
     },
@@ -1276,46 +1362,67 @@ const state = {
   categoriaActual: 'todas',
   busqueda: '',
   currentPromoSlide: 0,
-  promoInterval: null
+  promoInterval: null,
+  
+  // Navegación por secciones
+  seccionActual: 'inicio' // 'inicio', 'productos', 'personalizadas', 'contacto', 'videos'
 };
 
 // Promociones
 const promociones = [
   {
-    titulo: "✨ Velas Personalizadas - Crea tu diseño único",
+    titulo: "Velas Personalizadas",
+    subtitulo: "Crea tu diseño único",
     descripcion: "Haz tu vela única con tu nombre, logo o diseño especial. ¡Consulta nuestros precios!",
     imagen: "https://via.placeholder.com/800x400?text=Velas+Personalizadas",
-    color: "from-purple-600 to-pink-600"
+    color: "from-purple-600 via-pink-600 to-purple-700",
+    icon: "fas fa-magic",
+    iconBg: "from-purple-400 to-pink-500"
   },
   {
-    titulo: "🎁 Envío GRATIS en compras superiores a $400 mil",
+    titulo: "Envío GRATIS",
+    subtitulo: "En compras superiores a $400 mil",
     descripcion: "Aprovecha esta oferta y ahorra en tus compras de velas artesanales",
     imagen: "https://via.placeholder.com/800x400?text=Envío+Gratis",
-    color: "from-green-500 to-emerald-600"
+    color: "from-green-500 via-emerald-500 to-green-600",
+    icon: "fas fa-gift",
+    iconBg: "from-green-300 to-emerald-400"
   },
   {
-    titulo: "🕯️ Nuevas Colecciones Navideñas Disponibles",
+    titulo: "Nuevas Colecciones Navideñas",
+    subtitulo: "Disponibles ahora",
     descripcion: "Descubre muñecos de año viejo, velas decorativas y más productos exclusivos",
     imagen: "https://via.placeholder.com/800x400?text=Navidad",
-    color: "from-red-600 to-orange-600"
+    color: "from-red-600 via-orange-600 to-red-700",
+    icon: "fas fa-tree",
+    iconBg: "from-red-400 to-orange-500"
   },
   {
-    titulo: "💝 Perfectas para Regalos Especiales",
+    titulo: "Perfectas para Regalos Especiales",
+    subtitulo: "Para cada ocasión",
     descripcion: "Velas para cumpleaños, aniversarios, San Valentín, Baby Shower y más ocasiones",
     imagen: "https://via.placeholder.com/800x400?text=Regalos",
-    color: "from-pink-500 to-rose-600"
+    color: "from-pink-500 via-rose-500 to-pink-600",
+    icon: "fas fa-heart",
+    iconBg: "from-pink-300 to-rose-400"
   },
   {
-    titulo: "🔥 Precios Mayoristas Disponibles",
+    titulo: "Precios Mayoristas",
+    subtitulo: "Disponibles",
     descripcion: "Compra al por mayor y obtén mejores precios. Ideal para eventos y negocios",
     imagen: "https://via.placeholder.com/800x400?text=Mayorista",
-    color: "from-blue-600 to-indigo-600"
+    color: "from-blue-600 via-indigo-600 to-blue-700",
+    icon: "fas fa-tags",
+    iconBg: "from-blue-400 to-indigo-500"
   },
   {
-    titulo: "🌟 Velas con las Mejores Fragancias",
+    titulo: "Las Mejores Fragancias",
+    subtitulo: "Elige tu favorita",
     descripcion: "Vainilla, canela, coco, rosa y más. Elige tu aroma favorito",
     imagen: "https://via.placeholder.com/800x400?text=Fragancias",
-    color: "from-amber-500 to-yellow-600"
+    color: "from-amber-500 via-yellow-500 to-amber-600",
+    icon: "fas fa-spray-can",
+    iconBg: "from-amber-300 to-yellow-400"
   }
 ];
 
@@ -1406,6 +1513,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPersonalizadas();
   initScrollToTop();
   initLazyVideosPersonalizadas();
+  initNavegacionSecciones();
   
 });
 
@@ -1997,8 +2105,13 @@ function initProductos() {
       // Actualizar botones (solo actualiza el HTML, el listener sigue activo)
       renderCategorias();
       
-      // Filtrar y mostrar productos con animación
-      filtrarYMostrarProductos();
+      // Si cambió la categoría, re-renderizar productos primero
+      if (filterSeleccionado === 'navidad' || filterSeleccionado === 'todas') {
+        renderProductos();
+      } else {
+        // Para otras categorías, solo filtrar
+        filtrarYMostrarProductos();
+      }
       
       // Scroll a productos si no está visible
       const productsSection = document.getElementById('productos');
@@ -2133,7 +2246,7 @@ function renderProductos() {
   if (esNavidad || esTodas) {
     // Si es Navidad o "todas", renderizar productos de Navidad individualmente
     const productosNavidad = todosLosProductos.filter(p => {
-      if (!p.id || !p.nombre || !p.imagen) return false;
+      if (!p || !p.id || !p.nombre || !p.imagen) return false;
       if (p.imagen.includes('placeholder') || p.imagen.includes('via.placeholder')) return false;
       return p.categoria === 'navidad';
     });
@@ -3491,15 +3604,68 @@ function renderPromociones() {
   if (!container) return;
   
   container.innerHTML = promociones.map((promo, index) => `
-    <div class="min-w-full flex-shrink-0 relative h-auto min-h-[200px] md:h-80 bg-gradient-to-r ${promo.color} flex items-center justify-center text-white overflow-hidden">
-      <div class="text-center z-10 w-full px-4 md:px-6 lg:px-8 py-6 md:py-8 max-w-5xl mx-auto">
-        <h3 class="font-playfair text-base md:text-lg lg:text-xl xl:text-2xl font-bold mb-2 md:mb-3 text-center drop-shadow-lg break-words leading-snug px-2">${promo.titulo}</h3>
-        ${promo.descripcion ? `<p class="text-xs md:text-sm lg:text-base opacity-90 text-center break-words leading-relaxed px-2 mt-2">${promo.descripcion}</p>` : ''}
+    <div class="min-w-full flex-shrink-0 relative h-auto min-h-[240px] md:h-[400px] bg-gradient-to-br ${promo.color} flex items-center justify-center text-white overflow-hidden rounded-3xl shadow-2xl border-2 border-white/30">
+      <!-- Efecto de brillo animado -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-shimmer opacity-60"></div>
+      
+      <!-- Partículas decorativas animadas -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-6 left-6 w-3 h-3 bg-white/50 rounded-full animate-pulse shadow-lg"></div>
+        <div class="absolute top-16 right-10 w-2 h-2 bg-white/40 rounded-full animate-pulse shadow-lg" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-10 left-16 w-2.5 h-2.5 bg-white/45 rounded-full animate-pulse shadow-lg" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-20 right-20 w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse shadow-lg" style="animation-delay: 1.5s;"></div>
+        <div class="absolute top-1/2 left-8 w-2 h-2 bg-white/35 rounded-full animate-pulse shadow-lg" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/3 right-12 w-1.5 h-1.5 bg-white/40 rounded-full animate-pulse shadow-lg" style="animation-delay: 2.5s;"></div>
       </div>
+      
+      <!-- Contenido principal -->
+      <div class="text-center z-10 w-full px-4 md:px-8 lg:px-12 py-10 md:py-16 max-w-6xl mx-auto relative">
+        <!-- Icono decorativo grande con gradiente -->
+        <div class="mb-6 md:mb-8 flex justify-center">
+          <div class="relative">
+            <!-- Halo animado -->
+            <div class="absolute inset-0 bg-gradient-to-r ${promo.iconBg} rounded-full blur-2xl animate-pulse opacity-60 scale-150"></div>
+            <!-- Icono principal -->
+            <div class="relative bg-white/25 backdrop-blur-md rounded-full p-5 md:p-7 lg:p-8 border-3 border-white/50 shadow-2xl transform hover:scale-110 transition-transform duration-300">
+              <i class="${promo.icon || 'fas fa-gift'} text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-2xl"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Título principal con efecto -->
+        <h3 class="font-playfair text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 md:mb-3 text-center drop-shadow-2xl break-words leading-tight px-2 text-white">
+          <span class="inline-block transform hover:scale-105 transition-transform duration-300 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl">${promo.titulo}</span>
+        </h3>
+        
+        <!-- Subtítulo -->
+        ${promo.subtitulo ? `
+          <div class="mb-4 md:mb-6">
+            <p class="text-base md:text-lg lg:text-xl font-semibold text-white/90 drop-shadow-lg">
+              ${promo.subtitulo}
+            </p>
+          </div>
+        ` : ''}
+        
+        <!-- Descripción -->
+        ${promo.descripcion ? `
+          <div class="mt-4 md:mt-6 max-w-2xl mx-auto">
+            <p class="text-sm md:text-base lg:text-lg opacity-95 text-center break-words leading-relaxed px-2 md:px-4 font-medium text-white/95 drop-shadow-md">
+              ${promo.descripcion}
+            </p>
+          </div>
+        ` : ''}
+        
+        <!-- Línea decorativa mejorada -->
+        <div class="mt-6 md:mt-8 flex justify-center">
+          <div class="w-24 md:w-40 h-1.5 bg-gradient-to-r from-transparent via-white/60 to-transparent rounded-full shadow-lg"></div>
+        </div>
+      </div>
+      
+      <!-- Borde brillante superior -->
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
     </div>
   `).join('');
-  
-  actualizarIndicadores();
 }
 
 function iniciarCarrusel() {
@@ -3511,44 +3677,116 @@ function iniciarCarrusel() {
     actualizarCarrusel();
   }, 5000);
   
-  // Pause on touch
+  // Mejorar funcionalidad de touch/swipe
   const carousel = document.getElementById('promo-carousel');
   if (carousel) {
     let touchStartX = 0;
     let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    let isDragging = false;
     
+    // Touch events para móviles
     carousel.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
       clearInterval(state.promoInterval);
-    });
+      isDragging = true;
+      carousel.style.cursor = 'grabbing';
+    }, { passive: true });
+    
+    carousel.addEventListener('touchmove', (e) => {
+      if (isDragging) {
+        e.preventDefault();
+      }
+    }, { passive: false });
     
     carousel.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      
       touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
+      touchEndY = e.changedTouches[0].screenY;
+      
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+      
+      // Solo cambiar si el movimiento horizontal es mayor que el vertical (swipe horizontal)
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
+        if (deltaX < -50) {
+          // Swipe izquierda - siguiente
+          state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
+          actualizarCarrusel();
+        } else if (deltaX > 50) {
+          // Swipe derecha - anterior
+          state.currentPromoSlide = (state.currentPromoSlide - 1 + promociones.length) % promociones.length;
+          actualizarCarrusel();
+        }
+      }
+      
+      isDragging = false;
+      carousel.style.cursor = 'grab';
+      
+      // Reiniciar auto-play después de un delay
+      clearInterval(state.promoInterval);
       state.promoInterval = setInterval(() => {
         state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
         actualizarCarrusel();
       }, 5000);
+    }, { passive: true });
+    
+    // Mouse events para desktop (click para cambiar)
+    let mouseStartX = 0;
+    let mouseEndX = 0;
+    let mouseDown = false;
+    
+    carousel.addEventListener('mousedown', (e) => {
+      mouseStartX = e.clientX;
+      mouseDown = true;
+      clearInterval(state.promoInterval);
+      carousel.style.cursor = 'grabbing';
     });
     
-    function handleSwipe() {
-      if (touchEndX < touchStartX - 50) {
-        state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
-        actualizarCarrusel();
+    carousel.addEventListener('mousemove', (e) => {
+      if (mouseDown) {
+        mouseEndX = e.clientX;
       }
-      if (touchEndX > touchStartX + 50) {
-        state.currentPromoSlide = (state.currentPromoSlide - 1 + promociones.length) % promociones.length;
-        actualizarCarrusel();
-      }
-    }
+    });
     
-    // Indicadores
-    const indicators = document.querySelectorAll('.promo-indicator');
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        state.currentPromoSlide = index;
-        actualizarCarrusel();
-      });
+    carousel.addEventListener('mouseup', (e) => {
+      if (mouseDown) {
+        const deltaX = mouseEndX - mouseStartX;
+        
+        if (Math.abs(deltaX) > 50) {
+          if (deltaX < 0) {
+            // Drag izquierda - siguiente
+            state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
+            actualizarCarrusel();
+          } else {
+            // Drag derecha - anterior
+            state.currentPromoSlide = (state.currentPromoSlide - 1 + promociones.length) % promociones.length;
+            actualizarCarrusel();
+          }
+        } else {
+          // Click simple - siguiente slide
+          state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
+          actualizarCarrusel();
+        }
+        
+        mouseDown = false;
+        carousel.style.cursor = 'grab';
+        
+        // Reiniciar auto-play
+        clearInterval(state.promoInterval);
+        state.promoInterval = setInterval(() => {
+          state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
+          actualizarCarrusel();
+        }, 5000);
+      }
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+      mouseDown = false;
+      carousel.style.cursor = 'grab';
     });
   }
 }
@@ -3558,20 +3796,6 @@ function actualizarCarrusel() {
   if (!slides) return;
   
   slides.style.transform = `translateX(-${state.currentPromoSlide * 100}%)`;
-  actualizarIndicadores();
-}
-
-function actualizarIndicadores() {
-  const indicators = document.querySelectorAll('.promo-indicator');
-  indicators.forEach((indicator, index) => {
-    if (index === state.currentPromoSlide) {
-      indicator.classList.add('bg-white', 'w-8');
-      indicator.classList.remove('bg-white/50', 'w-2');
-    } else {
-      indicator.classList.remove('bg-white', 'w-8');
-      indicator.classList.add('bg-white/50', 'w-2');
-    }
-  });
 }
 
 // Videos
@@ -3883,6 +4107,148 @@ function initScrollToTop() {
       navigator.vibrate(30);
     }
   });
+}
+
+// Sistema de Navegación por Secciones
+function initNavegacionSecciones() {
+  // Detectar sección inicial desde URL hash
+  const hash = window.location.hash.replace('#', '') || 'inicio';
+  
+  // Si el hash es 'videos', redirigir a inicio (los videos están en inicio)
+  const hashFinal = hash === 'videos' ? 'inicio' : hash;
+  mostrarSeccion(hashFinal);
+  
+  // Escuchar cambios en los enlaces del menú
+  const enlaces = document.querySelectorAll('a[href^="#"]');
+  enlaces.forEach(enlace => {
+    enlace.addEventListener('click', (e) => {
+      e.preventDefault();
+      let hash = enlace.getAttribute('href').replace('#', '');
+      
+      // Si el enlace es a videos, cambiar a inicio
+      if (hash === 'videos') {
+        hash = 'inicio';
+        // Scroll a videos dentro de inicio
+        setTimeout(() => {
+          const videosSection = document.getElementById('videos');
+          if (videosSection) {
+            videosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+      
+      mostrarSeccion(hash);
+      
+      // Cerrar menú móvil si está abierto
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        const icon = document.getElementById('mobile-menu-button')?.querySelector('i');
+        if (icon) {
+          icon.classList.add('fa-bars');
+          icon.classList.remove('fa-times');
+        }
+      }
+    });
+  });
+  
+  // Escuchar cambios en el hash de la URL
+  window.addEventListener('hashchange', () => {
+    let hash = window.location.hash.replace('#', '') || 'inicio';
+    if (hash === 'videos') {
+      hash = 'inicio';
+      setTimeout(() => {
+        const videosSection = document.getElementById('videos');
+        if (videosSection) {
+          videosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+    mostrarSeccion(hash);
+  });
+}
+
+function mostrarSeccion(seccionId) {
+  // Lista de secciones válidas
+  const secciones = ['inicio', 'productos', 'personalizadas', 'contacto', 'videos'];
+  
+  // Si la sección no es válida, usar 'inicio'
+  if (!secciones.includes(seccionId)) {
+    seccionId = 'inicio';
+  }
+  
+  // Ocultar todas las secciones principales
+  const todasLasSecciones = document.querySelectorAll('.page-section');
+  todasLasSecciones.forEach(seccion => {
+    seccion.style.display = 'none';
+  });
+  
+  // Ocultar secciones de inicio (promociones y videos)
+  const seccionesInicio = document.querySelectorAll('.inicio-section');
+  seccionesInicio.forEach(seccion => {
+    seccion.style.display = 'none';
+  });
+  
+  // Si es inicio, mostrar también promociones y videos
+  if (seccionId === 'inicio') {
+    seccionesInicio.forEach(seccion => {
+      seccion.style.display = '';
+    });
+  }
+  
+  // Mostrar solo la sección activa
+  const seccionActiva = document.getElementById(seccionId);
+  if (seccionActiva) {
+    seccionActiva.style.display = '';
+    
+    // Scroll suave al inicio de la sección
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 50);
+  }
+  
+  // Actualizar estado
+  state.seccionActual = seccionId;
+  
+  // Actualizar URL sin recargar
+  if (window.location.hash !== `#${seccionId}`) {
+    window.history.pushState(null, '', `#${seccionId}`);
+  }
+  
+  // Resaltar enlace activo en el menú
+  actualizarMenuActivo(seccionId);
+  
+  // Inicializar contenido específico de la sección si es necesario
+  if (seccionId === 'productos') {
+    // Asegurar que los productos se rendericen cuando se muestra la sección
+    setTimeout(() => {
+      // Si el contenedor está visible, renderizar productos
+      const productsSection = document.getElementById('productos');
+      if (productsSection && productsSection.style.display !== 'none') {
+        renderProductos();
+        renderCategorias();
+      }
+    }, 150);
+  }
+}
+
+function actualizarMenuActivo(seccionId) {
+  // Remover clase activa de todos los enlaces
+  const enlaces = document.querySelectorAll('nav a[href^="#"]');
+  enlaces.forEach(enlace => {
+    enlace.classList.remove('text-yellow-500', 'font-bold');
+    enlace.classList.add('text-gray-800', 'dark:text-gray-200');
+  });
+  
+  // Agregar clase activa al enlace correspondiente
+  const enlaceActivo = document.querySelector(`nav a[href="#${seccionId}"]`);
+  if (enlaceActivo) {
+    enlaceActivo.classList.remove('text-gray-800', 'dark:text-gray-200');
+    enlaceActivo.classList.add('text-yellow-500', 'font-bold');
+  }
 }
 
 // Velas Personalizadas

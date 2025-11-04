@@ -1479,6 +1479,57 @@ a.bg-yellow-600:hover {
   background-size: 200% 100%;
 }
 
+/* Animación shimmer para promociones */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+}
+
+/* Animación de texto dorado brillante */
+@keyframes shimmer-text {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Mejoras para el carrusel de promociones */
+#promo-carousel {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.dark #promo-carousel {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.promo-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.promo-indicator.active,
+.promo-indicator:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
 /* Ocultar skeleton cuando la imagen carga */
 .producto-item img.loaded + .skeleton-image,
 .producto-item img.loaded ~ .skeleton-image {
