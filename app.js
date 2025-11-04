@@ -1404,6 +1404,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBottomDock();
   initWhatsApp();
   initPersonalizadas();
+  initScrollToTop();
   initLazyVideosPersonalizadas();
   
 });
@@ -3852,6 +3853,36 @@ function initBottomDock() {
 // WhatsApp
 function initWhatsApp() {
   // Los links ya están configurados en el HTML
+}
+
+// Botón Volver Arriba
+function initScrollToTop() {
+  const scrollButton = document.getElementById('scroll-to-top');
+  if (!scrollButton) return;
+  
+  // Mostrar/ocultar botón según scroll
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      scrollButton.classList.remove('opacity-0', 'invisible');
+      scrollButton.classList.add('opacity-100', 'visible');
+    } else {
+      scrollButton.classList.add('opacity-0', 'invisible');
+      scrollButton.classList.remove('opacity-100', 'visible');
+    }
+  }, { passive: true });
+  
+  // Click para volver arriba
+  scrollButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Animación de vibración (si está disponible)
+    if (navigator.vibrate) {
+      navigator.vibrate(30);
+    }
+  });
 }
 
 // Velas Personalizadas

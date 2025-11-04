@@ -64,13 +64,18 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Forzar modo oscuro siempre -->
+    <!-- Inicializar Dark Mode ANTES de cargar el contenido para evitar flash -->
     <script>
-      // Siempre mantener modo oscuro (dark mode)
+      // Detectar preferencia del sistema y localStorage ANTES de que se renderice el body
       (function() {
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const storedTheme = localStorage.getItem('theme');
+        const shouldBeDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
+        
+        if (shouldBeDark) {
+          document.documentElement.classList.add('dark');
+          document.body.classList.add('dark');
+        }
       })();
     </script>
     
@@ -118,6 +123,12 @@
                 
                 <!-- Right Side Icons -->
                 <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2.5 rounded-full bg-gray-200/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-300/50 dark:border-gray-700/50 transition-all shadow-sm" aria-label="Cambiar tema">
+                        <i class="fas fa-moon text-lg text-gray-600 dark:text-gray-400 dark:hidden"></i>
+                        <i class="fas fa-sun text-lg text-[#D4AF37] hidden dark:inline"></i>
+                    </button>
+                    
                     <!-- Cart Icon -->
                     <button id="cart-button" class="relative p-2 rounded-full transition" aria-label="Abrir carrito">
                         <i id="cart-icon" class="fas fa-shopping-cart text-xl text-gray-700 dark:text-gray-300"></i>
@@ -704,6 +715,11 @@
         
     </main>
     
+    <!-- Botón Volver Arriba -->
+    <button id="scroll-to-top" class="fixed bottom-24 right-4 md:bottom-8 md:right-8 z-40 bg-gradient-to-br from-yellow-400 to-amber-500 text-white rounded-full p-4 shadow-2xl opacity-0 invisible transition-all duration-300 hover:scale-110 active:scale-95" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+    
     <!-- Floating Bottom Menu (Dock) -->
     <nav id="bottom-dock" class="fixed bottom-0 left-0 right-0 z-30 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-t-2 border-gray-300/50 dark:border-gray-600/50 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.3)] md:hidden transition-transform duration-300 ease-in-out">
         <div class="flex justify-around items-center py-3 px-2">
@@ -991,23 +1007,16 @@
               registration.addEventListener('updatefound', () => {
                 const newWorker = registration.installing;
                 newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed') {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    // Hay una nueva versión disponible
                     console.log('Nueva versión del Service Worker disponible');
-                    // Forzar actualización automática sin pedir confirmación
-                    newWorker.postMessage({ action: 'skipWaiting' });
-                    // Esperar un momento y recargar
-                    setTimeout(() => {
-                      window.location.reload(true);
-                    }, 500);
+                    // Opcional: mostrar notificación al usuario
+                    if (confirm('Hay una nueva versión disponible. ¿Deseas actualizar?')) {
+                      newWorker.postMessage({ action: 'skipWaiting' });
+                      window.location.reload();
+                    }
                   }
                 });
-              });
-              
-              // Escuchar mensajes del service worker
-              navigator.serviceWorker.addEventListener('message', (event) => {
-                if (event.data && event.data.action === 'swUpdated') {
-                  window.location.reload(true);
-                }
               });
             })
             .catch((error) => {
