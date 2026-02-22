@@ -1,0 +1,35 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.tmp
+*.log
+*.swp
+*~
+
+# Archivos de configuración local
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node modules (si se usa)
+node_modules/
+package-lock.json
+
+# Archivos de respaldo
+*.bak
+*.backup
+
+# Archivos comprimidos innecesarios
+*.zip
+*.rar
+*.7z
+
+# Archivos de documentación temporal
+*.md~
+COMO-AGREGAR-VIDEOS.md
+README-VICTOR.md
+
