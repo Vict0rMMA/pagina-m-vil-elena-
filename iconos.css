@@ -1,0 +1,82 @@
+/* Font Awesome 6.4.0 reducido a los 51 iconos que usa este sitio.
+ * Generado por herramientas/regenerar-iconos.py — no editar a mano.
+ */
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("assets/fonts/fa-solid-900-subset.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("assets/fonts/fa-brands-400-subset.woff2") format("woff2");
+}
+
+.fa, .fas, .fa-solid, .fab, .fa-brands {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: var(--fa-display, inline-block);
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+.fas, .fa-solid, .fa { font-family: "Font Awesome 6 Free"; font-weight: 900; }
+.fab, .fa-brands     { font-family: "Font Awesome 6 Brands"; font-weight: 400; }
+
+.fa-arrow-right:before { content: "\f061"; }
+.fa-arrow-up:before { content: "\f062"; }
+.fa-arrow-up-right-from-square:before { content: "\f08e"; }
+.fa-baby:before { content: "\f77c"; }
+.fa-bars:before { content: "\f0c9"; }
+.fa-bolt:before { content: "\f0e7"; }
+.fa-box-open:before { content: "\f49e"; }
+.fa-check:before { content: "\f00c"; }
+.fa-check-circle:before { content: "\f058"; }
+.fa-chevron-left:before { content: "\f053"; }
+.fa-chevron-right:before { content: "\f054"; }
+.fa-circle-info:before { content: "\f05a"; }
+.fa-cloud-arrow-up:before { content: "\f0ee"; }
+.fa-comment:before { content: "\f075"; }
+.fa-cross:before { content: "\f654"; }
+.fa-download:before { content: "\f019"; }
+.fa-exclamation-triangle:before { content: "\f071"; }
+.fa-expand:before { content: "\f065"; }
+.fa-facebook-f:before { content: "\f39e"; }
+.fa-gift:before { content: "\f06b"; }
+.fa-globe-americas:before { content: "\f57d"; }
+.fa-heart:before { content: "\f004"; }
+.fa-house:before { content: "\f015"; }
+.fa-info-circle:before { content: "\f05a"; }
+.fa-instagram:before { content: "\f16d"; }
+.fa-location-dot:before { content: "\f3c5"; }
+.fa-magic:before { content: "\f0d0"; }
+.fa-minus:before { content: "\f068"; }
+.fa-money-bill-wave:before { content: "\f53a"; }
+.fa-paperclip:before { content: "\f0c6"; }
+.fa-play:before { content: "\f04b"; }
+.fa-plus:before { content: "\2b"; }
+.fa-search:before { content: "\f002"; }
+.fa-shield-halved:before { content: "\f3ed"; }
+.fa-shopping-bag:before { content: "\f290"; }
+.fa-shopping-cart:before { content: "\f07a"; }
+.fa-snowflake:before { content: "\f2dc"; }
+.fa-spray-can:before { content: "\f5bd"; }
+.fa-store:before { content: "\f54e"; }
+.fa-tags:before { content: "\f02c"; }
+.fa-th:before { content: "\f00a"; }
+.fa-tiktok:before { content: "\e07b"; }
+.fa-times:before { content: "\f00d"; }
+.fa-times-circle:before { content: "\f057"; }
+.fa-trash:before { content: "\f1f8"; }
+.fa-trash-alt:before { content: "\f2ed"; }
+.fa-tree:before { content: "\f1bb"; }
+.fa-truck-fast:before { content: "\f48b"; }
+.fa-video:before { content: "\f03d"; }
+.fa-wallet:before { content: "\f555"; }
+.fa-whatsapp:before { content: "\f232"; }

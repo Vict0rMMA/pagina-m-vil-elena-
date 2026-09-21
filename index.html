@@ -35,37 +35,31 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Elena Velas">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="assets/logos/elena-marca.png">
-    <link rel="apple-touch-icon" href="assets/logos/elena-marca.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
     
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              playfair: ['Playfair Display', 'serif'],
-              montserrat: ['Montserrat', 'sans-serif']
-            }
-          }
-        },
-        darkMode: 'class',
-        // Compila hover: a @media (hover: hover) — en táctil el estado se quedaba pegado tras el tap
-        future: { hoverOnlyWhenSupported: true }
-      }
-    </script>
+    <!-- Iconos propios: sólo los 51 que usa el sitio.
+         Antes: 19 KB de CSS + 251 KB de fuentes desde cdnjs, con miles de
+         glifos que nadie pinta. Ahora: 3 KB de CSS + 5,7 KB de fuentes,
+         servidos desde el propio dominio. -->
+    <link rel="preload" as="font" type="font/woff2"
+          href="assets/fonts/fa-solid-900-subset.woff2" crossorigin>
+    <link rel="stylesheet" href="iconos.css?v=20260921">
+
+    <!-- Tailwind precompilado.
+         Antes esto era <script src="https://cdn.tailwindcss.com">: 124 KB de
+         JavaScript que bloqueaban el render y generaban el CSS en el móvil del
+         cliente en cada visita. Ahora son 32 KB de CSS (5 KB comprimido) con
+         exactamente las clases que usa el sitio.
+         Para regenerarlo tras añadir clases nuevas: ver README, sección Tailwind. -->
+    <link rel="stylesheet" href="tailwind.css?v=20260921">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
@@ -473,11 +467,11 @@
                                         Efectivo
                                     </li>
                                     <li>
-                                        <span class="dato-pago-icono"><img src="assets/icons/nequi.png" alt="" width="22" height="22"></span>
+                                        <span class="dato-pago-icono"><img src="assets/icons/nequi.png" alt="" width="22" height="22" loading="lazy" decoding="async"></span>
                                         Nequi
                                     </li>
                                     <li>
-                                        <span class="dato-pago-icono"><img src="assets/icons/bancolombia.png" alt="" width="22" height="22"></span>
+                                        <span class="dato-pago-icono"><img src="assets/icons/bancolombia.png" alt="" width="22" height="22" loading="lazy" decoding="async"></span>
                                         Bancolombia
                                     </li>
                                 </ul>
@@ -715,100 +709,6 @@
     <script src="app.js?v=20260921-wheel-final"></script>
     <script src="motion.js" defer></script>
     <script>
-      // Generar velas animadas de fondo (deshabilitado - se ve mal al inicio)
-      function crearVelasAnimadas() {
-        // Deshabilitado para evitar que se vea mal al inicio
-        return;
-        const container = document.getElementById('candles-container');
-        if (!container) return;
-        
-        const numVelas = 12; // Número de velas aumentado para mejor visibilidad
-        const sizes = ['candle-small', 'candle-medium', 'candle-large'];
-        const colors = ['#D4AF37', '#FFD700', '#FFA500', '#FF8C00']; // Colores dorados/naranjas
-        
-        // Crear un SVG maestro con el gradiente (una sola vez)
-        const svgMaster = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svgMaster.setAttribute('width', '0');
-        svgMaster.setAttribute('height', '0');
-        svgMaster.style.position = 'absolute';
-        svgMaster.style.visibility = 'hidden';
-        
-        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-        const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
-        gradient.setAttribute('id', 'flameGradient');
-        gradient.setAttribute('x1', '0%');
-        gradient.setAttribute('y1', '0%');
-        gradient.setAttribute('x2', '0%');
-        gradient.setAttribute('y2', '100%');
-        
-        const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-        stop1.setAttribute('offset', '0%');
-        stop1.setAttribute('stop-color', '#FFD700');
-        stop1.setAttribute('stop-opacity', '1');
-        
-        const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-        stop2.setAttribute('offset', '50%');
-        stop2.setAttribute('stop-color', '#FFA500');
-        stop2.setAttribute('stop-opacity', '0.9');
-        
-        const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-        stop3.setAttribute('offset', '100%');
-        stop3.setAttribute('stop-color', '#FF4500');
-        stop3.setAttribute('stop-opacity', '0.7');
-        
-        gradient.appendChild(stop1);
-        gradient.appendChild(stop2);
-        gradient.appendChild(stop3);
-        defs.appendChild(gradient);
-        svgMaster.appendChild(defs);
-        document.body.appendChild(svgMaster);
-        
-        for (let i = 0; i < numVelas; i++) {
-          const candle = document.createElement('div');
-          const size = sizes[Math.floor(Math.random() * sizes.length)];
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          
-          candle.className = `candle-floating ${size}`;
-          
-          // Posición horizontal aleatoria
-          candle.style.left = Math.random() * 100 + '%';
-          
-          // Delay aleatorio para que aparezcan en diferentes momentos (más rápido)
-          candle.style.animationDelay = Math.random() * 5 + 's';
-          
-          // Empezar desde diferentes alturas para que siempre haya velas visibles
-          const startHeight = Math.random() * 30; // 0-30% desde abajo
-          candle.style.bottom = `-${startHeight}%`;
-          
-          // SVG de la vela con llama
-          const candleHeight = size === 'candle-small' ? 60 : size === 'candle-medium' ? 80 : 100;
-          const candleWidth = size === 'candle-small' ? 30 : size === 'candle-medium' ? 40 : 50;
-          
-          candle.innerHTML = `
-            <svg class="candle-svg" width="${candleWidth}" height="${candleHeight}" viewBox="0 0 40 100" xmlns="http://www.w3.org/2000/svg">
-              <!-- Llama parpadeante -->
-              <g class="candle-flame" transform="translate(20, 10)">
-                <path d="M 0 0 Q -3 -8 -2 -15 Q 0 -18 2 -15 Q 3 -8 0 0" fill="url(#flameGradient)">
-                  <animate attributeName="opacity" values="1;0.8;1" dur="1.5s" repeatCount="indefinite"/>
-                </path>
-                <!-- Brillo de la llama -->
-                <ellipse cx="0" cy="-5" rx="2" ry="4" fill="#FFD700" opacity="0.6">
-                  <animate attributeName="cy" values="-5;-7;-5" dur="1s" repeatCount="indefinite"/>
-                </ellipse>
-              </g>
-              <!-- Cuerpo de la vela -->
-              <rect x="15" y="20" width="10" height="${candleHeight - 20}" fill="${color}" opacity="0.7" rx="2"/>
-              <!-- Base de la vela -->
-              <ellipse cx="20" cy="${candleHeight - 5}" rx="8" ry="3" fill="${color}" opacity="0.5"/>
-              <!-- Brillo en el cuerpo -->
-              <rect x="17" y="25" width="3" height="${candleHeight - 30}" fill="#FFFFFF" opacity="0.3" rx="1"/>
-            </svg>
-          `;
-          
-          container.appendChild(candle);
-        }
-      }
-      
       // Generar partículas animadas para el Hero
       function crearParticulas() {
         const container = document.getElementById('particles-container');
@@ -859,50 +759,25 @@
       // Inicializar velas y partículas cuando el DOM esté listo
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-          crearVelasAnimadas();
           crearParticulas();
           crearParticulasCatalogo();
         });
       } else {
-        crearVelasAnimadas();
         crearParticulas();
         crearParticulasCatalogo();
       }
       
-      // Registrar Service Worker con actualización forzada
+      // Registrar el Service Worker.
+      //
+      // Antes esto recargaba la página entera: el worker hacía clients.claim(),
+      // saltaba 'controllerchange' y el listener llamaba a location.reload().
+      // Cada primera visita cargaba el sitio dos veces. Además un confirm()
+      // interrumpía al cliente en mitad de la compra para preguntarle por una
+      // actualización. El worker nuevo toma el control sin recargar nada.
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' })
-            .then((registration) => {
-              console.log('Service Worker registrado:', registration.scope);
-              
-              // Verificar actualizaciones cada vez que se carga la página
-              registration.update();
-              
-              // Escuchar actualizaciones del service worker
-              registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    // Hay una nueva versión disponible
-                    console.log('Nueva versión del Service Worker disponible');
-                    // Opcional: mostrar notificación al usuario
-                    if (confirm('Hay una nueva versión disponible. ¿Deseas actualizar?')) {
-                      newWorker.postMessage({ action: 'skipWaiting' });
-                      window.location.reload();
-                    }
-                  }
-                });
-              });
-            })
-            .catch((error) => {
-              console.log('Error al registrar Service Worker:', error);
-            });
-          
-          // Escuchar mensajes del service worker
-          navigator.serviceWorker.addEventListener('controllerchange', () => {
-            window.location.reload();
-          });
+            .catch(() => { /* sin service worker el sitio funciona igual */ });
         });
       }
     </script>

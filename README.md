@@ -185,14 +185,73 @@ Modifica las variables CSS en `styles.css`:
 
 ---
 
-## 🌐 Despliegue
+## 🌐 Despliegue (Vercel)
 
-### Otros servicios compatibles:
+El sitio se despliega solo: **cada `git push` a `main` publica una versión nueva**
+en https://pagina-m-vil-elena.vercel.app. No hay paso de compilación, así que un
+error de código nunca tumba el despliegue — pero tampoco hay nadie que avise, así
+que conviene abrir la página después de cada push.
 
-- **Vercel** - Deploy automático desde GitHub
-- **GitHub Pages** - Hosting gratuito
-- **Firebase Hosting** - Hosting de Google
-- **AWS S3 + CloudFront** - Hosting escalable
+`vercel.json` define las cabeceras de caché. Lo importante:
+
+| Recurso | Caché | Por qué |
+|---|---|---|
+| `index.html` | siempre revalida | los precios tienen que salir al día |
+| `.css` / `.js` | 5 min + revalidación en segundo plano | cambian a menudo |
+| Imágenes | 1 h + una semana en segundo plano | si reemplazas una foto, tarda como mucho 1 h |
+| Vídeos | 1 día | pesan mucho y casi nunca cambian |
+| Fuentes | 1 año | llevan el contenido en el nombre |
+
+> Si cambias una foto y quieres verla ya, añade `?2` al final de su nombre en el
+> código, o espera una hora.
+
+### Forzar que un cliente vea los cambios
+
+El HTML nunca se cachea, así que basta con recargar. Si aun así ve algo viejo,
+es el *service worker*: **Ctrl+Shift+R** lo salta.
+
+---
+
+## 🔧 Mantenimiento
+
+### Estilos de Tailwind
+
+Tailwind va **precompilado** en `tailwind.css`. Antes se cargaba desde
+`cdn.tailwindcss.com`, que son 124 KB de JavaScript generando el CSS en el móvil
+del cliente en cada visita — el propio Tailwind avisa de que eso no debe usarse
+en producción.
+
+Si añades clases de Tailwind nuevas al HTML o al JS, hay que regenerarlo:
+
+```bash
+npx tailwindcss@3.4.17 -c tailwind.config.js -i tailwind.entrada.css -o tailwind.css --minify
+```
+
+> Las clases que se construyen en tiempo de ejecución (por ejemplo
+> `md:grid-cols-${n}` en `app.js`) el escáner no las ve. Están puestas a mano en
+> el `safelist` de `tailwind.config.js`; si añades otra, agrégala ahí.
+
+### Iconos
+
+Font Awesome va **reducido**: el sitio usa ~50 iconos de los miles que trae, así
+que `iconos.css` y `assets/fonts/` contienen sólo esos (6 KB en vez de 270 KB).
+
+Si añades un icono nuevo (`<i class="fas fa-loquesea">`), regenera:
+
+```bash
+pip install "fonttools[woff]"
+python herramientas/regenerar-iconos.py
+```
+
+El script busca las clases `fa-*` por todo el proyecto, se descarga Font Awesome,
+recorta las fuentes y reescribe `iconos.css`. **Si no lo ejecutas, el icono nuevo
+sale en blanco.**
+
+### Fotos de producto
+
+Las fotos grandes son el mayor peso del sitio. Antes de subir una, redúcela a
+unos 1000 px de ancho y guárdala como JPEG de calidad ~80. Una foto de producto
+no debería pasar de 200 KB.
 
 ---
 
