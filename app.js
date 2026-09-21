@@ -1956,6 +1956,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPromociones();
   initVideos();
   initWheelScrollBridging();
+  initGlobalWheelScroll();
   initSearch();
   initAnimations();
   initBottomDock();
@@ -1976,6 +1977,18 @@ function initWheelScrollBridging() {
       event.preventDefault();
     }, { passive: false });
   });
+}
+
+function initGlobalWheelScroll() {
+  document.addEventListener('wheel', (event) => {
+    if (!event.deltaY || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+    if (event.target.closest('.product-modal-sheet, .cart-sheet, #mobile-menu')) return;
+    if ([...document.querySelectorAll('#product-modal, #cart-modal, #confirm-modal, #mobile-overlay')]
+      .some(modal => !modal.classList.contains('hidden'))) return;
+
+    event.preventDefault();
+    window.scrollBy({ top: event.deltaY, left: 0, behavior: 'auto' });
+  }, { capture: true, passive: false });
 }
 
 // Lazy loading para videos de personalizadas
