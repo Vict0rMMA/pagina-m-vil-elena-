@@ -139,7 +139,7 @@ html {
   -webkit-tap-highlight-color: transparent; /* el flash gris al tocar delata "web" */
   -webkit-text-size-adjust: 100%;
   overscroll-behavior-y: none;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   /* El color base vive aquí para que .fondo-ambiente (z-index:-1) se vea. */
   background: var(--bg);
   color-scheme: light;
