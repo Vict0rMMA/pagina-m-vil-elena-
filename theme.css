@@ -3802,3 +3802,131 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 }
 
 .ficha-opciones[hidden] { display: none; }
+
+/* ============================================================
+   41. Ambiente de las cabeceras de sección
+   ------------------------------------------------------------
+   El hero tenía halo, destellos y partículas en canvas; el resto
+   de secciones era un degradado plano con un aro suelto en la
+   esquina. Esto les da el mismo aire, pero sólo con CSS: ni una
+   petición de red, ni un nodo que pintar desde JavaScript.
+
+   Todo va en una capa propia a z-index -1 dentro de .section-head,
+   que no crea contexto de apilamiento (no lleva z-index), así que
+   los destellos quedan por detrás del texto y por delante del
+   fondo de la sección.
+   ============================================================ */
+
+.section-head { position: relative; }
+
+/* Aura: un resplandor cálido que respira detrás del título.
+   Muy ancha y muy difuminada a propósito — en cuanto se le ve el
+   borde deja de leerse como luz y parece una mancha. */
+.section-head::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 45%;
+  width: min(34rem, 108%);
+  aspect-ratio: 5 / 2;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center,
+              rgba(211, 169, 79, 0.20),
+              rgba(211, 169, 79, 0.06) 46%,
+              transparent 72%);
+  filter: blur(20px);
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: elena-aura-titulo 9s var(--ease-suave) infinite alternate;
+}
+
+@keyframes elena-aura-titulo {
+  from { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+  to   { opacity: 1;   transform: translate(-50%, -50%) scale(1.07); }
+}
+
+/* Destellos: mismo lenguaje que los del hero, pero más pequeños.
+   Aquí el área es mucho menor y a 10px se comían el título. */
+.titulo-destellos {
+  position: absolute;
+  z-index: -1;
+  /* Se desborda a los lados para que los destellos caigan fuera de la
+     columna de texto. La sección recorta, así que no genera scroll. */
+  inset: -0.75rem -1.75rem;
+  pointer-events: none;
+}
+
+.titulo-destellos span {
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D3A94F;
+  box-shadow: 0 0 0 3px rgba(211, 169, 79, 0.09), 0 0 12px rgba(211, 169, 79, 0.60);
+  opacity: 0.30;
+  will-change: transform, opacity;
+  /* 4,4 s frente a los 3 s del hero: más lento, menos insistente
+     en un bloque que se lee, no que se mira. */
+  animation: elena-destello 4.4s linear infinite;
+}
+
+/* Repartidos por las bandas de arriba y abajo, que es donde no hay
+   texto: el título está centrado y el subtítulo llega casi al borde.
+   Los retardos no son múltiplos exactos para que no parpadeen a coro. */
+.titulo-destellos span:nth-child(1) { top: 2%;  left: 13%;  animation-delay: 0ms; }
+.titulo-destellos span:nth-child(2) { top: 9%;  right: 16%; width: 4px; height: 4px; animation-delay: 900ms; }
+.titulo-destellos span:nth-child(3) { bottom: 4%; left: 22%; width: 5px; height: 5px; animation-delay: 1700ms; }
+.titulo-destellos span:nth-child(4) { bottom: -6%; right: 9%; animation-delay: 2600ms; }
+.titulo-destellos span:nth-child(5) { top: 30%; right: 2%;  width: 3px; height: 3px; animation-delay: 3500ms; }
+
+/* En móvil la cabecera es estrecha y el subtítulo ocupa casi todo:
+   se quedan los dos de las esquinas superiores, que no estorban. */
+@media (max-width: 640px) {
+  .titulo-destellos span:nth-child(3),
+  .titulo-destellos span:nth-child(4),
+  .titulo-destellos span:nth-child(5) { display: none; }
+  .titulo-destellos span:nth-child(1) { left: 6%; }
+  .titulo-destellos span:nth-child(2) { right: 7%; }
+}
+
+/* El aro suelto de la esquina parecía un resto olvidado. Con un
+   relleno tenue pasa a leerse como parte del ambiente. */
+.section:not(.hero)::after {
+  background: radial-gradient(circle, rgba(211, 178, 105, 0.10), transparent 70%);
+  border-color: rgba(164, 124, 50, 0.10);
+}
+
+/* Movimiento reducido no es "sin movimiento": se queda un latido
+   lento, sin escala ni desplazamiento, que no dispara vértigo.
+   Hace falta !important porque la regla general de la sección 17
+   corta toda animación a 0,01 ms. */
+@media (prefers-reduced-motion: reduce) {
+  .section-head::before {
+    transform: translate(-50%, -50%);
+    animation: elena-aura-suave 12s ease-in-out infinite alternate !important;
+    animation-iteration-count: infinite !important;
+  }
+  .titulo-destellos span {
+    animation: elena-destello-suave 6s ease-in-out infinite !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+@keyframes elena-aura-suave {
+  from { opacity: 0.55; }
+  to   { opacity: 1; }
+}
+
+@keyframes elena-destello-suave {
+  /* Rango un poco mas amplio que el del modo normal a proposito: aqui
+     no hay escala que acompane, y si el brillo no sube lo suficiente el
+     destello no se lee. Sigue siendo solo opacidad. */
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.78; }
+}
+
+/* En equipos modestos se queda sólo el aura, quieta. */
+.equipo-modesto .section-head::before { animation: none; opacity: 0.8; }
+.equipo-modesto .titulo-destellos { display: none; }

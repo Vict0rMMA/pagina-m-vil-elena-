@@ -182,6 +182,7 @@
         <section class="inicio-section section section-alt">
             <div class="section-inner">
                 <div class="section-head">
+                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
                     <span class="section-eyebrow">Ofertas</span>
                     <h2 class="section-title">Promociones especiales</h2>
                     <p class="section-subtitle">Selección de temporada con precio reducido.</p>
@@ -202,6 +203,7 @@
         <section id="videos" class="inicio-section section">
             <div class="section-inner">
                 <div class="section-head">
+                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
                     <span class="section-eyebrow">Novedades</span>
                     <h2 class="section-title">Nuevos videos</h2>
                     <p class="section-subtitle">S&iacute;guenos en TikTok e Instagram para ver los productos reci&eacute;n salidos del taller.</p>
@@ -217,6 +219,7 @@
         <section id="personalizadas" class="page-section section section-alt">
             <div class="section-inner">
                 <div class="section-head">
+                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
                     <span class="section-eyebrow">A tu medida</span>
                     <h2 class="section-title">Velas personalizadas</h2>
                     <p class="section-subtitle">
@@ -386,6 +389,7 @@
         <section id="productos" class="page-section section">
             <div class="section-inner">
                 <div class="section-head">
+                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
                     <span class="section-eyebrow">Cat&aacute;logo</span>
                     <h2 class="section-title">Nuestros productos</h2>
                     <p class="section-subtitle">Filtra por categor&iacute;a o busca lo que tienes en mente.</p>
@@ -428,6 +432,7 @@
         <section id="contacto" class="page-section section section-alt">
             <div class="section-inner">
                 <div class="section-head">
+                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
                     <span class="section-eyebrow">Hablemos</span>
                     <h2 class="section-title">Conecta con nosotros</h2>
                     <p class="section-subtitle">Escr&iacute;benos por WhatsApp y te ayudamos con tu pedido.</p>
@@ -709,64 +714,6 @@
     <script src="app.js?v=20260921-wheel-final"></script>
     <script src="motion.js" defer></script>
     <script>
-      // Generar partículas animadas para el Hero
-      function crearParticulas() {
-        const container = document.getElementById('particles-container');
-        if (!container) return;
-        
-        const numParticulas = 30; // Número de partículas
-        const sizes = ['particle-small', 'particle-medium', 'particle-large'];
-        
-        for (let i = 0; i < numParticulas; i++) {
-          const particle = document.createElement('div');
-          particle.className = `particle ${sizes[Math.floor(Math.random() * sizes.length)]}`;
-          
-          // Posición aleatoria inicial
-          particle.style.left = Math.random() * 100 + '%';
-          particle.style.top = Math.random() * 100 + '%';
-          
-          // Delay aleatorio para que no todas empiecen al mismo tiempo
-          particle.style.animationDelay = Math.random() * 5 + 's';
-          
-          // Variación adicional en la animación
-          const randomDelay = Math.random() * 3;
-          particle.style.animationDelay = `-${randomDelay}s`;
-          
-          container.appendChild(particle);
-        }
-      }
-      
-      // Generar partículas para la sección de catálogos
-      function crearParticulasCatalogo() {
-        const container = document.getElementById('catalog-particles-container');
-        if (!container) return;
-        
-        const numParticulas = 20;
-        const sizes = ['particle-small', 'particle-medium', 'particle-large'];
-        
-        for (let i = 0; i < numParticulas; i++) {
-          const particle = document.createElement('div');
-          particle.className = `particle ${sizes[Math.floor(Math.random() * sizes.length)]}`;
-          
-          particle.style.left = Math.random() * 100 + '%';
-          particle.style.top = Math.random() * 100 + '%';
-          particle.style.animationDelay = `${Math.random() * 5}s`;
-          
-          container.appendChild(particle);
-        }
-      }
-      
-      // Inicializar velas y partículas cuando el DOM esté listo
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-          crearParticulas();
-          crearParticulasCatalogo();
-        });
-      } else {
-        crearParticulas();
-        crearParticulasCatalogo();
-      }
-      
       // Registrar el Service Worker.
       //
       // Antes esto recargaba la página entera: el worker hacía clients.claim(),
