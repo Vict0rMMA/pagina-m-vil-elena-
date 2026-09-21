@@ -14,7 +14,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Matera Vela Mariposa Mini",
       descripcion: "Vela artesanal con aroma floral y forma de corazón, ideal para ocasiones románticas.",
-      imagen: "assets/productos/Amor-y-amistad/2.png",
+      imagen: "assets/productos/Amor-y-amistad/2.jpg",
       precios: {
         detal: { bolsa: 5900, caja: 7000 },
         mayorista: { bolsa: 5200, caja: 6500 }
@@ -31,7 +31,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Peonía Mediana",
       descripcion: "Vela artesanal en forma de peonía con diseño floral elegante. Medidas: 5.5cm x 5.5cm, peso 30gr. Disponible en varios colores (rojo, rosa, verde menta, amarillo).",
-      imagen: "assets/productos/Amor-y-amistad/4.png",
+      imagen: "assets/productos/Amor-y-amistad/4.jpg",
       precios: {
         detal: { bolsa: 3300, caja: 4000 },
         mayorista: { bolsa: 2900, caja: 3500 }
@@ -48,7 +48,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Flores con Aroma Empaque Especial",
       descripcion: "Vela en forma de corazón rojo con base blanca texturizada. Diseño elegante y romántico ideal para ocasiones especiales. Disponible en múltiples colores. Medidas: 7.5cm altura x 7.8cm ancho, peso 100gr.",
-      imagen: "assets/productos/Amor-y-amistad/5.png",
+      imagen: "assets/productos/Amor-y-amistad/5.jpg",
       precios: {
         detal: {
           bolsa: 4700,
@@ -71,7 +71,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Matera Vela Corazón Rosas",
       descripcion: "Flores aromáticas en empaque especial con domo transparente. Disponible en múltiples colores (rosa, rojo, blanco, morado, azul claro, amarillo). Medidas: 5.5cm altura x 5.5cm ancho, peso 30gr.",
-      imagen: "assets/productos/Amor-y-amistad/6.png",
+      imagen: "assets/productos/Amor-y-amistad/6.jpg",
       precios: {
         detal: {
           bolsa: 8900,
@@ -94,7 +94,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Corazón Rosas",
       descripcion: "Vela en forma de corazón decorada con rosas rojas en relieve. Disponible en caja kraft con ventana transparente. Medidas: 6.5cm altura x 8cm ancho, peso 42gr.",
-      imagen: "assets/productos/Amor-y-amistad/7.png",
+      imagen: "assets/productos/Amor-y-amistad/7.jpg",
       precios: {
         detal: { bolsa: 3900, caja: 4900 },
         mayorista: { bolsa: 3500, caja: 4300 }
@@ -111,7 +111,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Vela Corazón Grande",
       descripcion: "Vela en forma de corazón grande con mensajes de amor. Disponible en colores blanco y rojo con textos personalizados. Medidas: 11.7cm altura x 5cm ancho x 2.2cm espesor, peso 72gr.",
-      imagen: "assets/productos/Amor-y-amistad/8.png",
+      imagen: "assets/productos/Amor-y-amistad/8.jpg",
       precios: {
         detal: { bolsa: 4700, caja: 5900 },
         mayorista: { bolsa: 4400, caja: 5400 }
@@ -128,7 +128,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Mariposa 2 Mechas",
       descripcion: "Vela en forma de mariposa con 2 mechas, decorada con brillo dorado. Disponible en empaque especial. Medidas: 7.5cm altura x 8.5cm ancho x 2.5cm espesor, peso 52gr.",
-      imagen: "assets/productos/Amor-y-amistad/9.png",
+      imagen: "assets/productos/Amor-y-amistad/9.jpg",
       precios: {
         detal: { bolsa: 6400, caja: 7600 },
         mayorista: { bolsa: 5600, caja: 6900 }
@@ -145,7 +145,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Poli Mediano Mano Corazón",
       descripcion: "Frasco de vidrio con vela blanca y vela decorativa en forma de mano haciendo corazón. Incluye mensaje 'Feliz Amor y Amistad'. Disponible en empaque especial. Medidas: 7.5cm altura x 5cm ancho, peso 56gr.",
-      imagen: "assets/productos/Amor-y-amistad/10.png",
+      imagen: "assets/productos/Amor-y-amistad/10.jpg",
       precios: {
         detal: { bolsa: 7000, caja: 8000 },
         mayorista: { bolsa: 6500, caja: 7400 }
@@ -162,7 +162,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Corazón Rosas",
       descripcion: "Corazones decorados con rosas, disponibles en colores blanco y rosa. Incluyen etiqueta 'Feliz Día!'. Medidas: 2.8cm altura x 5.6cm ancho, peso 24gr.",
-      imagen: "assets/productos/Amor-y-amistad/11.png",
+      imagen: "assets/productos/Amor-y-amistad/11.jpg",
       precios: {
         detal: { bolsa: 3400, caja: 4300 },
         mayorista: { bolsa: 3000, caja: 3900 }
@@ -179,7 +179,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Oso Moño",
       descripcion: "Osos decorativos con moño y corazón. Disponibles en colores blanco y rosa. Incluyen moño o corazón decorativo. Medidas: 6.3cm altura x 4.5cm ancho, peso 52gr.",
-      imagen: "assets/productos/Amor-y-amistad/12.png",
+      imagen: "assets/productos/Amor-y-amistad/12.jpg",
       precios: {
         detal: { bolsa: 4000, caja: 5500 },
         mayorista: { bolsa: 4500, caja: 6000 }
@@ -196,7 +196,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Copa",
       descripcion: "Copa decorativa con vela blanca y elementos decorativos rojos. Incluye cinta roja en el tallo y mensajes personalizados. Medidas: 17.5cm altura x 7.8cm ancho, peso 120gr.",
-      imagen: "assets/productos/Amor-y-amistad/13.png",
+      imagen: "assets/productos/Amor-y-amistad/13.jpg",
       precios: {
         detal: {
           bolsa: 18500,
@@ -218,7 +218,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Poli Corazón Mensaje",
       descripcion: "Corazones decorativos con mensajes personalizados (TE AMO). Disponibles en colores rojo y blanco. Medidas: 3cm altura, peso 55gr.",
-      imagen: "assets/productos/Amor-y-amistad/14.png",
+      imagen: "assets/productos/Amor-y-amistad/14.jpg",
       precios: {
         detal: { bolsa: 6800, caja: 7900 },
         mayorista: { bolsa: 6500, caja: 7400 }
@@ -235,7 +235,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Peonía Grande",
       descripcion: "Vela artesanal en forma de peonía grande. Disponible en múltiples colores (rojo, rosa, azul). Disponible en caja kraft con ventana transparente. Medidas: 7cm altura x 7cm ancho, peso 45gr.",
-      imagen: "assets/productos/Amor-y-amistad/15.png",
+      imagen: "assets/productos/Amor-y-amistad/15.jpg",
       precios: {
         detal: { bolsa: 4200, caja: 5000 },
         mayorista: { bolsa: 3800, caja: 4500 }
@@ -252,7 +252,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Burbuja Vidrio",
       descripcion: "Velas decorativas en frasco de vidrio transparente con diseños florales y corazones. Disponible en múltiples diseños y colores. Medidas: 7cm altura x 7.8cm ancho, peso 90gr.",
-      imagen: "assets/productos/Amor-y-amistad/16.png",
+      imagen: "assets/productos/Amor-y-amistad/16.jpg",
       precios: {
         detal: {
           bolsa: 10800,
@@ -275,7 +275,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Poli Mediano Rosa",
       descripcion: "Vela de dos niveles con rosa morada en la parte superior y base rosa y blanca. Incluye mensaje 'Feliz Día' en escritura dorada. Disponible en bolsa y caja transparente. Medidas: 6cm altura x 5cm ancho, peso 56gr.",
-      imagen: "assets/productos/Amor-y-amistad/17.png",
+      imagen: "assets/productos/Amor-y-amistad/17.jpg",
       precios: {
         detal: { bolsa: 7000, caja: 8000 },
         mayorista: { bolsa: 6500, caja: 7400 }
@@ -292,7 +292,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Vela Corazón Personalizada",
       descripcion: "Velas en forma de corazón personalizadas con letras para formar nombres o mensajes. Disponibles en múltiples colores. Medidas: 9.5cm altura x 2.5cm ancho, peso 30gr.",
-      imagen: "assets/productos/Amor-y-amistad/18.png",
+      imagen: "assets/productos/Amor-y-amistad/18.jpg",
       precios: {
         detal: {
           bolsa: 3600,
@@ -314,7 +314,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Corazón Rosa",
       descripcion: "Vela en forma de corazón con textura de rosa en tonos rosados. Disponible en bolsa y caja transparente. Medidas: 3.5cm altura x 5.8cm ancho, peso 36gr.",
-      imagen: "assets/productos/Amor-y-amistad/19.png",
+      imagen: "assets/productos/Amor-y-amistad/19.jpg",
       precios: {
         detal: { bolsa: 3100, caja: 4100 },
         mayorista: { bolsa: 2800, caja: 3900 }
@@ -330,7 +330,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Vidrio Corcho Estrellas y Corazones",
       descripcion: "Velas decorativas en frasco de vidrio con tapa de corcho. Disponibles con estrellas y corazones de colores. Incluye cordel decorativo. Medidas: 3.5cm altura x 5.8cm ancho, peso 36gr.",
-      imagen: "assets/productos/Amor-y-amistad/20.png",
+      imagen: "assets/productos/Amor-y-amistad/20.jpg",
       precios: {
         detal: {
           bolsa: 0,
@@ -353,7 +353,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Rosa Mini",
       descripcion: "Vela en forma de rosa pequeña. Disponible en múltiples colores (rosa, teal, blanco con dorado). Disponible en bolsa y caja. Medidas: 3cm altura x 4cm ancho, peso 18gr.",
-      imagen: "assets/productos/Amor-y-amistad/21.png",
+      imagen: "assets/productos/Amor-y-amistad/21.jpg",
       precios: {
         detal: { bolsa: 2500, caja: 3000 },
         mayorista: { bolsa: 2000, caja: 2500 }
@@ -370,7 +370,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Ramo Personalizado",
       descripcion: "Velas personalizadas en forma de oso o flor dentro de taza blanca con texto personalizado. Ideal para regalos. Disponible en caja. Medidas: 12cm altura x 7cm ancho, peso 95gr.",
-      imagen: "assets/productos/Amor-y-amistad/22.png",
+      imagen: "assets/productos/Amor-y-amistad/22.jpg",
       precios: {
         detal: {
           bolsa: 0,
@@ -393,7 +393,7 @@ const productos = {
       categoria: "amorYAmistad",
       nombre: "Margarita",
       descripcion: "Vela en forma de margarita (daisy). Disponible en múltiples colores (rosa, fucsia, morado). Disponible en bolsa y caja. Medidas: 5cm altura x 5cm ancho, peso 16gr.",
-      imagen: "assets/productos/Amor-y-amistad/23.png",
+      imagen: "assets/productos/Amor-y-amistad/23.jpg",
       precios: {
         detal: { bolsa: 2500, caja: 3200 },
         mayorista: { bolsa: 2300, caja: 2800 }
@@ -412,7 +412,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "LEONCITO",
       descripcion: "Vela en forma de león pequeño. Disponible en múltiples colores (rosa, naranja, azul). Disponible en bolsa y caja kraft. Medidas: 6cm altura x 5cm ancho x 2.5cm espesor, peso 25gr.",
-      imagen: "assets/productos/Baby-Shower/1.png",
+      imagen: "assets/productos/Baby-Shower/1.jpg",
       precios: {
         detal: { bolsa: 3500, caja: 5000 },
         mayorista: { bolsa: 3100, caja: 4700 }
@@ -429,7 +429,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "LEONCITO POLI PEQUEÑO",
       descripcion: "Vela en forma de león pequeño con personalización de nombre. Disponible en múltiples colores (rosa, fucsia). Incluye etiqueta con nombre personalizado. Medidas: 7.5cm altura x 4.5cm ancho, peso 44gr.",
-      imagen: "assets/productos/Baby-Shower/1.png",
+      imagen: "assets/productos/Baby-Shower/1.jpg",
       precios: {
         detal: { bolsa: 5500, caja: 6500 },
         mayorista: { bolsa: 5000, caja: 6000 }
@@ -445,7 +445,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "LEONCITO POLI MEDIANO",
       descripcion: "Vela en forma de león mediano con personalización de nombre. Disponible en múltiples colores (rosa, blanco). Incluye etiqueta con nombre personalizado. Medidas: 8.7cm altura x 5cm ancho, peso 60gr.",
-      imagen: "assets/productos/Baby-Shower/1.png",
+      imagen: "assets/productos/Baby-Shower/1.jpg",
       precios: {
         detal: { bolsa: 6500, caja: 7000 },
         mayorista: { bolsa: 5700, caja: 6400 }
@@ -462,7 +462,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "LEONCITO NUBE",
       descripcion: "Vela en forma de león sobre base de nube. Disponible en color azul. Disponible en bolsa y caja. Incluye base decorativa tipo nube. Medidas: 6.5cm altura x 4.5cm ancho, peso 30gr.",
-      imagen: "assets/productos/Baby-Shower/2.png",
+      imagen: "assets/productos/Baby-Shower/2.jpg",
       precios: {
         detal: { bolsa: 3500, caja: 5000 },
         mayorista: { bolsa: 3000, caja: 4300 }
@@ -478,7 +478,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "LEONCITO VIDRIO TAPA CORCHO",
       descripcion: "Vela en forma de león dentro de frasco de vidrio con tapa de corcho. Incluye etiqueta con nombre personalizado. Presentación única en frasco de vidrio. Medidas: 8cm altura x 5.5cm ancho, peso 60gr.",
-      imagen: "assets/productos/Baby-Shower/2.png",
+      imagen: "assets/productos/Baby-Shower/2.jpg",
       precios: {
         detal: {
           bolsa: 0,
@@ -500,7 +500,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "JIRAFA",
       descripcion: "Vela en forma de jirafa con manchas características. Disponible en color amarillo con manchas negras. Disponible en bolsa y caja kraft con ventana. Medidas: 10cm altura x 4cm ancho x 2cm espesor, peso 30gr.",
-      imagen: "assets/productos/Baby-Shower/2.png",
+      imagen: "assets/productos/Baby-Shower/2.jpg",
       precios: {
         detal: { bolsa: 4000, caja: 5500 },
         mayorista: { bolsa: 3500, caja: 4700 }
@@ -516,7 +516,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "JIRAFA POLI",
       descripcion: "Vela en forma de jirafa con personalización de nombre. Disponible en color rosa con manchas negras. Incluye moño y etiqueta con nombre personalizado. Disponible en bolsa y caja. Medidas: 11cm altura x 4.5cm ancho, peso 52gr.",
-      imagen: "assets/productos/Baby-Shower/3.png",
+      imagen: "assets/productos/Baby-Shower/3.jpg",
       precios: {
         detal: { bolsa: 6500, caja: 8000 },
         mayorista: { bolsa: 6000, caja: 7500 }
@@ -532,7 +532,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "OSO POLI PEQUEÑO",
       descripcion: "Vela en forma de oso pequeño con personalización de nombre. Disponible en color rosa. Incluye moño y etiqueta con nombre personalizado. Disponible en bolsa y caja. Medidas: 6cm altura x 4.5cm ancho, peso 40gr.",
-      imagen: "assets/productos/Baby-Shower/3.png",
+      imagen: "assets/productos/Baby-Shower/3.jpg",
       precios: {
         detal: { bolsa: 6000, caja: 7500 },
         mayorista: { bolsa: 5400, caja: 6800 }
@@ -548,7 +548,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "ELEFANTE Y ELEFANTA POLI PEQUEÑO",
       descripcion: "Vela en forma de elefante pequeño con personalización. Disponible en múltiples colores (azul, rosa). Incluye etiqueta con nombre personalizado. Disponible en bolsa y caja. Medidas: 4.5cm altura x 4.5cm ancho, peso 26gr.",
-      imagen: "assets/productos/Baby-Shower/3.png",
+      imagen: "assets/productos/Baby-Shower/3.jpg",
       precios: {
         detal: { bolsa: 5000, caja: 6000 },
         mayorista: { bolsa: 4500, caja: 5500 }
@@ -564,7 +564,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "COMPOTA 00",
       descripcion: "Compota en frasco de vidrio con tapa verde. Disponible en múltiples sabores. Presentación individual. Ideal como detalle para baby shower. Medidas: 4.2cm altura x 4.3cm ancho, peso 25gr.",
-      imagen: "assets/productos/Baby-Shower/4.png",
+      imagen: "assets/productos/Baby-Shower/4.jpg",
       precios: {
         detal: {
           bolsa: 5500,
@@ -586,7 +586,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "PIESITOS POLI PEQUEÑOS",
       descripcion: "Vela decorativa con huellas de bebé. Disponible en color blanco con huellas azules. Presentación en bolsa. Ideal como detalle para baby shower. Medidas: 2cm altura x 4cm ancho, peso 22gr.",
-      imagen: "assets/productos/Baby-Shower/4.png",
+      imagen: "assets/productos/Baby-Shower/4.jpg",
       precios: {
         detal: {
           bolsa: 3500,
@@ -608,7 +608,7 @@ const productos = {
       categoria: "celebracion",
       nombre: "PIESITOS HOJALATA",
       descripcion: "Vela decorativa con huellas de bebé en lata. Disponible en lata con vela blanca y huellas rosadas. Presentación en lata. Ideal como detalle para baby shower. Medidas: 2cm altura x 5cm ancho, peso 18gr.",
-      imagen: "assets/productos/Baby-Shower/4.png",
+      imagen: "assets/productos/Baby-Shower/4.jpg",
       precios: {
         detal: {
           bolsa: 0,
@@ -632,7 +632,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "POLI MEDIANO ESTRELLAS",
       descripcion: "Vela personalizada mediana con decoración de estrellas. Incluye nombre personalizado en script dorado y decoración con estrellas rosadas y flores secas. Disponible en bolsa y caja. Medidas: 4cm altura x 5cm ancho, peso 54gr.",
-      imagen: "assets/productos/Primera-Comunion/1.png",
+      imagen: "assets/productos/Primera-Comunion/1.jpg",
       precios: {
         detal: { bolsa: 5600, caja: 7500 },
         mayorista: { bolsa: 5100, caja: 6300 }
@@ -649,7 +649,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "CRUZ NIÑO Y NIÑA",
       descripcion: "Vela en forma de cruz con figura de niño o niña arrodillada. Disponible en color blanco con figura azul (niño) o rosa (niña). Disponible en bolsa y caja. Medidas: 10cm altura x 7cm ancho x 2cm espesor, peso 48gr.",
-      imagen: "assets/productos/Primera-Comunion/2.png",
+      imagen: "assets/productos/Primera-Comunion/2.jpg",
       precios: {
         detal: { bolsa: 6000, caja: 7500 },
         mayorista: { bolsa: 5200, caja: 6500 }
@@ -665,7 +665,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "ENVASE CORCHO ESTRELLAS",
       descripcion: "Vela decorativa con estrellas en frasco de vidrio con tapa de corcho. Incluye mensaje 'Mi primera comunión' y cinta decorativa. Presentación única en frasco de vidrio. Medidas: 7cm altura x 6cm ancho, peso 74gr.",
-      imagen: "assets/productos/Primera-Comunion/2.png",
+      imagen: "assets/productos/Primera-Comunion/2.jpg",
       precios: {
         detal: {
           bolsa: 0,
@@ -687,7 +687,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "MARIPOSA",
       descripcion: "Vela en forma de mariposa decorativa. Disponible en color blanco con brillo. Disponible en bolsa y caja. Medidas: 7.5cm altura x 8.5cm ancho x 2.5cm espesor, peso 52gr.",
-      imagen: "assets/productos/Primera-Comunion/2.png",
+      imagen: "assets/productos/Primera-Comunion/2.jpg",
       precios: {
         detal: { bolsa: 6400, caja: 7600 },
         mayorista: { bolsa: 5600, caja: 6900 }
@@ -703,7 +703,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "CRUZ PALOMA",
       descripcion: "Vela en forma de cruz decorada con paloma azul. Disponible en color blanco con paloma azul decorativa y cordón dorado. Disponible en bolsa y caja kraft con ventana. Medidas: 8.5cm altura x 6cm ancho x 2.5cm espesor, peso 54gr.",
-      imagen: "assets/productos/Primera-Comunion/3.png",
+      imagen: "assets/productos/Primera-Comunion/3.jpg",
       precios: {
         detal: { bolsa: 6500, caja: 7500 },
         mayorista: { bolsa: 5800, caja: 7000 }
@@ -719,7 +719,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "CALIZ",
       descripcion: "Vela en forma de cáliz de comunión decorada con detalles dorados. Disponible en color blanco con cruces y líneas doradas. Disponible en bolsa y caja. Medidas: 9.5cm altura x 5.5cm ancho x 2cm espesor, peso 48gr.",
-      imagen: "assets/productos/Primera-Comunion/4.png",
+      imagen: "assets/productos/Primera-Comunion/4.jpg",
       precios: {
         detal: { bolsa: 7000, caja: 8500 },
         mayorista: { bolsa: 6500, caja: 7900 }
@@ -735,7 +735,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "BURBUJA MINI",
       descripcion: "Vela esférica pequeña decorada con cinta y flores secas. Disponible en tonos blanco y rosa. Presentación en domo transparente con base dorada. Medidas: 3.7cm altura x 4cm ancho, peso 38gr.",
-      imagen: "assets/productos/Primera-Comunion/4.png",
+      imagen: "assets/productos/Primera-Comunion/4.jpg",
       precios: {
         detal: { bolsa: 4500, caja: 5900 },
         mayorista: { bolsa: 4200, caja: 5200 }
@@ -751,7 +751,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "OSO MOÑO",
       descripcion: "Vela en forma de oso con moño decorativo. Disponible en colores azul oscuro y azul claro. Disponible en bolsa y caja. Medidas: 6.3cm altura x 4.5cm ancho, peso 52gr.",
-      imagen: "assets/productos/Primera-Comunion/4.png",
+      imagen: "assets/productos/Primera-Comunion/4.jpg",
       precios: {
         detal: { bolsa: 4500, caja: 6000 },
         mayorista: { bolsa: 4000, caja: 5500 }
@@ -767,7 +767,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "VIRGEN GUADALUPE CORAZÓN MEDIANA",
       descripcion: "Vela en forma de corazón con la imagen de la Virgen de Guadalupe. Disponible en colores rosa y verde menta. Disponible en bolsa y caja kraft con ventana. Medidas: 8cm altura x 5cm ancho x 2.5cm espesor, peso 38gr.",
-      imagen: "assets/productos/Primera-Comunion/5.png",
+      imagen: "assets/productos/Primera-Comunion/5.jpg",
       precios: {
         detal: { bolsa: 5000, caja: 6500 },
         mayorista: { bolsa: 4500, caja: 5900 }
@@ -783,7 +783,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "VIRGEN GUADALUPE CORAZÓN PEQUEÑO",
       descripcion: "Vela pequeña en forma de corazón con la imagen de la Virgen de Guadalupe. Disponible en color azul. Disponible en bolsa y caja. Medidas: 6cm altura x 4cm ancho x 2cm espesor, peso 32gr.",
-      imagen: "assets/productos/Primera-Comunion/5.png",
+      imagen: "assets/productos/Primera-Comunion/5.jpg",
       precios: {
         detal: { bolsa: 4300, caja: 5300 },
         mayorista: { bolsa: 3900, caja: 4900 }
@@ -799,7 +799,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "ANGEL CORONA NIÑO NIÑA",
       descripcion: "Vela en forma de ángel con corona, personalizable con nombre. Disponible en color azul. Disponible en bolsa y caja. Medidas: 10cm altura x 6cm ancho, peso 58gr.",
-      imagen: "assets/productos/Primera-Comunion/5.png",
+      imagen: "assets/productos/Primera-Comunion/5.jpg",
       precios: {
         detal: { bolsa: 6200, caja: 7200 },
         mayorista: { bolsa: 5800, caja: 6900 }
@@ -815,7 +815,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "COMPOTA 1",
       descripcion: "Compota en frasco de vidrio con tapa dorada. Disponible en múltiples sabores. Presentación individual. Ideal como detalle para primera comunión. Medidas: 5.1cm altura x 5.9cm ancho, peso 100gr.",
-      imagen: "assets/productos/Primera-Comunion/6.png",
+      imagen: "assets/productos/Primera-Comunion/6.jpg",
       precios: {
         detal: {
           bolsa: 0,
@@ -837,7 +837,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "COMPOTA 00",
       descripcion: "Compota pequeña en frasco redondo con tapa dorada-rosa. Disponible en múltiples sabores. Presentación individual. Ideal como detalle para primera comunión. Medidas: 4.2cm altura x 4.3cm ancho, peso 25gr.",
-      imagen: "assets/productos/Primera-Comunion/6.png",
+      imagen: "assets/productos/Primera-Comunion/6.jpg",
       precios: {
         detal: {
           bolsa: 0,
@@ -859,7 +859,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "ANGEL CORONA NIÑO NIÑA",
       descripcion: "Vela en forma de ángel con corona, disponible en colores azul (niño) y rosa (niña). Disponible en bolsa y caja. Medidas: 7.5cm altura x 4.5cm ancho, peso 42gr.",
-      imagen: "assets/productos/Primera-Comunion/6.png",
+      imagen: "assets/productos/Primera-Comunion/6.jpg",
       precios: {
         detal: { bolsa: 6500, caja: 8500 },
         mayorista: { bolsa: 5800, caja: 7400 }
@@ -875,7 +875,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "ANGELITO Y ANGELITA PEQUEÑO POLI",
       descripcion: "Velas pequeñas en forma de ángel y angelita con personalización de nombre. Disponibles en colores azul (niño) y rosa (niña). Disponible en bolsa y caja. Medidas: 8cm altura x 4.5cm ancho, peso 35gr.",
-      imagen: "assets/productos/Primera-Comunion/7.png",
+      imagen: "assets/productos/Primera-Comunion/7.jpg",
       precios: {
         detal: { bolsa: 6500, caja: 8300 },
         mayorista: { bolsa: 6000, caja: 7500 }
@@ -891,7 +891,7 @@ const productos = {
       categoria: "primeraComunion",
       nombre: "ROSA MINI",
       descripcion: "Vela pequeña en forma de rosa. Disponible en múltiples colores (rosa, fucsia, morado). Disponible en bolsa y caja. Medidas: 3cm altura x 4cm ancho, peso 18gr.",
-      imagen: "assets/productos/Primera-Comunion/8.png",
+      imagen: "assets/productos/Primera-Comunion/8.jpg",
       precios: {
         detal: { bolsa: 2500, caja: 3900 },
         mayorista: { bolsa: 2000, caja: 3300 }
@@ -904,93 +904,149 @@ const productos = {
     }
   ],
   navidad: [
-    // Productos combinados Detal + Mayorista
     {
       id: "nad1",
       categoria: "navidad",
       nombre: "Vela Papá Noel",
-      descripcion: "Vela navideña Papá Noel para venta al detal. Diseño festivo y fragancias navideñas. Altura: 14cm, Diámetro: 3.2cm.",
-      imagen: "assets/productos/Navidad/1.jpg",
+      descripcion: "Vela Papá Noel.",
+      imagen: "assets/productos/Navidad-2026/vela-papa-noel.jpg",
       precios: {
-        detal: {
-          bolsa: 12500,
-          caja: 14500
-        },
-        mayorista: {
-          bolsa: 10500,
-          caja: 12500
-        }
-      }
-    },
-    {
-      id: "nad2",
-      categoria: "navidad",
-      nombre: "Souvenir Navideño",
-      descripcion: "Velas navideñas decorativas con diseño especial. Incluye velas en forma de Papá Noel, conos navideños y velas rectangulares con mensajes festivos. Disponible en bolsa.",
-      imagen: "assets/productos/Navidad/2.jpg",
-      precios: {
-        detal: {
-          bolsa: 3900,
-          caja: 0
-        },
-        mayorista: {
-          bolsa: 3700,
-          caja: 0
+        detal: { bolsa: 12500, caja: 14500 },
+        mayorista: { bolsa: 11000, caja: 12500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Diámetro", valor: "3.2 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 12500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 14500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 11000 },
+          { nombre: "Empaque cajita", detalle: null, precio: 12500 }
+        ]
         }
       }
     },
     {
       id: "nad3",
       categoria: "navidad",
-      nombre: "Vela Degrade Larga Marcada",
-      descripcion: "Velas largas con efecto degradado y personalización con nombres o mensajes. Disponible en múltiples colores vibrantes (rosa, amarillo, azul, verde). Disponible en dos tamaños: Grande (17cm altura, 1.5cm diámetro) y Pequeña (14cm altura, 1.5cm diámetro), con presentación en bolsa o caja.",
-      imagen: "assets/productos/Navidad/3.jpg",
-      tamanos: [
-        { 
-          nombre: "Grande", 
-          detal: { bolsa: 10800, caja: 12500 },
-          mayorista: { bolsa: 9800, caja: 11500 }
-        },
-        { 
-          nombre: "Pequeña", 
-          detal: { bolsa: 10500, caja: 11500 },
-          mayorista: { bolsa: 9000, caja: 10500 }
+      nombre: "Vela Degradé Larga Marcada",
+      descripcion: "Vela Degradé Larga Marcada.",
+      imagen: "assets/productos/Navidad-2026/vela-degrade-larga.jpg",
+      precios: {
+        detal: { bolsa: 17500, caja: 18500 },
+        mayorista: { bolsa: 14500, caja: 15900 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "17 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 17500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 18500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 14500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 15900 }
+        ]
         }
-      ]
+      }
     },
     {
       id: "nad4",
       categoria: "navidad",
       nombre: "Vela Marcada",
-      descripcion: "Velas largas con efecto degradado y personalización con nombres o mensajes. Disponible en múltiples colores vibrantes (rosa, amarillo, azul, verde). Disponible en dos tamaños: Grande (17cm altura, 1.5cm diámetro) y Pequeña (14cm altura, 1.5cm diámetro), con presentación en bolsa o caja.",
-      imagen: "assets/productos/Navidad/4.jpg",
-      tamanos: [
-        { 
-          nombre: "Grande", 
-          detal: { bolsa: 10800, caja: 12500 },
-          mayorista: { bolsa: 9800, caja: 11500 }
+      descripcion: "Vela Marcada.",
+      imagen: "assets/productos/Navidad-2026/vela-marcada.jpg",
+      precios: {
+        detal: { bolsa: 10500, caja: 12500 },
+        mayorista: { bolsa: 10500, caja: 12000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Grande", valor: "17 cm de alto · 1.5 cm de diámetro" }, { etiqueta: "Pequeña", valor: "14 cm de alto · 1.5 cm de diámetro" }],
+        precios: {
+          detal: [
+            { nombre: "Grande, bolsita", detalle: null, precio: 10800 },
+            { nombre: "Pequeña, bolsita", detalle: null, precio: 10500 },
+            { nombre: "Grande, cajita", detalle: null, precio: 12500 },
+            { nombre: "Pequeña, cajita", detalle: null, precio: 11500 }
+          ],
+          mayorista: [
+          { nombre: "Grande, bolsita", detalle: null, precio: 10500 },
+          { nombre: "Pequeña, bolsita", detalle: null, precio: 11000 },
+          { nombre: "Grande, cajita", detalle: null, precio: 11500 },
+          { nombre: "Pequeña, cajita", detalle: null, precio: 12000 }
+        ]
         },
-        { 
-          nombre: "Pequeña", 
-          detal: { bolsa: 10500, caja: 11500 },
-          mayorista: { bolsa: 9000, caja: 10500 }
+        nota: "Los precios son los del catálogo: en esta referencia la pequeña cuesta más que la grande."
+      }
+    },
+    {
+      id: "nad28",
+      categoria: "navidad",
+      nombre: "Vela Degradé Pequeña",
+      descripcion: "Vela Degradé Pequeña.",
+      imagen: "assets/productos/Navidad-2026/vela-degrade-pequena.jpg",
+      precios: {
+        detal: { bolsa: 15500, caja: 17000 },
+        mayorista: { bolsa: 13000, caja: 14500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 15500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 17000 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 13000 },
+          { nombre: "Empaque cajita", detalle: null, precio: 14500 }
+        ]
         }
-      ]
+      }
     },
     {
       id: "nad5",
       categoria: "navidad",
       nombre: "Vela Mirella",
-      descripcion: "Vela navideña decorativa con diseños festivos. Disponible en múltiples presentaciones: caja decorativa con ilustraciones navideñas (árbol, duende, muñeco de nieve) o bolsa individual. Velas blancas con bases brillantes en verde, dorado y rojo. Altura: 14cm, Diámetro: 1.5cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/5.jpg",
+      descripcion: "Vela Mirella.",
+      imagen: "assets/productos/Navidad-2026/vela-mirella.jpg",
       precios: {
-        detal: {
-          bolsa: 16900,
-          caja: 17500
-        },
-        mayorista: {
-          bolsa: 15500,
-          caja: 16800
+        detal: { bolsa: 16900, caja: 17500 },
+        mayorista: { bolsa: 14500, caja: 15800 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 16900 },
+            { nombre: "Empaque cajita", detalle: null, precio: 17500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 14500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 15800 }
+        ]
+        }
+      }
+    },
+    {
+      id: "nad29",
+      categoria: "navidad",
+      nombre: "Kit 12 Deseos Estrellas",
+      descripcion: "Kit 12 Deseos Estrellas.",
+      imagen: "assets/productos/Navidad-2026/kit-12-deseos.jpg",
+      precios: {
+        detal: { bolsa: 13500, caja: 13500 },
+        mayorista: { bolsa: 11000, caja: 11000 }
+      },
+      ficha: {
+        precios: {
+          detal: [
+            { nombre: "Empaque cajita", detalle: null, precio: 13500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque cajita", detalle: null, precio: 11000 }
+        ]
         }
       }
     },
@@ -998,16 +1054,21 @@ const productos = {
       id: "nad6",
       categoria: "navidad",
       nombre: "Vela Blanca Larga Marcada",
-      descripcion: "Velas blancas largas marcadas, individualmente empaquetadas en bolsa transparente con lazo dorado y etiqueta verde con mensaje 'Felices Fiestas'. Diseño elegante y festivo. Altura: 17cm, Diámetro: 1.5cm. Disponible solo en bolsa.",
-      imagen: "assets/productos/Navidad/6.jpg",
+      descripcion: "Vela Blanca Larga Marcada.",
+      imagen: "assets/productos/Navidad-2026/vela-blanca-larga.jpg",
       precios: {
-        detal: {
-          bolsa: 10800,
-          caja: 0
-        },
-        mayorista: {
-          bolsa: 9800,
-          caja: 0
+        detal: { bolsa: 10800, caja: 10800 },
+        mayorista: { bolsa: 9800, caja: 9800 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "17 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 10800 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 9800 }
+        ]
         }
       }
     },
@@ -1015,16 +1076,23 @@ const productos = {
       id: "nad7",
       categoria: "navidad",
       nombre: "Vela Dorada",
-      descripcion: "Velas navideñas blancas con bases doradas, cada una inscrita con palabras positivas y deseos como Prosperidad, Amor, Familia, Éxitos, Gratitud, Paz, Abundancia, Empleo, Salud y Dinero. Disponible en presentación individual en bolsa transparente o en caja decorativa navideña. Altura: 14cm, Diámetro: 1.5cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/7.jpg",
+      descripcion: "Vela Dorada.",
+      imagen: "assets/productos/Navidad-2026/vela-dorada.jpg",
       precios: {
-        detal: {
-          bolsa: 16900,
-          caja: 17500
-        },
-        mayorista: {
-          bolsa: 15500,
-          caja: 16800
+        detal: { bolsa: 16900, caja: 17500 },
+        mayorista: { bolsa: 14500, caja: 15800 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 16900 },
+            { nombre: "Empaque cajita", detalle: null, precio: 17500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 14500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 15800 }
+        ]
         }
       }
     },
@@ -1032,16 +1100,24 @@ const productos = {
       id: "nad8",
       categoria: "navidad",
       nombre: "Vela Navidad",
-      descripcion: "Velas navideñas coloridas con palabras festivas como Unión, Alegría, Amor, Fe, Paz, Salud, Mayra. Cada vela tiene diseño brillante y textura glitter. Disponible en bolsa de tul (6 unidades) o caja decorativa navideña (6 unidades). Altura: 15cm, Diámetro: 3cm.",
-      imagen: "assets/productos/Navidad/8.jpg",
+      descripcion: "Vela Navidad.",
+      imagen: "assets/productos/Navidad-2026/vela-navidad.jpg",
       precios: {
-        detal: {
-          bolsa: 18500,
-          caja: 19000
-        },
-        mayorista: {
-          bolsa: 16800,
-          caja: 17500
+        detal: { bolsa: 18500, caja: 19000 },
+        mayorista: { bolsa: 14800, caja: 15800 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "3 cm" }, { etiqueta: "Espesor", valor: "1.7 cm" }],
+        empaque: "6 unidades",
+        precios: {
+          detal: [
+            { nombre: "Bolsa de tul x6", detalle: null, precio: 18500 },
+            { nombre: "Caja x6", detalle: null, precio: 19000 }
+          ],
+          mayorista: [
+          { nombre: "Bolsa de tul x6", detalle: null, precio: 14800 },
+          { nombre: "Caja x6", detalle: null, precio: 15800 }
+        ]
         }
       }
     },
@@ -1049,16 +1125,24 @@ const productos = {
       id: "nad9",
       categoria: "navidad",
       nombre: "Caja Vela Propósito x6 Unidades",
-      descripcion: "Set de 6 velas rectangulares blancas con palabras de propósito como Felicidad, Salud, Amor, Paz, Unión, Esperanza, Abundancia, Prosperidad, Éxito, Sabiduría y Fe. Cada palabra está escrita en colores vibrantes. Disponible en bolsa de tul (6 unidades) o caja decorativa navideña (6 unidades). Altura: 14cm, Diámetro: 3.5cm.",
-      imagen: "assets/productos/Navidad/9.jpg",
+      descripcion: "Caja Vela Propósito x6 Unidades.",
+      imagen: "assets/productos/Navidad-2026/caja-proposito-x6.jpg",
       precios: {
-        detal: {
-          bolsa: 18500,
-          caja: 19000
-        },
-        mayorista: {
-          bolsa: 16800,
-          caja: 17500
+        detal: { bolsa: 18500, caja: 19000 },
+        mayorista: { bolsa: 15500, caja: 16800 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Diámetro", valor: "3.5 cm" }, { etiqueta: "Espesor", valor: "1.8 cm" }],
+        empaque: "6 unidades",
+        precios: {
+          detal: [
+            { nombre: "Bolsa de tul x6", detalle: null, precio: 18500 },
+            { nombre: "Caja x6", detalle: null, precio: 19000 }
+          ],
+          mayorista: [
+          { nombre: "Bolsa de tul x6", detalle: null, precio: 15500 },
+          { nombre: "Caja x6", detalle: null, precio: 16800 }
+        ]
         }
       }
     },
@@ -1066,67 +1150,139 @@ const productos = {
       id: "nad10",
       categoria: "navidad",
       nombre: "Vela Propósito Individual",
-      descripcion: "Vela rectangular blanca individual con palabras de propósito como Gratitud. Empaquetada individualmente en bolsa transparente con lazo rojo. Cada vela tiene palabras escritas en cursiva, disponibles en diferentes colores (rojo, verde brillante).",
-      imagen: "assets/productos/Navidad/10.jpg",
+      descripcion: "Vela Propósito Individual.",
+      imagen: "assets/productos/Navidad-2026/vela-proposito.jpg",
       precios: {
-        detal: {
-          bolsa: 3400,
-          caja: 0
-        },
-        mayorista: {
-          bolsa: 2900,
-          caja: 0
+        detal: { bolsa: 3400, caja: 3400 },
+        mayorista: { bolsa: 3300, caja: 3300 }
+      },
+      ficha: {
+        empaque: "Unidad suelta",
+        precios: {
+          detal: [
+            { nombre: "Precio por unidad", detalle: null, precio: 3400 }
+          ],
+          mayorista: [
+          { nombre: "Precio por unidad", detalle: null, precio: 3300 }
+        ]
         }
       }
     },
     {
       id: "nad12",
       categoria: "navidad",
-      nombre: "Arbol Navidad",
-      descripcion: "Velas navideñas en forma de árbol de Navidad con diseño escalonado. Disponibles en colores rosa y verde/teal. Cada vela tiene decoración dorada en la parte superior. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 12cm, Diámetro: 7.5cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/12.jpg",
+      nombre: "Árbol Navidad",
+      descripcion: "Árbol Navidad.",
+      imagen: "assets/productos/Navidad-2026/arbol-navidad.jpg",
       precios: {
-        detal: {
-          bolsa: 9700,
-          caja: 11500
-        },
-        mayorista: {
-          bolsa: 7900,
-          caja: 9500
+        detal: { bolsa: 9700, caja: 11500 },
+        mayorista: { bolsa: 8000, caja: 10500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "12 cm" }, { etiqueta: "Diámetro", valor: "7.5 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 9700 },
+            { nombre: "Empaque cajita", detalle: null, precio: 11500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 8000 },
+          { nombre: "Empaque cajita", detalle: null, precio: 10500 }
+        ]
         }
       }
     },
     {
       id: "nad13",
       categoria: "navidad",
-      nombre: "Arbol Navidad Pino Pequeño",
-      descripcion: "Velas navideñas pequeñas en forma de árbol de Navidad (pino) con efecto nevado en las puntas. Disponibles en colores verde oscuro, azul y verde menta. Cada vela tiene un adorno dorado en la parte superior. Empaquetadas en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 8cm, Diámetro: 8cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/13.jpg",
+      nombre: "Árbol Navidad Pino Pequeño",
+      descripcion: "Árbol Navidad Pino Pequeño.",
+      imagen: "assets/productos/Navidad-2026/pino-pequeno.jpg",
       precios: {
-        detal: {
-          bolsa: 5600,
-          caja: 6500
-        },
-        mayorista: {
-          bolsa: 4100,
-          caja: 5500
+        detal: { bolsa: 5600, caja: 6500 },
+        mayorista: { bolsa: 4500, caja: 6000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "8 cm" }, { etiqueta: "Diámetro", valor: "8 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 5600 },
+            { nombre: "Empaque cajita", detalle: null, precio: 6500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 4500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 6000 }
+        ]
         }
       }
     },
     {
       id: "nad14",
       categoria: "navidad",
-      nombre: "Arbol Navidad Pino Grande",
-      descripcion: "Velas navideñas grandes en forma de árbol de Navidad (pino) con efecto nevado en las puntas. Disponibles en colores rojo y blanco. Cada vela tiene textura que imita las hojas de pino y un adorno dorado en la parte superior. Empaquetadas en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 10cm, Diámetro: 8cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/14.jpg",
+      nombre: "Árbol Navidad Pino Grande",
+      descripcion: "Árbol Navidad Pino Grande.",
+      imagen: "assets/productos/Navidad-2026/pino-grande.jpg",
       precios: {
-        detal: {
-          bolsa: 6500,
-          caja: 8500
-        },
-        mayorista: {
-          bolsa: 5900,
-          caja: 7500
+        detal: { bolsa: 6500, caja: 8500 },
+        mayorista: { bolsa: 6500, caja: 8000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "10 cm" }, { etiqueta: "Diámetro", valor: "8 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 6500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 8500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 6500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 8000 }
+        ]
+        }
+      }
+    },
+    {
+      id: "nad30",
+      categoria: "navidad",
+      nombre: "Vela Huella y Cara de Perro y Gato",
+      descripcion: "Vela Huella y Cara de Perro y Gato.",
+      imagen: "assets/productos/Navidad-2026/vela-huella-mascota.jpg",
+      precios: {
+        detal: { bolsa: 4000, caja: 4000 },
+        mayorista: { bolsa: 3500, caja: 3500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "11.5 cm" }, { etiqueta: "Diámetro", valor: "3.5 cm" }, { etiqueta: "Espesor", valor: "1.5 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Bolsita por unidad", detalle: null, precio: 4000 }
+          ],
+          mayorista: [
+          { nombre: "Bolsita por unidad", detalle: null, precio: 3500 }
+        ]
+        }
+      }
+    },
+    {
+      id: "nad31",
+      categoria: "navidad",
+      nombre: "Pesebre Arbolito Ángel",
+      descripcion: "Pesebre Arbolito Ángel.",
+      imagen: "assets/productos/Navidad-2026/pesebre-arbolito-angel.jpg",
+      precios: {
+        detal: { bolsa: 7500, caja: 8900 },
+        mayorista: { bolsa: 6800, caja: 7500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "8 cm" }, { etiqueta: "Ancho", valor: "8 cm" }, { etiqueta: "Espesor", valor: "13 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 7500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 8900 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 6800 },
+          { nombre: "Empaque cajita", detalle: null, precio: 7500 }
+        ]
         }
       }
     },
@@ -1134,16 +1290,23 @@ const productos = {
       id: "nad15",
       categoria: "navidad",
       nombre: "Pesebre Estrella Arco",
-      descripcion: "Velas navideñas decorativas en forma de arco con escena de pesebre (María, José y el niño Jesús) dentro, coronado con una estrella. Disponibles en colores verde azulado, azul, rojo y blanco. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 10cm, Diámetro: 9cm, Espesor: 3cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/15.jpg",
+      descripcion: "Pesebre Estrella Arco.",
+      imagen: "assets/productos/Navidad-2026/pesebre-estrella-arco.jpg",
       precios: {
-        detal: {
-          bolsa: 7500,
-          caja: 8900
-        },
-        mayorista: {
-          bolsa: 6100,
-          caja: 7900
+        detal: { bolsa: 7500, caja: 8900 },
+        mayorista: { bolsa: 6100, caja: 7900 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "10 cm" }, { etiqueta: "Diámetro", valor: "9 cm" }, { etiqueta: "Espesor", valor: "3 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 7500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 8900 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 6100 },
+          { nombre: "Empaque cajita", detalle: null, precio: 7900 }
+        ]
         }
       }
     },
@@ -1151,33 +1314,47 @@ const productos = {
       id: "nad16",
       categoria: "navidad",
       nombre: "Pesebre Estrella Navidad",
-      descripcion: "Velas navideñas en forma de estrella con escena de pesebre (María, José y el niño Jesús) dentro del contorno de la estrella. Disponibles en colores verde azulado, azul, rojo y blanco. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 9cm, Diámetro: 9cm, Espesor: 3.5cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/16.jpg",
+      descripcion: "Pesebre Estrella Navidad.",
+      imagen: "assets/productos/Navidad-2026/pesebre-estrella.jpg",
       precios: {
-        detal: {
-          bolsa: 6500,
-          caja: 7900
-        },
-        mayorista: {
-          bolsa: 5100,
-          caja: 6800
+        detal: { bolsa: 6500, caja: 7900 },
+        mayorista: { bolsa: 5500, caja: 7200 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "9 cm" }, { etiqueta: "Diámetro", valor: "9 cm" }, { etiqueta: "Espesor", valor: "3.5 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 6500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 7900 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 5500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 7200 }
+        ]
         }
       }
     },
     {
       id: "nad17",
       categoria: "navidad",
-      nombre: "Pesebre Arbol Navidad",
-      descripcion: "Velas navideñas en forma de árbol de Navidad con escena de pesebre (María, José y el niño Jesús) integrada en su diseño. Cada vela está coronada con una estrella. Disponibles en colores rosa, verde azulado, azul y blanco con estrellas doradas. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 10cm, Diámetro: 7.5cm, Espesor: 3cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/17.jpg",
+      nombre: "Pesebre Árbol Navidad",
+      descripcion: "Pesebre Árbol Navidad.",
+      imagen: "assets/productos/Navidad-2026/pesebre-arbol.jpg",
       precios: {
-        detal: {
-          bolsa: 6900,
-          caja: 8400
-        },
-        mayorista: {
-          bolsa: 6500,
-          caja: 7900
+        detal: { bolsa: 6900, caja: 8400 },
+        mayorista: { bolsa: 6500, caja: 7900 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "10 cm" }, { etiqueta: "Diámetro", valor: "7.5 cm" }, { etiqueta: "Espesor", valor: "3 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 6900 },
+            { nombre: "Empaque cajita", detalle: null, precio: 8400 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 6500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 7900 }
+        ]
         }
       }
     },
@@ -1185,16 +1362,23 @@ const productos = {
       id: "nad18",
       categoria: "navidad",
       nombre: "Pesebre Casa Navidad",
-      descripcion: "Velas navideñas en forma de casa con escena de pesebre (María, José y el niño Jesús) dentro. Cada casa tiene una estrella en el techo. Disponibles en colores azul, verde azulado, rojo, verde oscuro y blanco. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 10cm, Diámetro: 8.5cm, Espesor: 3cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/18.jpg",
+      descripcion: "Pesebre Casa Navidad.",
+      imagen: "assets/productos/Navidad-2026/pesebre-casa.jpg",
       precios: {
-        detal: {
-          bolsa: 7500,
-          caja: 9500
-        },
-        mayorista: {
-          bolsa: 6800,
-          caja: 8800
+        detal: { bolsa: 7500, caja: 9500 },
+        mayorista: { bolsa: 6800, caja: 8800 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "10 cm" }, { etiqueta: "Diámetro", valor: "8.5 cm" }, { etiqueta: "Espesor", valor: "3 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 7500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 9500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 6800 },
+          { nombre: "Empaque cajita", detalle: null, precio: 8800 }
+        ]
         }
       }
     },
@@ -1202,16 +1386,22 @@ const productos = {
       id: "nad19",
       categoria: "navidad",
       nombre: "Pesebre Choza",
-      descripcion: "Vela navideña blanca en forma de choza con techo texturizado que imita paja. La choza contiene una escena de pesebre (María, José y el niño Jesús) moldeada en la cera. Decorada con brillo dorado en el techo y la base. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/19.jpg",
+      descripcion: "Pesebre Choza.",
+      imagen: "assets/productos/Navidad-2026/pesebre-choza.jpg",
       precios: {
-        detal: {
-          bolsa: 6500,
-          caja: 7500
-        },
-        mayorista: {
-          bolsa: 5600,
-          caja: 6900
+        detal: { bolsa: 6500, caja: 7500 },
+        mayorista: { bolsa: 5600, caja: 6900 }
+      },
+      ficha: {
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 6500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 7500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 5600 },
+          { nombre: "Empaque cajita", detalle: null, precio: 6900 }
+        ]
         }
       }
     },
@@ -1219,16 +1409,23 @@ const productos = {
       id: "nad20",
       categoria: "navidad",
       nombre: "Bola Navidad Pesebre",
-      descripcion: "Velas navideñas esféricas con escena de pesebre tallada en relieve (María, José y el niño Jesús en un pesebre, con animales y posiblemente pastores). Disponibles en colores rojo y verde azulado. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 6.5cm, Diámetro: 7.2cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/20.jpg",
+      descripcion: "Bola Navidad Pesebre.",
+      imagen: "assets/productos/Navidad-2026/bola-pesebre.jpg",
       precios: {
-        detal: {
-          bolsa: 9000,
-          caja: 10500
-        },
-        mayorista: {
-          bolsa: 8500,
-          caja: 9900
+        detal: { bolsa: 9000, caja: 10500 },
+        mayorista: { bolsa: 8500, caja: 9900 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "6.5 cm" }, { etiqueta: "Diámetro", valor: "7.2 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 9000 },
+            { nombre: "Empaque cajita", detalle: null, precio: 10500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 8500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 9900 }
+        ]
         }
       }
     },
@@ -1236,16 +1433,23 @@ const productos = {
       id: "nad21",
       categoria: "navidad",
       nombre: "Bola Navidad",
-      descripcion: "Velas navideñas esféricas ligeramente aplanadas con diseño tallado en relieve que muestra una escena de bosque invernal con ciervos y árboles. Disponibles en colores verde bosque y rojo navideño. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Altura: 7.2cm, Diámetro: 6.7cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/21.jpg",
+      descripcion: "Bola Navidad.",
+      imagen: "assets/productos/Navidad-2026/bola-navidad.jpg",
       precios: {
-        detal: {
-          bolsa: 8000,
-          caja: 9700
-        },
-        mayorista: {
-          bolsa: 7500,
-          caja: 8500
+        detal: { bolsa: 8000, caja: 9700 },
+        mayorista: { bolsa: 8000, caja: 9700 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "7.2 cm" }, { etiqueta: "Diámetro", valor: "6.7 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 8000 },
+            { nombre: "Empaque cajita", detalle: null, precio: 9700 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 8000 },
+          { nombre: "Empaque cajita", detalle: null, precio: 9700 }
+        ]
         }
       }
     },
@@ -1253,52 +1457,68 @@ const productos = {
       id: "nad22",
       categoria: "navidad",
       nombre: "Muñeco de Nieve",
-      descripcion: "Velas navideñas en forma de muñeco de nieve blanco con acabado brillante. El muñeco lleva un sombrero puntiagudo (que forma la mecha en la parte superior) y una bufanda alrededor del cuello. Tiene características faciales simples (ojos y nariz de zanahoria) y brazos pequeños. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/22.jpg",
+      descripcion: "Muñeco de Nieve.",
+      imagen: "assets/productos/Navidad-2026/muneco-nieve.jpg",
       precios: {
-        detal: {
-          bolsa: 6500,
-          caja: 7500
-        },
-        mayorista: {
-          bolsa: 5000,
-          caja: 6500
+        detal: { bolsa: 6500, caja: 7500 },
+        mayorista: { bolsa: 5000, caja: 6500 }
+      },
+      ficha: {
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 6500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 7500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 5000 },
+          { nombre: "Empaque cajita", detalle: null, precio: 6500 }
+        ]
         }
       }
     },
     {
       id: "nad23",
       categoria: "navidad",
-      nombre: "Angel Grande y Pequeño",
-      descripcion: "Velas navideñas en forma de ángel blanco con un corte en forma de corazón en el centro. Disponibles en dos tamaños: Grande y Pequeño. Disponible en bolsa transparente con lazo dorado y etiqueta navideña. Disponible solo en bolsa.",
-      imagen: "assets/productos/Navidad/23.jpg",
-      tamanos: [
-        { 
-          nombre: "Grande", 
-          detal: { bolsa: 5500, caja: 0 },
-          mayorista: { bolsa: 4500, caja: 0 }
-        },
-        { 
-          nombre: "Pequeño", 
-          detal: { bolsa: 4500, caja: 0 },
-          mayorista: { bolsa: 4000, caja: 0 }
+      nombre: "Ángel Grande y Pequeño",
+      descripcion: "Ángel Grande y Pequeño.",
+      imagen: "assets/productos/Navidad-2026/angel.jpg",
+      precios: {
+        detal: { bolsa: 4500, caja: 5500 },
+        mayorista: { bolsa: 4000, caja: 4500 }
+      },
+      ficha: {
+        precios: {
+          detal: [
+            { nombre: "Grande, bolsita", detalle: null, precio: 5500 },
+            { nombre: "Pequeño, bolsita", detalle: null, precio: 4500 }
+          ],
+          mayorista: [
+          { nombre: "Grande, bolsita", detalle: null, precio: 4500 },
+          { nombre: "Pequeño, bolsita", detalle: null, precio: 4000 }
+        ]
         }
-      ]
+      }
     },
     {
       id: "nad24",
       categoria: "navidad",
       nombre: "Pesebre Mini Poli",
-      descripcion: "Velas navideñas mini con escena de pesebre (María, José y el niño Jesús) moldeada. Disponibles en colores rojo y verde brillante. Cada vela tiene una base circular transparente con mensaje 'Feliz Navidad'. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/24.jpg",
+      descripcion: "Pesebre Mini Poli.",
+      imagen: "assets/productos/Navidad-2026/pesebre-mini-poli.jpg",
       precios: {
-        detal: {
-          bolsa: 5500,
-          caja: 6700
-        },
-        mayorista: {
-          bolsa: 4500,
-          caja: 5500
+        detal: { bolsa: 5500, caja: 6700 },
+        mayorista: { bolsa: 4900, caja: 5500 }
+      },
+      ficha: {
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 5500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 6700 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 4900 },
+          { nombre: "Empaque cajita", detalle: null, precio: 5500 }
+        ]
         }
       }
     },
@@ -1306,16 +1526,23 @@ const productos = {
       id: "nad25",
       categoria: "navidad",
       nombre: "Peonía Grande",
-      descripcion: "Velas navideñas en forma de peonía grande con múltiples capas de pétalos realistas. Disponibles en colores rojo, blanco y rosa/rosa claro. Cada vela tiene una mecha visible en el centro. Disponibles en empaques individuales en cajas cuadradas pequeñas de cartón marrón claro con ventana transparente, o en bolsa. Altura: 7cm, Ancho: 7cm. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/25.jpg",
+      descripcion: "Peonía Grande.",
+      imagen: "assets/productos/Navidad-2026/peonia-grande.jpg",
       precios: {
-        detal: {
-          bolsa: 4200,
-          caja: 5000
-        },
-        mayorista: {
-          bolsa: 3800,
-          caja: 4500
+        detal: { bolsa: 4200, caja: 5000 },
+        mayorista: { bolsa: 4000, caja: 5000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "7 cm" }, { etiqueta: "Ancho", valor: "7 cm" }],
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 4200 },
+            { nombre: "Empaque cajita", detalle: null, precio: 5000 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 4000 },
+          { nombre: "Empaque cajita", detalle: null, precio: 5000 }
+        ]
         }
       }
     },
@@ -1323,16 +1550,22 @@ const productos = {
       id: "nad26",
       categoria: "navidad",
       nombre: "Poli Mediano Navidad",
-      descripcion: "Velas navideñas cilíndricas blancas con bases doradas. Cada vela está inscrita con palabras festivas como Felicidad, Feliz Navidad, Salud, Sueñas, Viajes, Mariana. Diseño elegante y festivo. Disponible en bolsa transparente con lazo dorado y etiqueta navideña, o en caja decorativa. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/26.jpg",
+      descripcion: "Poli Mediano Navidad.",
+      imagen: "assets/productos/Navidad-2026/poli-mediano.jpg",
       precios: {
-        detal: {
-          bolsa: 6500,
-          caja: 7500
-        },
-        mayorista: {
-          bolsa: 5500,
-          caja: 6800
+        detal: { bolsa: 6500, caja: 7500 },
+        mayorista: { bolsa: 5500, caja: 6800 }
+      },
+      ficha: {
+        precios: {
+          detal: [
+            { nombre: "Empaque bolsita", detalle: null, precio: 6500 },
+            { nombre: "Empaque cajita", detalle: null, precio: 7500 }
+          ],
+          mayorista: [
+          { nombre: "Empaque bolsita", detalle: null, precio: 5500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 6800 }
+        ]
         }
       }
     },
@@ -1340,17 +1573,209 @@ const productos = {
       id: "nad27",
       categoria: "navidad",
       nombre: "Muñeco Año Viejo",
-      descripcion: "Muñecos de año viejo artesanales con diferentes diseños y colores (suéteres a rayas rojas y blancas, camisas amarillas, verdes, negras, sombreros rojos, verdes). Incluyen elementos decorativos como libros pequeños y tarjetas. Disponibles en bolsa de tul transparente con lazo rojo y etiqueta, o en caja decorativa. Disponible en bolsa o caja.",
-      imagen: "assets/productos/Navidad/27.jpg",
+      descripcion: "Muñeco Año Viejo.",
+      imagen: "assets/productos/Navidad-2026/muneco-ano-viejo.jpg",
       precios: {
-        detal: {
-          bolsa: 16000,
-          caja: 18500
-        },
-        mayorista: {
-          bolsa: 15000,
-          caja: 17500
+        detal: { bolsa: 16000, caja: 18500 },
+        mayorista: { bolsa: 15000, caja: 17500 }
+      },
+      ficha: {
+        precios: {
+          detal: [
+            { nombre: "Bolsa de tul", detalle: null, precio: 16000 },
+            { nombre: "Caja", detalle: null, precio: 18500 }
+          ],
+          mayorista: [
+          { nombre: "Bolsa de tul", detalle: null, precio: 15000 },
+          { nombre: "Caja", detalle: null, precio: 17500 }
+        ]
         }
+      }
+    }
+  ],
+  kitEmprendedor: [
+    {
+      id: "kit1",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 1",
+      descripcion: "Kit Emprendedor 1.",
+      imagen: "assets/productos/Kit-Emprendedor/kit01.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 10000, caja: 250000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        empaque: "Caja x10 unidades",
+        lote: "25 cajas",
+        colores: [{ nombre: "Blanca", hex: "#F4F1EA" }, { nombre: "Pastel", hex: "#E3AEB4" }, { nombre: "Neón", hex: "#C6F04A" }],
+        opciones: [
+          { nombre: "Caja completa", detalle: "10 unidades", precio: 250000 },
+          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 10000 }
+        ]
+      }
+    },
+    {
+      id: "kit2",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 2",
+      descripcion: "Kit Emprendedor 2.",
+      imagen: "assets/productos/Kit-Emprendedor/kit02.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 12500, caja: 312500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        empaque: "Caja x10 unidades",
+        lote: "25 cajas",
+        colores: [{ nombre: "Blanca", hex: "#F4F1EA" }, { nombre: "Pastel", hex: "#E3AEB4" }, { nombre: "Neón", hex: "#C6F04A" }],
+        opciones: [
+          { nombre: "Caja completa", detalle: "10 unidades", precio: 312500 },
+          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 12500 }
+        ]
+      }
+    },
+    {
+      id: "kit3",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 3",
+      descripcion: "Kit Emprendedor 3.",
+      imagen: "assets/productos/Kit-Emprendedor/kit03.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 13500, caja: 337500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        empaque: "Caja x10 unidades",
+        lote: "25 cajas",
+        colores: [{ nombre: "Blanca", hex: "#F4F1EA" }, { nombre: "Pastel", hex: "#E3AEB4" }, { nombre: "Neón", hex: "#C6F04A" }],
+        opciones: [
+          { nombre: "Caja completa", detalle: "10 unidades", precio: 337500 },
+          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 13500 }
+        ]
+      }
+    },
+    {
+      id: "kit4",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 4",
+      descripcion: "Kit Emprendedor 4.",
+      imagen: "assets/productos/Kit-Emprendedor/kit04.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 6700, caja: 6700 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "Variada" }, { etiqueta: "Color", valor: "Variado" }],
+        empaque: "Venta por unidad",
+        lote: "Más de 12 unidades",
+        colores: [{ nombre: "Verde", hex: "#1E6B3A" }, { nombre: "Azul", hex: "#1F4FA8" }, { nombre: "Rojo", hex: "#B32027" }, { nombre: "Blanco", hex: "#F4F1EA" }, { nombre: "Multicolor", hex: "#C9A961" }],
+        opciones: [
+          { nombre: "Oferta mayorista por unidad", detalle: null, precio: 6700 }
+        ],
+        nota: "Producto exclusivo de velas artesanales."
+      }
+    },
+    {
+      id: "kit5",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 5 · Vela Árbol Navidad",
+      descripcion: "Kit Emprendedor 5 · Vela Árbol Navidad.",
+      imagen: "assets/productos/Kit-Emprendedor/kit05.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 19500, caja: 390000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Ancho", valor: "4.5 cm" }],
+        empaque: "Caja x6 unidades",
+        lote: "20 cajas",
+        opciones: [
+          { nombre: "Caja completa", detalle: "6 unidades", precio: 390000 },
+          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 19500 }
+        ]
+      }
+    },
+    {
+      id: "kit6",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 6 · Vela Papá Noel 1",
+      descripcion: "Kit Emprendedor 6 · Vela Papá Noel 1.",
+      imagen: "assets/productos/Kit-Emprendedor/kit06.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 12500, caja: 312500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "16 cm" }, { etiqueta: "Diámetro", valor: "2.0 cm" }],
+        empaque: "Bolsa x6 unidades",
+        lote: "25 bolsas",
+        opciones: [
+          { nombre: "Bolsa completa", detalle: "6 unidades", precio: 312500 },
+          { nombre: "Unidad suelta", detalle: "dentro de la bolsa", precio: 12500 }
+        ]
+      }
+    },
+    {
+      id: "kit7",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 6 · Vela Papá Noel 2",
+      descripcion: "Kit Emprendedor 6 · Vela Papá Noel 2.",
+      imagen: "assets/productos/Kit-Emprendedor/kit07.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 12500, caja: 312500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Diámetro", valor: "3.0 cm" }],
+        empaque: "Bolsa x6 unidades",
+        lote: "25 bolsas",
+        opciones: [
+          { nombre: "Bolsa completa", detalle: "6 unidades", precio: 312500 },
+          { nombre: "Unidad suelta", detalle: "dentro de la bolsa", precio: 12500 }
+        ]
+      }
+    },
+    {
+      id: "kit8",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 7 · Vela Propósito",
+      descripcion: "Kit Emprendedor 7 · Vela Propósito.",
+      imagen: "assets/productos/Kit-Emprendedor/kit08.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 18100, caja: 362000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Diámetro", valor: "3.5 cm" }],
+        empaque: "Caja x6 unidades",
+        lote: "20 cajas",
+        opciones: [
+          { nombre: "Caja completa", detalle: "6 unidades", precio: 362000 },
+          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 18100 }
+        ]
+      }
+    },
+    {
+      id: "kit9",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 8 · Vela Navidad",
+      descripcion: "Kit Emprendedor 8 · Vela Navidad.",
+      imagen: "assets/productos/Kit-Emprendedor/kit09.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 16800, caja: 336000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "3.0 cm" }],
+        empaque: "Caja x6 unidades",
+        lote: "20 cajas",
+        opciones: [
+          { nombre: "Caja completa", detalle: "6 unidades", precio: 336000 },
+          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 16800 }
+        ]
       }
     }
   ]
@@ -1458,15 +1883,39 @@ const videos = [
   },
   {
     plataforma: "tiktok",
-    titulo: "Nuevo Video en TikTok",
-    url: "", // Aquí pegas la URL del video de TikTok
-    embedCode: "" // O aquí pegas el código embed de TikTok
+    titulo: "Pregunta ya por nuestro kit",
+    url: "https://www.tiktok.com/@velas.elena/video/7684359342010748180",
+    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7684359342010748180" data-video-id="7684359342010748180"><section></section></blockquote>`
   },
   {
-    plataforma: "instagram",
-    titulo: "Nuevo Video en Instagram",
-    url: "", // Aquí pegas la URL del video de Instagram
-    embedCode: "" // O aquí pegas el código embed de Instagram
+    plataforma: "tiktok",
+    titulo: "Somos mayoristas, emprende con nosotros",
+    url: "https://www.tiktok.com/@velas.elena/video/7685743973889035538",
+    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7685743973889035538" data-video-id="7685743973889035538"><section></section></blockquote>`
+  },
+  {
+    plataforma: "tiktok",
+    titulo: "Nuestras velas navideñas",
+    url: "https://www.tiktok.com/@velas.elena/video/7685605024013012231",
+    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7685605024013012231" data-video-id="7685605024013012231"><section></section></blockquote>`
+  },
+  {
+    plataforma: "tiktok",
+    titulo: "Vela árbol de Navidad",
+    url: "https://www.tiktok.com/@velas.elena/video/7680630648012573972",
+    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7680630648012573972" data-video-id="7680630648012573972"><section></section></blockquote>`
+  },
+  {
+    plataforma: "tiktok",
+    titulo: "Pregunta por nuestros kits de emprendedor",
+    url: "https://www.tiktok.com/@velas.elena/video/7663227063792389396",
+    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7663227063792389396" data-video-id="7663227063792389396"><section></section></blockquote>`
+  },
+  {
+    plataforma: "tiktok",
+    titulo: "Velas para toda la familia",
+    url: "https://www.tiktok.com/@velas.elena/video/7566441246244211988",
+    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7566441246244211988" data-video-id="7566441246244211988"><section></section></blockquote>`
   }
 ];
 
@@ -1540,12 +1989,11 @@ function initLazyVideosPersonalizadas() {
   });
 }
 
-// Forzar modo oscuro siempre
+// La identidad de marca es la crema del logo: el sitio es claro siempre.
 function initDarkMode() {
-  // Siempre mantener modo oscuro (dark mode)
-  document.documentElement.classList.add('dark');
-  document.body.classList.add('dark');
-  localStorage.setItem('theme', 'dark');
+  document.documentElement.classList.remove('dark');
+  document.body.classList.remove('dark');
+  localStorage.removeItem('theme');
 }
 
 // Mobile Menu
@@ -2138,7 +2586,8 @@ const categoryMap = {
   'amor': 'amorYAmistad',
   'babyshower': 'celebracion',
   'comunion': 'primeraComunion',
-  'navidad': 'navidad'
+  'navidad': 'navidad',
+  'kits': 'kitEmprendedor'
 };
 
 // Mapeo inverso: categoría real a filtro
@@ -2146,7 +2595,8 @@ const categoryToFilter = {
   'amorYAmistad': 'amor',
   'celebracion': 'babyshower',
   'primeraComunion': 'comunion',
-  'navidad': 'navidad'
+  'navidad': 'navidad',
+  'kitEmprendedor': 'kits'
 };
 
 function renderCategorias() {
@@ -2158,26 +2608,29 @@ function renderCategorias() {
     { filter: 'amor', nombre: 'Amor y Amistad', icon: 'fas fa-heart' },
     { filter: 'babyshower', nombre: 'Baby Shower', icon: 'fas fa-baby' },
     { filter: 'comunion', nombre: 'Primera Comunión', icon: 'fas fa-cross' },
-    { filter: 'navidad', nombre: 'Navidad', icon: 'fas fa-tree' }
+    { filter: 'navidad', nombre: 'Navidad', icon: 'fas fa-tree' },
+    { filter: 'kits', nombre: 'Kit Emprendedor', icon: 'fas fa-box-open' }
   ];
   
   // Determinar el filtro activo actual
   const filterActual = state.categoriaActual === 'todas' ? 'todas' : 
                       (categoryToFilter[state.categoriaActual] || 'todas');
   
-  container.innerHTML = categorias.map(cat => `
+  container.innerHTML = categorias.map(cat => {
+    const activo = filterActual === cat.filter;
+    return `
     <button 
+      type="button"
+      role="tab"
       data-filter="${cat.filter}"
-      class="px-6 py-3 rounded-full border-2 transition-all min-h-[44px] flex items-center gap-2 filter-btn ${
-        filterActual === cat.filter 
-          ? 'bg-yellow-500 border-yellow-500 text-white active' 
-          : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300'
-      }"
+      aria-selected="${activo}"
+      class="filter-btn${activo ? ' active' : ''}"
     >
       <i class="${cat.icon}"></i>
       <span>${cat.nombre}</span>
     </button>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function filtrarProductos() {
@@ -2220,6 +2673,7 @@ function getProductCategory(producto) {
   if (categoriaReal === 'celebracion') return 'babyshower';
   if (categoriaReal === 'primeraComunion') return 'comunion';
   if (categoriaReal === 'navidad') return 'navidad';
+  if (categoriaReal === 'kitEmprendedor') return 'kits';
   return categoriaReal.toLowerCase();
 }
 
@@ -2251,31 +2705,26 @@ function renderProductos() {
       const dataCategory = getProductCategory(producto);
       
       return `
-    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${producto.imagen}" data-nombre="${producto.nombre.toLowerCase()}" data-descripcion="${producto.descripcion ? producto.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700/30 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
+    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${producto.imagen}" data-nombre="${producto.nombre.toLowerCase()}" data-descripcion="${producto.descripcion ? producto.descripcion.toLowerCase() : ''}">
+      <div class="producto-media">
+        <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="event.stopPropagation(); ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')"><i class="fas fa-expand"></i></button>
         <div class="skeleton-image absolute inset-0"></div>
-        <img 
-          src="${producto.imagen}" 
+        <img
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
+          data-src="${producto.imagen}"
           alt="${producto.nombre}"
-          class="max-w-full max-h-full w-auto h-auto object-contain relative z-10 rounded-lg"
-          loading="lazy"
+          class="producto-img"
           decoding="async"
-          style="opacity: 0; transition: opacity 0.3s ease;"
-          onload="this.style.opacity='1'; this.classList.add('loaded');"
-          onerror="console.error('Error cargando imagen:', '${producto.imagen}'); this.style.opacity='1'; this.style.filter='grayscale(100%) opacity(0.5)';"
-        >
-        <div class="double-click-badge">
-          <i class="fas fa-search-plus"></i>
-          <span>Doble clic</span>
-        </div>
+          >
+        
       </div>
-      <div class="p-4">
-        <h3 class="font-playfair text-lg font-bold mb-3 text-gray-800 dark:text-[#D4AF37] text-center">
+      <div class="producto-body">
+        <h3>
           ${producto.nombre}
         </h3>
         <button 
           onclick="abrirModalProducto('${producto.id}')"
-          class="w-full py-2.5 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="btn btn-primary ripple-effect"
         >
           Ver Precios
         </button>
@@ -2289,6 +2738,7 @@ function renderProductos() {
       container.innerHTML = htmlNavidad;
       setTimeout(() => {
         filtrarYMostrarProductos();
+        if (typeof refrescarMovimiento === 'function') refrescarMovimiento(container);
       }, 100);
       return;
     }
@@ -2337,31 +2787,26 @@ function renderProductos() {
         }
         
         return `
-    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${tituloTarjeta.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700/30 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${imagen}', '${tituloTarjeta}')">
+    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${tituloTarjeta.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
+      <div class="producto-media">
+        <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="event.stopPropagation(); ampliarImagenProducto('${imagen}', '${tituloTarjeta}')"><i class="fas fa-expand"></i></button>
         <div class="skeleton-image absolute inset-0"></div>
-        <img 
-          src="${imagen}" 
+        <img
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
+          data-src="${imagen}"
           alt="${nombresProductos}"
-          class="max-w-full max-h-full w-auto h-auto object-contain relative z-10 rounded-lg"
-          loading="lazy"
+          class="producto-img"
           decoding="async"
-          style="opacity: 0; transition: opacity 0.3s ease;"
-          onload="this.style.opacity='1'; this.classList.add('loaded');"
-          onerror="console.error('Error cargando imagen:', '${imagen}'); this.style.opacity='1'; this.style.filter='grayscale(100%) opacity(0.5)';"
-        >
-        <div class="double-click-badge">
-          <i class="fas fa-search-plus"></i>
-          <span>Doble clic</span>
-        </div>
+          >
+        
       </div>
-      <div class="p-4">
-        <h3 class="font-playfair text-lg font-bold mb-3 text-gray-800 dark:text-[#D4AF37] text-center">
+      <div class="producto-body">
+        <h3>
           ${tituloTarjeta}
         </h3>
         <button 
           onclick="abrirModalProductoGrupo('${imagen}')"
-          class="w-full py-2.5 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="btn btn-primary ripple-effect"
         >
           Ver Precios
         </button>
@@ -2371,31 +2816,26 @@ function renderProductos() {
     } else {
       // Producto único - mostrar normalmente
       return `
-    <div class="producto bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${productoPrincipal.nombre.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
-      <div class="relative h-72 bg-gray-50 dark:bg-gray-700/30 p-6 flex items-center justify-center cursor-pointer" ondblclick="ampliarImagenProducto('${imagen}', '${productoPrincipal.nombre}')">
+    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${productoPrincipal.nombre.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
+      <div class="producto-media">
+        <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="event.stopPropagation(); ampliarImagenProducto('${imagen}', '${productoPrincipal.nombre}')"><i class="fas fa-expand"></i></button>
         <div class="skeleton-image absolute inset-0"></div>
-        <img 
-          src="${imagen}" 
+        <img
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
+          data-src="${imagen}"
           alt="${productoPrincipal.nombre}"
-          class="max-w-full max-h-full w-auto h-auto object-contain relative z-10 rounded-lg"
-          loading="lazy"
+          class="producto-img"
           decoding="async"
-          style="opacity: 0; transition: opacity 0.3s ease;"
-          onload="this.style.opacity='1'; this.classList.add('loaded');"
-          onerror="console.error('Error cargando imagen:', '${imagen}'); this.style.opacity='1'; this.style.filter='grayscale(100%) opacity(0.5)';"
-        >
-        <div class="double-click-badge">
-          <i class="fas fa-search-plus"></i>
-          <span>Doble clic</span>
-        </div>
+          >
+        
       </div>
-      <div class="p-4">
-        <h3 class="font-playfair text-lg font-bold mb-3 text-gray-800 dark:text-[#D4AF37] text-center">
+      <div class="producto-body">
+        <h3>
           ${productoPrincipal.nombre}
         </h3>
         <button 
           onclick="abrirModalProducto('${productoPrincipal.id}')"
-          class="w-full py-2.5 text-black rounded-full font-semibold transition-all duration-300 min-h-[44px] ripple-effect"
+          class="btn btn-primary ripple-effect"
         >
           Ver Precios
         </button>
@@ -2420,12 +2860,9 @@ function renderProductos() {
   // Aplicar filtro inicial después de que el DOM esté actualizado
   setTimeout(() => {
     filtrarYMostrarProductos();
-    // Reiniciar animaciones para productos visibles
-    const productosVisibles = container.querySelectorAll('.producto-item:not([style*="display: none"])');
-    productosVisibles.forEach((producto, index) => {
-      producto.style.animationDelay = `${index * 0.05}s`;
-      producto.classList.add('fade-in');
-    });
+    // Las tarjetas son nuevas: hay que volver a observarlas para que
+    // aparezcan al entrar en pantalla.
+    if (typeof refrescarMovimiento === 'function') refrescarMovimiento(container);
   }, 100);
 }
 
@@ -2542,7 +2979,8 @@ function abrirModalProductoGrupo(imagen) {
     </div>
     
     <div class="mb-6 flex justify-center px-2">
-      <div class="w-full max-w-2xl bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 md:p-8 shadow-2xl border-4 border-yellow-400 cursor-pointer group relative" id="product-image-container-grupo" ondblclick="ampliarImagenProducto('${imagen}', 'Productos Disponibles')">
+      <div class="modal-media modal-media-2xl" id="product-image-container-grupo">
+          <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="ampliarImagenProducto('${imagen}', 'Productos Disponibles')"><i class="fas fa-expand"></i></button>
         <img 
           src="${imagen}" 
           alt="Productos"
@@ -2550,10 +2988,7 @@ function abrirModalProductoGrupo(imagen) {
           style=""
           onerror="this.style.filter='grayscale(100%) opacity(0.5)'; this.style.padding='20px';"
         >
-        <div class="double-click-badge">
-          <i class="fas fa-search-plus"></i>
-          <span>Doble clic</span>
-        </div>
+        
       </div>
     </div>
     
@@ -2646,6 +3081,222 @@ function filtrarYMostrarProductos() {
   }
 }
 
+// ============================================
+// FICHA DE PRODUCTO (catálogos mayoristas en PDF)
+// ============================================
+// Los productos de los catálogos Navidad Mayorista y Kit Emprendedor traen
+// una ficha con medidas, empaque, colores y las formas de venta con su
+// precio. Se venden solo al por mayor, así que no llevan el selector
+// Detal/Mayorista: se elige directamente la presentación.
+
+function formatearPesos(valor) {
+  return '$' + Number(valor).toLocaleString('es-CO');
+}
+
+/** Devuelve las dos listas de precios, venga la ficha en formato nuevo o viejo. */
+function preciosDeFicha(f) {
+  if (f.precios) {
+    return {
+      detal: f.precios.detal || [],
+      mayorista: f.precios.mayorista || []
+    };
+  }
+  // Fichas antiguas: una sola lista, que era mayorista.
+  return { detal: [], mayorista: f.opciones || [] };
+}
+
+function renderFichaProducto(producto) {
+  const f = producto.ficha;
+  const grupos = preciosDeFicha(f);
+  const hayDetal = grupos.detal.length > 0;
+  const hayMayorista = grupos.mayorista.length > 0;
+  const ambos = hayDetal && hayMayorista;
+  // Se abre en detal: es lo que busca la mayoría de quien entra.
+  const tipoInicial = hayDetal ? 'detal' : 'mayorista';
+
+  const filas = [];
+  (f.medidas || []).forEach(m => filas.push({ etiqueta: m.etiqueta, valor: m.valor }));
+  if (f.empaque) filas.push({ etiqueta: 'Empaque', valor: f.empaque });
+  if (f.lote) filas.push({ etiqueta: 'Disponible', valor: f.lote });
+
+  const especificaciones = filas.length ? `
+      <div class="ficha-specs">
+        ${filas.map(r => `
+        <div class="ficha-spec">
+          <dt>${r.etiqueta}</dt>
+          <dd>${r.valor}</dd>
+        </div>`).join('')}
+      </div>` : '';
+
+  const colores = (f.colores && f.colores.length) ? `
+      <div class="ficha-bloque">
+        <h4 class="ficha-titulo">Colores disponibles</h4>
+        <ul class="ficha-colores">
+          ${f.colores.map(c => `
+          <li><span class="ficha-muestra" style="background:${c.hex}"></span>${c.nombre}</li>`).join('')}
+        </ul>
+      </div>` : '';
+
+  // Selector detal/mayorista, sólo si el producto tiene ambos.
+  const selectorTipo = ambos ? `
+      <div class="ficha-bloque">
+        <h4 class="ficha-titulo">Tipo de compra</h4>
+        <div class="ficha-tipos" role="radiogroup" aria-label="Tipo de compra">
+          <button type="button" class="ficha-tipo active" data-tipo="detal" role="radio" aria-checked="true">
+            <span class="ficha-tipo-nombre">Detal</span>
+            <span class="ficha-tipo-detalle">Compra por unidad</span>
+          </button>
+          <button type="button" class="ficha-tipo" data-tipo="mayorista" role="radio" aria-checked="false">
+            <span class="ficha-tipo-nombre">Mayorista</span>
+            <span class="ficha-tipo-detalle">Precio por volumen</span>
+          </button>
+        </div>
+      </div>` : '';
+
+  function listaOpciones(tipo) {
+    const ops = grupos[tipo];
+    const unaSola = ops.length === 1;
+    return `
+        <div class="ficha-opciones" data-grupo="${tipo}" role="radiogroup"
+             aria-label="Presentación"${tipo === tipoInicial ? '' : ' hidden'}>
+          ${ops.map((o, i) => `
+          <button type="button"
+                  class="ficha-opcion${unaSola ? ' active' : ''}"
+                  role="radio" aria-checked="${unaSola}"
+                  data-tipo="${tipo}" data-indice="${i}"
+                  data-precio="${o.precio}" data-nombre="${o.nombre}">
+            <span class="ficha-opcion-nombre">${o.nombre}</span>
+            ${o.detalle ? `<span class="ficha-opcion-detalle">${o.detalle}</span>` : ''}
+            <span class="ficha-opcion-precio">${formatearPesos(o.precio)}</span>
+          </button>`).join('')}
+        </div>`;
+  }
+
+  const bloqueOpciones = `
+      <div class="ficha-bloque">
+        <h4 class="ficha-titulo">Elige la presentación</h4>
+        ${hayDetal ? listaOpciones('detal') : ''}
+        ${hayMayorista ? listaOpciones('mayorista') : ''}
+      </div>`;
+
+  const nota = f.nota ? `<p class="ficha-nota"><i class="fas fa-circle-info"></i>${f.nota}</p>` : '';
+
+  // Con una sola presentación ya viene elegida; el total sale directo.
+  const inicial = grupos[tipoInicial];
+  const arranca = inicial.length === 1;
+
+  return `
+    <div class="ficha">
+      <div class="ficha-cabecera">
+        <h3 class="ficha-nombre">${producto.nombre}</h3>
+        <button onclick="cerrarModalProducto()" class="ficha-cerrar" aria-label="Cerrar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-media modal-media-lg" id="product-image-container">
+        <button type="button" class="producto-zoom" aria-label="Ampliar imagen"
+                onclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre.replace(/'/g, "\\'")}')">
+          <i class="fas fa-expand"></i>
+        </button>
+        <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" decoding="async">
+      </div>
+
+      ${ambos ? '' : `<span class="ficha-etiqueta">${hayDetal ? 'Venta al detal' : 'Venta al por mayor'}</span>`}
+      ${especificaciones}
+      ${colores}
+      ${selectorTipo}
+      ${bloqueOpciones}
+      ${nota}
+
+      <div class="ficha-total">
+        <span class="ficha-total-etiqueta">Total</span>
+        <span class="ficha-total-valor" id="ficha-total">${arranca ? formatearPesos(inicial[0].precio) : '—'}</span>
+      </div>
+
+      <button type="button" id="ficha-agregar" class="btn btn-primary btn-block"${arranca ? '' : ' disabled'}>
+        ${arranca ? 'Agregar al carrito' : 'Elige una presentación'}
+      </button>
+    </div>`;
+}
+
+function abrirModalFicha(producto, modal, content) {
+  content.innerHTML = renderFichaProducto(producto);
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  const grupos = preciosDeFicha(producto.ficha);
+  const total = content.querySelector('#ficha-total');
+  const agregar = content.querySelector('#ficha-agregar');
+
+  let tipo = grupos.detal.length ? 'detal' : 'mayorista';
+  let elegida = grupos[tipo].length === 1 ? 0 : null;
+
+  function refrescar() {
+    const ops = grupos[tipo];
+    if (elegida === null || !ops[elegida]) {
+      total.textContent = '—';
+      agregar.disabled = true;
+      agregar.textContent = 'Elige una presentación';
+      return;
+    }
+    total.textContent = formatearPesos(ops[elegida].precio);
+    agregar.disabled = false;
+    agregar.textContent = 'Agregar al carrito';
+  }
+
+  // Cambio de tipo de compra: se muestra su lista y se reinicia la elección.
+  content.querySelectorAll('.ficha-tipo').forEach(function (b) {
+    b.addEventListener('click', function () {
+      content.querySelectorAll('.ficha-tipo').forEach(function (o) {
+        o.classList.remove('active');
+        o.setAttribute('aria-checked', 'false');
+      });
+      b.classList.add('active');
+      b.setAttribute('aria-checked', 'true');
+
+      tipo = b.dataset.tipo;
+      content.querySelectorAll('.ficha-opciones').forEach(function (g) {
+        g.hidden = g.dataset.grupo !== tipo;
+      });
+
+      const ops = grupos[tipo];
+      elegida = ops.length === 1 ? 0 : null;
+      content.querySelectorAll('.ficha-opcion').forEach(function (o) {
+        const suya = o.dataset.tipo === tipo;
+        const activa = suya && ops.length === 1;
+        o.classList.toggle('active', activa);
+        o.setAttribute('aria-checked', String(activa));
+      });
+      refrescar();
+    });
+  });
+
+  content.querySelectorAll('.ficha-opcion').forEach(function (b) {
+    b.addEventListener('click', function () {
+      content.querySelectorAll('.ficha-opcion[data-tipo="' + b.dataset.tipo + '"]')
+        .forEach(function (o) {
+          o.classList.remove('active');
+          o.setAttribute('aria-checked', 'false');
+        });
+      b.classList.add('active');
+      b.setAttribute('aria-checked', 'true');
+      tipo = b.dataset.tipo;
+      elegida = parseInt(b.dataset.indice, 10);
+      refrescar();
+    });
+  });
+
+  agregar.addEventListener('click', function () {
+    const o = grupos[tipo][elegida];
+    if (!o) return;
+    agregarAlCarrito(producto.id, tipo, o.nombre, o.precio);
+    cerrarModalProducto();
+  });
+
+  refrescar();
+}
+
 function abrirModalProducto(productoId) {
   const producto = buscarProducto(productoId);
   if (!producto) return;
@@ -2654,6 +3305,17 @@ function abrirModalProducto(productoId) {
   const content = document.getElementById('product-modal-content');
   
   if (!modal || !content) return;
+  
+  // Los productos de los catálogos PDF traen ficha propia.
+  const tieneFicha = producto.ficha &&
+    ((producto.ficha.precios &&
+      ((producto.ficha.precios.detal || []).length ||
+       (producto.ficha.precios.mayorista || []).length)) ||
+     (producto.ficha.opciones || []).length);
+  if (tieneFicha) {
+    abrirModalFicha(producto, modal, content);
+    return;
+  }
   
   // Si el producto tiene tamanos pero no precios, mostrar modal con tamaños
   if (producto.tamanos && producto.tamanos.length > 0 && !producto.precios) {
@@ -2716,7 +3378,8 @@ function abrirModalProducto(productoId) {
       
       <!-- Imagen del producto -->
       <div class="mb-6 flex justify-center px-2">
-        <div class="w-full max-w-lg bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 md:p-6 shadow-xl border-2 border-yellow-400 cursor-pointer group relative" id="product-image-container" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
+        <div class="modal-media modal-media-lg" id="product-image-container">
+          <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')"><i class="fas fa-expand"></i></button>
           <img 
             src="${producto.imagen}" 
             alt="${producto.nombre}"
@@ -2725,10 +3388,7 @@ function abrirModalProducto(productoId) {
             onerror="this.style.filter='grayscale(100%) opacity(0.5)'; this.style.padding='20px';"
             style=""
           >
-          <div class="double-click-badge">
-            <i class="fas fa-search-plus"></i>
-            <span>Doble clic</span>
-          </div>
+          
         </div>
       </div>
       
@@ -3242,7 +3902,8 @@ function abrirModalProducto(productoId) {
     
     <!-- Imagen del producto centrada y bien formateada -->
     <div class="mb-6 flex justify-center px-2">
-      <div class="w-full max-w-lg bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 md:p-6 shadow-xl border-2 border-yellow-400 cursor-pointer group relative" id="product-image-container" ondblclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')">
+      <div class="modal-media modal-media-lg" id="product-image-container">
+          <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')"><i class="fas fa-expand"></i></button>
         <img 
           src="${producto.imagen}" 
           alt="${producto.nombre} - ${producto.descripcion ? producto.descripcion.substring(0, 100) : 'Vela artesanal'}"
@@ -3253,10 +3914,7 @@ function abrirModalProducto(productoId) {
           onerror="this.style.filter='grayscale(100%) opacity(0.5)'; this.style.padding='20px';"
           style=""
         >
-        <div class="double-click-badge">
-          <i class="fas fa-search-plus"></i>
-          <span>Doble clic</span>
-        </div>
+        
       </div>
     </div>
     
@@ -3516,26 +4174,29 @@ function ampliarImagenProducto(imagenSrc, nombreProducto) {
   if (!imageModal) {
     imageModal = document.createElement('div');
     imageModal.id = 'image-zoom-modal';
-    imageModal.className = 'fixed inset-0 z-[60] hidden bg-black/95 backdrop-blur-md';
+    imageModal.className = 'visor hidden';
+    imageModal.setAttribute('role', 'dialog');
+    imageModal.setAttribute('aria-modal', 'true');
+    imageModal.setAttribute('aria-label', 'Imagen ampliada');
+    // El botón de cerrar iba en blanco al 10% sobre fondo casi negro:
+    // apenas se veía y el cliente se quedaba sin saber cómo salir.
     imageModal.innerHTML = `
-      <div class="absolute inset-0 flex items-center justify-center p-4">
-        <button onclick="cerrarImagenAmpliada()" class="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition-all backdrop-blur-sm">
-          <i class="fas fa-times text-2xl"></i>
-        </button>
-        <div class="max-w-7xl max-h-[95vh] w-full h-full flex items-center justify-center">
-          <img 
-            src="${imagenSrc}" 
-            alt="${nombreProducto} - Vista ampliada"
-            class="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-            id="zoomed-image"
-            loading="eager"
-            decoding="async"
-          >
-        </div>
-        <p class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-lg font-semibold bg-black/50 px-4 py-2 rounded-full">
-          ${nombreProducto}
-        </p>
+      <button type="button" onclick="cerrarImagenAmpliada()" class="visor-cerrar" aria-label="Cerrar imagen">
+        <i class="fas fa-times" aria-hidden="true"></i>
+        <span>Cerrar</span>
+      </button>
+      <div class="visor-cuerpo">
+        <img
+          src="${imagenSrc}"
+          alt="${nombreProducto} - Vista ampliada"
+          class="visor-img"
+          id="zoomed-image"
+          loading="eager"
+          decoding="async"
+        >
+        <p class="visor-nombre">${nombreProducto}</p>
       </div>
+      <p class="visor-ayuda">Toca fuera de la imagen o pulsa Esc para volver</p>
     `;
     document.body.appendChild(imageModal);
     
@@ -3598,193 +4259,180 @@ function initPromociones() {
 function renderPromociones() {
   const container = document.getElementById('promo-slides');
   if (!container) return;
-  
+
   container.innerHTML = promociones.map((promo, index) => `
-    <div class="min-w-full flex-shrink-0 relative h-auto min-h-[240px] md:h-[400px] bg-gradient-to-br ${promo.color} flex items-center justify-center text-white overflow-hidden rounded-3xl shadow-2xl border-2 border-white/30">
-      <!-- Efecto de brillo animado -->
-      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent animate-shimmer opacity-60"></div>
-      
-      <!-- Partículas decorativas animadas -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-6 left-6 w-3 h-3 bg-white/50 rounded-full animate-pulse shadow-lg"></div>
-        <div class="absolute top-16 right-10 w-2 h-2 bg-white/40 rounded-full animate-pulse shadow-lg" style="animation-delay: 0.5s;"></div>
-        <div class="absolute bottom-10 left-16 w-2.5 h-2.5 bg-white/45 rounded-full animate-pulse shadow-lg" style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-20 right-20 w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse shadow-lg" style="animation-delay: 1.5s;"></div>
-        <div class="absolute top-1/2 left-8 w-2 h-2 bg-white/35 rounded-full animate-pulse shadow-lg" style="animation-delay: 2s;"></div>
-        <div class="absolute top-1/3 right-12 w-1.5 h-1.5 bg-white/40 rounded-full animate-pulse shadow-lg" style="animation-delay: 2.5s;"></div>
+    <article class="promo-slide" role="group" aria-roledescription="diapositiva"
+             aria-label="${index + 1} de ${promociones.length}">
+      <div class="promo-cuerpo">
+        <span class="promo-icono" aria-hidden="true">
+          <i class="${promo.icon || 'fas fa-gift'}"></i>
+        </span>
+        ${promo.subtitulo ? `<span class="promo-eyebrow">${promo.subtitulo}</span>` : ''}
+        <h3 class="promo-titulo">${promo.titulo}</h3>
+        ${promo.descripcion ? `<p class="promo-texto">${promo.descripcion}</p>` : ''}
+        <a href="#productos" class="btn btn-secondary promo-accion">Ver catálogo</a>
       </div>
-      
-      <!-- Contenido principal -->
-      <div class="text-center z-10 w-full px-4 md:px-8 lg:px-12 py-10 md:py-16 max-w-6xl mx-auto relative">
-        <!-- Icono decorativo grande con gradiente -->
-        <div class="mb-6 md:mb-8 flex justify-center">
-          <div class="relative">
-            <!-- Halo animado -->
-            <div class="absolute inset-0 bg-gradient-to-r ${promo.iconBg} rounded-full blur-2xl animate-pulse opacity-60 scale-150"></div>
-            <!-- Icono principal -->
-            <div class="relative bg-white/25 backdrop-blur-md rounded-full p-5 md:p-7 lg:p-8 border-3 border-white/50 shadow-2xl transform hover:scale-110 transition-transform duration-300">
-              <i class="${promo.icon || 'fas fa-gift'} text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-2xl"></i>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Título principal con efecto -->
-        <h3 class="font-playfair text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 md:mb-3 text-center drop-shadow-2xl break-words leading-tight px-2 text-white">
-          <span class="inline-block transform hover:scale-105 transition-transform duration-300 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl">${promo.titulo}</span>
-        </h3>
-        
-        <!-- Subtítulo -->
-        ${promo.subtitulo ? `
-          <div class="mb-4 md:mb-6">
-            <p class="text-base md:text-lg lg:text-xl font-semibold text-white/90 drop-shadow-lg">
-              ${promo.subtitulo}
-            </p>
-          </div>
-        ` : ''}
-        
-        <!-- Descripción -->
-        ${promo.descripcion ? `
-          <div class="mt-4 md:mt-6 max-w-2xl mx-auto">
-            <p class="text-sm md:text-base lg:text-lg opacity-95 text-center break-words leading-relaxed px-2 md:px-4 font-medium text-white/95 drop-shadow-md">
-              ${promo.descripcion}
-            </p>
-          </div>
-        ` : ''}
-        
-        <!-- Línea decorativa mejorada -->
-        <div class="mt-6 md:mt-8 flex justify-center">
-          <div class="w-24 md:w-40 h-1.5 bg-gradient-to-r from-transparent via-white/60 to-transparent rounded-full shadow-lg"></div>
-        </div>
-      </div>
-      
-      <!-- Borde brillante superior -->
-      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
-    </div>
+    </article>
+  `).join('');
+
+  renderPromoPuntos();
+  if (typeof refrescarMovimiento === 'function') refrescarMovimiento(container.parentElement);
+}
+
+// Los puntos son además el control: se puede saltar a una promo concreta.
+function renderPromoPuntos() {
+  const cont = document.getElementById('promo-puntos');
+  if (!cont) return;
+  cont.innerHTML = promociones.map((p, i) => `
+    <button type="button" class="promo-punto${i === (state.currentPromoSlide || 0) ? ' active' : ''}"
+            data-slide="${i}" aria-label="Ir a ${p.titulo}"></button>
   `).join('');
 }
 
+function actualizarPromoPuntos() {
+  const cont = document.getElementById('promo-puntos');
+  if (!cont) return;
+  const actual = state.currentPromoSlide || 0;
+  const puntos = cont.querySelectorAll('.promo-punto');
+  // Se quita .active de todos y se vuelve a poner tras forzar un reflujo:
+  // es lo que reinicia la barra de progreso, que vive en el ::after.
+  puntos.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+  const elegido = puntos[actual];
+  if (elegido) {
+    void elegido.offsetWidth;
+    elegido.classList.add('active');
+    elegido.setAttribute('aria-selected', 'true');
+  }
+}
+
+// --- Carrusel de promociones -------------------------------------------
+// Avanza solo. Un único par arrancar/parar: antes el mousedown paraba el
+// temporizador y el mouseleave no lo reanudaba, así que bastaba pulsar y
+// sacar el ratón para que se quedara clavado.
+
+const PROMO_PAUSA = 4000;
+
+let carruselCableado = false;
+
 function iniciarCarrusel() {
-  const slides = document.getElementById('promo-slides');
-  if (!slides) return;
-  
-  state.promoInterval = setInterval(() => {
-    state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
+  const pista = document.getElementById('promo-slides');
+  const carrusel = document.getElementById('promo-carousel');
+  if (!pista || !carrusel) return;
+
+  const total = promociones.length;
+  if (total < 2) return;
+
+  if (carruselCableado) { actualizarCarrusel(); return; }
+  carruselCableado = true;
+
+  // Un único temporizador que NUNCA se cancela. Antes se paraba y se
+  // arrancaba según varios "frenos", y bastaba que uno se quedara puesto
+  // (por ejemplo, el carrusel visible sólo al 12%) para dejarlo clavado
+  // para siempre. Ahora el estado se consulta al disparar: no hay forma
+  // de que se quede bloqueado.
+  let enPantalla = true;     // si no hay IntersectionObserver, se asume visible
+  let arrastrando = false;
+  let sobreControles = false;
+  let ultimoToque = 0;       // instante del último gesto del usuario
+
+  function debeAvanzar() {
+    if (arrastrando || sobreControles) return false;
+    if (document.hidden || !enPantalla) return false;
+    // Tras tocarlo, se respeta una vuelta entera antes de seguir solo.
+    if (Date.now() - ultimoToque < PROMO_PAUSA) return false;
+    return true;
+  }
+
+  setInterval(() => {
+    if (debeAvanzar()) irA(state.currentPromoSlide + 1);
+    carrusel.classList.toggle('corriendo', debeAvanzar());
+  }, PROMO_PAUSA);
+
+  function irA(indice, porElUsuario) {
+    state.currentPromoSlide = ((indice % total) + total) % total;
     actualizarCarrusel();
-  }, 5000);
-  
-  // Mejorar funcionalidad de touch/swipe
-  const carousel = document.getElementById('promo-carousel');
-  if (carousel) {
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let touchStartY = 0;
-    let touchEndY = 0;
-    let isDragging = false;
-    
-    // Touch events para móviles
-    carousel.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-      clearInterval(state.promoInterval);
-      isDragging = true;
-      carousel.style.cursor = 'grabbing';
-    }, { passive: true });
-    
-    carousel.addEventListener('touchmove', (e) => {
-      if (isDragging) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-    
-    carousel.addEventListener('touchend', (e) => {
-      if (!isDragging) return;
-      
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
-      
-      const deltaX = touchEndX - touchStartX;
-      const deltaY = touchEndY - touchStartY;
-      
-      // Solo cambiar si el movimiento horizontal es mayor que el vertical (swipe horizontal)
-      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
-        if (deltaX < -50) {
-          // Swipe izquierda - siguiente
-          state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
-          actualizarCarrusel();
-        } else if (deltaX > 50) {
-          // Swipe derecha - anterior
-          state.currentPromoSlide = (state.currentPromoSlide - 1 + promociones.length) % promociones.length;
-          actualizarCarrusel();
-        }
-      }
-      
-      isDragging = false;
-      carousel.style.cursor = 'grab';
-      
-      // Reiniciar auto-play después de un delay
-      clearInterval(state.promoInterval);
-      state.promoInterval = setInterval(() => {
-        state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
-        actualizarCarrusel();
-      }, 5000);
-    }, { passive: true });
-    
-    // Mouse events para desktop (click para cambiar)
-    let mouseStartX = 0;
-    let mouseEndX = 0;
-    let mouseDown = false;
-    
-    carousel.addEventListener('mousedown', (e) => {
-      mouseStartX = e.clientX;
-      mouseDown = true;
-      clearInterval(state.promoInterval);
-      carousel.style.cursor = 'grabbing';
-    });
-    
-    carousel.addEventListener('mousemove', (e) => {
-      if (mouseDown) {
-        mouseEndX = e.clientX;
-      }
-    });
-    
-    carousel.addEventListener('mouseup', (e) => {
-      if (mouseDown) {
-        const deltaX = mouseEndX - mouseStartX;
-        
-        if (Math.abs(deltaX) > 50) {
-          if (deltaX < 0) {
-            // Drag izquierda - siguiente
-            state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
-            actualizarCarrusel();
-          } else {
-            // Drag derecha - anterior
-            state.currentPromoSlide = (state.currentPromoSlide - 1 + promociones.length) % promociones.length;
-            actualizarCarrusel();
-          }
-        } else {
-          // Click simple - siguiente slide
-          state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
-          actualizarCarrusel();
-        }
-        
-        mouseDown = false;
-        carousel.style.cursor = 'grab';
-        
-        // Reiniciar auto-play
-        clearInterval(state.promoInterval);
-        state.promoInterval = setInterval(() => {
-          state.currentPromoSlide = (state.currentPromoSlide + 1) % promociones.length;
-          actualizarCarrusel();
-        }, 5000);
-      }
-    });
-    
-    carousel.addEventListener('mouseleave', () => {
-      mouseDown = false;
-      carousel.style.cursor = 'grab';
+    if (porElUsuario) ultimoToque = Date.now();
+  }
+
+  /* --- Visibilidad --- */
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((e) => {
+      // threshold 0: basta con que asome. Con 0.2 no llegaba a activarse
+      // en pantallas donde el carrusel queda a medias.
+      enPantalla = e[0].isIntersecting;
+      carrusel.classList.toggle('corriendo', debeAvanzar());
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' }).observe(carrusel);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    carrusel.classList.toggle('corriendo', debeAvanzar());
+  });
+
+  /* --- Arrastre y deslizamiento --- */
+
+  const UMBRAL = 45;
+  let inicioX = 0, inicioY = 0, eje = null;
+
+  function agarrar(x, y) { inicioX = x; inicioY = y; arrastrando = true; eje = null; }
+
+  function soltar(x) {
+    if (!arrastrando) return;
+    arrastrando = false;
+    if (typeof x === 'number' && eje === 'x') {
+      const dx = x - inicioX;
+      if (Math.abs(dx) > UMBRAL) irA(state.currentPromoSlide + (dx < 0 ? 1 : -1), true);
+    }
+  }
+
+  carrusel.addEventListener('touchstart', (e) => {
+    const t = e.changedTouches[0];
+    agarrar(t.screenX, t.screenY);
+  }, { passive: true });
+
+  carrusel.addEventListener('touchmove', (e) => {
+    if (!arrastrando) return;
+    const t = e.changedTouches[0];
+    if (eje === null) {
+      // Se decide una vez si el dedo va en horizontal o en vertical; si va
+      // en vertical, se deja pasar el scroll de la página.
+      eje = Math.abs(t.screenX - inicioX) > Math.abs(t.screenY - inicioY) ? 'x' : 'y';
+    }
+    if (eje === 'x' && e.cancelable) e.preventDefault();
+  }, { passive: false });
+
+  carrusel.addEventListener('touchend', (e) => soltar(e.changedTouches[0].screenX), { passive: true });
+  carrusel.addEventListener('touchcancel', () => soltar(), { passive: true });
+
+  carrusel.addEventListener('mousedown', (e) => { agarrar(e.screenX, e.screenY); eje = 'x'; e.preventDefault(); });
+  window.addEventListener('mouseup', (e) => soltar(e.screenX));
+  // Si el puntero sale sin soltar, el arrastre se queda abierto y bloquea
+  // el avance: aquí se cierra sin contarlo como deslizamiento.
+  carrusel.addEventListener('mouseleave', () => { arrastrando = false; });
+  window.addEventListener('blur', () => { arrastrando = false; });
+
+  /* --- Puntos y teclado --- */
+
+  const puntos = document.getElementById('promo-puntos');
+  if (puntos) {
+    // Sólo sobre los controles se pausa: la tarjeta ocupa media pantalla y
+    // pausar ahí bastaba para que no volviera a avanzar.
+    puntos.addEventListener('mouseenter', () => { sobreControles = true; });
+    puntos.addEventListener('mouseleave', () => { sobreControles = false; });
+    puntos.addEventListener('click', (e) => {
+      const b = e.target.closest('.promo-punto');
+      if (b) irA(Number(b.dataset.slide), true);
     });
   }
+
+  carrusel.setAttribute('tabindex', '0');
+  carrusel.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); irA(state.currentPromoSlide + 1, true); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); irA(state.currentPromoSlide - 1, true); }
+  });
+
+  actualizarCarrusel();
+  carrusel.classList.add('corriendo');
 }
 
 function actualizarCarrusel() {
@@ -3792,6 +4440,7 @@ function actualizarCarrusel() {
   if (!slides) return;
   
   slides.style.transform = `translateX(-${state.currentPromoSlide * 100}%)`;
+  actualizarPromoPuntos();
 }
 
 // Videos
@@ -3812,25 +4461,17 @@ function initLazyVideos() {
         const placeholder = container.querySelector('.video-placeholder');
         const video = container.querySelector('video');
         
-        if (video && videoSrc && !video.src) {
-          // Cuando el usuario hace clic en el placeholder, cargar el video
+        if (video && videoSrc && !video.src && placeholder) {
+          // Sólo al pulsar: antes se descargaba con sólo asomar en pantalla,
+          // y estos videos pesan hasta 7,7 MB.
           placeholder.addEventListener('click', () => {
             video.src = videoSrc;
             video.load();
             placeholder.classList.add('hidden');
             video.classList.remove('hidden');
-            video.play().catch(() => {
-              // Auto-play puede fallar, está bien
-            });
+            video.play().catch(() => {});
           }, { once: true });
-          
-          // También cargar cuando el video está visible y el usuario hace scroll
-          setTimeout(() => {
-            if (entry.isIntersecting) {
-              video.src = videoSrc;
-              video.load();
-            }
-          }, 1000);
+          videoObserver.unobserve(container);
         }
       }
     });
@@ -3843,116 +4484,156 @@ function initLazyVideos() {
   });
 }
 
+// Los <script> inyectados con innerHTML no se ejecutan: los embeds de
+// TikTok e Instagram necesitan que su script se cargue aparte. Se carga
+// uno por plataforma y sólo si hay algún embed de esa plataforma.
+const SCRIPTS_EMBED = {
+  tiktok: 'https://www.tiktok.com/embed.js',
+  instagram: 'https://www.instagram.com/embed.js'
+};
+
+function cargarScriptsEmbed(lista) {
+  const necesarias = new Set(
+    lista.filter(v => v.embedCode).map(v => v.plataforma)
+  );
+  if (!necesarias.size) return;
+
+  // El script de TikTok pesa y es de terceros: no debe cargarse al abrir
+  // la página, sólo cuando los embeds se acercan a la pantalla.
+  const ancla = document.querySelector('.reel-embed') ||
+                document.getElementById('videos-container');
+  if (ancla && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entradas) => {
+      if (!entradas[0].isIntersecting) return;
+      obs.disconnect();
+      inyectarScriptsEmbed(necesarias);
+    }, { rootMargin: '400px 0px' });
+    obs.observe(ancla);
+    return;
+  }
+
+  inyectarScriptsEmbed(necesarias);
+}
+
+function inyectarScriptsEmbed(necesarias) {
+  necesarias.forEach(plataforma => {
+    const src = SCRIPTS_EMBED[plataforma];
+    if (!src) return;
+
+    const yaEsta = document.querySelector(`script[src="${src}"]`);
+    if (yaEsta) {
+      reprocesarEmbeds(plataforma);
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.addEventListener('load', () => reprocesarEmbeds(plataforma));
+    document.body.appendChild(script);
+  });
+}
+
+function reprocesarEmbeds(plataforma) {
+  if (plataforma === 'instagram' && window.instgrm) window.instgrm.Embeds.process();
+  if (plataforma === 'tiktok' && typeof window.tiktokEmbedLoad === 'function') window.tiktokEmbedLoad();
+}
+
 function renderVideos() {
   const container = document.getElementById('videos-container');
   if (!container) return;
-  
-  // Filtrar videos que tengan contenido
-  const videosConContenido = videos.filter(video => video.embedCode || video.url || video.videoSrc);
-  
+
+  const videosConContenido = videos.filter(v => v.embedCode || v.url || v.videoSrc);
+
   if (videosConContenido.length === 0) {
     container.innerHTML = `
-      <div class="col-span-full text-center py-12">
-        <i class="fas fa-video text-6xl text-gray-300 dark:text-gray-600 mb-4"></i>
-        <p class="text-gray-600 dark:text-gray-400 text-lg">
-          Próximamente habrá nuevos videos aquí
-        </p>
-        <p class="text-gray-500 dark:text-gray-500 text-sm mt-2">
-          Edita el array <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">videos</code> en app.js para agregar videos
-        </p>
-      </div>
-    `;
+      <div class="reel-vacio">
+        <i class="fas fa-video"></i>
+        <p>Pronto publicaremos nuevos videos.</p>
+      </div>`;
     return;
   }
-  
-  container.innerHTML = videosConContenido.map(video => {
-    const icono = video.plataforma === 'tiktok' ? 'fab fa-tiktok' : video.plataforma === 'instagram' ? 'fab fa-instagram' : 'fas fa-video';
-    const colorPlataforma = video.plataforma === 'tiktok' ? 'from-black to-gray-900' : video.plataforma === 'instagram' ? 'from-pink-600 to-purple-600' : 'from-yellow-500 to-amber-600';
-    
-    // Si es un video local (MP4)
+
+  // Los embeds de redes piden 325px de ancho como mínimo y traen su
+  // propio marco: metidos en el carrete 9:16 salían recortados. Van en
+  // su propia rejilla, debajo.
+  const propios = videosConContenido.filter(v => !v.embedCode);
+  const embeds = videosConContenido.filter(v => v.embedCode);
+
+  container.innerHTML = propios.map((video, i) => {
+    const icono = video.plataforma === 'tiktok' ? 'fab fa-tiktok'
+                : video.plataforma === 'instagram' ? 'fab fa-instagram'
+                : 'fas fa-play';
+
+    // Video propio (MP4 vertical). Se descarga sólo al pulsar.
     if (video.videoSrc && video.plataforma === 'local') {
-      const videoId = `video-${Math.random().toString(36).substr(2, 9)}`;
+      // El fotograma de portada se saca del nombre del archivo.
+      const base = video.videoSrc.split('/').pop().replace(/\.mp4$/i, '');
+      const poster = 'assets/productos/Videos/posters/' + base + '.jpg';
       return `
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 video-container-lazy" data-video-src="${video.videoSrc}">
-          <div class="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 p-4 text-white shadow-lg">
-            <div class="flex items-center gap-3">
-              <i class="${icono} text-2xl text-yellow-100"></i>
-              <h3 class="font-playfair text-xl font-bold text-white">${video.titulo}</h3>
-            </div>
-          </div>
-          <div class="p-4 relative">
-            <div class="video-placeholder w-full rounded-xl shadow-lg bg-gradient-to-br from-gray-800 via-gray-700 to-gray-800 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 flex items-center justify-center cursor-pointer relative overflow-hidden group" style="min-height: 300px; max-height: 600px; aspect-ratio: 16/9;">
-              <!-- Efecto de brillo animado -->
-              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              <!-- Contenido central -->
-              <div class="text-center relative z-10">
-                <div class="relative inline-block mb-4">
-                  <div class="absolute inset-0 bg-yellow-400 rounded-full blur-xl opacity-50 animate-pulse"></div>
-                  <div class="relative bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full p-6 shadow-2xl transform group-hover:scale-110 transition-all duration-300">
-                    <i class="fas fa-play text-white text-4xl ml-1"></i>
-                  </div>
-                </div>
-                <p class="text-white font-semibold text-lg mb-2 group-hover:text-yellow-400 transition-colors duration-300">Haz clic para cargar el video</p>
-                <div class="flex items-center justify-center gap-2 text-yellow-400/80 text-sm">
-                  <i class="fas fa-video"></i>
-                  <span>Video disponible</span>
-                </div>
-              </div>
-            </div>
-            <video 
-              id="${videoId}"
-              controls 
-              class="w-full rounded-xl shadow-lg hidden"
-              style="max-height: 600px;"
-              preload="none"
-              playsinline
-            >
-              Tu navegador no soporta videos HTML5.
-            </video>
-          </div>
+      <article class="reel video-container-lazy" data-video-src="${video.videoSrc}">
+        <img class="reel-poster" src="${poster}" alt="" loading="lazy" decoding="async"
+             onerror="this.remove()">
+        <button type="button" class="reel-lanzador video-placeholder" aria-label="Reproducir: ${video.titulo}">
+          <span class="reel-play"><i class="fas fa-play"></i></span>
+        </button>
+        <video class="reel-video video-el hidden" preload="none" playsinline controls
+               poster="" aria-label="${video.titulo}">
+          Tu navegador no soporta videos HTML5.
+        </video>
+        <div class="reel-pie">
+          <span class="reel-marca"><i class="${icono}"></i></span>
+          <h3 class="reel-titulo">${video.titulo}</h3>
         </div>
-      `;
+      </article>`;
     }
-    
-    // Si tiene embedCode, usarlo directamente
+
+    // Incrustado de una red social.
     if (video.embedCode) {
       return `
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
-          <div class="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 p-4 text-white shadow-lg">
-            <div class="flex items-center gap-3">
-              <i class="${icono} text-2xl text-yellow-100"></i>
-              <h3 class="font-playfair text-xl font-bold text-white">${video.titulo}</h3>
-            </div>
-          </div>
-          <div class="p-4">
-            ${video.embedCode}
-          </div>
+      <article class="reel reel-embed">
+        <div class="reel-embed-caja">${video.embedCode}</div>
+        <div class="reel-pie">
+          <span class="reel-marca"><i class="${icono}"></i></span>
+          <h3 class="reel-titulo">${video.titulo}</h3>
         </div>
-      `;
+      </article>`;
     }
-    
-    // Si solo tiene URL, crear un enlace
-    if (video.url) {
-      return `
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
-          <div class="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 p-4 text-white shadow-lg">
-            <div class="flex items-center gap-3">
-              <i class="${icono} text-2xl text-yellow-100"></i>
-              <h3 class="font-playfair text-xl font-bold text-white">${video.titulo}</h3>
-            </div>
-          </div>
-          <div class="p-4">
-            <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="block w-full py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white rounded-xl font-semibold text-center hover:opacity-90 transition-all shadow-lg">
-              <i class="${icono} mr-2"></i>
-              Ver Video en ${video.plataforma === 'tiktok' ? 'TikTok' : video.plataforma === 'instagram' ? 'Instagram' : 'Ver Video'}
-            </a>
-          </div>
+
+    // Sólo enlace: se abre en la red de origen.
+    return `
+      <a class="reel reel-enlace" href="${video.url}" target="_blank" rel="noopener noreferrer">
+        <span class="reel-play"><i class="${icono}"></i></span>
+        <div class="reel-pie">
+          <span class="reel-marca"><i class="${icono}"></i></span>
+          <h3 class="reel-titulo">${video.titulo}</h3>
         </div>
-      `;
-    }
-    
-    return '';
-  }).filter(html => html !== '').join('');
+      </a>`;
+  }).join('');
+
+  renderEmbedsSociales(embeds);
+  cargarScriptsEmbed(videosConContenido);
+  if (typeof refrescarMovimiento === 'function') refrescarMovimiento(container);
+}
+
+function renderEmbedsSociales(embeds) {
+  let zona = document.getElementById('social-embeds');
+  if (!embeds.length) { if (zona) zona.remove(); return; }
+
+  if (!zona) {
+    const contenedor = document.getElementById('videos-container');
+    if (!contenedor) return;
+    zona = document.createElement('div');
+    zona.id = 'social-embeds';
+    zona.className = 'embed-grid';
+    contenedor.insertAdjacentElement('afterend', zona);
+  }
+
+  zona.innerHTML = embeds.map(v => `
+    <article class="embed-card">
+      <div class="embed-caja">${v.embedCode}</div>
+    </article>
+  `).join('');
 }
 
 // Búsqueda mejorada
@@ -4232,270 +4913,286 @@ function mostrarSeccion(seccionId) {
 }
 
 function actualizarMenuActivo(seccionId) {
-  // Remover clase activa de todos los enlaces
+  // El estado activo vive en una sola clase; el color lo decide theme.css.
   const enlaces = document.querySelectorAll('nav a[href^="#"]');
   enlaces.forEach(enlace => {
-    enlace.classList.remove('text-yellow-500', 'font-bold');
-    enlace.classList.add('text-gray-800', 'dark:text-gray-200');
+    enlace.classList.remove('active');
+    enlace.removeAttribute('aria-current');
   });
   
-  // Agregar clase activa al enlace correspondiente
-  const enlaceActivo = document.querySelector(`nav a[href="#${seccionId}"]`);
-  if (enlaceActivo) {
-    enlaceActivo.classList.remove('text-gray-800', 'dark:text-gray-200');
-    enlaceActivo.classList.add('text-yellow-500', 'font-bold');
-  }
+  document.querySelectorAll(`nav a[href="#${seccionId}"]`).forEach(enlace => {
+    enlace.classList.add('active');
+    enlace.setAttribute('aria-current', 'page');
+  });
 }
 
-// Velas Personalizadas
+// ============================================
+// VELAS PERSONALIZADAS
+// ============================================
+// WhatsApp no deja adjuntar un archivo desde un enlace, así que la imagen
+// de referencia se guarda en el equipo del usuario y se le indica cómo
+// adjuntarla en el chat que se abre con el mensaje ya escrito.
+
+const IMAGEN_MAX_MB = 8;
+
 function initPersonalizadas() {
   const form = document.getElementById('form-personalizada');
+  if (!form) return;
+
   const tieneImagenSi = document.getElementById('tiene-imagen-si');
   const tieneImagenNo = document.getElementById('tiene-imagen-no');
   const tieneImagenInput = document.getElementById('tiene-imagen');
-  
-  if (!form) return;
-  
-  // Manejar botones Sí/No
-  if (tieneImagenSi) {
-    tieneImagenSi.addEventListener('click', () => {
-      tieneImagenSi.classList.add('border-yellow-500', 'bg-yellow-500/30');
-      tieneImagenSi.classList.remove('border-gray-600', 'bg-gray-700/50');
-      tieneImagenNo.classList.remove('border-yellow-500', 'bg-yellow-500/30');
-      tieneImagenNo.classList.add('border-gray-600', 'bg-gray-700/50');
-      tieneImagenInput.value = 'si';
+
+  const zona = document.getElementById('imagen-zona');
+  const entrada = document.getElementById('imagen-personalizada');
+  const vista = document.getElementById('imagen-vista');
+  const vistaImg = document.getElementById('imagen-vista-img');
+  const vistaNombre = document.getElementById('imagen-vista-nombre');
+  const vistaPeso = document.getElementById('imagen-vista-peso');
+  const quitar = document.getElementById('imagen-quitar');
+  const errorImagen = document.getElementById('error-imagen');
+  const bloque = document.getElementById('imagen-bloque');
+
+  // El archivo elegido, con su lectura en base64 para la vista previa
+  let archivoElegido = null;
+  let archivoBase64 = null;
+
+  /* --- Chips sí/no: el "sí" despliega el área de subida --- */
+
+  function elegirTiene(valor) {
+    const si = valor === 'si';
+    if (tieneImagenSi) {
+      tieneImagenSi.classList.toggle('active', si);
+      tieneImagenSi.setAttribute('aria-pressed', String(si));
+    }
+    if (tieneImagenNo) {
+      tieneImagenNo.classList.toggle('active', !si);
+      tieneImagenNo.setAttribute('aria-pressed', String(!si));
+    }
+    if (tieneImagenInput) tieneImagenInput.value = valor;
+    if (bloque) {
+      bloque.hidden = !si;
+      bloque.setAttribute('aria-hidden', String(!si));
+    }
+    if (!si) limpiarImagen();
+  }
+
+  if (tieneImagenSi) tieneImagenSi.addEventListener('click', () => elegirTiene('si'));
+  if (tieneImagenNo) tieneImagenNo.addEventListener('click', () => elegirTiene('no'));
+
+  /* --- Elegir archivo: por clic, por teclado o arrastrando --- */
+
+  function mostrarErrorImagen(texto) {
+    if (!errorImagen) return;
+    errorImagen.textContent = texto;
+    errorImagen.classList.toggle('hidden', !texto);
+  }
+
+  function pesoLegible(bytes) {
+    return bytes < 1048576
+      ? Math.round(bytes / 1024) + ' KB'
+      : (bytes / 1048576).toFixed(1) + ' MB';
+  }
+
+  function limpiarImagen() {
+    archivoElegido = null;
+    archivoBase64 = null;
+    if (entrada) entrada.value = '';
+    if (vistaImg) vistaImg.removeAttribute('src');
+    if (vista) vista.hidden = true;
+    if (zona) zona.hidden = false;
+    mostrarErrorImagen('');
+  }
+
+  function aceptarArchivo(archivo) {
+    if (!archivo) return;
+
+    if (!/^image\//.test(archivo.type)) {
+      mostrarErrorImagen('Ese archivo no es una imagen. Sube un JPG, PNG o WEBP.');
+      return;
+    }
+    if (archivo.size > IMAGEN_MAX_MB * 1048576) {
+      mostrarErrorImagen('La imagen pesa ' + pesoLegible(archivo.size) +
+                         '. El máximo son ' + IMAGEN_MAX_MB + ' MB.');
+      return;
+    }
+
+    mostrarErrorImagen('');
+    archivoElegido = archivo;
+
+    const lector = new FileReader();
+    lector.onload = (e) => {
+      archivoBase64 = e.target.result;
+      if (vistaImg) vistaImg.src = archivoBase64;
+      if (vistaNombre) vistaNombre.textContent = archivo.name;
+      if (vistaPeso) vistaPeso.textContent = pesoLegible(archivo.size);
+      if (vista) vista.hidden = false;
+      if (zona) zona.hidden = true;
+    };
+    lector.onerror = () => mostrarErrorImagen('No se pudo leer la imagen. Prueba con otra.');
+    lector.readAsDataURL(archivo);
+  }
+
+  if (entrada) {
+    entrada.addEventListener('change', () => aceptarArchivo(entrada.files[0]));
+  }
+
+  if (zona) {
+    zona.addEventListener('click', () => entrada && entrada.click());
+    zona.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); entrada && entrada.click(); }
+    });
+    ['dragenter', 'dragover'].forEach(ev =>
+      zona.addEventListener(ev, (e) => { e.preventDefault(); zona.classList.add('encima'); }));
+    ['dragleave', 'drop'].forEach(ev =>
+      zona.addEventListener(ev, (e) => { e.preventDefault(); zona.classList.remove('encima'); }));
+    zona.addEventListener('drop', (e) => {
+      const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (f) aceptarArchivo(f);
     });
   }
-  
-  if (tieneImagenNo) {
-    tieneImagenNo.addEventListener('click', () => {
-      tieneImagenNo.classList.add('border-yellow-500', 'bg-yellow-500/30');
-      tieneImagenNo.classList.remove('border-gray-600', 'bg-gray-700/50');
-      tieneImagenSi.classList.remove('border-yellow-500', 'bg-yellow-500/30');
-      tieneImagenSi.classList.add('border-gray-600', 'bg-gray-700/50');
-      tieneImagenInput.value = 'no';
-    });
-  }
-  
-  // Validar y enviar formulario
+
+  if (quitar) quitar.addEventListener('click', limpiarImagen);
+
+  /* --- Envío --- */
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     const nombre = document.getElementById('nombre-personalizada').value.trim();
     const motivo = document.getElementById('motivo-personalizada').value.trim();
     const diseno = document.getElementById('diseno-personalizada').value.trim();
-    const tieneImagen = tieneImagenInput.value;
-    
-    // Validar campos
-    let tieneErrores = false;
-    
-    // Validar nombre
-    const errorNombre = document.getElementById('error-nombre');
-    if (!nombre) {
-      errorNombre.classList.remove('hidden');
-      tieneErrores = true;
-    } else {
-      errorNombre.classList.add('hidden');
-    }
-    
-    // Validar motivo
-    const errorMotivo = document.getElementById('error-motivo');
-    if (!motivo) {
-      errorMotivo.classList.remove('hidden');
-      tieneErrores = true;
-    } else {
-      errorMotivo.classList.add('hidden');
-    }
-    
-    // Validar diseño
-    const errorDiseno = document.getElementById('error-diseno');
-    if (!diseno) {
-      errorDiseno.classList.remove('hidden');
-      tieneErrores = true;
-    } else {
-      errorDiseno.classList.add('hidden');
-    }
-    
-    if (tieneErrores) {
-      // Scroll al primer error
-      const primerError = document.querySelector('.text-red-400:not(.hidden)');
-      if (primerError) {
-        primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+    const tieneImagen = tieneImagenInput ? tieneImagenInput.value : '';
+
+    let hayErrores = false;
+    const revisar = (valor, idError) => {
+      const el = document.getElementById(idError);
+      if (!el) return;
+      el.classList.toggle('hidden', !!valor);
+      if (!valor) hayErrores = true;
+    };
+    revisar(nombre, 'error-nombre');
+    revisar(motivo, 'error-motivo');
+    revisar(diseno, 'error-diseno');
+
+    if (hayErrores) {
+      const primero = document.querySelector('.field-error:not(.hidden)');
+      if (primero) primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    
-    // Construir mensaje para WhatsApp
-    let mensaje = `¡Hola Velas y Aromas Elena! 💌\n\n`;
-    mensaje += `Quiero hacer una vela personalizada.\n\n`;
-    mensaje += `👤 Nombre: ${nombre}\n`;
-    mensaje += `🕯️ Motivo: ${motivo}\n`;
-    mensaje += `💭 Idea: ${diseno}`;
-    
-    // Nota sobre imagen
-    if (tieneImagen === 'si') {
-      mensaje += `\n\n📷 Sí tengo una imagen de referencia que puedo enviar`;
+
+    let mensaje = '¡Hola Velas y Aromas Elena!\n\n';
+    mensaje += 'Quiero hacer una vela personalizada.\n\n';
+    mensaje += 'Nombre: ' + nombre + '\n';
+    mensaje += 'Motivo: ' + motivo + '\n';
+    mensaje += 'Idea: ' + diseno;
+
+    if (archivoElegido) {
+      mensaje += '\n\nTe adjunto en este chat la imagen de referencia.';
+    } else if (tieneImagen === 'si') {
+      mensaje += '\n\nTengo una imagen de referencia y te la envío por aquí.';
     } else if (tieneImagen === 'no') {
-      mensaje += `\n\n📷 No tengo imagen de referencia`;
+      mensaje += '\n\nNo tengo imagen de referencia.';
     }
-    
-    // Codificar mensaje para URL
-    const mensajeCodificado = encodeURIComponent(mensaje);
-    const urlWhatsApp = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${mensajeCodificado}`;
-    
-    // Abrir WhatsApp directamente
-    window.open(urlWhatsApp, '_blank');
-    mostrarNotificacion('¡Formulario enviado! Redirigiendo a WhatsApp...', 'success');
-    
-    // Limpiar formulario después de un delay
-    setTimeout(() => {
+
+    const url = 'https://api.whatsapp.com/send?phone=' + WHATSAPP_PHONE +
+                '&text=' + encodeURIComponent(mensaje);
+
+    if (archivoElegido) {
+      // La imagen se descarga para que el usuario la adjunte en el chat.
+      mostrarModalImagen(archivoBase64, archivoElegido.name, url, () => limpiar());
+    } else {
+      window.open(url, '_blank');
+      mostrarNotificacion('Abriendo WhatsApp con tu pedido...', 'success');
+      setTimeout(limpiar, 1500);
+    }
+
+    function limpiar() {
       form.reset();
-      tieneImagenInput.value = '';
-      tieneImagenSi.classList.remove('border-yellow-500', 'bg-yellow-500/30');
-      tieneImagenSi.classList.add('border-gray-600', 'bg-gray-700/50');
-      tieneImagenNo.classList.remove('border-yellow-500', 'bg-yellow-500/30');
-      tieneImagenNo.classList.add('border-gray-600', 'bg-gray-700/50');
-      document.querySelectorAll('.text-red-400').forEach(el => el.classList.add('hidden'));
-    }, 2000);
+      limpiarImagen();
+      if (tieneImagenInput) tieneImagenInput.value = '';
+      if (tieneImagenSi) { tieneImagenSi.classList.remove('active'); tieneImagenSi.setAttribute('aria-pressed', 'false'); }
+      if (tieneImagenNo) { tieneImagenNo.classList.remove('active'); tieneImagenNo.setAttribute('aria-pressed', 'false'); }
+      if (bloque) { bloque.hidden = true; bloque.setAttribute('aria-hidden', 'true'); }
+      document.querySelectorAll('.field-error').forEach(el => el.classList.add('hidden'));
+    }
   });
 }
 
-// Función para mostrar modal con instrucciones de imagen
-function mostrarModalImagen(nombre, motivo, diseno, imagenBase64, urlWhatsApp) {
-  // Crear modal
+// Hoja con la imagen descargada y los pasos para adjuntarla en WhatsApp.
+function mostrarModalImagen(imagenBase64, nombreArchivo, urlWhatsApp, alCerrar) {
+  const anterior = document.getElementById('modal-imagen');
+  if (anterior) anterior.remove();
+
   const modal = document.createElement('div');
-  modal.id = 'modal-imagen-instructions';
-  modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4';
+  modal.id = 'modal-imagen';
+  modal.className = 'modal-imagen';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-labelledby', 'modal-imagen-titulo');
   modal.innerHTML = `
-    <div class="bg-gray-800 rounded-3xl p-6 md:p-8 max-w-lg w-full border-2 border-yellow-500/50 shadow-2xl">
-      <div class="text-center mb-6">
-        <i class="fas fa-image text-yellow-400 text-5xl mb-4"></i>
-        <h3 class="text-white text-2xl md:text-3xl font-bold mb-2">Instrucciones para enviar la imagen</h3>
-        <p class="text-gray-300 text-sm md:text-base">
-          WhatsApp Web no permite adjuntar archivos automáticamente. Sigue estos pasos:
+    <div class="modal-overlay" data-cerrar></div>
+    <div class="modal-imagen-hoja">
+      <button type="button" class="ficha-cerrar" aria-label="Cerrar" data-cerrar>
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="modal-imagen-cabecera">
+        <span class="promo-icono"><i class="fas fa-paperclip"></i></span>
+        <h3 class="panel-title" id="modal-imagen-titulo">Adjunta tu imagen</h3>
+        <p class="modal-imagen-intro">
+          WhatsApp no permite adjuntar archivos desde un enlace. Guardamos tu
+          imagen en el dispositivo para que la adjuntes en el chat.
         </p>
       </div>
-      
-      <div class="space-y-4 mb-6">
-        <div class="bg-gray-700/50 rounded-xl p-4">
-          <div class="flex items-start gap-3">
-            <span class="flex-shrink-0 bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</span>
-            <p class="text-white text-sm md:text-base">Se abrirá WhatsApp con tu mensaje prellenado</p>
-          </div>
-        </div>
-        
-        <div class="bg-gray-700/50 rounded-xl p-4">
-          <div class="flex items-start gap-3">
-            <span class="flex-shrink-0 bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</span>
-            <p class="text-white text-sm md:text-base">Antes de enviar, haz clic en el botón de adjuntar (📎) en WhatsApp</p>
-          </div>
-        </div>
-        
-        <div class="bg-gray-700/50 rounded-xl p-4">
-          <div class="flex items-start gap-3">
-            <span class="flex-shrink-0 bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">3</span>
-            <p class="text-white text-sm md:text-base">Selecciona "Fotos y videos" y elige la imagen que subiste</p>
-          </div>
-        </div>
-        
-        <div class="bg-gray-700/50 rounded-xl p-4">
-          <div class="flex items-start gap-3">
-            <span class="flex-shrink-0 bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">4</span>
-            <p class="text-white text-sm md:text-base">Envía primero el mensaje de texto y luego la imagen</p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Vista previa de imagen -->
-      <div class="mb-6 bg-gray-700/30 rounded-xl p-4">
-        <p class="text-gray-300 text-sm mb-2 text-center">Vista previa de tu imagen:</p>
-        <img src="${imagenBase64}" alt="Preview" class="max-w-full max-h-48 mx-auto rounded-lg">
-      </div>
-      
-      <!-- Botones -->
-      <div class="flex flex-col sm:flex-row gap-3">
-        <button 
-          id="btn-abrir-whatsapp"
-          class="flex-1 py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-xl font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
-        >
-          <i class="fab fa-whatsapp text-2xl"></i>
-          Abrir WhatsApp
+
+      <figure class="modal-imagen-vista">
+        <img src="${imagenBase64}" alt="Imagen de referencia seleccionada">
+        <figcaption>${nombreArchivo}</figcaption>
+      </figure>
+
+      <ol class="modal-imagen-pasos">
+        <li><span>1</span> Guarda la imagen con el botón de abajo.</li>
+        <li><span>2</span> Se abre WhatsApp con tu mensaje ya escrito. Envíalo.</li>
+        <li><span>3</span> Toca el clip 📎 y elige la imagen que acabas de guardar.</li>
+      </ol>
+
+      <div class="modal-imagen-acciones">
+        <button type="button" class="btn btn-primary btn-block" id="modal-imagen-seguir">
+          <i class="fas fa-download"></i> Guardar imagen y abrir WhatsApp
         </button>
-        <button 
-          id="btn-descargar-imagen"
-          class="flex-1 py-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white rounded-xl font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
-        >
-          <i class="fas fa-download text-xl"></i>
-          Descargar Imagen
-        </button>
-        <button 
-          id="btn-cerrar-modal"
-          class="flex-1 py-4 bg-gray-700 hover:bg-gray-600 text-white rounded-xl font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300"
-        >
-          Cancelar
-        </button>
+        <button type="button" class="btn btn-ghost" data-cerrar>Cancelar</button>
       </div>
-    </div>
-  `;
-  
+    </div>`;
+
   document.body.appendChild(modal);
   document.body.style.overflow = 'hidden';
-  
-  // Botón abrir WhatsApp
-  document.getElementById('btn-abrir-whatsapp').addEventListener('click', () => {
+
+  function cerrar() {
+    modal.remove();
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', porTecla);
+  }
+  function porTecla(e) { if (e.key === 'Escape') cerrar(); }
+  document.addEventListener('keydown', porTecla);
+
+  modal.querySelectorAll('[data-cerrar]').forEach(b => b.addEventListener('click', cerrar));
+
+  modal.querySelector('#modal-imagen-seguir').addEventListener('click', () => {
+    const enlace = document.createElement('a');
+    enlace.href = imagenBase64;
+    enlace.download = nombreArchivo || 'imagen-referencia.jpg';
+    document.body.appendChild(enlace);
+    enlace.click();
+    enlace.remove();
+
     window.open(urlWhatsApp, '_blank');
-    mostrarNotificacion('WhatsApp abierto. ¡No olvides enviar la imagen!', 'success');
-    cerrarModalImagen(modal);
-    
-    const form = document.getElementById('form-personalizada');
-    const imagenPreview = document.getElementById('imagen-preview');
-    const imagenPreviewImg = document.getElementById('imagen-preview-img');
-    const imagenTexto = document.getElementById('imagen-texto');
-    const imagenInput = document.getElementById('imagen-personalizada');
-    
-    setTimeout(() => {
-      limpiarFormulario(form, imagenPreview, imagenPreviewImg, imagenTexto, imagenInput);
-    }, 2000);
+    mostrarNotificacion('Imagen guardada. Adjúntala en el chat de WhatsApp.', 'success');
+    cerrar();
+    if (typeof alCerrar === 'function') alCerrar();
   });
-  
-  // Botón descargar imagen
-  document.getElementById('btn-descargar-imagen').addEventListener('click', () => {
-    const link = document.createElement('a');
-    link.href = imagenBase64;
-    link.download = localStorage.getItem('nombreImagenPersonalizada') || 'imagen-referencia.jpg';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    mostrarNotificacion('Imagen descargada ✓', 'success');
-  });
-  
-  // Botón cerrar
-  document.getElementById('btn-cerrar-modal').addEventListener('click', () => {
-    cerrarModalImagen(modal);
-  });
-  
-  // Cerrar al hacer clic fuera
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      cerrarModalImagen(modal);
-    }
-  });
-}
 
-function cerrarModalImagen(modal) {
-  modal.remove();
-  document.body.style.overflow = '';
-}
-
-function limpiarFormulario(form, imagenPreview, imagenPreviewImg, imagenTexto, imagenInput) {
-  form.reset();
-  imagenPreview.classList.add('hidden');
-  imagenPreviewImg.src = '';
-  imagenTexto.textContent = 'Haz clic para subir una imagen';
-  imagenInput.value = '';
-  localStorage.removeItem('imagenPersonalizada');
-  localStorage.removeItem('nombreImagenPersonalizada');
-  document.querySelectorAll('.text-red-400').forEach(el => el.classList.add('hidden'));
+  modal.querySelector('#modal-imagen-seguir').focus();
 }
 
 function comprarPorWhatsApp() {

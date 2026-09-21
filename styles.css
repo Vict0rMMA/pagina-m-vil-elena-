@@ -37,22 +37,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
 }
 
-/* Títulos Principales con Text Shadow Elegante */
-.font-playfair.text-4xl,
-.font-playfair.text-5xl,
-.font-playfair.text-6xl {
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.1),
-    0 1px 2px rgba(0, 0, 0, 0.08);
-  letter-spacing: -0.02em;
-}
-
-/* Textos con Sombra Suave */
-body, p, span {
-  letter-spacing: 0.01em;
-  line-height: 1.6;
-}
-
 /* Botones con Tipografía Mejorada */
 button, .btn {
   letter-spacing: 0.03em;
@@ -64,7 +48,6 @@ button, .btn {
 .producto h3 {
   letter-spacing: -0.01em;
   font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .producto p {
@@ -91,23 +74,10 @@ nav a {
   color: #e5e7eb !important; /* Gris claro para modo oscuro */
 }
 
-
 /* Precios con Estilo Elegante */
 .text-yellow-600, .text-yellow-400 {
   letter-spacing: 0.02em;
   font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Textos en Dark Mode */
-.dark h1, .dark h2, .dark h3 {
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.3),
-    0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.dark p, .dark span {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Subtítulos y Descripciones */
@@ -120,30 +90,9 @@ p, .text-sm, .text-base {
 .filter-btn {
   letter-spacing: 0.02em;
   font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.filter-btn.active {
-  text-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.2),
-    0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 /* Hero Section */
-#inicio h1 {
-  letter-spacing: -0.03em;
-  text-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.2),
-    0 1px 4px rgba(0, 0, 0, 0.15);
-}
-
-#inicio p {
-  letter-spacing: 0.02em;
-  text-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.2),
-    0 0 2px rgba(0, 0, 0, 0.1);
-}
-
 /* Mejora para Labels y Etiquetas */
 label {
   letter-spacing: 0.01em;
@@ -160,50 +109,11 @@ input::placeholder {
   opacity: 0.7;
 }
 
-/* Fondos elegantes gris claro */
-body {
-  background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%) !important;
-  background-attachment: fixed;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(255, 193, 7, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255, 143, 0, 0.05) 0%, transparent 50%),
-    url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23FFC107" fill-opacity="0.02"%3E%3Cpath d="M50 50 L60 40 L70 50 L60 60 Z"/%3E%3C/g%3E%3C/svg%3E');
-  pointer-events: none;
-  z-index: 0;
-}
-
-body > * {
-  position: relative;
-  z-index: 1;
-}
-
-.dark body {
-  background: linear-gradient(to bottom, #050505 0%, #0a0a0a 50%, #0f0f0f 100%) !important;
-}
-
-.dark body::before {
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(201, 169, 97, 0.05) 0%, transparent 50%);
-}
-
 /* Fondo claro por defecto (dark mode opcional) */
 
 /* Efecto Glow para textos dorados - Estilo del logo */
 .glow-gold {
   color: #D4AF37;
-  text-shadow: 
-    0 1px 2px rgba(212, 175, 55, 0.3);
-  background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -213,45 +123,10 @@ body > * {
 /* Efecto Glow púrpura para título */
 .glow-purple {
   color: #a855f7;
-  text-shadow: 
-    0 0 15px rgba(168, 85, 247, 0.8),
-    0 0 30px rgba(168, 85, 247, 0.6),
-    0 0 45px rgba(168, 85, 247, 0.4),
-    0 0 60px rgba(168, 85, 247, 0.3);
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    text-shadow: 
-      0 0 15px rgba(168, 85, 247, 0.8),
-      0 0 30px rgba(168, 85, 247, 0.6),
-      0 0 45px rgba(168, 85, 247, 0.4),
-      0 0 60px rgba(168, 85, 247, 0.3);
-  }
-  50% {
-    text-shadow: 
-      0 0 20px rgba(168, 85, 247, 1),
-      0 0 40px rgba(168, 85, 247, 0.8),
-      0 0 60px rgba(168, 85, 247, 0.6),
-      0 0 80px rgba(168, 85, 247, 0.4);
-  }
-}
-
-/* Glow para contenedor dorado */
-.glow-gold-container {
-  box-shadow: 
-    0 0 30px rgba(255, 193, 7, 0.7),
-    0 0 60px rgba(255, 193, 7, 0.5),
-    0 0 90px rgba(255, 193, 7, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4);
-}
-
-/* Glow para botones verdes de WhatsApp */
-.glow-green {
-  box-shadow: 
-    0 0 15px rgba(34, 197, 94, 0.6),
-    0 0 30px rgba(34, 197, 94, 0.4);
+@keyframes pulse-glow-purple {
 }
 
 /* Sparkle animation */
@@ -259,7 +134,7 @@ body > * {
   animation: sparkle 2s ease-in-out infinite;
 }
 
-@keyframes sparkle {
+@keyframes sparkle-icon {
   0%, 100% {
     opacity: 1;
     transform: scale(1) rotate(0deg);
@@ -270,33 +145,16 @@ body > * {
   }
 }
 
-/* Background pattern */
-.bg-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
 .glow-pink {
   color: #FF69B4;
-  text-shadow: 
-    0 0 10px rgba(255, 105, 180, 0.5),
-    0 0 20px rgba(255, 105, 180, 0.3),
-    0 0 30px rgba(255, 105, 180, 0.2);
 }
 
 .glow-blue {
   color: #5C8AFF;
-  text-shadow: 
-    0 0 10px rgba(92, 138, 255, 0.5),
-    0 0 20px rgba(92, 138, 255, 0.3),
-    0 0 30px rgba(92, 138, 255, 0.2);
 }
 
 .glow-red {
   color: #FF0000;
-  text-shadow: 
-    0 0 10px rgba(255, 0, 0, 0.5),
-    0 0 20px rgba(255, 0, 0, 0.3),
-    0 0 30px rgba(255, 0, 0, 0.2);
 }
 
 /* Partículas doradas flotantes */
@@ -312,13 +170,12 @@ body > * {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: #FFD700;
   border-radius: 50%;
   opacity: 0.6;
   animation: float 15s infinite;
 }
 
-@keyframes float {
+@keyframes float-particle {
   0% {
     transform: translateY(100vh) translateX(0) rotate(0deg);
     opacity: 0;
@@ -337,19 +194,12 @@ body > * {
 
 /* Banner dorado */
 .golden-banner {
-  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 50%, #FFB300 100%);
   border-radius: 50px;
   padding: 1rem 2rem;
-  box-shadow: 
-    0 0 30px rgba(255, 193, 7, 0.6),
-    0 0 60px rgba(255, 193, 7, 0.4),
-    inset 0 2px 4px rgba(255, 255, 255, 0.4);
 }
 
 /* Cards de estadísticas */
 .stats-card {
-  background: rgba(40, 40, 40, 0.8);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 1.5rem;
@@ -358,39 +208,19 @@ body > * {
 
 .stats-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
 }
 
 /* Botones de categoría con colores */
 .category-btn-gold {
-  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 50%, #FFB300 100%);
-  box-shadow: 0 0 25px rgba(255, 193, 7, 0.6), 0 4px 15px rgba(255, 193, 7, 0.4);
   transition: all 0.3s ease;
 }
 
 .category-btn-gold:hover {
-  box-shadow: 0 0 35px rgba(255, 193, 7, 0.8), 0 6px 20px rgba(255, 193, 7, 0.6);
   transform: translateY(-2px);
-}
-
-.category-btn-pink {
-  background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
-  box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
-}
-
-.category-btn-blue {
-  background: linear-gradient(135deg, #5C8AFF 0%, #4169E1 100%);
-  box-shadow: 0 0 20px rgba(92, 138, 255, 0.4);
-}
-
-.category-btn-red {
-  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
 }
 
 /* Banner de catálogo individual */
 .catalog-banner {
-  background: rgba(60, 50, 30, 0.9);
   border-radius: 12px;
   padding: 2rem;
   margin: 2rem 0;
@@ -406,7 +236,6 @@ body > * {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
   animation: rotate 20s linear infinite;
 }
 
@@ -568,7 +397,6 @@ img {
   object-fit: cover;
   width: 100%;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Mejorar visibilidad de imágenes en cards */
@@ -579,11 +407,6 @@ img {
 
 #products-grid .relative img {
   min-height: 200px;
-  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-}
-
-.dark #products-grid .relative img {
-  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
 }
 
 /* Line Clamp Utility */
@@ -597,8 +420,6 @@ img {
 
 /* Glassmorphism para cards */
 .glass-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -631,19 +452,6 @@ body {
   }
 }
 
-/* Mejoras para Bottom Dock */
-#bottom-dock {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.05);
-}
-
-.dark #bottom-dock {
-  background: rgba(17, 24, 39, 0.95);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3), 0 -1px 0 rgba(255, 255, 255, 0.05);
-}
-
 #bottom-dock a,
 #bottom-dock button {
   transition: all 0.2s ease;
@@ -653,7 +461,6 @@ body {
 
 #bottom-dock a:hover,
 #bottom-dock button:hover {
-  background: rgba(234, 179, 8, 0.1);
   transform: translateY(-2px);
 }
 
@@ -678,21 +485,8 @@ body {
   height: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: #2d2d2d;
-}
-
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-pink);
   border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #ec4899;
 }
 
 /* Loading States */
@@ -726,12 +520,6 @@ body {
   }
 }
 
-/* Mejoras para Modales */
-.modal-overlay {
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
 /* Transiciones suaves para Dark Mode */
 body,
 button,
@@ -749,11 +537,6 @@ textarea {
 
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.dark .card-hover:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Spinner para Loading */
@@ -803,11 +586,6 @@ textarea {
   }
 }
 
-/* Mejoras para el hero */
-.hero-gradient {
-  background: linear-gradient(135deg, #f472b6 0%, #a78bfa 100%);
-}
-
 /* Responsive Typography */
 @media (max-width: 640px) {
   h1 {
@@ -829,15 +607,6 @@ button {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-}
-
-/* Mejoras para el dock inferior */
-#bottom-dock {
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.dark #bottom-dock {
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Mejoras para el carrusel de promociones */
@@ -902,19 +671,6 @@ button {
   overflow-wrap: anywhere;
 }
 
-/* Colores personalizados Tailwind - Grises elegantes */
-.bg-cream-50 {
-  background-color: #f8f9fa;
-}
-
-.bg-warm-beige {
-  background-color: #e9ecef;
-}
-
-.bg-gold-cream {
-  background-color: #ffffff;
-}
-
 .from-cream-50 {
   --tw-gradient-from: #FFF8DC;
   --tw-gradient-to: rgba(255, 248, 220, 0);
@@ -932,18 +688,15 @@ button {
 
 /* Cards de productos con fondo gris elegante */
 .producto {
-  background: linear-gradient(to bottom, #FFFFFF 0%, #f8f9fa 100%);
   border: 1px solid rgba(212, 175, 55, 0.2);
   transition: all 0.3s ease;
 }
 
 .producto:hover {
   border-color: rgba(212, 175, 55, 0.4);
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
 }
 
 .dark .producto {
-  background: linear-gradient(to bottom, #1a1a1a 0%, #0f0f0f 100%);
   border-color: rgba(212, 175, 55, 0.3);
 }
 
@@ -952,7 +705,6 @@ input[type="text"],
 input[type="email"],
 textarea,
 select {
-  background-color: #ffffff !important;
   border-color: rgba(212, 175, 55, 0.3) !important;
 }
 
@@ -960,39 +712,22 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus,
 select:focus {
-  background-color: #FFFFFF !important;
   border-color: #D4AF37 !important;
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2) !important;
 }
 
 .dark input[type="text"],
 .dark input[type="email"],
 .dark textarea,
 .dark select {
-  background-color: #1a1a1a !important;
   border-color: rgba(212, 175, 55, 0.4) !important;
-}
-
-/* Modales con fondo gris claro */
-#cart-modal,
-#product-modal {
-  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-}
-
-.dark #cart-modal,
-.dark #product-modal {
-  background: linear-gradient(to bottom, #0a0a0a 0%, #050505 100%);
 }
 
 /* Bottom dock con fondo blanco */
 #bottom-dock {
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(12px);
   border-top-color: rgba(212, 175, 55, 0.3) !important;
 }
 
 .dark #bottom-dock {
-  background: rgba(10, 10, 10, 0.95) !important;
   border-top-color: rgba(212, 175, 55, 0.4) !important;
 }
 
@@ -1024,59 +759,18 @@ select:focus {
   }
 }
 
-#inicio p span {
-  display: inline-block;
-  animation: sparkle 2s ease-in-out infinite;
-}
-
 #inicio p span:last-child {
   animation-delay: 1s;
-}
-
-/* Mejoras de fondo oscuro elegante */
-.dark body {
-  background: linear-gradient(to bottom, #050505 0%, #0a0a0a 50%, #0f0f0f 100%);
-}
-
-.dark .bg-gray-900 {
-  background-color: #0a0a0a !important;
-}
-
-.dark .bg-gray-800 {
-  background-color: #1a1a1a !important;
-}
-
-.dark .bg-gray-700 {
-  background-color: #2a2a2a !important;
 }
 
 /* Bordes dorados en modo oscuro */
 .dark .border-yellow-500 {
   border-color: #D4AF37 !important;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
 .dark .text-yellow-400,
 .dark .text-yellow-500 {
   color: #D4AF37 !important;
-  text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-}
-
-/* Botones dorados mejorados - Estilo del logo */
-.bg-gradient-to-r.from-yellow-500,
-.bg-gradient-to-r.from-yellow-600 {
-  background: linear-gradient(to right, #D4AF37, #C9A961, #B8860B) !important;
-}
-
-.bg-gradient-to-r.to-amber-600,
-.bg-gradient-to-r.to-amber-700 {
-  background: linear-gradient(to right, #D4AF37, #B8860B) !important;
-}
-
-/* Mejoras visuales adicionales - Dorados del logo */
-.bg-yellow-500,
-.bg-yellow-600 {
-  background-color: #D4AF37 !important;
 }
 
 .text-yellow-500,
@@ -1088,34 +782,11 @@ select:focus {
   border-color: #D4AF37 !important;
 }
 
-/* Gradientes dorados mejorados */
-.bg-gradient-to-r.from-yellow-500.to-amber-600 {
-  background: linear-gradient(to right, #D4AF37, #C9A961, #B8860B) !important;
-}
-
-/* Fondos negros elegantes mejorados */
-.dark {
-  background-color: #050505;
-}
-
-.dark .bg-gray-900 {
-  background: linear-gradient(to bottom, #050505, #0a0a0a) !important;
-}
-
-/* Efectos de brillo en elementos dorados */
-.text-yellow-500,
-.text-yellow-600,
-.text-yellow-400 {
-  filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.6));
-}
-
 /* Mejoras en botones dorados */
 button.bg-yellow-500,
 button.bg-yellow-600,
 a.bg-yellow-500,
 a.bg-yellow-600 {
-  background: linear-gradient(135deg, #D4AF37 0%, #C9A961 50%, #B8860B 100%) !important;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
   transition: all 0.3s ease;
 }
 
@@ -1123,34 +794,21 @@ button.bg-yellow-500:hover,
 button.bg-yellow-600:hover,
 a.bg-yellow-500:hover,
 a.bg-yellow-600:hover {
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.7), 0 0 30px rgba(212, 175, 55, 0.5);
   transform: translateY(-2px);
 }
 
 /* Estilos mejorados para el botón de cambio de tema */
 #theme-toggle {
-  background: rgba(229, 231, 235, 0.9) !important;
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(209, 213, 219, 0.6) !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 #theme-toggle:hover {
-  background: rgba(209, 213, 219, 0.95) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: scale(1.05);
 }
 
 .dark #theme-toggle {
-  background: rgba(31, 41, 55, 0.9) !important;
   border-color: rgba(75, 85, 99, 0.6) !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.dark #theme-toggle:hover {
-  background: rgba(55, 65, 81, 0.95) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 #theme-toggle i {
@@ -1159,10 +817,6 @@ a.bg-yellow-600:hover {
 
 #theme-toggle:hover i {
   transform: scale(1.1);
-}
-
-.dark #theme-toggle .fa-sun {
-  filter: drop-shadow(0 0 4px rgba(255, 193, 7, 0.6));
 }
 
 .skeleton {
@@ -1207,16 +861,6 @@ a.bg-yellow-600:hover {
 }
 
 /* Animaciones de entrada mejoradas para productos */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 @keyframes fadeInScale {
   from {
@@ -1254,90 +898,17 @@ a.bg-yellow-600:hover {
 }
 
 /* Gradientes sutiles en botones */
-.producto button {
-  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%);
-  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
-  transition: all 0.3s ease;
-}
-
-.producto button:hover {
-  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%);
-  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
-  transform: translateY(-2px);
-}
-
 /* Gradientes sutiles en fondos de tarjetas */
 .producto {
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-}
-
-.dark .producto {
-  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .producto:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px) scale(1.01);
 }
 
-.dark .producto:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Gradientes sutiles en botones principales del hero */
-#inicio a {
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-  transition: all 0.3s ease;
-}
-
-#inicio a:hover {
-  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-#inicio a[href="#videos"],
-#inicio a[href="#contacto"] {
-  background: transparent;
-  border: 2px solid #D4AF37;
-}
-
-#inicio a[href="#videos"]:hover,
-#inicio a[href="#contacto"]:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.2) 100%);
-  border-color: #FFD700;
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-}
-
-/* Gradientes sutiles en botones de categorías */
-.filter-btn {
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-  transition: all 0.3s ease;
-}
-
-.dark .filter-btn {
-  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-}
-
 .filter-btn:hover {
-  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
   transform: translateY(-2px);
-}
-
-.dark .filter-btn:hover {
-  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-}
-
-.filter-btn.active {
-  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
-  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
-}
-
-.dark .filter-btn.active {
-  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
 }
 
 .producto-item[style*="display: none"] {
@@ -1357,7 +928,6 @@ a.bg-yellow-600:hover {
   transform: translateX(-50%);
   width: 80%;
   height: 2px;
-  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 2px;
 }
 
@@ -1369,33 +939,18 @@ a.bg-yellow-600:hover {
   height: auto;
   object-fit: contain;
   transition: transform 0.3s ease;
-  filter: brightness(1.02) contrast(1.05) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.3));
 }
 
 .product-modal-image:hover {
   transform: scale(1.02);
 }
 
-/* Contenedor de imagen del modal */
-#product-image-container {
-  background: #ffffff !important;
-}
-
-.dark #product-image-container {
-  background: #111827 !important;
-}
-
 /* Contenedor de imagen del modal agrupado */
 #product-image-container-grupo {
-  background: #ffffff !important;
   min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.dark #product-image-container-grupo {
-  background: #111827 !important;
 }
 
 #product-image-container-grupo img {
@@ -1480,7 +1035,7 @@ a.bg-yellow-600:hover {
 }
 
 /* Animación shimmer para promociones */
-@keyframes shimmer {
+@keyframes shimmer-skew15 {
   0% {
     transform: translateX(-100%) skewX(-15deg);
   }
@@ -1507,27 +1062,19 @@ a.bg-yellow-600:hover {
 #promo-carousel {
   border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.dark #promo-carousel {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .promo-indicator {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .promo-indicator.active,
 .promo-indicator:hover {
-  background: rgba(255, 255, 255, 0.9);
   transform: scale(1.2);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /* Ocultar skeleton cuando la imagen carga */
@@ -1541,8 +1088,6 @@ a.bg-yellow-600:hover {
   position: absolute;
   bottom: 8px;
   left: 8px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
   color: white;
   padding: 6px 10px;
   border-radius: 20px;
@@ -1557,13 +1102,11 @@ a.bg-yellow-600:hover {
   pointer-events: none;
   z-index: 20;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .producto:hover .double-click-badge,
 .producto-item:hover .double-click-badge {
   opacity: 1;
-  background: rgba(0, 0, 0, 0.8);
   border-color: rgba(255, 255, 255, 0.3);
   transform: scale(1.05);
 }
@@ -1581,13 +1124,11 @@ a.bg-yellow-600:hover {
   left: 12px;
   font-size: 0.75rem;
   padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.65);
 }
 
 #product-image-container:hover .double-click-badge,
 #product-image-container-grupo:hover .double-click-badge {
   opacity: 1;
-  background: rgba(0, 0, 0, 0.9);
   transform: scale(1.05);
 }
 
@@ -1614,50 +1155,19 @@ a.bg-yellow-600:hover {
 
 .tipo-compra-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Mantener colores cuando están activos o presionados */
 .tipo-compra-btn.active,
 .tipo-compra-btn-tamanos.active {
-  background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.3)) !important;
   border-color: var(--primary-gold) !important;
   color: #1f2937 !important;
 }
 
 .dark .tipo-compra-btn.active,
 .dark .tipo-compra-btn-tamanos.active {
-  background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.4)) !important;
   border-color: var(--primary-gold) !important;
   color: var(--gold-light) !important;
-}
-
-/* Evitar que se pongan blancos al presionar */
-.tipo-compra-btn:active,
-.tipo-compra-btn-tamanos:active {
-  background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.35)) !important;
-}
-
-.dark .tipo-compra-btn:active,
-.dark .tipo-compra-btn-tamanos:active {
-  background: linear-gradient(to bottom right, rgba(212, 175, 55, 0.35), rgba(212, 175, 55, 0.45)) !important;
-}
-
-/* Mantener el gradiente original cuando NO está activo */
-.tipo-compra-btn:not(.active):not(:active) {
-  background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.2)) !important;
-}
-
-.tipo-compra-btn[data-tipo="mayorista"]:not(.active):not(:active) {
-  background: linear-gradient(to bottom right, rgba(168, 85, 247, 0.1), rgba(168, 85, 247, 0.2)) !important;
-}
-
-.dark .tipo-compra-btn:not(.active):not(:active) {
-  background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.25)) !important;
-}
-
-.dark .tipo-compra-btn[data-tipo="mayorista"]:not(.active):not(:active) {
-  background: linear-gradient(to bottom right, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.25)) !important;
 }
 
 /* Botones de precio */
@@ -1667,12 +1177,10 @@ a.bg-yellow-600:hover {
 
 .precio-btn:hover {
   transform: scale(1.02);
-  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.3);
 }
 
 /* Mejoras para imágenes en tarjetas de productos */
 .producto img {
-  filter: brightness(1.05) contrast(1.08) saturate(1.05);
   transition: all 0.3s ease;
   border-radius: 0.5rem;
   image-rendering: -webkit-optimize-contrast;
@@ -1685,18 +1193,12 @@ a.bg-yellow-600:hover {
 }
 
 .producto:hover img {
-  filter: brightness(1.1) contrast(1.12) saturate(1.08);
   transform: scale(1.02);
 }
 
 /* Mejorar contenedor de imágenes de productos */
 .producto > div:first-child {
-  background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
   border-radius: 1rem 1rem 0 0;
-}
-
-.dark .producto > div:first-child {
-  background: linear-gradient(to bottom, #374151 0%, #1f2937 100%);
 }
 
 /* Estilos para videos */
@@ -1722,12 +1224,6 @@ a.bg-yellow-600:hover {
   border-radius: 0.75rem;
 }
 
-/* Estilos para formulario de velas personalizadas */
-#form-personalizada input:focus,
-#form-personalizada textarea:focus {
-  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
-}
-
 #form-personalizada input:invalid:not(:placeholder-shown),
 #form-personalizada textarea:invalid:not(:placeholder-shown) {
   border-color: #ef4444;
@@ -1747,77 +1243,18 @@ section:not(:first-child) {
   position: relative;
 }
 
-section:not(:first-child)::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
-  border-radius: 2px;
-  opacity: 0.6;
-}
-
-.dark section:not(:first-child)::before {
-  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-  opacity: 0.8;
-}
-
-/* Separador decorativo con icono */
-section:not(:first-child)::after {
-  content: '🕯️';
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.5rem;
-  background: var(--bg-light, #f8f9fa);
-  padding: 0 0.5rem;
-  z-index: 1;
-}
-
-.dark section:not(:first-child)::after {
-  background: var(--bg-dark, #0f0f0f);
-}
-
 /* 2. MEJORAR SOMBRAS Y PROFUNDIDAD */
 .producto {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .producto:hover {
-  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(212, 175, 55, 0.2);
   transform: translateY(-4px);
-}
-
-.dark .producto {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.dark .producto:hover {
-  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5), 0 10px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.2);
 }
 
 /* Sombras mejoradas en botones */
 button, .btn, a[class*="bg-"] {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-button:hover, .btn:hover, a[class*="bg-"]:hover {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Sombras en modales */
-#product-modal, #cart-modal {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-.dark #product-modal, .dark #cart-modal {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* 3. MICROINTERACCIONES */
@@ -1839,10 +1276,11 @@ button:hover, .btn:hover, a[class*="bg-"]:hover {
   border: 3px solid rgba(212, 175, 55, 0.3);
   border-top-color: var(--primary-gold);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: spin-centered 0.8s linear infinite;
 }
 
-@keyframes spin {
+/* Nombre propio: antes se llamaba "spin" y pisaba silenciosamente al de .spinner. */
+@keyframes spin-centered {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
@@ -1868,12 +1306,6 @@ button:active, .btn:active {
 
 /* Efecto de pulso en botones importantes */
 @keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
-  }
 }
 
 .button-pulse {
@@ -1893,11 +1325,9 @@ button:active, .btn:active {
 /* 5. BARRA DE BÚSQUEDA MEJORADA */
 #product-search {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 #product-search:focus {
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2), 0 4px 12px rgba(212, 175, 55, 0.15);
   border-color: var(--primary-gold);
   transform: translateY(-2px);
 }
@@ -1922,27 +1352,16 @@ button:active, .btn:active {
   transition: all 0.3s ease;
 }
 
-/* Contenedor de búsqueda con efecto hover */
-.max-w-md.relative:hover #product-search {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 /* 6. MEJORAR CONTRASTE EN BOTONES */
 /* Botones principales con mejor contraste */
 .bg-yellow-500, .bg-yellow-600 {
-  background: linear-gradient(135deg, var(--primary-gold) 0%, var(--gold-rich) 100%) !important;
   color: #000000 !important;
   font-weight: 700 !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 6px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
-
 
 .bg-yellow-500:active, .bg-yellow-600:active,
 .bg-yellow-500:focus, .bg-yellow-600:focus {
-  background: linear-gradient(135deg, var(--gold-rich) 0%, var(--primary-gold) 100%) !important;
   color: #000000 !important;
-  box-shadow: 0 2px 4px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(0);
 }
 
@@ -1955,31 +1374,9 @@ button:active, .btn:active {
   overflow: hidden;
 }
 
-.border-\[#D4AF37\]::before, .border-yellow-500::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.border-\[#D4AF37\]:hover::before, .border-yellow-500:hover::before {
-  left: 100%;
-}
-
 .border-\[#D4AF37\]:hover, .border-yellow-500:hover {
   border-color: var(--gold-light) !important;
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5), inset 0 0 20px rgba(212, 175, 55, 0.1);
 }
-
-/* Botones blancos mejorados */
-.bg-white {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
 
 /* Estados activos más claros */
 button:focus-visible, a:focus-visible {
@@ -1991,22 +1388,6 @@ button:focus-visible, a:focus-visible {
 /* Gradientes sutiles en fondos de secciones */
 section {
   position: relative;
-}
-
-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.02) 0%, transparent 50%, rgba(212, 175, 55, 0.02) 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.dark section::before {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%, rgba(212, 175, 55, 0.05) 100%);
 }
 
 /* Bordes dorados sutiles en elementos importantes */
@@ -2022,7 +1403,6 @@ section::before {
   transform: translateX(-50%);
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
   border-radius: 1px;
   opacity: 0.6;
 }
@@ -2039,7 +1419,6 @@ h1::before, h2.font-playfair::before {
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2050,10 +1429,6 @@ h1::before, h2.font-playfair::before {
 /* Efecto de resplandor en hover para elementos dorados */
 .text-\[#D4AF37\], .text-yellow-500, .text-yellow-400 {
   transition: text-shadow 0.3s ease;
-}
-
-.text-\[#D4AF37\]:hover, .text-yellow-500:hover, .text-yellow-400:hover {
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 /* Partículas laterales para los márgenes */
@@ -2083,9 +1458,7 @@ h1::before, h2.font-playfair::before {
 
 .side-particle {
   position: absolute;
-  background: radial-gradient(circle, #FFD700 0%, #D4AF37 50%, transparent 100%);
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(255, 215, 0, 0.6), 0 0 12px rgba(212, 175, 55, 0.4);
   animation: float-side 20s infinite ease-in-out;
 }
 
@@ -2135,17 +1508,8 @@ h1::before, h2.font-playfair::before {
   animation: fadeIn 0.2s ease-out;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 /* Partículas doradas sutiles en fondo */
-@keyframes float {
+@keyframes float-soft {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(180deg); }
 }
@@ -2154,7 +1518,6 @@ h1::before, h2.font-playfair::before {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: var(--primary-gold);
   border-radius: 50%;
   opacity: 0.3;
   animation: float 6s infinite ease-in-out;
@@ -2164,29 +1527,23 @@ h1::before, h2.font-playfair::before {
 /* Mejora en el logo con efecto sutil */
 header img {
   transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2));
 }
 
 header img:hover {
-  filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.4));
   transform: scale(1.05);
 }
 
 /* Cards con efecto de vidrio sutil */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dark .glass-effect {
-  background: rgba(0, 0, 0, 0.3);
   border-color: rgba(255, 255, 255, 0.05);
 }
 
 #imagen-preview img {
   object-fit: contain;
-  background: #374151;
   padding: 0.5rem;
 }
 
@@ -2215,16 +1572,6 @@ header img:hover {
 }
 
 /* Animaciones para Toast Mejorado */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 
 @keyframes slideOutRight {
   from {
@@ -2247,7 +1594,6 @@ header img:hover {
 
 /* Estilos adicionales para el toast */
 #product-toast {
-  backdrop-filter: blur(10px);
   max-width: calc(100vw - 2rem);
 }
 
@@ -2274,23 +1620,6 @@ header img:hover {
   }
 }
 
-/* Estilos mejorados para video placeholder - v1.0.4 */
-/* Actualizado: 2025-01-27 - Forzar actualización de caché */
-.video-placeholder {
-  position: relative !important;
-  border: 2px solid rgba(234, 179, 8, 0.3) !important;
-  transition: all 0.3s ease !important;
-}
-
-.video-placeholder:hover {
-  border-color: rgba(234, 179, 8, 0.6) !important;
-  box-shadow: 0 0 30px rgba(234, 179, 8, 0.3) !important;
-}
-
-.video-placeholder .fa-play {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) !important;
-}
-
 @keyframes shimmer {
   0% {
     transform: translateX(-100%) skewX(-12deg);
@@ -2298,30 +1627,6 @@ header img:hover {
   100% {
     transform: translateX(200%) skewX(-12deg);
   }
-}
-
-.video-placeholder::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(234, 179, 8, 0.1),
-    transparent
-  ) !important;
-  animation: shimmer 3s infinite !important;
-  z-index: 1 !important;
-  pointer-events: none !important;
-}
-
-/* Asegurar que el contenido del placeholder sea visible */
-.video-placeholder > div {
-  position: relative !important;
-  z-index: 10 !important;
 }
 
 /* Partículas animadas para Hero */
@@ -2350,8 +1655,6 @@ header img:hover {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, rgba(212, 175, 55, 0) 70%);
-  filter: blur(2px);
 }
 
 @keyframes float {
@@ -2376,22 +1679,16 @@ header img:hover {
 .particle-small {
   width: 4px;
   height: 4px;
-  background: #D4AF37;
-  box-shadow: 0 0 6px #FFD700, 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
 .particle-medium {
   width: 6px;
   height: 6px;
-  background: #FFD700;
-  box-shadow: 0 0 8px #FFD700, 0 0 16px rgba(255, 215, 0, 0.6);
 }
 
 .particle-large {
   width: 8px;
   height: 8px;
-  background: #FFD700;
-  box-shadow: 0 0 10px #FFD700, 0 0 20px rgba(255, 215, 0, 0.7);
 }
 
 /* Variaciones de animación para diferentes partículas */
@@ -2427,7 +1724,6 @@ header img:hover {
   bottom: -50px;
   opacity: 0.25;
   animation: floatCandle 20s infinite ease-in-out;
-  filter: blur(0.3px);
 }
 
 .candle-floating:nth-child(odd) {
@@ -2494,17 +1790,10 @@ header img:hover {
 }
 
 #hero-candles-container svg {
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1)) drop-shadow(0 0 6px rgba(255, 165, 0, 0.9)) drop-shadow(0 0 3px rgba(255, 69, 0, 0.7));
   animation: candleGlow 2s ease-in-out infinite;
 }
 
 @keyframes candleGlow {
-  0%, 100% {
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1)) drop-shadow(0 0 6px rgba(255, 165, 0, 0.9)) drop-shadow(0 0 3px rgba(255, 69, 0, 0.7));
-  }
-  50% {
-    filter: drop-shadow(0 0 14px rgba(255, 215, 0, 1)) drop-shadow(0 0 8px rgba(255, 165, 0, 1)) drop-shadow(0 0 4px rgba(255, 69, 0, 0.8));
-  }
 }
 
 @keyframes floatCandle {
@@ -2532,7 +1821,6 @@ header img:hover {
 .candle-svg {
   width: 40px;
   height: 80px;
-  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
 }
 
 /* Animación de la llama */

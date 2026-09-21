@@ -26,7 +26,7 @@ const productos = [
     id: "aa2",
     nombre: "Matera Vela Mariposa Mini",
     descripcion: "Vela artesanal con aroma floral y forma de corazón, ideal para ocasiones románticas.",
-    imagen: "assets/productos/Amor-y-amistad/2.png",
+    imagen: "assets/productos/Amor-y-amistad/2.jpg",
     precios: {
       detal: { bolsa: 5900, caja: 7000 },
       mayorista: { bolsa: 5200, caja: 6500 }
@@ -46,7 +46,7 @@ const productos = [
     id: "aa4",
     nombre: "Peonía Mediana",
     descripcion: "Vela artesanal en forma de peonía con diseño floral elegante. Medidas: 5.5cm x 5.5cm, peso 30gr. Disponible en varios colores (rojo, rosa, verde menta, amarillo).",
-    imagen: "assets/productos/Amor-y-amistad/4.png",
+    imagen: "assets/productos/Amor-y-amistad/4.jpg",
     precios: {
       detal: { bolsa: 3300, caja: 4000 },
       mayorista: { bolsa: 2900, caja: 3500 }
@@ -56,7 +56,7 @@ const productos = [
     id: "aa5",
     nombre: "Flores con Aroma Empaque Especial",
     descripcion: "Flores aromáticas en empaque especial con domo transparente. Disponible en múltiples colores (rosa, rojo, blanco, morado, azul claro, amarillo). Medidas: 5.5cm x 5.5cm, peso 30gr.",
-    imagen: "assets/productos/Amor-y-amistad/5.png",
+    imagen: "assets/productos/Amor-y-amistad/5.jpg",
     precios: {
       detal: 4700,
       mayorista: 4000
@@ -66,7 +66,7 @@ const productos = [
     id: "aa6",
     nombre: "Flores con Aroma Empaque Especial",
     descripcion: "Flores aromáticas en empaque especial con domo transparente. Disponible en múltiples colores (rosa, rojo, blanco, morado, azul claro, amarillo). Medidas: 5.5cm x 5.5cm, peso 30gr.",
-    imagen: "assets/productos/Amor-y-amistad/6.png",
+    imagen: "assets/productos/Amor-y-amistad/6.jpg",
     precios: {
       detal: 4700,
       mayorista: 4000
@@ -76,7 +76,7 @@ const productos = [
     id: "aa7",
     nombre: "Corazón Rosas",
     descripcion: "Vela en forma de corazón decorada con rosas rojas en relieve. Disponible en caja kraft con ventana transparente. Medidas: 6.5cm altura x 8cm ancho, peso 42gr.",
-    imagen: "assets/productos/Amor-y-amistad/7.png",
+    imagen: "assets/productos/Amor-y-amistad/7.jpg",
     precios: {
       detal: { bolsa: 3900, caja: 4900 },
       mayorista: { bolsa: 3500, caja: 4300 }
@@ -86,7 +86,7 @@ const productos = [
     id: "aa8",
     nombre: "Vela Corazón Grande",
     descripcion: "Vela en forma de corazón grande con mensajes de amor. Disponible en colores blanco y rojo con textos personalizados. Medidas: 11.7cm altura x 5cm ancho x 2.2cm espesor, peso 72gr.",
-    imagen: "assets/productos/Amor-y-amistad/8.png",
+    imagen: "assets/productos/Amor-y-amistad/8.jpg",
     precios: {
       detal: { bolsa: 4700, caja: 5900 },
       mayorista: { bolsa: 4400, caja: 5400 }
@@ -96,7 +96,7 @@ const productos = [
     id: "aa9",
     nombre: "Mariposa 2 Mechas",
     descripcion: "Vela en forma de mariposa con 2 mechas, decorada con brillo dorado. Disponible en empaque especial. Medidas: 7.5cm altura x 8.5cm ancho x 2.5cm espesor, peso 52gr.",
-    imagen: "assets/productos/Amor-y-amistad/9.png",
+    imagen: "assets/productos/Amor-y-amistad/9.jpg",
     precios: {
       detal: { bolsa: 6400, caja: 7600 },
       mayorista: { bolsa: 5600, caja: 6900 }
@@ -106,7 +106,7 @@ const productos = [
     id: "aa10",
     nombre: "Poli Mediano Mano Corazón",
     descripcion: "Frasco de vidrio con vela blanca y vela decorativa en forma de mano haciendo corazón. Incluye mensaje 'Feliz Amor y Amistad'. Disponible en empaque especial. Medidas: 7.5cm altura x 5cm ancho, peso 56gr.",
-    imagen: "assets/productos/Amor-y-amistad/10.png",
+    imagen: "assets/productos/Amor-y-amistad/10.jpg",
     precios: {
       detal: { bolsa: 7000, caja: 8000 },
       mayorista: { bolsa: 6500, caja: 7400 }
@@ -116,7 +116,7 @@ const productos = [
     id: "aa11",
     nombre: "Corazón Rosas",
     descripcion: "Corazones decorados con rosas, disponibles en colores blanco y rosa. Incluyen etiqueta 'Feliz Día!'. Medidas: 2.8cm altura x 5.6cm ancho, peso 24gr.",
-    imagen: "assets/productos/Amor-y-amistad/11.png",
+    imagen: "assets/productos/Amor-y-amistad/11.jpg",
     precios: {
       detal: { bolsa: 3400, caja: 4300 },
       mayorista: { bolsa: 3000, caja: 3900 }
@@ -126,7 +126,7 @@ const productos = [
     id: "aa12",
     nombre: "Oso Moño",
     descripcion: "Osos decorativos con moño y corazón. Disponibles en colores blanco y rosa. Incluyen moño o corazón decorativo. Medidas: 6.3cm altura x 4.5cm ancho, peso 52gr.",
-    imagen: "assets/productos/Amor-y-amistad/12.png",
+    imagen: "assets/productos/Amor-y-amistad/12.jpg",
     precios: {
       detal: { bolsa: 4000, caja: 5500 },
       mayorista: { bolsa: 4500, caja: 6000 }
@@ -136,7 +136,7 @@ const productos = [
     id: "aa13",
     nombre: "Copa",
     descripcion: "Copa decorativa con vela blanca y elementos decorativos rojos. Incluye cinta roja en el tallo y mensajes personalizados. Medidas: 17.5cm altura x 7.8cm ancho, peso 120gr.",
-    imagen: "assets/productos/Amor-y-amistad/13.png",
+    imagen: "assets/productos/Amor-y-amistad/13.jpg",
     precios: {
       detal: 18500,
       mayorista: 16000
@@ -146,7 +146,7 @@ const productos = [
     id: "aa14",
     nombre: "Poli Corazón Mensaje",
     descripcion: "Corazones decorativos con mensajes personalizados (TE AMO). Disponibles en colores rojo y blanco. Medidas: 3cm altura, peso 55gr.",
-    imagen: "assets/productos/Amor-y-amistad/14.png",
+    imagen: "assets/productos/Amor-y-amistad/14.jpg",
     precios: {
       detal: { bolsa: 6800, caja: 7900 },
       mayorista: { bolsa: 6500, caja: 7400 }
@@ -156,7 +156,7 @@ const productos = [
     id: "aa15",
     nombre: "Peonía Grande",
     descripcion: "Vela artesanal en forma de peonía grande. Disponible en múltiples colores (rojo, rosa, azul). Disponible en caja kraft con ventana transparente. Medidas: 7cm altura x 7cm ancho, peso 45gr.",
-    imagen: "assets/productos/Amor-y-amistad/15.png",
+    imagen: "assets/productos/Amor-y-amistad/15.jpg",
     precios: {
       detal: { bolsa: 4200, caja: 5000 },
       mayorista: { bolsa: 3800, caja: 4500 }
@@ -166,7 +166,7 @@ const productos = [
     id: "aa16",
     nombre: "Burbuja Vidrio",
     descripcion: "Velas decorativas en frasco de vidrio transparente con diseños florales y corazones. Disponible en múltiples diseños y colores. Medidas: 7cm altura x 7.8cm ancho, peso 90gr.",
-    imagen: "assets/productos/Amor-y-amistad/16.png",
+    imagen: "assets/productos/Amor-y-amistad/16.jpg",
     precios: {
       detal: 10800,
       mayorista: 9600
@@ -176,7 +176,7 @@ const productos = [
     id: "aa17",
     nombre: "Poli Mediano Rosa",
     descripcion: "Vela de dos niveles con rosa morada en la parte superior y base rosa y blanca. Incluye mensaje 'Feliz Día' en escritura dorada. Disponible en bolsa y caja transparente. Medidas: 6cm altura x 5cm ancho, peso 56gr.",
-    imagen: "assets/productos/Amor-y-amistad/17.png",
+    imagen: "assets/productos/Amor-y-amistad/17.jpg",
     precios: {
       detal: { bolsa: 7000, caja: 8000 },
       mayorista: { bolsa: 6500, caja: 7400 }
@@ -186,7 +186,7 @@ const productos = [
     id: "aa18",
     nombre: "Vela Corazón Personalizada",
     descripcion: "Velas en forma de corazón personalizadas con letras para formar nombres o mensajes. Disponibles en múltiples colores. Medidas: 9.5cm altura x 2.5cm ancho, peso 30gr.",
-    imagen: "assets/productos/Amor-y-amistad/18.png",
+    imagen: "assets/productos/Amor-y-amistad/18.jpg",
     precios: {
       detal: 3600,
       mayorista: 3100
@@ -196,7 +196,7 @@ const productos = [
     id: "aa19",
     nombre: "Corazón Rosa",
     descripcion: "Vela en forma de corazón con textura de rosa en tonos rosados. Disponible en bolsa y caja transparente. Medidas: 3.5cm altura x 5.8cm ancho, peso 36gr.",
-    imagen: "assets/productos/Amor-y-amistad/19.png",
+    imagen: "assets/productos/Amor-y-amistad/19.jpg",
     precios: {
       detal: { bolsa: 3100, caja: 4100 },
       mayorista: { bolsa: 2800, caja: 3900 }
@@ -206,7 +206,7 @@ const productos = [
     id: "aa20",
     nombre: "Vidrio Corcho Estrellas y Corazones",
     descripcion: "Velas decorativas en frasco de vidrio con tapa de corcho. Disponibles con estrellas y corazones de colores. Incluye cordel decorativo. Medidas: 3.5cm altura x 5.8cm ancho, peso 36gr.",
-    imagen: "assets/productos/Amor-y-amistad/20.png",
+    imagen: "assets/productos/Amor-y-amistad/20.jpg",
     precios: {
       detal: 8500,
       mayorista: 7900
@@ -216,7 +216,7 @@ const productos = [
     id: "aa21",
     nombre: "Rosa Mini",
     descripcion: "Vela en forma de rosa pequeña. Disponible en múltiples colores (rosa, teal, blanco con dorado). Disponible en bolsa y caja. Medidas: 3cm altura x 4cm ancho, peso 18gr.",
-    imagen: "assets/productos/Amor-y-amistad/21.png",
+    imagen: "assets/productos/Amor-y-amistad/21.jpg",
     precios: {
       detal: { bolsa: 2500, caja: 3000 },
       mayorista: { bolsa: 2000, caja: 2500 }
@@ -226,7 +226,7 @@ const productos = [
     id: "aa22",
     nombre: "Ramo Personalizado",
     descripcion: "Velas personalizadas en forma de oso o flor dentro de taza blanca con texto personalizado. Ideal para regalos. Disponible en caja. Medidas: 12cm altura x 7cm ancho, peso 95gr.",
-    imagen: "assets/productos/Amor-y-amistad/22.png",
+    imagen: "assets/productos/Amor-y-amistad/22.jpg",
     precios: {
       detal: 11900,
       mayorista: 9600
@@ -236,7 +236,7 @@ const productos = [
     id: "aa23",
     nombre: "Margarita",
     descripcion: "Vela en forma de margarita (daisy). Disponible en múltiples colores (rosa, fucsia, morado). Disponible en bolsa y caja. Medidas: 5cm altura x 5cm ancho, peso 16gr.",
-    imagen: "assets/productos/Amor-y-amistad/23.png",
+    imagen: "assets/productos/Amor-y-amistad/23.jpg",
     precios: {
       detal: { bolsa: 2500, caja: 3200 },
       mayorista: { bolsa: 2300, caja: 2800 }
@@ -248,7 +248,7 @@ const productos = [
     id: "bs1",
     nombre: "COMPLETAR: Nombre según imagen 1.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Baby-Shower/1.png",
+    imagen: "assets/productos/Baby-Shower/1.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -258,7 +258,7 @@ const productos = [
     id: "bs2",
     nombre: "COMPLETAR: Nombre según imagen 2.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Baby-Shower/2.png",
+    imagen: "assets/productos/Baby-Shower/2.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -268,7 +268,7 @@ const productos = [
     id: "bs3",
     nombre: "COMPLETAR: Nombre según imagen 3.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Baby-Shower/3.png",
+    imagen: "assets/productos/Baby-Shower/3.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -278,7 +278,7 @@ const productos = [
     id: "bs4",
     nombre: "COMPLETAR: Nombre según imagen 4.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Baby-Shower/4.png",
+    imagen: "assets/productos/Baby-Shower/4.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -290,7 +290,7 @@ const productos = [
     id: "pc1",
     nombre: "COMPLETAR: Nombre según imagen 1.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Primera-Comunion/1.png",
+    imagen: "assets/productos/Primera-Comunion/1.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -300,7 +300,7 @@ const productos = [
     id: "pc2",
     nombre: "COMPLETAR: Nombre según imagen 2.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Primera-Comunion/2.png",
+    imagen: "assets/productos/Primera-Comunion/2.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -310,7 +310,7 @@ const productos = [
     id: "pc3",
     nombre: "COMPLETAR: Nombre según imagen 3.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Primera-Comunion/3.png",
+    imagen: "assets/productos/Primera-Comunion/3.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -320,7 +320,7 @@ const productos = [
     id: "pc4",
     nombre: "COMPLETAR: Nombre según imagen 4.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Primera-Comunion/4.png",
+    imagen: "assets/productos/Primera-Comunion/4.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -330,7 +330,7 @@ const productos = [
     id: "pc5",
     nombre: "COMPLETAR: Nombre según imagen 5.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Primera-Comunion/5.png",
+    imagen: "assets/productos/Primera-Comunion/5.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -340,7 +340,7 @@ const productos = [
     id: "pc6",
     nombre: "COMPLETAR: Nombre según imagen 6.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Primera-Comunion/6.png",
+    imagen: "assets/productos/Primera-Comunion/6.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -350,7 +350,7 @@ const productos = [
     id: "pc7",
     nombre: "COMPLETAR: Nombre según imagen 7.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Primera-Comunion/7.png",
+    imagen: "assets/productos/Primera-Comunion/7.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
@@ -360,7 +360,7 @@ const productos = [
     id: "pc8",
     nombre: "COMPLETAR: Nombre según imagen 8.png",
     descripcion: "COMPLETAR: Descripción del producto según imagen",
-    imagen: "assets/productos/Primera-Comunion/8.png",
+    imagen: "assets/productos/Primera-Comunion/8.jpg",
     precios: {
       detal: { bolsa: 0, caja: 0 },
       mayorista: { bolsa: 0, caja: 0 }
