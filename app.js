@@ -1967,13 +1967,30 @@ document.addEventListener('DOMContentLoaded', () => {
   
 });
 
-// Los carruseles horizontales no deben comerse la rueda vertical del mouse.
+// La rueda horizontal y Shift + rueda mueven los carruseles; la rueda vertical
+// sigue desplazando la página cuando el cursor está sobre uno de ellos.
 function initWheelScrollBridging() {
-  document.querySelectorAll('#category-filters, #videos-container, .reel-rail').forEach(container => {
+  document.querySelectorAll('#category-filters, #videos-container, #social-embeds, .reel-rail').forEach(container => {
     container.addEventListener('wheel', (event) => {
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX) || event.shiftKey) return;
-      window.scrollBy({ top: event.deltaY, left: 0, behavior: 'auto' });
-      event.preventDefault();
+      const horizontalDelta = event.deltaX || (event.shiftKey ? event.deltaY : 0);
+
+      if (horizontalDelta) {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        const nextScroll = Math.max(0, Math.min(maxScroll, container.scrollLeft + horizontalDelta));
+        const canScroll = maxScroll > 0 && nextScroll !== container.scrollLeft;
+
+        if (canScroll) {
+          container.scrollTo({ left: nextScroll, behavior: 'auto' });
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        return;
+      }
+
+      if (event.deltaY) {
+        window.scrollBy({ top: event.deltaY, left: 0, behavior: 'auto' });
+        event.preventDefault();
+      }
     }, { passive: false });
   });
 }
