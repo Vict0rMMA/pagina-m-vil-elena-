@@ -1955,6 +1955,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductos();
   initPromociones();
   initVideos();
+  initWheelScrollBridging();
   initSearch();
   initAnimations();
   initBottomDock();
@@ -1965,6 +1966,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavegacionSecciones();
   
 });
+
+// Los carruseles horizontales no deben comerse la rueda vertical del mouse.
+function initWheelScrollBridging() {
+  document.querySelectorAll('#category-filters, #videos-container, .reel-rail').forEach(container => {
+    container.addEventListener('wheel', (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX) || event.shiftKey) return;
+      window.scrollBy({ top: event.deltaY, left: 0, behavior: 'auto' });
+      event.preventDefault();
+    }, { passive: false });
+  });
+}
 
 // Lazy loading para videos de personalizadas
 function initLazyVideosPersonalizadas() {
