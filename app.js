@@ -4446,7 +4446,40 @@ function actualizarCarrusel() {
 // Videos
 function initVideos() {
   renderVideos();
+  initVideoCarouselControls();
   initLazyVideos();
+}
+
+function initVideoCarouselControls() {
+  document.querySelectorAll('#videos-container, #personalizadas .reel-rail').forEach(rail => {
+    if (rail.parentElement.classList.contains('video-carousel')) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'video-carousel';
+    rail.parentElement.insertBefore(wrapper, rail);
+    wrapper.appendChild(rail);
+
+    const createButton = (direction, label, icon) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `video-carousel-arrow video-carousel-arrow-${direction}`;
+      button.setAttribute('aria-label', label);
+      button.innerHTML = `<i class="fas ${icon}" aria-hidden="true"></i>`;
+      button.addEventListener('click', () => {
+        const firstCard = rail.querySelector('.reel');
+        if (!firstCard) return;
+        const gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
+        const step = firstCard.getBoundingClientRect().width + gap;
+        rail.scrollBy({ left: direction === 'next' ? step : -step, behavior: 'smooth' });
+      });
+      return button;
+    };
+
+    wrapper.append(
+      createButton('previous', 'Video anterior', 'fa-chevron-left'),
+      createButton('next', 'Siguiente video', 'fa-chevron-right')
+    );
+  });
 }
 
 // Lazy loading para videos
