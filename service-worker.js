@@ -1,6 +1,6 @@
 // Service Worker para PWA - Elena Velas y Aromas
-// Actualizado: v4 - Network First para todos los recursos
-const CACHE_NAME = 'elena-velas-v4';
+// Recursos propios cacheados para que las visitas repetidas abran rápido.
+const CACHE_NAME = 'elena-velas-v5';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -37,9 +37,14 @@ self.addEventListener('message', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
-  
-  // Para archivos HTML, usar Network First (siempre obtener la versión más reciente)
-  if (request.method === 'GET' && request.headers.get('accept') && request.headers.get('accept').includes('text/html')) {
+
+  // Dejar que el navegador gestione recursos externos y videos pesados.
+  if (request.method !== 'GET' || url.origin !== self.location.origin || request.destination === 'video') {
+    return;
+  }
+
+  // El HTML siempre busca la versión más reciente.
+  if (request.headers.get('accept') && request.headers.get('accept').includes('text/html')) {
     event.respondWith(
       fetch(request)
         .then((response) => {
@@ -60,23 +65,17 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
-  // Para otros recursos (CSS, JS, imágenes), usar Network First para forzar actualización
+  // CSS, JS e imágenes propios salen del caché; la red actualiza en segundo plano.
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Si hay respuesta de red, actualizar caché y devolverla
+    caches.match(event.request).then((cached) => {
+      const actualizar = fetch(event.request).then((response) => {
         if (response && response.status === 200) {
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, response.clone()));
         }
         return response;
-      })
-      .catch(() => {
-        // Si falla la red, usar caché como fallback
-        return caches.match(event.request);
-      })
+      });
+      return cached || actualizar;
+    })
   );
 });
 

@@ -4540,7 +4540,7 @@ function cargarScriptsEmbed(lista) {
       if (!entradas[0].isIntersecting) return;
       obs.disconnect();
       inyectarScriptsEmbed(necesarias);
-    }, { rootMargin: '400px 0px' });
+    }, { rootMargin: '0px', threshold: 0.1 });
     obs.observe(ancla);
     return;
   }
