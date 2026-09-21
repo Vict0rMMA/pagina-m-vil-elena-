@@ -145,6 +145,12 @@ html {
   color-scheme: light;
 }
 
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   /* Transparente a propósito: deja ver .fondo-ambiente. */
   background: transparent !important;
@@ -449,16 +455,36 @@ header.site-header.desplazada {
 }
 
 .mobile-menu {
+  display: none;
   margin-top: var(--space-3);
   padding-top: var(--space-3);
   border-top: 1px solid var(--line);
 }
+.mobile-menu:not(.hidden) { display: block; }
 .mobile-menu a {
   display: block;
   padding: var(--space-3) 0;
   font-size: var(--text-body);
   font-weight: 500;
   color: var(--ink-2) !important;
+}
+
+.desktop-menu {
+  display: none !important;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.mobile-menu-button { display: inline-flex !important; }
+
+@media (min-width: 900px) {
+  .desktop-menu { display: flex !important; }
+  .mobile-menu-button { display: none !important; }
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  #bottom-dock { display: block !important; }
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
 }
 .mobile-menu a.active,
 .mobile-menu a:active { color: var(--gold-deep) !important; font-weight: 600; }
