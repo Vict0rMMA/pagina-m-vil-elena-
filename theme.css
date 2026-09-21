@@ -754,11 +754,14 @@ input#product-search:focus {
   gap: var(--space-2);
   margin-bottom: var(--space-8);
   padding-bottom: var(--space-2);
-  /* En móvil la fila se desliza en horizontal; el navegador conserva el vertical. */
+  /* En móvil la fila se desliza en horizontal; el navegador conserva el vertical.
+     Los dos ejes van permitidos a propósito: con `pan-y` el navegador sólo
+     aceptaba el gesto vertical y la fila no se movía con el dedo. Con ambos,
+     decide él según la dirección del arrastre, que es justo lo que queremos. */
   overflow-x: auto;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pan-y pinch-zoom;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -2078,11 +2081,12 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   grid-auto-flow: column;
   grid-auto-columns: minmax(210px, 240px);
   gap: var(--space-4);
-  /* En móvil se desliza en horizontal; el navegador conserva el vertical. */
+  /* Mismo caso que los filtros: ambos ejes permitidos. Con `pan-y` el riel
+     no respondía al dedo. */
   overflow-x: auto;
   padding-bottom: var(--space-3);
   scroll-snap-type: x mandatory;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pan-y pinch-zoom;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -3138,7 +3142,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     overscroll-behavior-x: contain;
-    touch-action: pan-x pinch-zoom;
+    touch-action: pan-x pan-y pinch-zoom;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
   }
