@@ -749,27 +749,18 @@ input#product-search:focus {
   outline: none;
 }
 
+/* Las seis categorías se envuelven en varias filas, también en móvil.
+   Antes era una fila que se deslizaba en horizontal, y en el móvil de la
+   dueña las tres últimas (Primera Comunión, Navidad y Kit Emprendedor)
+   quedaban fuera de pantalla sin nada que indicara que hubiera más. Un
+   carril oculto justo donde el cliente elige qué comprar son ventas
+   perdidas: sale más a cuenta gastar dos filas y que se vea todo. */
 #category-filters {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-2);
   margin-bottom: var(--space-8);
-  padding-bottom: var(--space-2);
-  /* En móvil la fila se desliza en horizontal; el navegador conserva el vertical.
-     Los dos ejes van permitidos a propósito: con `pan-y` el navegador sólo
-     aceptaba el gesto vertical y la fila no se movía con el dedo. Con ambos,
-     decide él según la dirección del arrastre, que es justo lo que queremos. */
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  touch-action: pan-x pan-y pinch-zoom;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-#category-filters::-webkit-scrollbar { display: none; }
-
-@media (min-width: 768px) {
-  #category-filters { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
 }
 
 .filter-btn {
@@ -854,6 +845,16 @@ input#product-search:focus {
   .producto-zoom { top: var(--space-2); right: var(--space-2); width: 32px; height: 32px; }
 
   #category-filters { margin-bottom: var(--space-6); }
+
+  /* Compactas para que las seis quepan en tres filas sin empujar
+     demasiado el catálogo hacia abajo. 38px sigue siendo un objetivo
+     táctil cómodo. */
+  .filter-btn {
+    min-height: 38px;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-micro);
+  }
+  .filter-btn i { font-size: 11px; }
 }
 
 /* ============================================================
