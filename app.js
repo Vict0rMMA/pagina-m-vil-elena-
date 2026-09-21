@@ -1955,7 +1955,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductos();
   initPromociones();
   initVideos();
-  initWheelScrollBridging();
+  initMouseWheelScroll();
   initSearch();
   initAnimations();
   initBottomDock();
@@ -1967,32 +1967,20 @@ document.addEventListener('DOMContentLoaded', () => {
   
 });
 
-// La rueda horizontal y Shift + rueda mueven los carruseles; la rueda vertical
-// sigue desplazando la página cuando el cursor está sobre uno de ellos.
-function initWheelScrollBridging() {
-  document.querySelectorAll('#category-filters, #videos-container, #social-embeds, .reel-rail').forEach(container => {
-    container.addEventListener('wheel', (event) => {
-      const horizontalDelta = event.deltaX || (event.shiftKey ? event.deltaY : 0);
+// Algunos navegadores y vistas embebidas no entregan la rueda al documento.
+// Este puente mantiene el desplazamiento inmediato, sin smooth ni animaciones.
+function initMouseWheelScroll() {
+  document.addEventListener('wheel', (event) => {
+    if (!event.deltaY || event.ctrlKey) return;
+    if (event.target.closest('.product-modal-sheet, .cart-sheet, #mobile-menu')) return;
 
-      if (horizontalDelta) {
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        const nextScroll = Math.max(0, Math.min(maxScroll, container.scrollLeft + horizontalDelta));
-        const canScroll = maxScroll > 0 && nextScroll !== container.scrollLeft;
+    const modalAbierto = [...document.querySelectorAll('#product-modal, #cart-modal, #confirm-modal')]
+      .some(modal => !modal.classList.contains('hidden'));
+    if (modalAbierto) return;
 
-        if (canScroll) {
-          container.scrollTo({ left: nextScroll, behavior: 'auto' });
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        return;
-      }
-
-      if (event.deltaY) {
-        window.scrollBy({ top: event.deltaY, left: 0, behavior: 'auto' });
-        event.preventDefault();
-      }
-    }, { passive: false });
-  });
+    window.scrollBy(0, event.deltaY);
+    event.preventDefault();
+  }, { capture: true, passive: false });
 }
 
 // Lazy loading para videos de personalizadas
