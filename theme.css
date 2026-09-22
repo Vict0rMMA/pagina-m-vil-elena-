@@ -90,7 +90,6 @@
   --dur-lenta: 560ms;
 }
 
-
 /* ============================================================
    1. Reset del ruido heredado de styles.css
    ============================================================ */
@@ -2076,83 +2075,29 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    debajo del reproductor.
    ============================================================ */
 
+/* Rejilla, no carrusel.
+   Antes era un carril horizontal con dos flechas encima del vídeo —
+   tapaban la imagen y había que descubrir que aquello se deslizaba.
+   Con diez videos y tarjetas verticales, una rejilla los enseña todos
+   de una vez y se lee como una galería. */
 .reel-rail,
 #videos-container {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(210px, 240px);
-  gap: var(--space-4);
-  /* Mismo caso que los filtros: ambos ejes permitidos. Con `pan-y` el riel
-     no respondía al dedo. */
-  overflow-x: auto;
-  padding-bottom: var(--space-3);
-  scroll-snap-type: x mandatory;
-  touch-action: pan-x pan-y pinch-zoom;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  max-width: 64rem;
+  margin: 0 auto;
 }
 
-.video-carousel { position: relative; }
-.video-carousel-arrow { display: none; }
+@media (min-width: 560px)  { .reel-rail, #videos-container { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); } }
+@media (min-width: 900px)  { .reel-rail, #videos-container { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .reel-rail, #videos-container { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 
-@media (max-width: 767px) {
-  .video-carousel { margin: 0 calc(var(--space-2) * -1); }
-
-  .reel-rail,
-  #videos-container {
-    margin-left: var(--space-2);
-    margin-right: var(--space-2);
-    grid-template-columns: none !important;
-    grid-auto-columns: calc(100% - var(--space-6));
-    gap: var(--space-3);
-    padding-right: var(--space-3);
-  }
-
-  .video-carousel-arrow {
-    position: absolute;
-    top: 50%;
-    z-index: 8;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    border: 1px solid var(--line);
-    border-radius: var(--r-full);
-    background: rgba(255, 252, 246, 0.94);
-    color: var(--gold-deep);
-    box-shadow: var(--shadow-2);
-    transform: translateY(-50%);
-  }
-
-  .video-carousel-arrow:active { transform: translateY(-50%) scale(0.92); }
-  .video-carousel-arrow-previous { left: 0; }
-  .video-carousel-arrow-next { right: 0; }
-
-  .reel {
-    scroll-snap-stop: always;
-  }
-}
-
-.reel-rail::-webkit-scrollbar,
-#videos-container::-webkit-scrollbar { display: none; }
-
-@media (min-width: 768px) {
-  .reel-rail,
-  #videos-container {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    max-width: 56rem;
-    margin: 0 auto;
-    overflow-x: visible;
-    gap: var(--space-6);
-  }
-
-  /* Los ejemplos personalizados acompañan al formulario: un poco más
-     contenidos para que no dominen toda la sección. */
-  #personalizadas .reel-rail { max-width: 33rem; }
+/* Los ejemplos personalizados son sólo dos y acompañan al formulario:
+   no deben ocupar el ancho de una galería de diez. */
+#personalizadas .reel-rail {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 26rem;
 }
 
 .reel {
@@ -2260,18 +2205,6 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 /* Con el video en marcha el pie estorba: se aparta. */
 .reel:has(.reel-video:not(.hidden)) .reel-pie { opacity: 0; }
 
-.reel-marca {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px; height: 22px;
-  flex: 0 0 auto;
-  border-radius: var(--r-full);
-  background: rgba(255, 252, 246, 0.92);
-  color: var(--gold-deep);
-  font-size: 9px;
-}
-
 .reel-titulo {
   margin: 0;
   font-family: var(--font-body);
@@ -2284,11 +2217,41 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   text-shadow: 0 1px 3px rgba(18, 16, 14, 0.85);
 }
 
-.reel-embed-caja { position: absolute; inset: 0; z-index: 1; }
-.reel-embed-caja iframe { width: 100%; height: 100%; border: 0; }
-
 .reel-enlace { display: flex; align-items: center; justify-content: center; }
-.reel-enlace .reel-play { position: relative; z-index: 1; }
+.reel-enlace .reel-play { position: relative; z-index: 3; }
+
+/* Insignia de la red. Antes cada TikTok llegaba con su propia botonera
+   (me gusta, comentarios, compartir, "Watch now"): ahora basta el logo
+   para decir de dónde sale el video. */
+.reel-red {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--r-full);
+  background: rgba(18, 16, 14, 0.62);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  color: #FFFCF6;
+  font-size: 11px;
+}
+
+/* En una rejilla de tarjetas pequeñas el círculo de 56px tapaba media
+   portada. Se queda a la mitad y sin borde, que a este tamaño ensuciaba. */
+.reel-play {
+  width: 42px;
+  height: 42px;
+  font-size: 13px;
+}
+
+@media (min-width: 900px) {
+  .reel-play { width: 52px; height: 52px; font-size: 16px; }
+}
 
 .reel-vacio {
   grid-column: 1 / -1;
@@ -3068,182 +3031,6 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 @media (prefers-reduced-motion: reduce) {
   .promo-punto.active::after { background: var(--gold-deep); background-image: none; animation: none; }
-}
-
-/* ============================================================
-   34. Reels que son embeds de una red social
-   ------------------------------------------------------------
-   TikTok e Instagram deciden la altura de su iframe (TikTok pide
-   ~400px para 204 de ancho). Forzarles el 9:16 del carrete les
-   cortaba el pie. Aquí mandan ellos.
-   ============================================================ */
-
-.reel-embed {
-  aspect-ratio: auto;
-  align-self: start;
-  overflow: visible;
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-}
-
-.reel-embed::before { content: none; }   /* sin el velo de marca */
-
-.reel-embed-caja {
-  position: relative;
-  inset: auto;
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--surface-2);
-  box-shadow: var(--shadow-1);
-}
-
-.reel-embed-caja iframe {
-  display: block;
-  width: 100% !important;
-  height: auto;
-  border: 0;
-}
-
-/* El embed ya trae cuenta y descripción: nuestro pie sobraría. */
-.reel-embed .reel-pie { display: none; }
-
-@media (hover: hover) and (pointer: fine) {
-  .reel-embed:hover { transform: none; box-shadow: none; }
-  .reel-embed:hover .reel-embed-caja { border-color: var(--gold-veil); box-shadow: var(--shadow-2); }
-}
-
-/* ============================================================
-   35. Embeds de TikTok / Instagram
-   ------------------------------------------------------------
-   TikTok exige 325px de ancho mínimo (viene en su propio código
-   de inserción). En las tarjetas de 205px del carrete recortaba
-   el texto y los controles. Aquí tienen su sitio.
-   ============================================================ */
-
-.embed-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  justify-items: center;
-  max-width: 72rem;
-  margin: var(--space-12) auto 0;
-  padding: 0 var(--space-4);
-}
-
-@media (max-width: 767px) {
-  #social-embeds.embed-grid {
-    display: flex !important;
-    justify-content: flex-start;
-    gap: var(--space-3);
-    margin-top: var(--space-8);
-    padding: 0 var(--space-4) var(--space-3);
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior-x: contain;
-    touch-action: pan-x pan-y pinch-zoom;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  #social-embeds.embed-grid::-webkit-scrollbar { display: none; }
-  #social-embeds.embed-grid .embed-card {
-    flex: 0 0 min(325px, calc(100vw - 48px)) !important;
-    min-width: 0 !important;
-    min-height: 520px;
-    scroll-snap-align: start;
-  }
-
-  #social-embeds.embed-grid .embed-caja { min-height: 520px; }
-}
-
-@media (min-width: 720px)  { .embed-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1100px) { .embed-grid { grid-template-columns: repeat(3, 1fr); } }
-
-.embed-card {
-  width: 100%;
-  /* El mínimo que pide TikTok; el máximo, el suyo propio. */
-  min-width: 325px;
-  max-width: 380px;
-}
-
-.embed-card-link {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: 72px;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--surface);
-  color: var(--ink);
-  box-shadow: var(--shadow-1);
-}
-
-.embed-card-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  flex: 0 0 auto;
-  border-radius: var(--r-full);
-  background: var(--gold-mist);
-  color: var(--gold-deep);
-  font-size: 18px;
-}
-
-.embed-card-copy {
-  display: flex;
-  flex: 1;
-  min-width: 0;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.embed-card-copy strong,
-.embed-card-copy small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.embed-card-copy strong { font-size: var(--text-small); font-weight: 600; }
-.embed-card-copy small { color: var(--ink-3); font-size: var(--text-micro); }
-.embed-card-arrow { color: var(--ink-3); font-size: 13px; }
-
-@media (max-width: 380px) {
-  /* En pantallas más estrechas que su mínimo, se deja escalar. */
-  .embed-card { min-width: 0; }
-}
-
-.embed-caja {
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  box-shadow: var(--shadow-1);
-  transition: border-color var(--dur-base) var(--ease-out),
-              box-shadow var(--dur-base) var(--ease-suave);
-}
-
-.embed-caja iframe,
-.embed-caja blockquote {
-  display: block;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  border: 0;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .embed-card:hover .embed-caja {
-    border-color: var(--gold-veil);
-    box-shadow: var(--shadow-2);
-  }
-
-  .embed-card-link:hover {
-    border-color: var(--gold-veil);
-    box-shadow: var(--shadow-2);
-  }
 }
 
 /* ============================================================

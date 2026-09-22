@@ -1852,71 +1852,29 @@ const promociones = [
 ];
 
 // Videos de TikTok e Instagram
+// Los videos de la portada. Los de TikTok ya no traen el <blockquote> de
+// su widget: cada uno pesaba lo suyo en este archivo, cargaba un script
+// ajeno, montaba un iframe y llegaba con su propia botonera (me gusta,
+// comentarios, "Watch now"), que ni se puede maquetar ni pega con el
+// resto. Ahora es una portada alojada aquí que abre el video en TikTok.
+// Las portadas se regeneran con herramientas/portadas-tiktok.py
 const videos = [
-  {
-    plataforma: "local",
-    titulo: "Nuevo Video - Nuestras Velas",
-    url: "",
-    embedCode: "",
-    videoSrc: "assets/productos/Videos/velas.mp4"
-  },
-  {
-    plataforma: "local",
-    titulo: "Video - Aromas y Fragancias",
-    url: "",
-    embedCode: "",
-    videoSrc: "assets/productos/Videos/aro.mp4"
-  },
-  {
-    plataforma: "local",
-    titulo: "Video - Colección Especial",
-    url: "",
-    embedCode: "",
-    videoSrc: "assets/productos/Videos/al.mp4"
-  },
-  {
-    plataforma: "local",
-    titulo: "Video - Velas Artesanales",
-    url: "",
-    embedCode: "",
-    videoSrc: "assets/productos/Videos/vel.mp4"
-  },
-  {
-    plataforma: "tiktok",
-    titulo: "Pregunta ya por nuestro kit",
-    url: "https://www.tiktok.com/@velas.elena/video/7684359342010748180",
-    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7684359342010748180" data-video-id="7684359342010748180"><section></section></blockquote>`
-  },
-  {
-    plataforma: "tiktok",
-    titulo: "Somos mayoristas, emprende con nosotros",
-    url: "https://www.tiktok.com/@velas.elena/video/7685743973889035538",
-    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7685743973889035538" data-video-id="7685743973889035538"><section></section></blockquote>`
-  },
-  {
-    plataforma: "tiktok",
-    titulo: "Nuestras velas navideñas",
-    url: "https://www.tiktok.com/@velas.elena/video/7685605024013012231",
-    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7685605024013012231" data-video-id="7685605024013012231"><section></section></blockquote>`
-  },
-  {
-    plataforma: "tiktok",
-    titulo: "Vela árbol de Navidad",
-    url: "https://www.tiktok.com/@velas.elena/video/7680630648012573972",
-    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7680630648012573972" data-video-id="7680630648012573972"><section></section></blockquote>`
-  },
-  {
-    plataforma: "tiktok",
-    titulo: "Pregunta por nuestros kits de emprendedor",
-    url: "https://www.tiktok.com/@velas.elena/video/7663227063792389396",
-    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7663227063792389396" data-video-id="7663227063792389396"><section></section></blockquote>`
-  },
-  {
-    plataforma: "tiktok",
-    titulo: "Velas para toda la familia",
-    url: "https://www.tiktok.com/@velas.elena/video/7566441246244211988",
-    embedCode: `<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@velas.elena/video/7566441246244211988" data-video-id="7566441246244211988"><section></section></blockquote>`
-  }
+  { plataforma: "local", titulo: "Nuestras velas", videoSrc: "assets/productos/Videos/velas.mp4" },
+  { plataforma: "local", titulo: "Aromas y fragancias", videoSrc: "assets/productos/Videos/aro.mp4" },
+  { plataforma: "local", titulo: "Colección especial", videoSrc: "assets/productos/Videos/al.mp4" },
+  { plataforma: "local", titulo: "Velas artesanales", videoSrc: "assets/productos/Videos/vel.mp4" },
+  { plataforma: "tiktok", titulo: "Pregunta ya por nuestro kit", url: "https://www.tiktok.com/@velas.elena/video/7684359342010748180",
+    portada: "assets/productos/Videos/tiktok/7684359342010748180.jpg" },
+  { plataforma: "tiktok", titulo: "Somos mayoristas, emprende con nosotros", url: "https://www.tiktok.com/@velas.elena/video/7685743973889035538",
+    portada: "assets/productos/Videos/tiktok/7685743973889035538.jpg" },
+  { plataforma: "tiktok", titulo: "Nuestras velas navideñas", url: "https://www.tiktok.com/@velas.elena/video/7685605024013012231",
+    portada: "assets/productos/Videos/tiktok/7685605024013012231.jpg" },
+  { plataforma: "tiktok", titulo: "Vela árbol de Navidad", url: "https://www.tiktok.com/@velas.elena/video/7680630648012573972",
+    portada: "assets/productos/Videos/tiktok/7680630648012573972.jpg" },
+  { plataforma: "tiktok", titulo: "Pregunta por nuestros kits de emprendedor", url: "https://www.tiktok.com/@velas.elena/video/7663227063792389396",
+    portada: "assets/productos/Videos/tiktok/7663227063792389396.jpg" },
+  { plataforma: "tiktok", titulo: "Velas para toda la familia", url: "https://www.tiktok.com/@velas.elena/video/7566441246244211988",
+    portada: "assets/productos/Videos/tiktok/7566441246244211988.jpg" },
 ];
 
 // Inicialización
@@ -4463,43 +4421,9 @@ function actualizarCarrusel() {
 // Videos
 function initVideos() {
   renderVideos();
-  initVideoCarouselControls();
   initLazyVideos();
 }
 
-function initVideoCarouselControls() {
-  document.querySelectorAll('#videos-container, #personalizadas .reel-rail').forEach(rail => {
-    if (rail.parentElement.classList.contains('video-carousel')) return;
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'video-carousel';
-    rail.parentElement.insertBefore(wrapper, rail);
-    wrapper.appendChild(rail);
-
-    const createButton = (direction, label, icon) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = `video-carousel-arrow video-carousel-arrow-${direction}`;
-      button.setAttribute('aria-label', label);
-      button.innerHTML = `<i class="fas ${icon}" aria-hidden="true"></i>`;
-      button.addEventListener('click', () => {
-        const firstCard = rail.querySelector('.reel');
-        if (!firstCard) return;
-        const gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
-        const step = firstCard.getBoundingClientRect().width + gap;
-        rail.scrollBy({ left: direction === 'next' ? step : -step, behavior: 'smooth' });
-      });
-      return button;
-    };
-
-    wrapper.append(
-      createButton('previous', 'Video anterior', 'fa-chevron-left'),
-      createButton('next', 'Siguiente video', 'fa-chevron-right')
-    );
-  });
-}
-
-// Lazy loading para videos
 function initLazyVideos() {
   const videoContainers = document.querySelectorAll('.video-container-lazy');
   
@@ -4534,68 +4458,13 @@ function initLazyVideos() {
   });
 }
 
-// Los <script> inyectados con innerHTML no se ejecutan: los embeds de
-// TikTok e Instagram necesitan que su script se cargue aparte. Se carga
-// uno por plataforma y sólo si hay algún embed de esa plataforma.
-const SCRIPTS_EMBED = {
-  tiktok: 'https://www.tiktok.com/embed.js',
-  instagram: 'https://www.instagram.com/embed.js'
-};
-
-function cargarScriptsEmbed(lista) {
-  const necesarias = new Set(
-    lista.filter(v => v.embedCode).map(v => v.plataforma)
-  );
-  if (!necesarias.size) return;
-
-  // El script de TikTok pesa y es de terceros: no debe cargarse al abrir
-  // la página, sólo cuando los embeds se acercan a la pantalla.
-  const ancla = document.querySelector('.reel-embed') ||
-                document.getElementById('videos-container');
-  if (ancla && 'IntersectionObserver' in window) {
-    const obs = new IntersectionObserver((entradas) => {
-      if (!entradas[0].isIntersecting) return;
-      obs.disconnect();
-      inyectarScriptsEmbed(necesarias);
-    }, { rootMargin: '0px', threshold: 0.1 });
-    obs.observe(ancla);
-    return;
-  }
-
-  inyectarScriptsEmbed(necesarias);
-}
-
-function inyectarScriptsEmbed(necesarias) {
-  necesarias.forEach(plataforma => {
-    const src = SCRIPTS_EMBED[plataforma];
-    if (!src) return;
-
-    const yaEsta = document.querySelector(`script[src="${src}"]`);
-    if (yaEsta) {
-      reprocesarEmbeds(plataforma);
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = src;
-    script.async = true;
-    script.addEventListener('load', () => reprocesarEmbeds(plataforma));
-    document.body.appendChild(script);
-  });
-}
-
-function reprocesarEmbeds(plataforma) {
-  if (plataforma === 'instagram' && window.instgrm) window.instgrm.Embeds.process();
-  if (plataforma === 'tiktok' && typeof window.tiktokEmbedLoad === 'function') window.tiktokEmbedLoad();
-}
-
 function renderVideos() {
   const container = document.getElementById('videos-container');
   if (!container) return;
 
-  const videosConContenido = videos.filter(v => v.embedCode || v.url || v.videoSrc);
+  const conContenido = videos.filter(v => v.videoSrc || v.url);
 
-  if (videosConContenido.length === 0) {
+  if (!conContenido.length) {
     container.innerHTML = `
       <div class="reel-vacio">
         <i class="fas fa-video"></i>
@@ -4604,20 +4473,9 @@ function renderVideos() {
     return;
   }
 
-  // Los embeds de redes piden 325px de ancho como mínimo y traen su
-  // propio marco: metidos en el carrete 9:16 salían recortados. Van en
-  // su propia rejilla, debajo.
-  const propios = videosConContenido.filter(v => !v.embedCode);
-  const embeds = videosConContenido.filter(v => v.embedCode);
-
-  container.innerHTML = propios.map((video, i) => {
-    const icono = video.plataforma === 'tiktok' ? 'fab fa-tiktok'
-                : video.plataforma === 'instagram' ? 'fab fa-instagram'
-                : 'fas fa-play';
-
-    // Video propio (MP4 vertical). Se descarga sólo al pulsar.
-    if (video.videoSrc && video.plataforma === 'local') {
-      // El fotograma de portada se saca del nombre del archivo.
+  container.innerHTML = conContenido.map(video => {
+    // Video propio: se descarga sólo al pulsar, nunca antes.
+    if (video.videoSrc) {
       const base = video.videoSrc.split('/').pop().replace(/\.mp4$/i, '');
       const poster = 'assets/productos/Videos/posters/' + base + '.jpg';
       return `
@@ -4628,62 +4486,30 @@ function renderVideos() {
           <span class="reel-play"><i class="fas fa-play"></i></span>
         </button>
         <video class="reel-video video-el hidden" preload="none" playsinline controls
-               poster="" aria-label="${video.titulo}">
+               aria-label="${video.titulo}">
           Tu navegador no soporta videos HTML5.
         </video>
         <div class="reel-pie">
-          <span class="reel-marca"><i class="${icono}"></i></span>
           <h3 class="reel-titulo">${video.titulo}</h3>
         </div>
       </article>`;
     }
 
-    // Incrustado de una red social.
-    if (video.embedCode) {
-      return `
-      <article class="reel reel-embed">
-        <div class="reel-embed-caja">${video.embedCode}</div>
-        <div class="reel-pie">
-          <span class="reel-marca"><i class="${icono}"></i></span>
-          <h3 class="reel-titulo">${video.titulo}</h3>
-        </div>
-      </article>`;
-    }
-
-    // Sólo enlace: se abre en la red de origen.
+    // Video de TikTok: portada alojada aquí que abre el original.
     return `
-      <a class="reel reel-enlace" href="${video.url}" target="_blank" rel="noopener noreferrer">
-        <span class="reel-play"><i class="${icono}"></i></span>
+      <a class="reel reel-enlace" href="${video.url}" target="_blank" rel="noopener noreferrer"
+         aria-label="Ver en TikTok: ${video.titulo}">
+        <img class="reel-poster" src="${video.portada}" alt="" loading="lazy" decoding="async"
+             onerror="this.remove()">
+        <span class="reel-red"><i class="fab fa-tiktok" aria-hidden="true"></i></span>
+        <span class="reel-play"><i class="fas fa-play"></i></span>
         <div class="reel-pie">
-          <span class="reel-marca"><i class="${icono}"></i></span>
           <h3 class="reel-titulo">${video.titulo}</h3>
         </div>
       </a>`;
   }).join('');
 
-  renderEmbedsSociales(embeds);
-  cargarScriptsEmbed(videosConContenido);
   if (typeof refrescarMovimiento === 'function') refrescarMovimiento(container);
-}
-
-function renderEmbedsSociales(embeds) {
-  let zona = document.getElementById('social-embeds');
-  if (!embeds.length) { if (zona) zona.remove(); return; }
-
-  if (!zona) {
-    const contenedor = document.getElementById('videos-container');
-    if (!contenedor) return;
-    zona = document.createElement('div');
-    zona.id = 'social-embeds';
-    zona.className = 'embed-grid';
-    contenedor.insertAdjacentElement('afterend', zona);
-  }
-
-  zona.innerHTML = embeds.map(v => `
-    <article class="embed-card">
-      <div class="embed-caja">${v.embedCode}</div>
-    </article>
-  `).join('');
 }
 
 // Búsqueda mejorada
