@@ -7,26 +7,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- SEO Meta Tags -->
-    <title>Elena Velas y Aromas | Velas Aromáticas Artesanales</title>
-    <meta name="description" content="Velas aromáticas artesanales para ocasiones especiales. Elige tu fragancia favorita y crea momentos inolvidables con Elena Velas y Aromas.">
-    <meta name="keywords" content="velas aromáticas, velas artesanales, velas perfumadas, regalos, ocasiones especiales">
+    <!-- El título y la descripción son lo que se lee en el resultado de
+         Google. Llevan lo que la gente realmente escribe al buscar:
+         la ciudad y "por mayor". La etiqueta keywords no la usa ningún
+         buscador desde hace años, así que sobra. -->
+    <title>Velas artesanales en Medellín | Elena Velas y Aromas</title>
+    <meta name="description" content="Velas decorativas y de consumo hechas a mano en Medellín. Navidad, comunión, baby shower y diseños personalizados. Detal y por mayor, envíos a toda Colombia.">
     <meta name="author" content="Elena Velas y Aromas">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph / Facebook -->
+    <!-- Vista previa al compartir el enlace.
+         Antes apuntaba a elenavelasyaromas.com, que no existe, y a una
+         imagen que daba 404: el enlace llegaba pelado a WhatsApp, que es
+         por donde entra la venta. La imagen se regenera con
+         herramientas/imagen-compartir.py -->
+    <link rel="canonical" href="https://pagina-m-vil-elena.vercel.app/">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://elenavelasyaromas.com/">
-    <meta property="og:title" content="Elena Velas y Aromas | Velas Aromáticas Artesanales">
-    <meta property="og:description" content="Velas aromáticas artesanales para ocasiones especiales">
-    <meta property="og:image" content="https://elenavelasyaromas.com/assets/og-image.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://elenavelasyaromas.com/">
-    <meta property="twitter:title" content="Elena Velas y Aromas | Velas Aromáticas Artesanales">
-    <meta property="twitter:description" content="Velas aromáticas artesanales para ocasiones especiales">
-    <meta property="twitter:image" content="https://elenavelasyaromas.com/assets/twitter-image.jpg">
-    
+    <meta property="og:site_name" content="Elena Velas y Aromas">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:url" content="https://pagina-m-vil-elena.vercel.app/">
+    <meta property="og:title" content="Elena Velas y Aromas | Velas artesanales en Medellín">
+    <meta property="og:description" content="Velas decorativas y de consumo hechas a mano. Detal y por mayor, con envíos a todo Colombia.">
+    <meta property="og:image" content="https://pagina-m-vil-elena.vercel.app/assets/compartir.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Velas artesanales Elena sobre una base de madera">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Elena Velas y Aromas | Velas artesanales en Medellín">
+    <meta name="twitter:description" content="Velas decorativas y de consumo hechas a mano. Detal y por mayor, con envíos a todo Colombia.">
+    <meta name="twitter:image" content="https://pagina-m-vil-elena.vercel.app/assets/compartir.jpg">
+
     <!-- PWA -->
     <!-- theme-color = el color del borde superior de la página, no el de marca -->
     <meta name="theme-color" content="#F7F4EE">
@@ -77,12 +88,17 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "Store",
       "name": "Elena Velas y Aromas",
-      "description": "Velas aromáticas artesanales para ocasiones especiales",
-      "url": "https://elenavelasyaromas.com",
-      "telephone": "+57-300-822-0389",
-      "priceRange": "$$"
+      "description": "Velas decorativas y de consumo hechas a mano, al detal y por mayor.",
+      "url": "https://pagina-m-vil-elena.vercel.app/",
+      "image": "https://pagina-m-vil-elena.vercel.app/assets/compartir.jpg",
+      "telephone": "+573008220389",
+      "priceRange": "$$",
+      "currenciesAccepted": "COP",
+      "paymentAccepted": "Efectivo, Nequi, Bancolombia",
+      "address": { "@type": "PostalAddress", "addressLocality": "Medellín", "addressRegion": "Antioquia", "addressCountry": "CO" },
+      "areaServed": { "@type": "Country", "name": "Colombia" }
     }
     </script>
 </head>
@@ -349,7 +365,8 @@
                                     </div>
 
                                     <input type="file" id="imagen-personalizada" name="imagen"
-                                           accept="image/*" class="sr-only">
+                                           accept="image/*" class="sr-only"
+                                           aria-label="Imagen de referencia para tu vela personalizada">
 
                                     <figure id="imagen-vista" class="subir-vista" hidden>
                                         <img id="imagen-vista-img" alt="Vista previa de tu imagen de referencia">

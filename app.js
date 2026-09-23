@@ -2112,7 +2112,7 @@ function generarMensajeWhatsApp() {
     if (item.cantidad > 1) mensaje += ` (x${item.cantidad})`;
     mensaje += `\n`;
   });
-  mensaje += `\nTotal: $${state.carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toLocaleString()}`;
+  mensaje += `\nTotal: $${state.carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toLocaleString('es-CO')}`;
   
   return mensaje;
 }
@@ -2458,8 +2458,8 @@ function renderCarrito() {
             <div class="flex items-center gap-4">
               <div class="text-right">
                 <p class="text-xs text-gray-500 dark:text-gray-400">Precio unitario</p>
-                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">$${item.precio.toLocaleString()}</p>
-                <p class="text-lg md:text-xl font-bold text-yellow-600 dark:text-yellow-400 mt-1">$${subtotal.toLocaleString()}</p>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">$${item.precio.toLocaleString('es-CO')}</p>
+                <p class="text-lg md:text-xl font-bold text-yellow-600 dark:text-yellow-400 mt-1">$${subtotal.toLocaleString('es-CO')}</p>
               </div>
               <button onclick="eliminarDelCarrito(${index})" 
                       class="w-10 h-10 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 flex items-center justify-center transition-all shadow-sm" 
@@ -2481,13 +2481,13 @@ function renderCarrito() {
   // Actualizar total
   const totalElement = document.getElementById('cart-total');
   if (totalElement) {
-    totalElement.textContent = `$${total.toLocaleString()}`;
+    totalElement.textContent = `$${total.toLocaleString('es-CO')}`;
   }
   
   // Actualizar subtotal
   const subtotalElement = document.getElementById('cart-subtotal');
   if (subtotalElement) {
-    subtotalElement.textContent = `$${subtotal.toLocaleString()}`;
+    subtotalElement.textContent = `$${subtotal.toLocaleString('es-CO')}`;
   }
   
   // Actualizar cantidad total de items
@@ -2901,7 +2901,7 @@ function abrirModalProductoGrupo(imagen) {
               <div class="mb-3">
                 <div class="font-semibold text-blue-600 dark:text-blue-400 mb-2">Detal:</div>
                 ${tamanosDetal.map(t => `
-                  <div class="text-gray-700 dark:text-gray-300 ml-3">${t.nombre}: $${t.precio.toLocaleString()}</div>
+                  <div class="text-gray-700 dark:text-gray-300 ml-3">${t.nombre}: $${t.precio.toLocaleString('es-CO')}</div>
                 `).join('')}
               </div>
             ` : ''}
@@ -2909,7 +2909,7 @@ function abrirModalProductoGrupo(imagen) {
               <div>
                 <div class="font-semibold text-purple-600 dark:text-purple-400 mb-2">Mayorista:</div>
                 ${tamanosMayorista.map(t => `
-                  <div class="text-gray-700 dark:text-gray-300 ml-3">${t.nombre}: $${t.precio.toLocaleString()}</div>
+                  <div class="text-gray-700 dark:text-gray-300 ml-3">${t.nombre}: $${t.precio.toLocaleString('es-CO')}</div>
                 `).join('')}
               </div>
             ` : ''}
@@ -2919,19 +2919,19 @@ function abrirModalProductoGrupo(imagen) {
           <div>
             <div class="font-semibold text-blue-600 dark:text-blue-400 mb-1">Detal</div>
             ${tienePres ? `
-              <div class="text-gray-700 dark:text-gray-300">Bolsa: $${preciosDetal.bolsa.toLocaleString()}</div>
-              <div class="text-gray-700 dark:text-gray-300">Caja: $${preciosDetal.caja.toLocaleString()}</div>
+              <div class="text-gray-700 dark:text-gray-300">Bolsa: $${preciosDetal.bolsa.toLocaleString('es-CO')}</div>
+              <div class="text-gray-700 dark:text-gray-300">Caja: $${preciosDetal.caja.toLocaleString('es-CO')}</div>
             ` : `
-              <div class="text-gray-700 dark:text-gray-300">Precio: $${preciosDetal.bolsa.toLocaleString()}</div>
+              <div class="text-gray-700 dark:text-gray-300">Precio: $${preciosDetal.bolsa.toLocaleString('es-CO')}</div>
             `}
           </div>
           <div>
             <div class="font-semibold text-purple-600 dark:text-purple-400 mb-1">Mayorista</div>
             ${tienePres ? `
-              <div class="text-gray-700 dark:text-gray-300">Bolsa: $${preciosMayorista.bolsa.toLocaleString()}</div>
-              <div class="text-gray-700 dark:text-gray-300">Caja: $${preciosMayorista.caja.toLocaleString()}</div>
+              <div class="text-gray-700 dark:text-gray-300">Bolsa: $${preciosMayorista.bolsa.toLocaleString('es-CO')}</div>
+              <div class="text-gray-700 dark:text-gray-300">Caja: $${preciosMayorista.caja.toLocaleString('es-CO')}</div>
             ` : `
-              <div class="text-gray-700 dark:text-gray-300">Precio: $${preciosMayorista.bolsa.toLocaleString()}</div>
+              <div class="text-gray-700 dark:text-gray-300">Precio: $${preciosMayorista.bolsa.toLocaleString('es-CO')}</div>
             `}
           </div>
         </div>
@@ -3454,7 +3454,7 @@ function abrirModalProducto(productoId) {
               class="tamano-btn px-6 py-4 border-2 rounded-xl transition-all min-h-[90px] border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30"
             >
               <div class="font-bold text-lg">${tamano.nombre}</div>
-              <div class="text-yellow-600 dark:text-yellow-400 font-semibold mt-2">$${tamano.precio.toLocaleString()}</div>
+              <div class="text-yellow-600 dark:text-yellow-400 font-semibold mt-2">$${tamano.precio.toLocaleString('es-CO')}</div>
             </button>
           `).join('')}
         </div>
@@ -3526,7 +3526,7 @@ function abrirModalProducto(productoId) {
           btnAgregar.removeAttribute('disabled');
           btnAgregar.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
           btnAgregar.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
-          btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
+          btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString('es-CO')}`;
           console.log('✅ Botón habilitado correctamente');
         } else {
           btnAgregar.disabled = true;
@@ -3543,7 +3543,7 @@ function abrirModalProducto(productoId) {
           btnAgregar.removeAttribute('disabled');
           btnAgregar.classList.remove('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed');
           btnAgregar.classList.add('bg-yellow-500', 'hover:bg-yellow-600', 'cursor-pointer');
-          btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString()}`;
+          btnAgregar.textContent = `Agregar al Carrito - $${precioSeleccionado.toLocaleString('es-CO')}`;
         } else {
           btnAgregar.disabled = true;
           btnAgregar.setAttribute('disabled', 'disabled');
@@ -3601,7 +3601,7 @@ function abrirModalProducto(productoId) {
                 class="tamano-btn px-6 py-4 border-2 rounded-xl transition-all min-h-[90px] border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-yellow-500 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30"
               >
                 <div class="font-bold text-lg">${tamano.nombre}</div>
-                <div class="text-yellow-600 dark:text-yellow-400 font-semibold mt-2">$${tamano.precio.toLocaleString()}</div>
+                <div class="text-yellow-600 dark:text-yellow-400 font-semibold mt-2">$${tamano.precio.toLocaleString('es-CO')}</div>
               </button>
             `).join('');
           }
@@ -3663,8 +3663,8 @@ function abrirModalProducto(productoId) {
           if (tamanoData && tipoCompraSeleccionado) {
             const preciosTamano = tamanoData[tipoCompraSeleccionado];
             if (preciosTamano) {
-              if (precioBolsaDisplay) precioBolsaDisplay.textContent = `$${preciosTamano.bolsa.toLocaleString()}`;
-              if (precioCajaDisplay) precioCajaDisplay.textContent = `$${preciosTamano.caja.toLocaleString()}`;
+              if (precioBolsaDisplay) precioBolsaDisplay.textContent = `$${preciosTamano.bolsa.toLocaleString('es-CO')}`;
+              if (precioCajaDisplay) precioCajaDisplay.textContent = `$${preciosTamano.caja.toLocaleString('es-CO')}`;
             }
           }
           
@@ -3743,7 +3743,7 @@ function abrirModalProducto(productoId) {
                 const precioContainer = document.getElementById('precio-tamano-container');
                 const precioValor = document.getElementById('precio-tamano-valor');
                 if (precioContainer && precioValor) {
-                  precioValor.textContent = `$${precioSeleccionado.toLocaleString()}`;
+                  precioValor.textContent = `$${precioSeleccionado.toLocaleString('es-CO')}`;
                   precioContainer.style.display = 'block';
                   setTimeout(() => {
                     const precioDisplay = document.getElementById('precio-tamano-display');
@@ -4010,10 +4010,10 @@ function abrirModalProducto(productoId) {
         const precioCajaDisplay = document.getElementById('precio-caja-display');
         
         if (precioBolsaDisplay && precios[tipoCompraSeleccionado].bolsa) {
-          precioBolsaDisplay.textContent = `$${precios[tipoCompraSeleccionado].bolsa.toLocaleString()}`;
+          precioBolsaDisplay.textContent = `$${precios[tipoCompraSeleccionado].bolsa.toLocaleString('es-CO')}`;
         }
         if (precioCajaDisplay && precios[tipoCompraSeleccionado].caja) {
-          precioCajaDisplay.textContent = `$${precios[tipoCompraSeleccionado].caja.toLocaleString()}`;
+          precioCajaDisplay.textContent = `$${precios[tipoCompraSeleccionado].caja.toLocaleString('es-CO')}`;
         }
         
         // Resetear selección de presentación cuando cambia el tipo
@@ -4035,7 +4035,7 @@ function abrirModalProducto(productoId) {
           precioActual = precios[tipoCompraSeleccionado];
           presentacionSeleccionada = null;
         }
-        precioValor.textContent = `$${precioActual.toLocaleString()}`;
+        precioValor.textContent = `$${precioActual.toLocaleString('es-CO')}`;
         precioDisplay.style.opacity = '1';
       }
       
@@ -4062,7 +4062,7 @@ function abrirModalProducto(productoId) {
         precioActual = precios[tipoCompraSeleccionado][presentacionSeleccionada];
         
         // Mostrar precio con animación
-        precioValor.textContent = `$${precioActual.toLocaleString()}`;
+        precioValor.textContent = `$${precioActual.toLocaleString('es-CO')}`;
         precioDisplay.style.opacity = '1';
         
         actualizarBotónCarrito();
@@ -5096,11 +5096,11 @@ function comprarPorWhatsApp() {
       mensaje += `   - Presentación: ${presentacionTexto}\n`;
     }
     mensaje += `   - Cantidad: ${item.cantidad}\n`;
-    mensaje += `   - Precio unitario: $${item.precio.toLocaleString()}\n`;
-    mensaje += `   - Subtotal: $${(item.precio * item.cantidad).toLocaleString()}\n\n`;
+    mensaje += `   - Precio unitario: $${item.precio.toLocaleString('es-CO')}\n`;
+    mensaje += `   - Subtotal: $${(item.precio * item.cantidad).toLocaleString('es-CO')}\n\n`;
   });
   
-  mensaje += `💰 Total: $${total.toLocaleString()}\n\n`;
+  mensaje += `💰 Total: $${total.toLocaleString('es-CO')}\n\n`;
   mensaje += `Gracias por tu atención.`;
   
   const url = WHATSAPP_API + encodeURIComponent(mensaje);
