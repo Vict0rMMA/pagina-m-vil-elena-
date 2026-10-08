@@ -1,0 +1,8 @@
+Fotos de los suvenirs.
+
+Una foto por producto, con nombre claro (souvenir-mariposa.jpg).
+Dos productos NO deben compartir foto: el catálogo agrupa por imagen y
+se mostrarían juntos en una sola tarjeta.
+
+Antes de subirlas, redúcelas a ~1000px de ancho y JPEG calidad 80.
+Una foto de producto no debería pasar de 200 KB.

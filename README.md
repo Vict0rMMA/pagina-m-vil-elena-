@@ -247,6 +247,19 @@ El script busca las clases `fa-*` por todo el proyecto, se descarga Font Awesome
 recorta las fuentes y reescribe `iconos.css`. **Si no lo ejecutas, el icono nuevo
 sale en blanco.**
 
+### Añadir una categoría nueva (ejemplo: Suvenirs)
+
+La categoría **Suvenirs** ya está cableada y vacía, esperando las fichas.
+Para cargarla sólo hay que:
+
+1. Poner las fotos en `assets/productos/Suvenirs/`, una por producto y sin
+   repetir imagen entre productos (el catálogo agrupa por foto).
+2. Llenar el array `suvenirs: []` de `app.js` con los productos.
+
+En cuanto haya un producto dentro, **aparece sola** la pestaña de Suvenirs en
+el catálogo y el aviso del carrusel de promociones. Mientras esté vacía no se
+muestra ninguna de las dos: una categoría sin productos no pinta su botón.
+
 ### Fotos de producto
 
 Las fotos grandes son el mayor peso del sitio. Antes de subir una, redúcela a

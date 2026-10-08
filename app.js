@@ -1778,7 +1778,11 @@ const productos = {
         ]
       }
     }
-  ]
+  ],
+
+  // Pendiente de las fichas: en cuanto lleguen las fotos y los precios,
+  // los productos entran aquí y la categoría aparece sola.
+  suvenirs: []
 };
 
 // Estado de la aplicación
@@ -1795,6 +1799,15 @@ const state = {
 
 // Promociones
 const promociones = [
+  {
+    titulo: "Nuevo catálogo de suvenirs",
+    subtitulo: "Recién llegado",
+    descripcion: "Mira el catálogo de suvenirs nuevo y la actualización del Kit Emprendedor.",
+    icon: "fas fa-gift",
+    // Sólo se anuncia si hay suvenirs cargados: un aviso que lleva a una
+    // categoría vacía es peor que no poner nada.
+    visible: () => (productos.suvenirs || []).length > 0
+  },
   {
     titulo: "Velas Personalizadas",
     subtitulo: "Crea tu diseño único",
@@ -2562,7 +2575,8 @@ const categoryMap = {
   'babyshower': 'celebracion',
   'comunion': 'primeraComunion',
   'navidad': 'navidad',
-  'kits': 'kitEmprendedor'
+  'kits': 'kitEmprendedor',
+  'suvenirs': 'suvenirs'
 };
 
 // Mapeo inverso: categoría real a filtro
@@ -2571,7 +2585,8 @@ const categoryToFilter = {
   'celebracion': 'babyshower',
   'primeraComunion': 'comunion',
   'navidad': 'navidad',
-  'kitEmprendedor': 'kits'
+  'kitEmprendedor': 'kits',
+  'suvenirs': 'suvenirs'
 };
 
 function renderCategorias() {
@@ -2584,8 +2599,13 @@ function renderCategorias() {
     { filter: 'babyshower', nombre: 'Baby Shower', icon: 'fas fa-baby' },
     { filter: 'comunion', nombre: 'Primera Comunión', icon: 'fas fa-cross' },
     { filter: 'navidad', nombre: 'Navidad', icon: 'fas fa-tree' },
+    { filter: 'suvenirs', nombre: 'Suvenirs', icon: 'fas fa-gift' },
     { filter: 'kits', nombre: 'Kit Emprendedor', icon: 'fas fa-box-open' }
-  ];
+  // Una categoría sin productos no muestra su botón: antes no podía
+  // pasar porque todas tenían, pero al añadir Suvenirs vacía habría
+  // salido un filtro que no lleva a ningún sitio.
+  ].filter(cat => cat.filter === 'todas' ||
+                  (productos[categoryMap[cat.filter]] || []).length > 0);
   
   // Determinar el filtro activo actual
   const filterActual = state.categoriaActual === 'todas' ? 'todas' : 
@@ -2649,6 +2669,7 @@ function getProductCategory(producto) {
   if (categoriaReal === 'primeraComunion') return 'comunion';
   if (categoriaReal === 'navidad') return 'navidad';
   if (categoriaReal === 'kitEmprendedor') return 'kits';
+  if (categoriaReal === 'suvenirs') return 'suvenirs';
   return categoriaReal.toLowerCase();
 }
 
@@ -4235,9 +4256,12 @@ function renderPromociones() {
   const container = document.getElementById('promo-slides');
   if (!container) return;
 
-  container.innerHTML = promociones.map((promo, index) => `
+  // Una promo puede traer una condición; si no la cumple, no se pinta.
+  const alAire = promociones.filter(p => typeof p.visible !== 'function' || p.visible());
+
+  container.innerHTML = alAire.map((promo, index) => `
     <article class="promo-slide" role="group" aria-roledescription="diapositiva"
-             aria-label="${index + 1} de ${promociones.length}">
+             aria-label="${index + 1} de ${alAire.length}">
       <div class="promo-cuerpo">
         <span class="promo-icono" aria-hidden="true">
           <i class="${promo.icon || 'fas fa-gift'}"></i>
@@ -4258,7 +4282,13 @@ function renderPromociones() {
 function renderPromoPuntos() {
   const cont = document.getElementById('promo-puntos');
   if (!cont) return;
-  cont.innerHTML = promociones.map((p, i) => `
+  // Se leen del DOM, no del array: con una promo condicionada (el aviso de
+  // suvenirs) había un punto de más y el carrusel giraba al vacío.
+  const pista = document.getElementById('promo-slides');
+  const pintadas = pista ? [...pista.children] : [];
+  cont.innerHTML = pintadas.map((el, i) => ({
+    titulo: (el.querySelector('.promo-titulo') || {}).textContent || ('promoción ' + (i + 1))
+  })).map((p, i) => `
     <button type="button" class="promo-punto${i === (state.currentPromoSlide || 0) ? ' active' : ''}"
             data-slide="${i}" aria-label="Ir a ${p.titulo}"></button>
   `).join('');
@@ -4294,7 +4324,7 @@ function iniciarCarrusel() {
   const carrusel = document.getElementById('promo-carousel');
   if (!pista || !carrusel) return;
 
-  const total = promociones.length;
+  const total = pista.children.length;
   if (total < 2) return;
 
   if (carruselCableado) { actualizarCarrusel(); return; }
