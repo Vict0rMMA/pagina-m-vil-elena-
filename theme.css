@@ -1987,34 +1987,44 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--space-8) var(--space-6);
   background: var(--surface);
 }
 
 @media (min-width: 768px) {
-  .promo-slide { padding: var(--space-16) var(--space-12); }
+  .promo-slide { padding: 40px var(--space-12); }
 }
 
 .promo-cuerpo {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) auto;
+  grid-template-areas: "icon copy action";
+  align-items: center;
+  gap: var(--space-6);
+  max-width: 56rem;
+  text-align: left;
+}
+
+.promo-copy {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  max-width: 34rem;
-  text-align: center;
+  grid-area: copy;
+  align-items: flex-start;
+  gap: var(--space-2);
 }
 
 .promo-icono {
+  grid-area: icon;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px; height: 56px;
-  margin-bottom: var(--space-2);
+  width: 46px; height: 46px;
+  margin: 0;
   border-radius: var(--r-full);
   background: var(--gold-mist);
   border: 1px solid var(--gold-veil);
   color: var(--gold-deep);
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .promo-eyebrow {
@@ -2044,7 +2054,73 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   color: var(--ink-2);
 }
 
-.promo-accion { margin-top: var(--space-4); }
+.promo-accion {
+  grid-area: action;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* El aviso de catálogo es una nota editorial, no otra tarjeta de venta. */
+.promo-slide.promo-novedades {
+  background: linear-gradient(105deg, var(--gold-mist), var(--surface) 72%);
+}
+
+.promo-novedades .promo-cuerpo {
+  gap: var(--space-6);
+}
+
+.promo-novedades .promo-icono {
+  background: var(--surface);
+}
+
+.promo-novedades .promo-eyebrow {
+  letter-spacing: 0.16em;
+}
+
+.promo-novedades .promo-titulo {
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  line-height: 1.2;
+}
+
+.promo-novedades .promo-texto {
+  max-width: 34rem;
+  font-size: var(--text-small);
+  line-height: 1.55;
+}
+
+#promo-slides .promo-novedades .promo-titulo,
+#promo-slides .promo-novedades .promo-texto {
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+@media (max-width: 560px) {
+  .promo-slide { padding: var(--space-6); }
+
+  .promo-cuerpo {
+    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-areas:
+      "icon copy"
+      ". action";
+    align-items: start;
+    column-gap: var(--space-4);
+    row-gap: var(--space-4);
+  }
+
+  .promo-icono {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .promo-accion { justify-self: start; }
+}
 
 /* Los puntos son también el control: llevan a su promoción. */
 .promo-puntos { display: flex; justify-content: center; gap: var(--space-2); }

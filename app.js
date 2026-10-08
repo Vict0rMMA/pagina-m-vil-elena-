@@ -2056,9 +2056,11 @@ const state = {
 // Promociones
 const promociones = [
   {
-    titulo: "Nuevas actualizaciones en nuestros catálogos",
-    subtitulo: "Recién llegado",
-    descripcion: "Descubre las novedades del catálogo de Suvenirs y del Kit Emprendedor.",
+    clase: "promo-novedades",
+    titulo: "Nuevos productos para regalar y emprender",
+    subtitulo: "Catálogos actualizados",
+    descripcion: "Ya puedes ver las novedades de Suvenirs y Kit Emprendedor.",
+    accion: "Ver catálogos",
     icon: "fas fa-gift",
     // Sólo se anuncia si hay suvenirs cargados: un aviso que lleva a una
     // categoría vacía es peor que no poner nada.
@@ -4537,16 +4539,18 @@ function renderPromociones() {
   const alAire = promociones.filter(p => typeof p.visible !== 'function' || p.visible());
 
   container.innerHTML = alAire.map((promo, index) => `
-    <article class="promo-slide" role="group" aria-roledescription="diapositiva"
+    <article class="promo-slide ${promo.clase || ''}" role="group" aria-roledescription="diapositiva"
              aria-label="${index + 1} de ${alAire.length}">
       <div class="promo-cuerpo">
         <span class="promo-icono" aria-hidden="true">
           <i class="${promo.icon || 'fas fa-gift'}"></i>
         </span>
-        ${promo.subtitulo ? `<span class="promo-eyebrow">${promo.subtitulo}</span>` : ''}
-        <h3 class="promo-titulo">${promo.titulo}</h3>
-        ${promo.descripcion ? `<p class="promo-texto">${promo.descripcion}</p>` : ''}
-        <a href="#productos" class="btn btn-secondary promo-accion">Ver catálogo</a>
+        <div class="promo-copy">
+          ${promo.subtitulo ? `<span class="promo-eyebrow">${promo.subtitulo}</span>` : ''}
+          <h3 class="promo-titulo">${promo.titulo}</h3>
+          ${promo.descripcion ? `<p class="promo-texto">${promo.descripcion}</p>` : ''}
+        </div>
+        <a href="#productos" class="btn btn-secondary promo-accion">${promo.accion || 'Ver catálogo'}</a>
       </div>
     </article>
   `).join('');
