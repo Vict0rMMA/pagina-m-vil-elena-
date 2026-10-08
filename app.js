@@ -1507,7 +1507,7 @@ const productos = {
       imagen: "assets/productos/Navidad-2026/pesebre-mini-poli.jpg",
       precios: {
         detal: { bolsa: 5500, caja: 6700 },
-        mayorista: { bolsa: 4900, caja: 5500 }
+        mayorista: { bolsa: 5000, caja: 5500 }
       },
       ficha: {
         precios: {
@@ -1516,7 +1516,7 @@ const productos = {
             { nombre: "Empaque cajita", detalle: null, precio: 6700 }
           ],
           mayorista: [
-          { nombre: "Empaque bolsita", detalle: null, precio: 4900 },
+          { nombre: "Empaque bolsita", detalle: null, precio: 5000 },
           { nombre: "Empaque cajita", detalle: null, precio: 5500 }
         ]
         }
@@ -1530,7 +1530,7 @@ const productos = {
       imagen: "assets/productos/Navidad-2026/peonia-grande.jpg",
       precios: {
         detal: { bolsa: 4200, caja: 5000 },
-        mayorista: { bolsa: 4000, caja: 5000 }
+        mayorista: { bolsa: 4500, caja: 5500 }
       },
       ficha: {
         medidas: [{ etiqueta: "Altura", valor: "7 cm" }, { etiqueta: "Ancho", valor: "7 cm" }],
@@ -1540,8 +1540,8 @@ const productos = {
             { nombre: "Empaque cajita", detalle: null, precio: 5000 }
           ],
           mayorista: [
-          { nombre: "Empaque bolsita", detalle: null, precio: 4000 },
-          { nombre: "Empaque cajita", detalle: null, precio: 5000 }
+          { nombre: "Empaque bolsita", detalle: null, precio: 4500 },
+          { nombre: "Empaque cajita", detalle: null, precio: 5500 }
         ]
         }
       }
