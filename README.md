@@ -260,6 +260,25 @@ En cuanto haya un producto dentro, **aparece sola** la pestaña de Suvenirs en
 el catálogo y el aviso del carrusel de promociones. Mientras esté vacía no se
 muestra ninguna de las dos: una categoría sin productos no pinta su botón.
 
+### Revisar los precios antes de publicar
+
+```bash
+node herramientas/revisar-precios.js
+```
+
+Compara el detal con el mayorista **presentación por presentación** (bolsita
+contra bolsita, cajita contra cajita) y avisa de:
+
+- mayorista más caro que el detal, o igual
+- lo grande costando menos que lo pequeño dentro del mismo tipo
+- precios en cero o productos sin precio
+- las dos copias del precio (`ficha.precios` y `precios`) diciendo cosas
+  distintas
+
+Sale con error si encuentra algo, así que conviene pasarlo siempre después de
+cargar precios nuevos. Una comparación a ojo no sirve: el mismo producto puede
+tener la bolsita bien y la cajita al revés.
+
 ### Fotos de producto
 
 Las fotos grandes son el mayor peso del sitio. Antes de subir una, redúcela a
