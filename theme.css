@@ -2617,9 +2617,15 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   font-size: 30px;
-  color: var(--gold-veil);
+  /* --gold-veil sobre la crema apenas se distinguía: el icono existía pero
+     no se veía. --gold tiene contraste de sobra y sigue siendo decorativo. */
+  color: var(--gold);
+  opacity: 0.7;
   line-height: 1;
 }
+
+/* Ampliar una foto que no existe abriría un visor vacío. */
+.producto.sin-foto .producto-zoom { display: none; }
 
 @media (min-width: 768px) {
   .producto.sin-foto .producto-media::after { font-size: 38px; }

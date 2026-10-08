@@ -2058,6 +2058,8 @@ const promociones = [
   {
     clase: "promo-novedades",
     titulo: "Nuevos productos para regalar y emprender",
+    destino: "productos",
+    filtro: "suvenirs",
     subtitulo: "Catálogos actualizados",
     descripcion: "Ya puedes ver las novedades de Suvenirs y Kit Emprendedor.",
     accion: "Ver catálogos",
@@ -2068,6 +2070,8 @@ const promociones = [
   },
   {
     titulo: "Velas Personalizadas",
+    destino: "personalizadas",
+    accion: "Diseñar mi vela",
     subtitulo: "Crea tu diseño único",
     descripcion: "Haz tu vela única con tu nombre, logo o diseño especial. ¡Consulta nuestros precios!",
     imagen: "https://via.placeholder.com/800x400?text=Velas+Personalizadas",
@@ -2077,6 +2081,8 @@ const promociones = [
   },
   {
     titulo: "Envío GRATIS",
+    destino: "contacto",
+    accion: "Ver envíos y pagos",
     subtitulo: "En compras superiores a $400 mil",
     descripcion: "Aprovecha esta oferta y ahorra en tus compras de velas artesanales",
     imagen: "https://via.placeholder.com/800x400?text=Envío+Gratis",
@@ -2086,6 +2092,9 @@ const promociones = [
   },
   {
     titulo: "Nuevas Colecciones Navideñas",
+    destino: "productos",
+    filtro: "navidad",
+    accion: "Ver Navidad",
     subtitulo: "Disponibles ahora",
     descripcion: "Descubre muñecos de año viejo, velas decorativas y más productos exclusivos",
     imagen: "https://via.placeholder.com/800x400?text=Navidad",
@@ -2095,6 +2104,7 @@ const promociones = [
   },
   {
     titulo: "Perfectas para Regalos Especiales",
+    destino: "productos",
     subtitulo: "Para cada ocasión",
     descripcion: "Velas para cumpleaños, aniversarios, San Valentín, Baby Shower y más ocasiones",
     imagen: "https://via.placeholder.com/800x400?text=Regalos",
@@ -2104,6 +2114,9 @@ const promociones = [
   },
   {
     titulo: "Precios Mayoristas",
+    destino: "productos",
+    filtro: "kits",
+    accion: "Ver Kit Emprendedor",
     subtitulo: "Disponibles",
     descripcion: "Compra al por mayor y obtén mejores precios. Ideal para eventos y negocios",
     imagen: "https://via.placeholder.com/800x400?text=Mayorista",
@@ -2113,6 +2126,7 @@ const promociones = [
   },
   {
     titulo: "Las Mejores Fragancias",
+    destino: "productos",
     subtitulo: "Elige tu favorita",
     descripcion: "Vainilla, canela, coco, rosa y más. Elige tu aroma favorito",
     imagen: "https://via.placeholder.com/800x400?text=Fragancias",
@@ -4529,6 +4543,40 @@ if (productOverlay) {
 function initPromociones() {
   renderPromociones();
   iniciarCarrusel();
+  cablearAccionesPromo();
+}
+
+// Cada promoción lleva a su sitio: la de personalizadas a Personalizadas,
+// la de Navidad al catálogo ya filtrado por Navidad... Antes las siete
+// abrían el catálogo completo, y el cliente tenía que buscar por su cuenta
+// lo que la promoción le acababa de ofrecer.
+let accionesPromoCableadas = false;
+
+function cablearAccionesPromo() {
+  const pista = document.getElementById('promo-slides');
+  if (!pista || accionesPromoCableadas) return;
+  accionesPromoCableadas = true;
+
+  pista.addEventListener('click', (e) => {
+    const boton = e.target.closest('.promo-accion');
+    if (!boton) return;
+    e.preventDefault();
+
+    const destino = boton.dataset.destino || 'productos';
+    const filtro = boton.dataset.filtro;
+
+    mostrarSeccion(destino);
+
+    if (destino === 'productos') {
+      // Sin filtro, el catálogo se abre entero aunque antes hubiera uno puesto.
+      state.categoriaActual = filtro ? (categoryMap[filtro] || filtro) : 'todas';
+      renderCategorias();
+      renderProductos();
+    }
+
+    const seccion = document.getElementById(destino);
+    if (seccion) seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 }
 
 function renderPromociones() {
@@ -4550,7 +4598,8 @@ function renderPromociones() {
           <h3 class="promo-titulo">${promo.titulo}</h3>
           ${promo.descripcion ? `<p class="promo-texto">${promo.descripcion}</p>` : ''}
         </div>
-        <a href="#productos" class="btn btn-secondary promo-accion">${promo.accion || 'Ver catálogo'}</a>
+        <a href="#${promo.destino || 'productos'}" class="btn btn-secondary promo-accion"
+           data-destino="${promo.destino || 'productos'}" data-filtro="${promo.filtro || ''}">${promo.accion || 'Ver catálogo'}</a>
       </div>
     </article>
   `).join('');
