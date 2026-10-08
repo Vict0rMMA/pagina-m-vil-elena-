@@ -123,7 +123,13 @@
     const src = img.dataset.src;
     if (!src) return;
     img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-    img.addEventListener('error', () => img.classList.add('fallo'), { once: true });
+    img.addEventListener('error', () => {
+      img.classList.add('fallo');
+      // Sin foto, la tarjeta pinta un marcador de marca en su lugar. Antes
+      // se quedaba el rectángulo gris de carga parpadeando para siempre.
+      const tarjeta = img.closest('.producto');
+      if (tarjeta) tarjeta.classList.add('sin-foto');
+    }, { once: true });
     img.src = src;
     img.removeAttribute('data-src');
   }

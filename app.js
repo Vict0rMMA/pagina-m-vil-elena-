@@ -1806,7 +1806,6 @@ const productos = {
   suvenirs: [
     {
       id: "sv1",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Vela Jesús",
       descripcion: "Suvenir navideño. Altura 7 cm, Ancho 5.5 cm, Espesor 2 cm. Empaque bolsita.",
@@ -1825,7 +1824,6 @@ const productos = {
     },
     {
       id: "sv2",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Vela Papá Noel #2",
       descripcion: "Suvenir navideño. Altura 12 cm, Ancho 5.5 cm, Espesor 2 cm. Empaque bolsita.",
@@ -1844,7 +1842,6 @@ const productos = {
     },
     {
       id: "sv3",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Pesebre Navidad",
       descripcion: "Suvenir navideño. Altura 6.5 cm, Ancho 4 cm, Espesor 2.2 cm. Empaque bolsita.",
@@ -1863,7 +1860,6 @@ const productos = {
     },
     {
       id: "sv4",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Vela Propósito",
       descripcion: "Suvenir navideño. Altura 14 cm, Ancho 3.5 cm, Espesor 1.8 cm. Empaque bolsita.",
@@ -1882,7 +1878,6 @@ const productos = {
     },
     {
       id: "sv5",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Pesebre Arbolito Ángel",
       descripcion: "Suvenir navideño. Altura 8.5 cm, Ancho 5.5 cm, Espesor 2.5 cm. Empaque bolsita.",
@@ -1901,7 +1896,6 @@ const productos = {
     },
     {
       id: "sv6",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Vela Reno",
       descripcion: "Suvenir navideño. Altura 7.5 cm, Ancho 5.2 cm, Espesor 2 cm. Empaque bolsita.",
@@ -1920,7 +1914,6 @@ const productos = {
     },
     {
       id: "sv7",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Vela Mirella",
       descripcion: "Suvenir navideño. Altura 15 cm, Diámetro 5.5 cm. Empaque bolsita.",
@@ -1939,7 +1932,6 @@ const productos = {
     },
     {
       id: "sv8",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Vela Papá Noel #1",
       descripcion: "Suvenir navideño. Altura 13.5 cm, Diámetro 3.2 cm. Empaque bolsita.",
@@ -1958,7 +1950,6 @@ const productos = {
     },
     {
       id: "sv9",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Vela Navidad",
       descripcion: "Suvenir navideño. Altura 14.6 cm, Ancho 2.5 cm, Espesor 2.0 cm. Empaque bolsita.",
@@ -1977,7 +1968,6 @@ const productos = {
     },
     {
       id: "sv10",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Rosa",
       descripcion: "Suvenir navideño. Altura 7 cm, Ancho 7 cm. Empaque bolsita.",
@@ -1996,7 +1986,6 @@ const productos = {
     },
     {
       id: "sv11",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Hojalata",
       descripcion: "Suvenir navideño. Altura 4.2 cm, Diámetro 8.4 cm. Empaque unidad.",
@@ -2015,7 +2004,6 @@ const productos = {
     },
     {
       id: "sv12",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Burbuja",
       descripcion: "Suvenir navideño. Altura 3.7 cm, Ancho 4 cm. Empaque caja de acetato.",
@@ -2034,7 +2022,6 @@ const productos = {
     },
     {
       id: "sv13",
-      pendiente: true,   // falta la foto
       categoria: "suvenirs",
       nombre: "Vela Envase Corcho",
       descripcion: "Suvenir navideño. Altura 7 cm, Diámetro 6.7 cm. Empaque unidad.",
@@ -2069,9 +2056,9 @@ const state = {
 // Promociones
 const promociones = [
   {
-    titulo: "Nuevo catálogo de suvenirs",
+    titulo: "Nuevas actualizaciones en nuestros catálogos",
     subtitulo: "Recién llegado",
-    descripcion: "Mira el catálogo de suvenirs nuevo y la actualización del Kit Emprendedor.",
+    descripcion: "Descubre las novedades del catálogo de Suvenirs y del Kit Emprendedor.",
     icon: "fas fa-gift",
     // Sólo se anuncia si hay suvenirs cargados: un aviso que lleva a una
     // categoría vacía es peor que no poner nada.
@@ -2871,8 +2858,8 @@ function renderCategorias() {
     { filter: 'babyshower', nombre: 'Baby Shower', icon: 'fas fa-baby' },
     { filter: 'comunion', nombre: 'Primera Comunión', icon: 'fas fa-cross' },
     { filter: 'navidad', nombre: 'Navidad', icon: 'fas fa-tree' },
-    { filter: 'suvenirs', nombre: 'Suvenirs', icon: 'fas fa-gift' },
-    { filter: 'kits', nombre: 'Kit Emprendedor', icon: 'fas fa-box-open' }
+    { filter: 'kits', nombre: 'Kit Emprendedor', icon: 'fas fa-box-open' },
+    { filter: 'suvenirs', nombre: 'Suvenirs', icon: 'fas fa-gift' }
   // Una categoría sin productos no muestra su botón: antes no podía
   // pasar porque todas tenían, pero al añadir Suvenirs vacía habría
   // salido un filtro que no lleva a ningún sitio.
@@ -2933,15 +2920,17 @@ function filtrarProductos() {
 // Un suvenir no es una ocasión aparte: es una vela pequeña que se regala
 // en un evento, y la misma vela puede ser de Navidad y suvenir a la vez.
 // Por eso `data-category` lleva una lista y no un solo valor.
+// Un producto es suvenir de dos maneras: porque vive en el catálogo de
+// suvenirs, o porque es de otra ocasión y además se vende como suvenir.
 function esSuvenir(producto) {
-  return !!(producto && producto.suvenir);
+  if (!producto) return false;
+  return producto.categoria === 'suvenirs' || !!producto.suvenir;
 }
 
 function contarEnCategoria(filtro) {
   const todos = obtenerTodosLosProductos();
   if (filtro === 'suvenirs') return todos.filter(esSuvenir).length;
-  const real = categoryMap[filtro];
-  return (productos[real] || []).length;
+  return todos.filter(p => p.categoria === categoryMap[filtro]).length;
 }
 
 function getProductCategory(producto) {

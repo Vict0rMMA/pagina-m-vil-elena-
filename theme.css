@@ -2523,7 +2523,31 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    esqueleto de la tarjeta. */
 .producto-img { opacity: 0; transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-suave); }
 .producto-img.loaded { opacity: 1; }
-.producto-img.fallo { opacity: 1; filter: grayscale(1); opacity: 0.45; }
+/* Producto sin foto: en vez del rectángulo gris de carga parpadeando sin
+   fin, un azulejo de marca. La ficha sí tiene medidas y precio, así que
+   el producto se puede comprar igual mientras llega la fotografía. */
+.producto-img.fallo { display: none; }
+
+.producto.sin-foto .skeleton-image { display: none; }
+
+.producto.sin-foto .producto-media {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(211, 169, 79, 0.16), transparent 68%),
+    var(--surface-2);
+}
+
+.producto.sin-foto .producto-media::after {
+  content: "\f06b";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 30px;
+  color: var(--gold-veil);
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .producto.sin-foto .producto-media::after { font-size: 38px; }
+}
 .producto-img.loaded ~ .skeleton-image,
 .producto-media:has(.producto-img.loaded) .skeleton-image { opacity: 0; }
 
