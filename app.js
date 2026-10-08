@@ -1801,9 +1801,257 @@ const productos = {
     }
   ],
 
-  // Pendiente de las fichas: en cuanto lleguen las fotos y los precios,
-  // los productos entran aquí y la categoría aparece sola.
-  suvenirs: []
+  // Catálogo Souvenirs Mayorista. Todos se venden por unidad y sólo a
+  // precio mayorista, por eso `detal` va en cero como en los kits.
+  suvenirs: [
+    {
+      id: "sv1",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Vela Jesús",
+      descripcion: "Suvenir navideño. Altura 7 cm, Ancho 5.5 cm, Espesor 2 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/vela-jesus.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 5500, caja: 5500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "7 cm" }, { etiqueta: "Ancho", valor: "5.5 cm" }, { etiqueta: "Espesor", valor: "2 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 5500 }
+        ]
+      }
+    },
+    {
+      id: "sv2",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Vela Papá Noel #2",
+      descripcion: "Suvenir navideño. Altura 12 cm, Ancho 5.5 cm, Espesor 2 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/vela-papa-noel-2.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 5500, caja: 5500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "12 cm" }, { etiqueta: "Ancho", valor: "5.5 cm" }, { etiqueta: "Espesor", valor: "2 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 5500 }
+        ]
+      }
+    },
+    {
+      id: "sv3",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Pesebre Navidad",
+      descripcion: "Suvenir navideño. Altura 6.5 cm, Ancho 4 cm, Espesor 2.2 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/pesebre-navidad.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 4500, caja: 4500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "6.5 cm" }, { etiqueta: "Ancho", valor: "4 cm" }, { etiqueta: "Espesor", valor: "2.2 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 4500 }
+        ]
+      }
+    },
+    {
+      id: "sv4",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Vela Propósito",
+      descripcion: "Suvenir navideño. Altura 14 cm, Ancho 3.5 cm, Espesor 1.8 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/vela-proposito.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 5500, caja: 5500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14 cm" }, { etiqueta: "Ancho", valor: "3.5 cm" }, { etiqueta: "Espesor", valor: "1.8 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 5500 }
+        ]
+      }
+    },
+    {
+      id: "sv5",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Pesebre Arbolito Ángel",
+      descripcion: "Suvenir navideño. Altura 8.5 cm, Ancho 5.5 cm, Espesor 2.5 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/pesebre-arbolito-angel.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 5500, caja: 5500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "8.5 cm" }, { etiqueta: "Ancho", valor: "5.5 cm" }, { etiqueta: "Espesor", valor: "2.5 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 5500 }
+        ]
+      }
+    },
+    {
+      id: "sv6",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Vela Reno",
+      descripcion: "Suvenir navideño. Altura 7.5 cm, Ancho 5.2 cm, Espesor 2 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/vela-reno.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 5500, caja: 5500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "7.5 cm" }, { etiqueta: "Ancho", valor: "5.2 cm" }, { etiqueta: "Espesor", valor: "2 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 5500 }
+        ]
+      }
+    },
+    {
+      id: "sv7",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Vela Mirella",
+      descripcion: "Suvenir navideño. Altura 15 cm, Diámetro 5.5 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/vela-mirella.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 3500, caja: 3500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "5.5 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 3500 }
+        ]
+      }
+    },
+    {
+      id: "sv8",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Vela Papá Noel #1",
+      descripcion: "Suvenir navideño. Altura 13.5 cm, Diámetro 3.2 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/vela-papa-noel-1.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 5500, caja: 5500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "13.5 cm" }, { etiqueta: "Diámetro", valor: "3.2 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 5500 }
+        ]
+      }
+    },
+    {
+      id: "sv9",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Vela Navidad",
+      descripcion: "Suvenir navideño. Altura 14.6 cm, Ancho 2.5 cm, Espesor 2.0 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/vela-navidad.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 5500, caja: 5500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "14.6 cm" }, { etiqueta: "Ancho", valor: "2.5 cm" }, { etiqueta: "Espesor", valor: "2.0 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 5500 }
+        ]
+      }
+    },
+    {
+      id: "sv10",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Rosa",
+      descripcion: "Suvenir navideño. Altura 7 cm, Ancho 7 cm. Empaque bolsita.",
+      imagen: "assets/productos/Suvenirs/rosa.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 5500, caja: 5500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "7 cm" }, { etiqueta: "Ancho", valor: "7 cm" }],
+        empaque: "Bolsita",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 5500 }
+        ]
+      }
+    },
+    {
+      id: "sv11",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Hojalata",
+      descripcion: "Suvenir navideño. Altura 4.2 cm, Diámetro 8.4 cm. Empaque unidad.",
+      imagen: "assets/productos/Suvenirs/hojalata.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 12500, caja: 12500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "4.2 cm" }, { etiqueta: "Diámetro", valor: "8.4 cm" }],
+        empaque: "Unidad",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 12500 }
+        ]
+      }
+    },
+    {
+      id: "sv12",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Burbuja",
+      descripcion: "Suvenir navideño. Altura 3.7 cm, Ancho 4 cm. Empaque caja de acetato.",
+      imagen: "assets/productos/Suvenirs/burbuja.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 6000, caja: 6000 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "3.7 cm" }, { etiqueta: "Ancho", valor: "4 cm" }],
+        empaque: "Caja de acetato",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 6000 }
+        ]
+      }
+    },
+    {
+      id: "sv13",
+      pendiente: true,   // falta la foto
+      categoria: "suvenirs",
+      nombre: "Vela Envase Corcho",
+      descripcion: "Suvenir navideño. Altura 7 cm, Diámetro 6.7 cm. Empaque unidad.",
+      imagen: "assets/productos/Suvenirs/vela-envase-corcho.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 7900, caja: 7900 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "7 cm" }, { etiqueta: "Diámetro", valor: "6.7 cm" }],
+        empaque: "Unidad",
+        opciones: [
+          { nombre: "Precio por unidad", detalle: null, precio: 7900 }
+        ]
+      }
+    }
+  ]
 };
 
 // Estado de la aplicación
@@ -1827,7 +2075,7 @@ const promociones = [
     icon: "fas fa-gift",
     // Sólo se anuncia si hay suvenirs cargados: un aviso que lleva a una
     // categoría vacía es peor que no poner nada.
-    visible: () => (productos.suvenirs || []).length > 0
+    visible: () => contarEnCategoria('suvenirs') > 0
   },
   {
     titulo: "Velas Personalizadas",
@@ -2586,7 +2834,10 @@ function buscarProducto(id) {
 }
 
 function obtenerTodosLosProductos() {
-  return Object.values(productos).flat();
+  // `pendiente: true` deja un producto cargado pero fuera del catálogo.
+  // Sirve para tener la ficha escrita antes de que llegue su foto: sin
+  // esto saldría una tarjeta con el hueco gris de carga para siempre.
+  return Object.values(productos).flat().filter(p => !p.pendiente);
 }
 
 // Mapeo de filtros a categorías reales
@@ -2625,8 +2876,7 @@ function renderCategorias() {
   // Una categoría sin productos no muestra su botón: antes no podía
   // pasar porque todas tenían, pero al añadir Suvenirs vacía habría
   // salido un filtro que no lleva a ningún sitio.
-  ].filter(cat => cat.filter === 'todas' ||
-                  (productos[categoryMap[cat.filter]] || []).length > 0);
+  ].filter(cat => cat.filter === 'todas' || contarEnCategoria(cat.filter) > 0);
   
   // Determinar el filtro activo actual
   const filterActual = state.categoriaActual === 'todas' ? 'todas' : 
@@ -2680,18 +2930,33 @@ function filtrarProductos() {
 }
 
 // Función para obtener el data-category del producto
+// Un suvenir no es una ocasión aparte: es una vela pequeña que se regala
+// en un evento, y la misma vela puede ser de Navidad y suvenir a la vez.
+// Por eso `data-category` lleva una lista y no un solo valor.
+function esSuvenir(producto) {
+  return !!(producto && producto.suvenir);
+}
+
+function contarEnCategoria(filtro) {
+  const todos = obtenerTodosLosProductos();
+  if (filtro === 'suvenirs') return todos.filter(esSuvenir).length;
+  const real = categoryMap[filtro];
+  return (productos[real] || []).length;
+}
+
 function getProductCategory(producto) {
   if (!producto || !producto.categoria) return '';
-  
+
+  const extra = esSuvenir(producto) ? ' suvenirs' : '';
   const categoriaReal = producto.categoria;
   // Convertir categoría real a filtro para data-category
-  if (categoriaReal === 'amorYAmistad') return 'amor';
-  if (categoriaReal === 'celebracion') return 'babyshower';
-  if (categoriaReal === 'primeraComunion') return 'comunion';
-  if (categoriaReal === 'navidad') return 'navidad';
-  if (categoriaReal === 'kitEmprendedor') return 'kits';
+  if (categoriaReal === 'amorYAmistad') return 'amor' + extra;
+  if (categoriaReal === 'celebracion') return 'babyshower' + extra;
+  if (categoriaReal === 'primeraComunion') return 'comunion' + extra;
+  if (categoriaReal === 'navidad') return 'navidad' + extra;
+  if (categoriaReal === 'kitEmprendedor') return 'kits' + extra;
   if (categoriaReal === 'suvenirs') return 'suvenirs';
-  return categoriaReal.toLowerCase();
+  return categoriaReal.toLowerCase() + extra;
 }
 
 function renderProductos() {
@@ -3045,7 +3310,9 @@ function filtrarYMostrarProductos() {
     const productDescripcion = producto.dataset.descripcion || '';
     
     // Verificar filtro de categoría
-    const pasaCategoria = filterActual === 'todas' || productCategory === filterActual;
+    // productCategory puede traer varias etiquetas ("navidad suvenirs").
+    const pasaCategoria = filterActual === 'todas' ||
+                          productCategory.split(' ').indexOf(filterActual) !== -1;
     
     // Verificar filtro de búsqueda
     const pasaBusqueda = !busquedaLower || 

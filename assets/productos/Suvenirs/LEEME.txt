@@ -1,8 +1,22 @@
-Fotos de los suvenirs.
+Fotos del Catálogo Souvenirs Mayorista.
 
-Una foto por producto, con nombre claro (souvenir-mariposa.jpg).
-Dos productos NO deben compartir foto: el catálogo agrupa por imagen y
-se mostrarían juntos en una sola tarjeta.
+Faltan estas 13. Guarda cada ficha con EXACTAMENTE este nombre:
 
-Antes de subirlas, redúcelas a ~1000px de ancho y JPEG calidad 80.
-Una foto de producto no debería pasar de 200 KB.
+   1. Vela Jesús                 -> vela-jesus.jpg
+   2. Vela Papá Noel #2          -> vela-papa-noel-2.jpg
+   3. Pesebre Navidad            -> pesebre-navidad.jpg
+   4. Vela Propósito             -> vela-proposito.jpg
+   5. Pesebre Arbolito Ángel     -> pesebre-arbolito-angel.jpg
+   6. Vela Reno                  -> vela-reno.jpg
+   7. Vela Mirella               -> vela-mirella.jpg
+   8. Vela Papá Noel #1          -> vela-papa-noel-1.jpg
+   9. Vela Navidad               -> vela-navidad.jpg
+  10. Rosa                       -> rosa.jpg
+  11. Hojalata                   -> hojalata.jpg
+  12. Burbuja                    -> burbuja.jpg
+  13. Vela Envase Corcho         -> vela-envase-corcho.jpg
+
+En cuanto estén, quita la línea `pendiente: true` de los productos
+sv1 a sv13 en app.js y la pestaña Suvenirs aparece sola.
+
+Redúcelas antes a ~620px de ancho y JPEG calidad 80.
