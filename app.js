@@ -1602,16 +1602,16 @@ const productos = {
       imagen: "assets/productos/Kit-Emprendedor/kit01.jpg",
       precios: {
         detal: { bolsa: 0, caja: 0 },
-        mayorista: { bolsa: 10000, caja: 250000 }
+        mayorista: { bolsa: 11000, caja: 275000 }
       },
       ficha: {
         medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
         empaque: "Caja x10 unidades",
         lote: "25 cajas",
-        colores: [{ nombre: "Blanca", hex: "#F4F1EA" }, { nombre: "Pastel", hex: "#E3AEB4" }, { nombre: "Neón", hex: "#C6F04A" }],
+        colores: [{ nombre: "Blanca", hex: "#F4F1EC" }, { nombre: "Pastel", hex: "#E8B9BC" }, { nombre: "Neón", hex: "#A8E10C" }],
         opciones: [
-          { nombre: "Caja completa", detalle: "10 unidades", precio: 250000 },
-          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 10000 }
+          { nombre: "Caja completa", detalle: null, precio: 275000 },
+          { nombre: "Unidad suelta", detalle: null, precio: 11000 }
         ]
       }
     },
@@ -1623,16 +1623,16 @@ const productos = {
       imagen: "assets/productos/Kit-Emprendedor/kit02.jpg",
       precios: {
         detal: { bolsa: 0, caja: 0 },
-        mayorista: { bolsa: 12500, caja: 312500 }
+        mayorista: { bolsa: 13500, caja: 337500 }
       },
       ficha: {
         medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
         empaque: "Caja x10 unidades",
         lote: "25 cajas",
-        colores: [{ nombre: "Blanca", hex: "#F4F1EA" }, { nombre: "Pastel", hex: "#E3AEB4" }, { nombre: "Neón", hex: "#C6F04A" }],
+        colores: [{ nombre: "Blanca", hex: "#F4F1EC" }, { nombre: "Pastel", hex: "#E8B9BC" }, { nombre: "Neón", hex: "#A8E10C" }],
         opciones: [
-          { nombre: "Caja completa", detalle: "10 unidades", precio: 312500 },
-          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 12500 }
+          { nombre: "Caja completa", detalle: null, precio: 337500 },
+          { nombre: "Unidad suelta", detalle: null, precio: 13500 }
         ]
       }
     },
@@ -1650,10 +1650,10 @@ const productos = {
         medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
         empaque: "Caja x10 unidades",
         lote: "25 cajas",
-        colores: [{ nombre: "Blanca", hex: "#F4F1EA" }, { nombre: "Pastel", hex: "#E3AEB4" }, { nombre: "Neón", hex: "#C6F04A" }],
+        colores: [{ nombre: "Blanca", hex: "#F4F1EC" }, { nombre: "Pastel", hex: "#E8B9BC" }, { nombre: "Neón", hex: "#A8E10C" }],
         opciones: [
-          { nombre: "Caja completa", detalle: "10 unidades", precio: 337500 },
-          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 13500 }
+          { nombre: "Caja completa", detalle: null, precio: 337500 },
+          { nombre: "Unidad suelta", detalle: null, precio: 13500 }
         ]
       }
     },
@@ -1665,17 +1665,17 @@ const productos = {
       imagen: "assets/productos/Kit-Emprendedor/kit04.jpg",
       precios: {
         detal: { bolsa: 0, caja: 0 },
-        mayorista: { bolsa: 6700, caja: 6700 }
+        mayorista: { bolsa: 10000, caja: 250000 }
       },
       ficha: {
-        medidas: [{ etiqueta: "Altura", valor: "Variada" }, { etiqueta: "Color", valor: "Variado" }],
-        empaque: "Venta por unidad",
-        lote: "Más de 12 unidades",
-        colores: [{ nombre: "Verde", hex: "#1E6B3A" }, { nombre: "Azul", hex: "#1F4FA8" }, { nombre: "Rojo", hex: "#B32027" }, { nombre: "Blanco", hex: "#F4F1EA" }, { nombre: "Multicolor", hex: "#C9A961" }],
+        medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        empaque: "Bolsa x25 unidades",
+        lote: "25 paquetes",
+        colores: [{ nombre: "Blanca", hex: "#F4F1EC" }, { nombre: "Pastel", hex: "#E8B9BC" }, { nombre: "Neón", hex: "#A8E10C" }],
         opciones: [
-          { nombre: "Oferta mayorista por unidad", detalle: null, precio: 6700 }
+          { nombre: "Bolsa completa", detalle: null, precio: 250000 },
+          { nombre: "Unidad suelta", detalle: null, precio: 10000 }
         ],
-        nota: "Producto exclusivo de velas artesanales."
       }
     },
     {
@@ -1713,8 +1713,8 @@ const productos = {
         empaque: "Bolsa x6 unidades",
         lote: "25 bolsas",
         opciones: [
-          { nombre: "Bolsa completa", detalle: "6 unidades", precio: 312500 },
-          { nombre: "Unidad suelta", detalle: "dentro de la bolsa", precio: 12500 }
+          { nombre: "Bolsa completa", detalle: null, precio: 312500 },
+          { nombre: "Unidad suelta", detalle: null, precio: 12500 }
         ]
       }
     },
@@ -1753,8 +1753,8 @@ const productos = {
         empaque: "Caja x6 unidades",
         lote: "20 cajas",
         opciones: [
-          { nombre: "Caja completa", detalle: "6 unidades", precio: 362000 },
-          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 18100 }
+          { nombre: "Caja completa", detalle: null, precio: 362000 },
+          { nombre: "Unidad suelta", detalle: null, precio: 18100 }
         ]
       }
     },
@@ -1773,8 +1773,29 @@ const productos = {
         empaque: "Caja x6 unidades",
         lote: "20 cajas",
         opciones: [
-          { nombre: "Caja completa", detalle: "6 unidades", precio: 336000 },
-          { nombre: "Unidad suelta", detalle: "dentro de la caja", precio: 16800 }
+          { nombre: "Caja completa", detalle: null, precio: 336000 },
+          { nombre: "Unidad suelta", detalle: null, precio: 16800 }
+        ]
+      }
+    },
+    {
+      id: "kit10",
+      categoria: "kitEmprendedor",
+      nombre: "Kit Emprendedor 9",
+      descripcion: "Kit emprendedor de velitas Noche de Velitas, bolsa por 25 unidades, con tarjeta de deseos.",
+      imagen: "assets/productos/Kit-Emprendedor/kit10.jpg",
+      precios: {
+        detal: { bolsa: 0, caja: 0 },
+        mayorista: { bolsa: 14500, caja: 362500 }
+      },
+      ficha: {
+        medidas: [{ etiqueta: "Altura", valor: "15 cm" }, { etiqueta: "Diámetro", valor: "1.5 cm" }],
+        empaque: "Bolsa x25 unidades",
+        lote: "25 paquetes",
+        colores: [{ nombre: "Blanca", hex: "#F4F1EC" }, { nombre: "Pastel", hex: "#E8B9BC" }, { nombre: "Neón", hex: "#A8E10C" }],
+        opciones: [
+          { nombre: "Bolsa completa", detalle: null, precio: 362500 },
+          { nombre: "Unidad suelta", detalle: null, precio: 14500 }
         ]
       }
     }
