@@ -7,6 +7,12 @@ const WHATSAPP_PHONE = '573008220389';
 const WHATSAPP_API = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=`;
 
 // Base de datos de productos
+// CATÁLOGO DE RESPALDO.
+// El catálogo de verdad vive en la hoja de Google "Catálogo Elena Velas y
+// Aromas" y llega por /api/catalogo al cargar la página (ver
+// cargarCatalogoDeLaHoja). Esta copia sólo se usa si la hoja no responde,
+// para que la tienda nunca se quede vacía. Para cambiar precios o productos,
+// se cambia la hoja, no esto.
 const productos = {
   amorYAmistad: [
     {
@@ -2196,6 +2202,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initCarrito();
   initProductos();
+  cargarCatalogoDeLaHoja();
   initPromociones();
   initVideos();
   initMouseWheelScroll();
@@ -2834,6 +2841,34 @@ function buscarProducto(id) {
     if (producto) return producto;
   }
   return null;
+}
+
+// Trae el catálogo de la hoja de Google y lo pone en lugar de la copia de
+// respaldo. La página ya está pintada con el respaldo, así que si la hoja
+// tarda o falla no se nota: se queda lo que hay.
+async function cargarCatalogoDeLaHoja() {
+  if (!window.fetch) return;
+  const control = typeof AbortController === 'function' ? new AbortController() : null;
+  const tope = setTimeout(() => control && control.abort(), 6000);
+  try {
+    const r = await fetch('/api/catalogo', control ? { signal: control.signal } : {});
+    if (!r.ok) return;
+    const datos = await r.json();
+    if (!datos || !datos.productos || !datos.total) return;
+
+    // `productos` es const y lo leen muchas funciones: se rellena en su sitio.
+    Object.keys(productos).forEach(k => { delete productos[k]; });
+    Object.assign(productos, datos.productos);
+
+    renderCategorias();
+    renderProductos();
+    renderPromociones();
+    window.catalogoDesde = 'hoja';
+  } catch (e) {
+    window.catalogoDesde = 'respaldo';
+  } finally {
+    clearTimeout(tope);
+  }
 }
 
 function obtenerTodosLosProductos() {
@@ -4684,6 +4719,9 @@ function iniciarCarrusel() {
   }, PROMO_PAUSA);
 
   function irA(indice, porElUsuario) {
+    // Se cuentan cada vez: el catálogo de la hoja puede añadir o quitar
+    // el aviso de suvenirs después de cablear el carrusel.
+    const total = pista.children.length || 1;
     state.currentPromoSlide = ((indice % total) + total) % total;
     actualizarCarrusel();
     if (porElUsuario) ultimoToque = Date.now();

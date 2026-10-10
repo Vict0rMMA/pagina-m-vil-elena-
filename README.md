@@ -214,6 +214,37 @@ es el *service worker*: **Ctrl+Shift+R** lo salta.
 
 ## 🔧 Mantenimiento
 
+### El catálogo vive en Google Sheets
+
+Los productos y los precios **no se cambian en el código**: se cambian en la hoja
+[Catálogo Elena Velas y Aromas](https://docs.google.com/spreadsheets/d/19HhkYRj7lqrT_Hep1nkK7I9FNWUKKVtWE0KJ_sSpbSs/edit).
+La pestaña *Cómo usar* de la propia hoja explica cada caso.
+
+Cómo llega a la web:
+
+1. `api/catalogo.js` es una función de Vercel que descarga las pestañas
+   *Productos* y *Precios* y las convierte al formato de la web
+   (`api/_lib/hoja.js`).
+2. Vercel guarda la respuesta 5 minutos: un cambio en la hoja tarda como mucho
+   eso en verse.
+3. Al cargar, `app.js` pide `/api/catalogo` y sustituye su lista. Si la hoja no
+   responde (no es pública, pestaña renombrada, Google caído), la web usa la
+   lista que lleva en `app.js`, que es **la copia de respaldo**.
+
+Condiciones para que funcione:
+
+- La hoja tiene que estar compartida como *Cualquier persona con el enlace ·
+  Lector*.
+- No se cambian los nombres de las pestañas ni los títulos de las columnas.
+- Las pestañas se leen por su identificador (`gid`), que está en
+  `api/_lib/hoja.js`. Si se borra una pestaña y se crea otra con el mismo
+  nombre, su `gid` cambia y hay que actualizarlo ahí.
+
+La copia de respaldo de `app.js` no se actualiza sola. Conviene refrescarla de
+vez en cuando para que, si la hoja falla, lo que se vea no esté muy desfasado.
+
+
+
 ### Estilos de Tailwind
 
 Tailwind va **precompilado** en `tailwind.css`. Antes se cargaba desde

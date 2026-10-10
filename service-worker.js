@@ -6,7 +6,7 @@
 //   Resto -> se sirve del caché al instante y la red actualiza por detrás.
 //
 // Los videos quedan fuera: pesan hasta 7 MB y se piden por rangos.
-const CACHE = 'elena-velas-v7';
+const CACHE = 'elena-velas-v8';
 
 // Sin el ?v= que lleva el HTML: al guardar y al buscar se ignora la query,
 // así un cambio de versión no deja la copia anterior huérfana en el caché.
@@ -105,7 +105,11 @@ self.addEventListener('fetch', (event) => {
   // Pesan 30 KB comprimidos entre los dos y llevan max-age=300, así que
   // la mayoría de las veces salen del caché del navegador sin tocar la
   // red. Si no hay señal, responde la copia guardada.
-  const esCodigo = request.destination === 'style' || request.destination === 'script';
+  // El catálogo de la hoja de Google también va a red primero: si no, el
+  // service worker serviría la copia guardada y un precio cambiado en la
+  // hoja tardaría una visita más en verse.
+  const esCodigo = request.destination === 'style' || request.destination === 'script' ||
+                   url.pathname.startsWith('/api/');
 
   if (esHTML(request)) {
     event.respondWith(redPrimero(request, '/index.html'));
