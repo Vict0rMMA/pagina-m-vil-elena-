@@ -2712,7 +2712,7 @@ function renderCarrito() {
     const subtotal = item.precio * item.cantidad;
     
     return `
-    <div class="group bg-white dark:bg-gray-800 rounded-2xl p-4 mb-4 border-2 border-gray-100 dark:border-gray-700 hover:border-yellow-400 dark:hover:border-yellow-500 transition-all shadow-sm hover:shadow-md">
+    <div class="group bg-white dark:bg-gray-800 rounded-2xl p-4 mb-4 border-2 border-gray-100 dark:border-gray-700 carrito-item transition-all shadow-sm hover:shadow-md">
       <div class="flex gap-4">
         <!-- Imagen del producto -->
         <div class="flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-xl p-2 border-2 border-gray-200 dark:border-gray-700 group-hover:border-yellow-400 transition-colors">
@@ -2935,6 +2935,27 @@ function renderCategorias() {
     </button>
   `;
   }).join('');
+
+  aplicarTemaCatalogo(filterActual);
+}
+
+// El catálogo se viste de la categoría elegida (fondo de Navidad, de Amor y
+// Amistad...). Se llama desde renderCategorias, que corre en cada cambio de
+// filtro, al pulsar una promoción y al llegar el catálogo de la hoja.
+function aplicarTemaCatalogo(filtro) {
+  const seccion = document.getElementById('productos');
+  if (!seccion) return;
+  const tema = filtro || 'todas';
+  if (seccion.dataset.tema === tema) return;
+  seccion.dataset.tema = tema;
+
+  // Entre dos categorías el fondo nuevo entra con un fundido.
+  const fondo = seccion.querySelector('.tema-fondo');
+  if (fondo && tema !== 'todas') {
+    fondo.classList.remove('cambio');
+    void fondo.offsetWidth;
+    fondo.classList.add('cambio');
+  }
 }
 
 function filtrarProductos() {
@@ -5691,20 +5712,20 @@ function mostrarToastProducto(producto) {
   toast.className = 'fixed top-4 right-4 md:top-6 md:right-6 z-50 animate-slide-in-right';
   
   toast.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border-2 border-yellow-400/50 p-4 max-w-sm w-full flex items-center gap-4 backdrop-blur-md">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 p-4 max-w-sm w-full flex items-center gap-4 backdrop-blur-md">
       <div class="flex-shrink-0">
         <img src="${producto.imagen}" alt="${producto.nombre}" 
-             class="w-16 h-16 object-cover rounded-xl border-2 border-yellow-400/30"
-             onerror="this.src='https://via.placeholder.com/64x64?text=Vela'">
+             class="w-16 h-16 object-cover rounded-xl border border-gray-200"
+             onerror="this.remove()">
       </div>
       <div class="flex-1 min-w-0">
         <div class="flex items-center gap-2 mb-1">
-          <i class="fas fa-check-circle text-green-500 text-lg"></i>
+          <i class="fas fa-check-circle icono-hecho text-lg"></i>
           <p class="text-sm font-semibold text-gray-800 dark:text-white truncate">¡Agregado!</p>
         </div>
         <p class="text-xs text-gray-600 dark:text-gray-300 truncate mb-2">${producto.nombre}</p>
         <button onclick="abrirCarrito(); document.getElementById('product-toast')?.remove();" 
-                class="w-full py-2 px-3 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
+                class="btn btn-primary btn-block">
           <i class="fas fa-shopping-cart"></i>
           Ver Carrito
         </button>

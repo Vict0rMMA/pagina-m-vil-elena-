@@ -3842,3 +3842,97 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 @media (min-width: 768px) {
   #inicio + .inicio-section { padding-top: var(--space-16); }
 }
+
+/* ============================================================
+   42. Fondo del catálogo según la categoría
+   ------------------------------------------------------------
+   Al elegir una categoría, el catálogo se viste de ella: Navidad en
+   verde y rojo con copos, estrellas y velas; Amor y Amistad en vino con
+   corazones; Baby Shower en pastel con nubes; Primera Comunión en
+   marfil con cruces; Kit Emprendedor en café con cajas y velas;
+   Suvenirs en champán con regalos. "Todas" se queda como siempre.
+
+   Los dibujos son SVG de línea fina dentro del propio CSS: no se
+   descarga ninguna imagen. Generado con herramientas/temas.py.
+   ============================================================ */
+
+.tema-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-slow, 480ms) var(--ease-suave);
+}
+
+#productos[data-tema]:not([data-tema="todas"]) .tema-fondo { opacity: 1; }
+
+/* Al cambiar de una categoría a otra el fondo entra con un fundido. */
+.tema-fondo.cambio { animation: tema-entra 520ms var(--ease-suave); }
+@keyframes tema-entra { from { opacity: 0; } to { opacity: 1; } }
+
+#productos[data-tema="navidad"] .tema-fondo {
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22 fill=%22none%22 stroke-width=%221.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cg transform=%22translate(30 34) rotate(0) scale(1.00)%22 stroke=%22rgba(255,248,235,0.30)%22 color=%22rgba(255,248,235,0.30)%22%3E%3Cpath d=%22M0-12V12M-10.4-6L10.4 6M-10.4 6L10.4-6M-3-9L0-12L3-9M-3 9L0 12L3 9M-10.9-2.2L-10.4-6L-6.8-7.5M10.9 2.2L10.4 6L6.8 7.5M-6.8 7.5L-10.4 6L-10.9 2.2M6.8-7.5L10.4-6L10.9-2.2%22/%3E%3C/g%3E%3Cg transform=%22translate(128 52) rotate(-8) scale(1.15)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Crect x=%22-4%22 y=%22-3%22 width=%228%22 height=%2215%22 rx=%221.5%22/%3E%3Cpath d=%22M0-3V-6%22/%3E%3Cpath d=%22M0-6C-2.5-8.5-1.5-11.5 0-14C1.5-11.5 2.5-8.5 0-6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(190 120) rotate(12) scale(0.85)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Cpath d=%22M0.0 -10.0L2.6 -3.6L9.5 -3.1L4.3 1.4L5.9 8.1L0.0 4.5L-5.9 8.1L-4.3 1.4L-9.5 -3.1L-2.6 -3.6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(62 150) rotate(0) scale(1.00)%22 stroke=%22rgba(120,200,140,0.30)%22 color=%22rgba(120,200,140,0.30)%22%3E%3Cpath d=%22M0-13L-9 1H-4L-11 9H11L4 1H9ZM0 9V13%22/%3E%3C/g%3E%3Cg transform=%22translate(160 192) rotate(20) scale(0.70)%22 stroke=%22rgba(255,248,235,0.24)%22 color=%22rgba(255,248,235,0.24)%22%3E%3Cpath d=%22M0-12V12M-10.4-6L10.4 6M-10.4 6L10.4-6M-3-9L0-12L3-9M-3 9L0 12L3 9M-10.9-2.2L-10.4-6L-6.8-7.5M10.9 2.2L10.4 6L6.8 7.5M-6.8 7.5L-10.4 6L-10.9 2.2M6.8-7.5L10.4-6L10.9-2.2%22/%3E%3C/g%3E%3Cg transform=%22translate(96 104) rotate(0) scale(0.60)%22 stroke=%22rgba(240,110,120,0.42)%22 color=%22rgba(240,110,120,0.42)%22%3E%3Cpath d=%22M0-10L2-2L10 0L2 2L0 10L-2 2L-10 0L-2-2Z%22/%3E%3C/g%3E%3Cg transform=%22translate(200 30) rotate(0) scale(1.00)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3Cg transform=%22translate(20 200) rotate(0) scale(1.00)%22 stroke=%22rgba(240,110,120,0.5)%22 color=%22rgba(240,110,120,0.5)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3Cg transform=%22translate(110 196) rotate(0) scale(1.00)%22 stroke=%22rgba(255,248,235,0.4)%22 color=%22rgba(255,248,235,0.4)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3C/svg%3E"), radial-gradient(55% 38% at 88% 6%, rgba(190,38,56,0.55), transparent 72%), radial-gradient(50% 34% at 6% 92%, rgba(190,38,56,0.42), transparent 72%), radial-gradient(40% 30% at 50% 0%, rgba(232,201,132,0.18), transparent 70%), linear-gradient(165deg, #1B4A31 0%, #163E29 48%, #0F2E1E 100%);
+  background-size: 220px 220px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+}
+
+#productos[data-tema="amor"] .tema-fondo {
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 fill=%22none%22 stroke-width=%221.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cg transform=%22translate(34 40) rotate(-12) scale(1.00)%22 stroke=%22rgba(255,190,205,0.36)%22 color=%22rgba(255,190,205,0.36)%22%3E%3Cpath d=%22M0 9C-7 4-11 0-11-4C-11-8-8-10-5.5-10C-3-10-1-8.5 0-6.5C1-8.5 3-10 5.5-10C8-10 11-8 11-4C11 0 7 4 0 9Z%22/%3E%3C/g%3E%3Cg transform=%22translate(140 80) rotate(14) scale(0.70)%22 stroke=%22rgba(255,230,236,0.26)%22 color=%22rgba(255,230,236,0.26)%22%3E%3Cpath d=%22M0 9C-7 4-11 0-11-4C-11-8-8-10-5.5-10C-3-10-1-8.5 0-6.5C1-8.5 3-10 5.5-10C8-10 11-8 11-4C11 0 7 4 0 9Z%22/%3E%3C/g%3E%3Cg transform=%22translate(80 150) rotate(0) scale(1.00)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Crect x=%22-4%22 y=%22-3%22 width=%228%22 height=%2215%22 rx=%221.5%22/%3E%3Cpath d=%22M0-3V-6%22/%3E%3Cpath d=%22M0-6C-2.5-8.5-1.5-11.5 0-14C1.5-11.5 2.5-8.5 0-6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(170 170) rotate(-6) scale(0.85)%22 stroke=%22rgba(255,190,205,0.30)%22 color=%22rgba(255,190,205,0.30)%22%3E%3Cpath d=%22M0 9C-7 4-11 0-11-4C-11-8-8-10-5.5-10C-3-10-1-8.5 0-6.5C1-8.5 3-10 5.5-10C8-10 11-8 11-4C11 0 7 4 0 9Z%22/%3E%3C/g%3E%3Cg transform=%22translate(110 30) rotate(0) scale(0.55)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Cpath d=%22M0-10L2-2L10 0L2 2L0 10L-2 2L-10 0L-2-2Z%22/%3E%3C/g%3E%3Cg transform=%22translate(20 120) rotate(0) scale(1.00)%22 stroke=%22rgba(255,190,205,0.6)%22 color=%22rgba(255,190,205,0.6)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3Cg transform=%22translate(186 24) rotate(0) scale(1.00)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3C/svg%3E"), radial-gradient(55% 38% at 85% 8%, rgba(232,120,150,0.42), transparent 72%), radial-gradient(50% 34% at 8% 90%, rgba(232,120,150,0.30), transparent 72%), linear-gradient(165deg, #6A1C30 0%, #571628 50%, #3E0F1C 100%);
+  background-size: 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+}
+
+#productos[data-tema="babyshower"] .tema-fondo {
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 fill=%22none%22 stroke-width=%221.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cg transform=%22translate(40 40) rotate(0) scale(1.10)%22 stroke=%22rgba(100,140,195,0.46)%22 color=%22rgba(100,140,195,0.46)%22%3E%3Cpath d=%22M-10 5H9a5 5 0 0 0 0-10a7 7 0 0 0-13-2a6 6 0 0 0-6 12z%22/%3E%3C/g%3E%3Cg transform=%22translate(150 50) rotate(10) scale(0.70)%22 stroke=%22rgba(210,165,70,0.42)%22 color=%22rgba(210,165,70,0.42)%22%3E%3Cpath d=%22M0.0 -10.0L2.6 -3.6L9.5 -3.1L4.3 1.4L5.9 8.1L0.0 4.5L-5.9 8.1L-4.3 1.4L-9.5 -3.1L-2.6 -3.6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(160 150) rotate(-10) scale(0.60)%22 stroke=%22rgba(225,120,155,0.48)%22 color=%22rgba(225,120,155,0.48)%22%3E%3Cpath d=%22M0 9C-7 4-11 0-11-4C-11-8-8-10-5.5-10C-3-10-1-8.5 0-6.5C1-8.5 3-10 5.5-10C8-10 11-8 11-4C11 0 7 4 0 9Z%22/%3E%3C/g%3E%3Cg transform=%22translate(70 160) rotate(0) scale(0.80)%22 stroke=%22rgba(225,120,155,0.28)%22 color=%22rgba(225,120,155,0.28)%22%3E%3Cpath d=%22M-10 5H9a5 5 0 0 0 0-10a7 7 0 0 0-13-2a6 6 0 0 0-6 12z%22/%3E%3C/g%3E%3Cg transform=%22translate(104 100) rotate(0) scale(0.50)%22 stroke=%22rgba(210,165,70,0.45)%22 color=%22rgba(210,165,70,0.45)%22%3E%3Cpath d=%22M0-10L2-2L10 0L2 2L0 10L-2 2L-10 0L-2-2Z%22/%3E%3C/g%3E%3Cg transform=%22translate(190 100) rotate(0) scale(1.00)%22 stroke=%22rgba(100,140,195,0.5)%22 color=%22rgba(100,140,195,0.5)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3Cg transform=%22translate(18 120) rotate(0) scale(1.00)%22 stroke=%22rgba(225,120,155,0.5)%22 color=%22rgba(225,120,155,0.5)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3C/svg%3E"), radial-gradient(55% 40% at 85% 8%, rgba(246,175,200,0.70), transparent 72%), radial-gradient(50% 36% at 8% 90%, rgba(150,190,235,0.75), transparent 72%), linear-gradient(165deg, #E4EEF9 0%, #F9E6EE 55%, #ECE6F7 100%);
+  background-size: 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+}
+
+#productos[data-tema="comunion"] .tema-fondo {
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 fill=%22none%22 stroke-width=%221.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cg transform=%22translate(36 40) rotate(0) scale(1.00)%22 stroke=%22rgba(168,129,60,0.55)%22 color=%22rgba(168,129,60,0.55)%22%3E%3Cpath d=%22M0-12V12M-7-5H7%22/%3E%3C/g%3E%3Cg transform=%22translate(150 60) rotate(0) scale(0.90)%22 stroke=%22rgba(168,129,60,0.34)%22 color=%22rgba(168,129,60,0.34)%22%3E%3Ccircle r=%228%22/%3E%3Cpath d=%22M0-4V4M-3-1H3%22/%3E%3C/g%3E%3Cg transform=%22translate(70 150) rotate(0) scale(1.00)%22 stroke=%22rgba(110,145,195,0.50)%22 color=%22rgba(110,145,195,0.50)%22%3E%3Crect x=%22-4%22 y=%22-3%22 width=%228%22 height=%2215%22 rx=%221.5%22/%3E%3Cpath d=%22M0-3V-6%22/%3E%3Cpath d=%22M0-6C-2.5-8.5-1.5-11.5 0-14C1.5-11.5 2.5-8.5 0-6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(160 160) rotate(0) scale(0.60)%22 stroke=%22rgba(168,129,60,0.55)%22 color=%22rgba(168,129,60,0.55)%22%3E%3Cpath d=%22M0-10L2-2L10 0L2 2L0 10L-2 2L-10 0L-2-2Z%22/%3E%3C/g%3E%3Cg transform=%22translate(110 104) rotate(0) scale(0.50)%22 stroke=%22rgba(110,145,195,0.50)%22 color=%22rgba(110,145,195,0.50)%22%3E%3Cpath d=%22M0.0 -10.0L2.6 -3.6L9.5 -3.1L4.3 1.4L5.9 8.1L0.0 4.5L-5.9 8.1L-4.3 1.4L-9.5 -3.1L-2.6 -3.6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(190 120) rotate(0) scale(1.00)%22 stroke=%22rgba(168,129,60,0.5)%22 color=%22rgba(168,129,60,0.5)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3Cg transform=%22translate(18 112) rotate(0) scale(1.00)%22 stroke=%22rgba(110,145,195,0.5)%22 color=%22rgba(110,145,195,0.5)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3C/svg%3E"), radial-gradient(55% 40% at 85% 8%, rgba(232,201,132,0.60), transparent 72%), radial-gradient(50% 36% at 8% 90%, rgba(150,190,235,0.70), transparent 72%), linear-gradient(165deg, #F3F7FC 0%, #E9F0F8 50%, #DCE7F4 100%);
+  background-size: 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+}
+
+#productos[data-tema="kits"] .tema-fondo {
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 fill=%22none%22 stroke-width=%221.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cg transform=%22translate(38 42) rotate(0) scale(1.00)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Cpath d=%22M-10-4H10V11H-10ZM-11.5-9H11.5V-4H-11.5ZM0-9V11%22/%3E%3C/g%3E%3Cg transform=%22translate(146 56) rotate(0) scale(1.05)%22 stroke=%22rgba(255,248,235,0.24)%22 color=%22rgba(255,248,235,0.24)%22%3E%3Crect x=%22-4%22 y=%22-3%22 width=%228%22 height=%2215%22 rx=%221.5%22/%3E%3Cpath d=%22M0-3V-6%22/%3E%3Cpath d=%22M0-6C-2.5-8.5-1.5-11.5 0-14C1.5-11.5 2.5-8.5 0-6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(164 56) rotate(0) scale(0.80)%22 stroke=%22rgba(255,248,235,0.20)%22 color=%22rgba(255,248,235,0.20)%22%3E%3Crect x=%22-4%22 y=%22-3%22 width=%228%22 height=%2215%22 rx=%221.5%22/%3E%3Cpath d=%22M0-3V-6%22/%3E%3Cpath d=%22M0-6C-2.5-8.5-1.5-11.5 0-14C1.5-11.5 2.5-8.5 0-6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(140 160) rotate(0) scale(0.80)%22 stroke=%22rgba(255,248,235,0.20)%22 color=%22rgba(255,248,235,0.20)%22%3E%3Cpath d=%22M-10-4H10V11H-10ZM-11.5-9H11.5V-4H-11.5ZM0-9V11%22/%3E%3C/g%3E%3Cg transform=%22translate(56 150) rotate(0) scale(1.00)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Crect x=%22-4%22 y=%22-3%22 width=%228%22 height=%2215%22 rx=%221.5%22/%3E%3Cpath d=%22M0-3V-6%22/%3E%3Cpath d=%22M0-6C-2.5-8.5-1.5-11.5 0-14C1.5-11.5 2.5-8.5 0-6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(100 104) rotate(0) scale(0.50)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Cpath d=%22M0-10L2-2L10 0L2 2L0 10L-2 2L-10 0L-2-2Z%22/%3E%3C/g%3E%3Cg transform=%22translate(192 110) rotate(0) scale(1.00)%22 stroke=%22rgba(232,201,132,0.34)%22 color=%22rgba(232,201,132,0.34)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3C/svg%3E"), radial-gradient(55% 38% at 85% 8%, rgba(232,201,132,0.30), transparent 72%), radial-gradient(50% 34% at 8% 92%, rgba(160,110,50,0.40), transparent 72%), linear-gradient(165deg, #33271A 0%, #2A2016 50%, #1D160F 100%);
+  background-size: 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+}
+
+#productos[data-tema="suvenirs"] .tema-fondo {
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 fill=%22none%22 stroke-width=%221.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cg transform=%22translate(38 42) rotate(-6) scale(1.00)%22 stroke=%22rgba(150,40,50,0.40)%22 color=%22rgba(150,40,50,0.40)%22%3E%3Cpath d=%22M-10-4H10V11H-10ZM-11.5-9H11.5V-4H-11.5ZM0-9V11M0-9C-3-14-8-13-6-9M0-9C3-14 8-13 6-9%22/%3E%3C/g%3E%3Cg transform=%22translate(150 58) rotate(0) scale(1.00)%22 stroke=%22rgba(168,129,60,0.52)%22 color=%22rgba(168,129,60,0.52)%22%3E%3Crect x=%22-4%22 y=%22-3%22 width=%228%22 height=%2215%22 rx=%221.5%22/%3E%3Cpath d=%22M0-3V-6%22/%3E%3Cpath d=%22M0-6C-2.5-8.5-1.5-11.5 0-14C1.5-11.5 2.5-8.5 0-6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(150 160) rotate(8) scale(0.75)%22 stroke=%22rgba(168,129,60,0.38)%22 color=%22rgba(168,129,60,0.38)%22%3E%3Cpath d=%22M-10-4H10V11H-10ZM-11.5-9H11.5V-4H-11.5ZM0-9V11M0-9C-3-14-8-13-6-9M0-9C3-14 8-13 6-9%22/%3E%3C/g%3E%3Cg transform=%22translate(66 150) rotate(0) scale(0.60)%22 stroke=%22rgba(150,40,50,0.28)%22 color=%22rgba(150,40,50,0.28)%22%3E%3Cpath d=%22M0.0 -10.0L2.6 -3.6L9.5 -3.1L4.3 1.4L5.9 8.1L0.0 4.5L-5.9 8.1L-4.3 1.4L-9.5 -3.1L-2.6 -3.6Z%22/%3E%3C/g%3E%3Cg transform=%22translate(104 104) rotate(0) scale(0.50)%22 stroke=%22rgba(168,129,60,0.45)%22 color=%22rgba(168,129,60,0.45)%22%3E%3Cpath d=%22M0-10L2-2L10 0L2 2L0 10L-2 2L-10 0L-2-2Z%22/%3E%3C/g%3E%3Cg transform=%22translate(190 116) rotate(0) scale(1.00)%22 stroke=%22rgba(150,40,50,0.4)%22 color=%22rgba(150,40,50,0.4)%22%3E%3Ccircle r=%221.6%22 fill=%22currentColor%22 stroke=%22none%22/%3E%3C/g%3E%3C/svg%3E"), radial-gradient(55% 40% at 85% 8%, rgba(190,60,70,0.28), transparent 72%), radial-gradient(50% 36% at 8% 90%, rgba(232,190,110,0.60), transparent 72%), linear-gradient(165deg, #F7E6D0 0%, #F0D8C0 55%, #E9CBB3 100%);
+  background-size: 200px 200px, 100% 100%, 100% 100%, 100% 100%;
+}
+
+/* En los temas oscuros la cabecera del catálogo pasa a tinta clara.
+   Las tarjetas son blancas y no cambian. */
+:is(#productos[data-tema="navidad"], #productos[data-tema="amor"], #productos[data-tema="kits"]) .section-title { color: #FFFCF6; }
+:is(#productos[data-tema="navidad"], #productos[data-tema="amor"], #productos[data-tema="kits"]) .section-subtitle { color: rgba(255, 252, 246, 0.84); }
+:is(#productos[data-tema="navidad"], #productos[data-tema="amor"], #productos[data-tema="kits"]) .section-eyebrow { color: #E8C984; }
+:is(#productos[data-tema="navidad"], #productos[data-tema="amor"], #productos[data-tema="kits"]) #no-results,
+:is(#productos[data-tema="navidad"], #productos[data-tema="amor"], #productos[data-tema="kits"]) #no-results p { color: rgba(255, 252, 246, 0.86); }
+
+/* En el champán de Suvenirs el dorado del antetítulo quedaba en 4,3:1. */
+#productos[data-tema="suvenirs"] .section-eyebrow { color: #6B4714; }
+
+/* ============================================================
+   43. Carrito
+   ============================================================ */
+
+/* El botón de pedir es la acción final de la compra: algo más alto y
+   con más presencia que un botón normal. */
+.btn-pedido {
+  min-height: 56px;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  gap: var(--space-2);
+  box-shadow: 0 6px 18px rgba(22, 123, 66, 0.28) !important;
+}
+
+/* El borde del producto al pasar el ratón era el amarillo por defecto de
+   Tailwind, ajeno a la paleta. */
+@media (hover: hover) and (pointer: fine) {
+  .carrito-item:hover { border-color: var(--gold-veil) !important; }
+}
+
+/* El ✓ de "¡Agregado!": verde de hecho, el mismo del botón de WhatsApp
+   (4,6:1 sobre blanco, suficiente para un icono). */
+.icono-hecho { color: #167B42; }

@@ -70,12 +70,12 @@
          cliente en cada visita. Ahora son 32 KB de CSS (5 KB comprimido) con
          exactamente las clases que usa el sitio.
          Para regenerarlo tras añadir clases nuevas: ver README, sección Tailwind. -->
-    <link rel="stylesheet" href="tailwind.css?v=20260921">
+    <link rel="stylesheet" href="tailwind.css?v=20261010-temas-carrito">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261010-accion-vino">
+    <link rel="stylesheet" href="theme.css?v=20261010-temas-carrito">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -402,7 +402,9 @@
         </section>
         
         <!-- Catálogo de Productos -->
-        <section id="productos" class="page-section section">
+        <section id="productos" class="page-section section" data-tema="todas">
+            <!-- Fondo según la categoría elegida (theme.css, sección 42) -->
+            <div class="tema-fondo" aria-hidden="true"></div>
             <div class="section-inner">
                 <div class="section-head">
                     <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
@@ -668,7 +670,10 @@
                         <span id="cart-total" class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">$0</span>
                     </div>
                 </div>
-                <button id="checkout-whatsapp" class="w-full py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 min-h-[52px] flex items-center justify-center gap-2 text-lg">
+                <!-- El degradado verde que traía lo anulaba la regla general de
+                     degradados heredados (theme.css, sección 19) y el botón salía
+                     blanco. Usa el estilo de WhatsApp del sitio, como el del formulario. -->
+                <button id="checkout-whatsapp" class="btn btn-whatsapp btn-block btn-pedido">
                     <i class="fab fa-whatsapp text-2xl"></i>
                     <span>Comprar por WhatsApp</span>
                 </button>
@@ -727,7 +732,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261010-accion-vino"></script>
+    <script src="app.js?v=20261010-temas-carrito"></script>
     <script src="motion.js?v=20261008-promo-destinos" defer></script>
     <script>
       // Registrar el Service Worker.
