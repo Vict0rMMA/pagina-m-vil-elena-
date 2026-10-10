@@ -4625,7 +4625,7 @@ const FECHAS_ESPECIALES = [
   { nombre: 'la Noche de Velitas', fecha: a => new Date(a, 11, 7), filtro: 'navidad',
     fotos: ['noche-velitas-1.jpg', 'noche-velitas-2.jpg', 'noche-velitas-3.jpg']
       .map(f => 'assets/productos/Navidad-2026/' + f),
-    boton: 'Ver velas de Navidad', texto: 'Las velitas se piden con tiempo. Haz tu pedido y asegura las tuyas.' },
+    boton: 'Ver velas de Navidad', texto: 'Pide las tuyas con tiempo. Vendemos al detal y al por mayor, para tu casa o para tu negocio.' },
   { nombre: 'Nochebuena', fecha: a => new Date(a, 11, 24), filtro: 'navidad', producto: 'nad16',
     boton: 'Ver velas de Navidad', texto: 'Regala velas hechas a mano esta Navidad.' },
   { nombre: 'Fin de Año', fecha: a => new Date(a, 11, 31), filtro: 'navidad', producto: 'nad9',
@@ -4743,7 +4743,7 @@ function initCuentaAtras() {
 // ------------------------------------------------------------
 // Página propia. Las velas de deseo llevan una palabra escrita (Amor,
 // Salud, Prosperidad…). Se elige el deseo, se ven velas que lo pueden
-// llevar y el botón lleva al catálogo de Suvenirs.
+// llevar y hay un botón por cada catálogo donde están esas velas.
 // ============================================================
 
 // Deseos para elegir. Se pueden cambiar o añadir aquí.
@@ -4756,7 +4756,12 @@ const DESEOS = ['Amor', 'Salud', 'Trabajo', 'Familia', 'Prosperidad', 'Abundanci
 const VELAS_DE_DESEO_EXTRA = ['sv7', 'sv9', 'nad5', 'kit1', 'kit4', 'kit10', 'nad28'];
 const PATRON_VELA_DE_DESEO = /marcad|prop[oó]sito|deseo/i;
 
-// Las de Suvenirs primero: el botón lleva a ese catálogo.
+const NOMBRE_CATALOGO = {
+  suvenirs: 'Suvenirs', navidad: 'Navidad', kitEmprendedor: 'Kit Emprendedor',
+  amorYAmistad: 'Amor y Amistad', celebracion: 'Baby Shower', primeraComunion: 'Primera Comunión'
+};
+
+// Las de Suvenirs primero.
 function velasDeDeseo() {
   const velas = obtenerTodosLosProductos().filter(p =>
     PATRON_VELA_DE_DESEO.test(p.nombre) || VELAS_DE_DESEO_EXTRA.includes(p.id));
@@ -4767,8 +4772,8 @@ function velasDeDeseo() {
 function initDeseos() {
   const lista = document.getElementById('deseos-lista');
   const rejilla = document.getElementById('deseos-velas');
-  const boton = document.getElementById('deseo-pedir');
-  if (!lista || !rejilla || !boton) return;
+  const catalogos = document.getElementById('deseos-catalogos');
+  if (!lista || !rejilla || !catalogos) return;
   let elegido = null;
 
   lista.innerHTML = DESEOS.map(d => `
@@ -4791,9 +4796,11 @@ function initDeseos() {
     document.getElementById('deseo-pista').hidden = true;
   });
 
-  boton.addEventListener('click', () => {
+  catalogos.addEventListener('click', e => {
+    const boton = e.target.closest('[data-categoria]');
+    if (!boton) return;
     mostrarSeccion('productos');
-    state.categoriaActual = 'suvenirs';
+    state.categoriaActual = boton.dataset.categoria;
     renderCategorias();
     renderProductos();
     const destino = document.getElementById('productos');
@@ -4815,6 +4822,14 @@ function renderVelasDeDeseo() {
   const velas = velasDeDeseo().slice(0, 8);
   const seccion = document.getElementById('deseos');
   if (seccion) seccion.hidden = velas.length === 0;
+  // Un botón por cada catálogo que tiene velas de deseo.
+  const catalogos = document.getElementById('deseos-catalogos');
+  if (catalogos) {
+    const categorias = [...new Set(velasDeDeseo().map(p => p.categoria))].filter(c => NOMBRE_CATALOGO[c]);
+    catalogos.innerHTML = categorias.map(c => `
+      <button type="button" class="btn btn-primary" data-categoria="${c}">Ver ${NOMBRE_CATALOGO[c]}</button>
+    `).join('');
+  }
   rejilla.innerHTML = velas.map(p => `
     <button type="button" class="deseo-vela" data-id="${p.id}" aria-label="Ver ${p.nombre}">
       <span class="deseo-vela-foto"><img src="${p.imagen}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>

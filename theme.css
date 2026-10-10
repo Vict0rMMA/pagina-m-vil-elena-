@@ -4105,7 +4105,19 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   .deseo-vela:hover .deseo-vela-nombre { color: var(--ink); }
 }
 
-.deseos-accion { display: flex; justify-content: center; margin-bottom: var(--space-12); }
+.deseos-donde {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-small);
+  text-align: center;
+  color: var(--ink-2);
+}
+.deseos-accion {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-12);
+}
 
 .deseos-velas-titulo {
   margin: 0 0 var(--space-4);
@@ -4116,14 +4128,14 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   text-align: center;
   color: var(--ink-3);
 }
-.deseos-accion .btn { min-width: min(100%, 320px); }
-.deseos-accion .btn:disabled { opacity: 0.55; cursor: not-allowed; box-shadow: none !important; }
+.deseos-accion .btn { min-width: 200px; }
 
 @media (max-width: 767px) {
   .deseos-velas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
   .deseo-chip { font-size: 1rem; padding: var(--space-2) var(--space-3); }
   .deseos-accion { margin-bottom: var(--space-8); }
-  .deseos-accion .btn { width: 100%; }
+  .deseos-accion { gap: var(--space-2); }
+  .deseos-accion .btn { min-width: 0; flex: 1 1 auto; padding-left: var(--space-4); padding-right: var(--space-4); }
   /* En el celular bastan cuatro ejemplos: ocho alargaban la sección. */
   .deseo-vela:nth-child(n+5) { display: none; }
 }
