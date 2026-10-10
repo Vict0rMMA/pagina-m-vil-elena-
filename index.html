@@ -70,12 +70,12 @@
          cliente en cada visita. Ahora son 32 KB de CSS (5 KB comprimido) con
          exactamente las clases que usa el sitio.
          Para regenerarlo tras añadir clases nuevas: ver README, sección Tailwind. -->
-    <link rel="stylesheet" href="tailwind.css?v=20261010-pagina-deseos">
+    <link rel="stylesheet" href="tailwind.css?v=20261010-velitas-fotos">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261010-pagina-deseos">
+    <link rel="stylesheet" href="theme.css?v=20261010-velitas-fotos">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -197,22 +197,6 @@
             </div>
         </section>
         
-        <!-- Cuenta atrás para la próxima fecha importante (app.js: initCuentaAtras).
-             Sólo aparece cuando faltan 60 días o menos. -->
-        <section id="cuenta-atras" class="inicio-section section cuenta-atras" hidden>
-            <div class="section-inner">
-                <div class="cuenta-panel">
-                    <img class="cuenta-foto" id="cuenta-foto" alt="" loading="lazy" decoding="async" hidden>
-                    <div class="cuenta-cuerpo">
-                        <p class="cuenta-fecha" id="cuenta-fecha"></p>
-                        <h2 class="cuenta-titulo" id="cuenta-titulo"></h2>
-                        <p class="cuenta-texto" id="cuenta-texto"></p>
-                        <a href="#productos" class="btn btn-primary cuenta-boton" id="cuenta-boton"></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Promociones Section (parte de inicio) -->
         <section class="inicio-section section section-alt">
             <div class="section-inner">
@@ -230,6 +214,22 @@
                         </div>
                     </div>
                     <div id="promo-puntos" class="promo-puntos" role="tablist" aria-label="Elegir promoci&oacute;n"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cuenta atrás para la próxima fecha importante (app.js: initCuentaAtras).
+             Sólo aparece cuando faltan 60 días o menos. -->
+        <section id="cuenta-atras" class="inicio-section section cuenta-atras" hidden>
+            <div class="section-inner">
+                <div class="cuenta-panel">
+                    <div class="cuenta-fotos" id="cuenta-fotos" hidden></div>
+                    <div class="cuenta-cuerpo">
+                        <p class="cuenta-fecha" id="cuenta-fecha"></p>
+                        <h2 class="cuenta-titulo" id="cuenta-titulo"></h2>
+                        <p class="cuenta-texto" id="cuenta-texto"></p>
+                        <a href="#productos" class="btn btn-primary cuenta-boton" id="cuenta-boton"></a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -772,7 +772,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261010-pagina-deseos"></script>
+    <script src="app.js?v=20261010-velitas-fotos"></script>
     <script src="motion.js?v=20261008-promo-destinos" defer></script>
     <script>
       // Registrar el Service Worker.

@@ -4608,8 +4608,8 @@ function initPromociones() {
 // ============================================================
 // Cuenta atrás para la próxima fecha importante
 // ------------------------------------------------------------
-// Muestra la fecha más cercana de la lista con la foto de una vela
-// para esa fecha. Sólo aparece cuando faltan 60 días o menos: una
+// Muestra la fecha más cercana de la lista con fotos de las velas
+// para esa fecha (si hay varias, pasan solas). Sólo aparece cuando faltan 60 días o menos: una
 // cuenta de 140 días no empuja a nadie. El día de la fecha dice
 // "Hoy es…" y al día siguiente pasa sola a la siguiente.
 // ============================================================
@@ -4622,7 +4622,9 @@ function enesimoDiaSemana(anio, mes, diaSemana, n) {
 }
 
 const FECHAS_ESPECIALES = [
-  { nombre: 'la Noche de Velitas', fecha: a => new Date(a, 11, 7), filtro: 'navidad', producto: 'nad4',
+  { nombre: 'la Noche de Velitas', fecha: a => new Date(a, 11, 7), filtro: 'navidad',
+    fotos: ['noche-velitas-1.jpg', 'noche-velitas-2.jpg', 'noche-velitas-3.jpg']
+      .map(f => 'assets/productos/Navidad-2026/' + f),
     boton: 'Ver velas de Navidad', texto: 'Las velitas se piden con tiempo. Haz tu pedido y asegura las tuyas.' },
   { nombre: 'Nochebuena', fecha: a => new Date(a, 11, 24), filtro: 'navidad', producto: 'nad16',
     boton: 'Ver velas de Navidad', texto: 'Regala velas hechas a mano esta Navidad.' },
@@ -4651,6 +4653,35 @@ function proximaFechaEspecial(ahora) {
   return candidatas[0] || null;
 }
 
+// Pone las fotos de la cuenta y, si hay más de una, las va pasando.
+let fotosCuentaActuales = '';
+let fotosCuentaTimer = null;
+
+function ponerFotosCuenta(fotos, nombre) {
+  const marco = document.getElementById('cuenta-fotos');
+  if (!marco) return;
+  const clave = fotos.join('|');
+  if (clave === fotosCuentaActuales) return;
+  fotosCuentaActuales = clave;
+  clearInterval(fotosCuentaTimer);
+  marco.hidden = fotos.length === 0;
+  marco.innerHTML = fotos.map((src, i) => `
+    <img src="${src}" alt="${fotos.length > 1 ? '' : nombre}" class="${i === 0 ? 'activa' : ''}"
+         loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
+  `).join('');
+  if (fotos.length < 2) return;
+  marco.setAttribute('aria-label', 'Fotos de velas para la fecha');
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let actual = 0;
+  fotosCuentaTimer = setInterval(() => {
+    if (document.hidden) return;
+    const imgs = marco.querySelectorAll('img');
+    imgs[actual].classList.remove('activa');
+    actual = (actual + 1) % imgs.length;
+    imgs[actual].classList.add('activa');
+  }, 4000);
+}
+
 function initCuentaAtras() {
   const seccion = document.getElementById('cuenta-atras');
   if (!seccion) return;
@@ -4670,17 +4701,10 @@ function initCuentaAtras() {
     boton.textContent = f.boton;
     boton.dataset.filtro = f.filtro;
 
-    // La foto: la vela elegida para la fecha o, si no hay, la primera de su categoría.
+    // Las fotos de la fecha o, si no tiene, la de su vela (o la primera de su categoría).
     const vela = (f.producto && buscarProducto(f.producto)) ||
       (productos[categoryMap[f.filtro]] || obtenerTodosLosProductos())[0];
-    const foto = $('cuenta-foto');
-    if (vela && vela.imagen) {
-      if (foto.getAttribute('src') !== vela.imagen) foto.src = vela.imagen;
-      foto.alt = vela.nombre;
-      foto.hidden = false;
-    } else {
-      foto.hidden = true;
-    }
+    ponerFotosCuenta(f.fotos || (vela && vela.imagen ? [vela.imagen] : []), vela ? vela.nombre : '');
 
     // Días de calendario, no de 24 horas: el 6 a las 11 p. m. ya es "mañana".
     const hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());

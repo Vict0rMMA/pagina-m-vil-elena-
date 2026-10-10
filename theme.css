@@ -3942,9 +3942,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    ============================================================ */
 
 .cuenta-atras[hidden], .deseos[hidden], .deseo-palabra[hidden],
-.deseo-pista[hidden], .cuenta-foto[hidden] { display: none !important; }
+.deseo-pista[hidden], .cuenta-fotos[hidden] { display: none !important; }
 
-/* Foto real de la vela y el texto al lado, con el mismo papel y la misma
+/* Fotos reales de las velas y el texto al lado, con el mismo papel y la misma
    tipografía del resto de la página. */
 .cuenta-panel {
   display: grid;
@@ -3955,14 +3955,24 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   margin: 0 auto;
 }
 
-.cuenta-foto {
-  display: block;
-  width: 100%;
-  aspect-ratio: 5 / 4;
-  object-fit: cover;
+.cuenta-fotos {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
   border-radius: var(--r-lg);
   background: var(--surface-2);
 }
+/* Las fotos van una encima de otra y se cambian fundiéndose. */
+.cuenta-fotos img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms var(--ease-suave);
+}
+.cuenta-fotos img.activa { opacity: 1; }
 
 .cuenta-fecha {
   margin: 0 0 var(--space-3);
@@ -3989,19 +3999,10 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   color: var(--ink-2);
 }
 
-/* La primera sección tras la portada es ahora la cuenta atrás; si está
-   oculta, el hueco corto pasa a las promociones como antes. */
-@media (min-width: 768px) {
-  #inicio + .cuenta-atras[hidden] + .inicio-section { padding-top: var(--space-16); }
-  .cuenta-atras:not([hidden]) + .inicio-section { padding-top: var(--space-12); }
-}
-
 @media (max-width: 767px) {
   .cuenta-panel { grid-template-columns: 1fr; gap: var(--space-6); }
-  .cuenta-foto { aspect-ratio: 16 / 10; }
   .cuenta-texto { margin-bottom: var(--space-4); }
   .cuenta-boton { width: 100%; }
-  .cuenta-atras { padding-bottom: 0; }
 }
 
 /* ============================================================
