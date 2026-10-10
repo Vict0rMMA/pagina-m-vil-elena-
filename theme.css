@@ -3942,131 +3942,51 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    ============================================================ */
 
 .cuenta-atras[hidden], .deseos[hidden], .deseo-palabra[hidden],
-.deseo-pista[hidden], .cuenta-reloj[hidden] { display: none !important; }
+.deseo-pista[hidden], .cuenta-foto[hidden] { display: none !important; }
 
-/* Una tarjeta de noche: la fecha que se cuenta es de velas encendidas. */
-.cuenta-tarjeta {
-  position: relative;
-  overflow: hidden;
-  max-width: 44rem;
+/* Foto real de la vela y el texto al lado, con el mismo papel y la misma
+   tipografía del resto de la página. */
+.cuenta-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  align-items: center;
+  gap: var(--space-12);
+  max-width: 60rem;
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6) var(--space-8);
-  border-radius: var(--r-xl);
-  background:
-    radial-gradient(ellipse 70% 45% at 50% 0%, rgba(217, 192, 138, 0.22), transparent 70%),
-    linear-gradient(160deg, #2A2030 0%, #1B1622 60%, #140F18 100%);
-  box-shadow: var(--shadow-3);
-  color: #FFFCF6;
-  text-align: center;
 }
 
-/* Siete velitas en fila, como se ponen el 7 de diciembre. */
-.cuenta-velas {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-3);
-  height: 46px;
-  margin-bottom: var(--space-6);
-}
-.cuenta-velas span {
-  position: relative;
-  align-self: flex-end;
-  width: 10px;
-  height: 28px;
-  border-radius: 3px 3px 2px 2px;
-  background: linear-gradient(180deg, #FFF6E4, #E8D6B4);
-}
-.cuenta-velas span:nth-child(even) { height: 22px; }
-.cuenta-velas span::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  width: 8px;
-  height: 14px;
-  margin-left: -4px;
-  margin-bottom: 2px;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  background: radial-gradient(ellipse at 50% 70%, #FFF3C4 0%, #F5B942 55%, rgba(232, 120, 40, 0.9) 100%);
-  box-shadow: 0 0 10px 3px rgba(245, 185, 66, 0.45);
-  transform-origin: 50% 100%;
-  animation: cuenta-llama 1.8s ease-in-out infinite alternate;
-}
-.cuenta-velas span:nth-child(2n)::before { animation-duration: 2.3s; animation-delay: -0.6s; }
-.cuenta-velas span:nth-child(3n)::before { animation-duration: 1.5s; animation-delay: -1.1s; }
-
-@keyframes cuenta-llama {
-  0%   { transform: scale(1, 1) rotate(-2deg); opacity: 0.95; }
-  50%  { transform: scale(0.92, 1.08) rotate(2deg); opacity: 1; }
-  100% { transform: scale(1.04, 0.94) rotate(-1deg); opacity: 0.88; }
-}
-
-.cuenta-antetitulo {
+.cuenta-foto {
   display: block;
-  margin-bottom: var(--space-2);
-  font-size: var(--text-micro);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold-veil);
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  background: var(--surface-2);
+}
+
+.cuenta-fecha {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--ink-3);
 }
 
 .cuenta-titulo {
-  margin: 0 auto var(--space-6);
-  max-width: 30rem;
+  margin: 0 0 var(--space-4);
   font-family: var(--font-display);
   font-size: var(--text-h2);
-  line-height: 1.15;
-  color: #FFFCF6;
-}
-
-.cuenta-reloj {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-6);
-}
-.cuenta-bloque {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 84px;
-  padding: var(--space-3) var(--space-2);
-  border: 1px solid rgba(217, 192, 138, 0.28);
-  border-radius: var(--r-lg);
-  background: rgba(255, 252, 246, 0.06);
-}
-.cuenta-numero {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
   font-weight: 700;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  color: var(--gold-veil);
+  line-height: 1.15;
+  color: var(--ink);
 }
-.cuenta-unidad {
-  margin-top: var(--space-1);
-  font-size: var(--text-micro);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 252, 246, 0.8);
-}
+.cuenta-titulo em { font-style: italic; color: var(--gold-deep); }
 
 .cuenta-texto {
-  max-width: 28rem;
-  margin: 0 auto var(--space-6);
+  max-width: 26rem;
+  margin: 0 0 var(--space-6);
   font-size: var(--text-body);
   line-height: 1.6;
-  color: rgba(255, 252, 246, 0.86);
-}
-
-.cuenta-boton {
-  background: #FFFCF6 !important;
-  color: #1B1622 !important;
-  font-weight: 700;
-}
-@media (hover: hover) and (pointer: fine) {
-  .cuenta-boton:hover { background: var(--gold-veil) !important; }
+  color: var(--ink-2);
 }
 
 /* La primera sección tras la portada es ahora la cuenta atrás; si está
@@ -4077,11 +3997,10 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 }
 
 @media (max-width: 767px) {
-  .cuenta-tarjeta { padding: var(--space-8) var(--space-4) var(--space-6); border-radius: var(--r-lg); }
-  .cuenta-velas { gap: 10px; margin-bottom: var(--space-4); }
-  .cuenta-reloj { gap: var(--space-2); }
-  .cuenta-bloque { min-width: 0; flex: 1 1 0; max-width: 96px; }
-  .cuenta-numero { font-size: 2rem; }
+  .cuenta-panel { grid-template-columns: 1fr; gap: var(--space-6); }
+  .cuenta-foto { aspect-ratio: 16 / 10; }
+  .cuenta-texto { margin-bottom: var(--space-4); }
+  .cuenta-boton { width: 100%; }
   .cuenta-atras { padding-bottom: 0; }
 }
 
@@ -4209,5 +4128,5 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cuenta-velas span::before, .deseo-palabra.aparece { animation: none; }
+  .deseo-palabra.aparece { animation: none; }
 }
