@@ -4308,7 +4308,7 @@ function abrirModalProducto(productoId) {
     <button 
       id="add-to-cart-btn"
       disabled
-      class="w-full max-w-md mx-auto block py-4 bg-gray-400 text-white rounded-full font-semibold transition-all duration-300 min-h-[48px] flex items-center justify-center opacity-50 cursor-not-allowed"
+      class="w-full max-w-md mx-auto py-4 bg-gray-400 text-white rounded-full font-semibold transition-all duration-300 min-h-[48px] flex items-center justify-center opacity-50 cursor-not-allowed"
     >
       ${tienePresentacion ? 'Selecciona tipo de compra y presentación' : 'Selecciona tipo de compra'}
     </button>

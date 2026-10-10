@@ -34,3 +34,6 @@ COMO-AGREGAR-VIDEOS.md
 README-VICTOR.md
 
 __pycache__/
+
+# Java instalado dentro de la carpeta del proyecto: no es parte de la web
+oracleJdk-27/

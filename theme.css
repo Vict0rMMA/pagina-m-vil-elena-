@@ -42,6 +42,14 @@
   /* Al pasar el cursor el oro se asienta en lugar de aclararse: aclararlo
      bajaría el contraste con la tinta. El brillo lo da el barrido. */
   --grad-gold-hover: linear-gradient(135deg, #8A6224 0%, #6C4B18 52%, #543A11 100%);
+
+  /* Color de acción. Todo era dorado (botones, títulos, iconos, bordes) y el
+     botón de comprar no destacaba. El vino de las fichas de Navidad queda
+     sólo para las acciones; el dorado sigue en lo decorativo. Contraste de
+     la tinta crema sobre el vino: 11:1 en el tono medio. */
+  --accion:            #6E1B27;
+  --grad-accion:       linear-gradient(135deg, #862534 0%, #6E1B27 52%, #581520 100%);
+  --grad-accion-hover: linear-gradient(135deg, #761F2D 0%, #5E1721 52%, #4A111A 100%);
   --grad-luz: radial-gradient(ellipse 60% 50% at 50% 30%,
                 rgba(199, 155, 74, 0.22) 0%, rgba(250, 247, 241, 0) 70%);
 
@@ -69,7 +77,7 @@
   --text-h3:      1.0625rem;
   --text-body:    1rem;
   --text-small:   0.875rem;
-  --text-micro:   0.6875rem;
+  --text-micro:   0.75rem;   /* 12px: a 11 los antetítulos y los filtros costaba leerlos en el celular */
 
   --r-sm: 6px;
   --r-md: 10px;
@@ -237,8 +245,8 @@ p, h1, h2, h3, li, td, input, textarea {
 .btn:active { transform: scale(0.97); }
 
 .btn-primary {
-  background: var(--gold-deep);
-  background-image: var(--grad-gold);
+  background: var(--accion);
+  background-image: var(--grad-accion);
   color: var(--gold-ink);
   box-shadow: var(--shadow-1);
   position: relative;
@@ -276,7 +284,7 @@ p, h1, h2, h3, li, td, input, textarea {
 
 /* Todo el hover vive aquí: en táctil se quedaba pegado tras el tap. */
 @media (hover: hover) and (pointer: fine) {
-  .btn-primary:hover { background-image: var(--grad-gold-hover); }
+  .btn-primary:hover { background-image: var(--grad-accion-hover); }
   .btn-secondary:hover { border-color: var(--gold); color: var(--gold-deep); background: var(--gold-mist); }
   .btn-ghost:hover { color: var(--ink); }
   .btn-whatsapp:hover { background: #116233; }
@@ -499,7 +507,7 @@ header.site-header.desplazada {
   justify-content: center;
   /* svh = el viewport más pequeño: nada queda tapado por la barra del navegador */
   min-height: 78svh;
-  padding: var(--space-16) var(--space-4) var(--space-24);
+  padding: var(--space-16) var(--space-4) var(--space-12);
   background: var(--bg);
   overflow: hidden;
 }
@@ -3828,3 +3836,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 /* En equipos modestos se queda sólo el aura, quieta. */
 .equipo-modesto .section-head::before { animation: none; opacity: 0.8; }
 .equipo-modesto .titulo-destellos { display: none; }
+
+/* La primera sección tras la portada arrancaba con 96 px de franja vacía:
+   sumados a los de la portada dejaban un hueco de 202 px. */
+@media (min-width: 768px) {
+  #inicio + .inicio-section { padding-top: var(--space-16); }
+}
