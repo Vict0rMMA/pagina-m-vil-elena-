@@ -166,6 +166,9 @@ body {
   font-size: var(--text-body);
   line-height: 1.65;
   letter-spacing: 0;
+  /* Números a la misma altura en toda la página: los de Playfair son
+     "de estilo antiguo" (el 5 y el 8 bajan de la línea) y se veían caídos. */
+  font-variant-numeric: lining-nums;
   overscroll-behavior-y: none;
   /* El dock mide 64px + el inset de la barra de gestos del iPhone. */
   padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
@@ -2005,7 +2008,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 .promo-cuerpo {
   display: grid;
-  grid-template-columns: 50px minmax(0, 1fr) auto;
+  grid-template-columns: 88px minmax(0, 1fr) auto;
   grid-template-areas: "icon copy action";
   align-items: center;
   gap: var(--space-6);
@@ -2034,6 +2037,30 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   color: var(--gold-deep);
   font-size: 17px;
 }
+
+/* Fotos de productos que pasan solas, en el sitio del icono. */
+.promo-fotos {
+  grid-area: icon;
+  position: relative;
+  display: block;
+  width: 88px;
+  height: 88px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-1);
+}
+.promo-fotos img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-suave);
+}
+.promo-fotos img.activa { opacity: 1; }
 
 .promo-eyebrow {
   font-family: var(--font-body);
@@ -2112,7 +2139,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   .promo-slide { padding: var(--space-6); }
 
   .promo-cuerpo {
-    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-columns: 64px minmax(0, 1fr);
     grid-template-areas:
       "icon copy"
       ". action";
@@ -2126,6 +2153,8 @@ textarea.form-input { min-height: 120px; resize: vertical; }
     height: 40px;
     font-size: 15px;
   }
+
+  .promo-fotos { width: 64px; height: 64px; }
 
   .promo-accion { justify-self: start; }
 }
@@ -3989,7 +4018,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   line-height: 1.15;
   color: var(--ink);
 }
-.cuenta-titulo em { font-style: italic; color: var(--gold-deep); }
+.cuenta-titulo em { font-style: normal; color: var(--gold-deep); }
 
 .cuenta-texto {
   max-width: 26rem;
@@ -4025,9 +4054,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   border-radius: var(--r-full);
   background: var(--surface);
   color: var(--ink-2);
-  font-family: var(--font-display);
-  font-size: 1.0625rem;
-  font-style: italic;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
   transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
 .deseo-chip.active {
@@ -4053,7 +4082,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 8vw, 3.5rem);
-  font-style: italic;
+  font-weight: 700;
   line-height: 1.1;
   color: var(--gold-deep);
 }
@@ -4132,7 +4161,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 @media (max-width: 767px) {
   .deseos-velas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
-  .deseo-chip { font-size: 1rem; padding: var(--space-2) var(--space-3); }
+  .deseo-chip { padding: var(--space-2) var(--space-3); }
   .deseos-accion { margin-bottom: var(--space-8); }
   .deseos-accion { gap: var(--space-2); }
   .deseos-accion .btn { min-width: 0; flex: 1 1 auto; padding-left: var(--space-4); padding-right: var(--space-4); }

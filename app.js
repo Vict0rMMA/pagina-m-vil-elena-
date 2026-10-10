@@ -2083,7 +2083,8 @@ const promociones = [
     imagen: "https://via.placeholder.com/800x400?text=Velas+Personalizadas",
     color: "from-purple-600 via-pink-600 to-purple-700",
     icon: "fas fa-magic",
-    iconBg: "from-purple-400 to-pink-500"
+    iconBg: "from-purple-400 to-pink-500",
+    fotosDe: "deseo"
   },
   {
     titulo: "Envío GRATIS",
@@ -2116,7 +2117,8 @@ const promociones = [
     imagen: "https://via.placeholder.com/800x400?text=Regalos",
     color: "from-pink-500 via-rose-500 to-pink-600",
     icon: "fas fa-heart",
-    iconBg: "from-pink-300 to-rose-400"
+    iconBg: "from-pink-300 to-rose-400",
+    fotosDe: "amor"
   },
   {
     titulo: "Precios Mayoristas",
@@ -4882,9 +4884,7 @@ function renderPromociones() {
     <article class="promo-slide ${promo.clase || ''}" role="group" aria-roledescription="diapositiva"
              aria-label="${index + 1} de ${alAire.length}">
       <div class="promo-cuerpo">
-        <span class="promo-icono" aria-hidden="true">
-          <i class="${promo.icon || 'fas fa-gift'}"></i>
-        </span>
+        ${marcoFotosPromo(promo)}
         <div class="promo-copy">
           ${promo.subtitulo ? `<span class="promo-eyebrow">${promo.subtitulo}</span>` : ''}
           <h3 class="promo-titulo">${promo.titulo}</h3>
@@ -4897,7 +4897,63 @@ function renderPromociones() {
   `).join('');
 
   renderPromoPuntos();
+  iniciarFotosPromo();
   if (typeof refrescarMovimiento === 'function') refrescarMovimiento(container.parentElement);
+}
+
+// ------------------------------------------------------------
+// Fotos pequeñas que pasan en cada promoción, en lugar del icono.
+// Salen del catálogo de la promoción; Personalizadas usa las velas
+// con palabra escrita y las que no llevan a un catálogo mezclan de todo.
+// ------------------------------------------------------------
+const FOTOS_POR_PROMO = 6;
+
+function fotosDePromo(promo) {
+  let lista;
+  const filtro = promo.fotosDe || promo.filtro;
+  if (filtro === 'deseo') {
+    lista = velasDeDeseo();
+  } else if (filtro && productos[categoryMap[filtro]]) {
+    lista = productos[categoryMap[filtro]].filter(p => !p.pendiente);
+  } else {
+    // Una de cada categoría por turnos, para que se vea de todo.
+    const grupos = Object.values(productos).map(g => g.filter(p => !p.pendiente));
+    lista = [];
+    for (let i = 0; lista.length < FOTOS_POR_PROMO * 2 && grupos.some(g => g[i]); i++) {
+      grupos.forEach(g => { if (g[i]) lista.push(g[i]); });
+    }
+  }
+  const conFoto = lista.filter(p => p.imagen);
+  // Repartidas por todo el catálogo, no sólo las primeras.
+  const paso = Math.max(1, Math.floor(conFoto.length / FOTOS_POR_PROMO));
+  return conFoto.filter((p, i) => i % paso === 0).slice(0, FOTOS_POR_PROMO);
+}
+
+function marcoFotosPromo(promo) {
+  const fotos = fotosDePromo(promo);
+  if (!fotos.length) {
+    return `<span class="promo-icono" aria-hidden="true"><i class="${promo.icon || 'fas fa-gift'}"></i></span>`;
+  }
+  return `<span class="promo-fotos" aria-hidden="true">${fotos.map((p, i) => `
+    <img src="${p.imagen}" alt="" class="${i === 0 ? 'activa' : ''}" loading="lazy" decoding="async" onerror="this.remove()">`).join('')}
+  </span>`;
+}
+
+let fotosPromoTimer = null;
+
+function iniciarFotosPromo() {
+  if (fotosPromoTimer) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  fotosPromoTimer = setInterval(() => {
+    if (document.hidden) return;
+    document.querySelectorAll('#promo-slides .promo-fotos').forEach(marco => {
+      const imgs = marco.querySelectorAll('img');
+      if (imgs.length < 2) return;
+      const actual = [...imgs].findIndex(img => img.classList.contains('activa'));
+      imgs[Math.max(actual, 0)].classList.remove('activa');
+      imgs[(actual + 1) % imgs.length].classList.add('activa');
+    });
+  }, 2800);
 }
 
 // Los puntos son además el control: se puede saltar a una promo concreta.
