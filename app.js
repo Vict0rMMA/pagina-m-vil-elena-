@@ -2204,6 +2204,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initProductos();
   cargarCatalogoDeLaHoja();
   initPromociones();
+  initCuentaAtras();
+  initDeseos();
   initVideos();
   initMouseWheelScroll();
   initSearch();
@@ -2863,6 +2865,7 @@ async function cargarCatalogoDeLaHoja() {
     renderCategorias();
     renderProductos();
     renderPromociones();
+    renderVelasDeDeseo();
     window.catalogoDesde = 'hoja';
   } catch (e) {
     window.catalogoDesde = 'respaldo';
@@ -4600,6 +4603,187 @@ function initPromociones() {
   renderPromociones();
   iniciarCarrusel();
   cablearAccionesPromo();
+}
+
+// ============================================================
+// Cuenta atrás para la próxima fecha importante
+// ------------------------------------------------------------
+// Muestra la fecha más cercana de la lista. Sólo aparece cuando
+// faltan 60 días o menos: una cuenta de 140 días no empuja a nadie.
+// El día de la fecha dice "¡Hoy es…!" y al día siguiente pasa sola
+// a la siguiente.
+// ============================================================
+
+// N-ésimo día de la semana de un mes: (año, mes 0-11, día 0=dom, n)
+function enesimoDiaSemana(anio, mes, diaSemana, n) {
+  const d = new Date(anio, mes, 1);
+  const desplazamiento = (diaSemana - d.getDay() + 7) % 7;
+  return new Date(anio, mes, 1 + desplazamiento + (n - 1) * 7);
+}
+
+const FECHAS_ESPECIALES = [
+  { nombre: 'la Noche de Velitas', fecha: a => new Date(a, 11, 7), filtro: 'navidad',
+    boton: 'Ver velas de Navidad', texto: 'Las velitas se piden con tiempo. Haz tu pedido y asegura las tuyas.' },
+  { nombre: 'Nochebuena', fecha: a => new Date(a, 11, 24), filtro: 'navidad',
+    boton: 'Ver velas de Navidad', texto: 'Regala velas hechas a mano esta Navidad.' },
+  { nombre: 'Fin de Año', fecha: a => new Date(a, 11, 31), filtro: 'navidad',
+    boton: 'Ver velas de propósito', texto: 'Empieza el año con una vela de propósito.' },
+  // Colombia: segundo domingo de mayo
+  { nombre: 'el Día de la Madre', fecha: a => enesimoDiaSemana(a, 4, 0, 2), filtro: 'todas',
+    boton: 'Ver regalos', texto: 'Un detalle hecho a mano para mamá.' },
+  // Colombia: tercer sábado de septiembre
+  { nombre: 'Amor y Amistad', fecha: a => enesimoDiaSemana(a, 8, 6, 3), filtro: 'amor',
+    boton: 'Ver Amor y Amistad', texto: 'Velas para regalar a quien quieres.' },
+];
+const CUENTA_DIAS_MAXIMOS = 60;
+
+// La próxima fecha cuyo día aún no ha terminado.
+function proximaFechaEspecial(ahora) {
+  const candidatas = [];
+  for (const f of FECHAS_ESPECIALES) {
+    for (const anio of [ahora.getFullYear(), ahora.getFullYear() + 1]) {
+      const inicio = f.fecha(anio);
+      const fin = new Date(inicio.getFullYear(), inicio.getMonth(), inicio.getDate() + 1);
+      if (fin > ahora) { candidatas.push({ ...f, inicio, fin }); break; }
+    }
+  }
+  candidatas.sort((x, y) => x.inicio - y.inicio);
+  return candidatas[0] || null;
+}
+
+function initCuentaAtras() {
+  const seccion = document.getElementById('cuenta-atras');
+  if (!seccion) return;
+  const $ = id => document.getElementById(id);
+
+  function pintar() {
+    const ahora = new Date();
+    const f = proximaFechaEspecial(ahora);
+    const falta = f ? f.inicio - ahora : Infinity;
+    if (!f || falta > CUENTA_DIAS_MAXIMOS * 864e5) { seccion.hidden = true; return; }
+    seccion.hidden = false;
+
+    const cuando = f.inicio.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long' });
+    $('cuenta-fecha').textContent = cuando;
+    $('cuenta-texto').textContent = f.texto;
+    const boton = $('cuenta-boton');
+    boton.textContent = f.boton;
+    boton.dataset.filtro = f.filtro;
+
+    const reloj = $('cuenta-reloj');
+    if (falta <= 0) {
+      // Es hoy
+      $('cuenta-titulo').textContent = '¡Hoy es ' + f.nombre + '!';
+      reloj.hidden = true;
+      return;
+    }
+    reloj.hidden = false;
+    $('cuenta-titulo').textContent = 'Se acerca ' + f.nombre;
+    const minutos = Math.floor(falta / 6e4);
+    const dias = Math.floor(minutos / 1440);
+    const horas = Math.floor((minutos % 1440) / 60);
+    const mins = minutos % 60;
+    $('cuenta-dias').textContent = dias;
+    $('cuenta-horas').textContent = horas;
+    $('cuenta-minutos').textContent = mins;
+    reloj.setAttribute('aria-label', `Faltan ${dias} días, ${horas} horas y ${mins} minutos para ${f.nombre}`);
+  }
+
+  pintar();
+  setInterval(pintar, 60 * 1000);
+
+  // El botón lleva al catálogo ya filtrado por la categoría de la fecha.
+  $('cuenta-boton').addEventListener('click', e => {
+    e.preventDefault();
+    const filtro = e.currentTarget.dataset.filtro || 'todas';
+    mostrarSeccion('productos');
+    state.categoriaActual = filtro === 'todas' ? 'todas' : (categoryMap[filtro] || filtro);
+    renderCategorias();
+    renderProductos();
+    const destino = document.getElementById('productos');
+    if (destino) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// ============================================================
+// Elige tu deseo
+// ------------------------------------------------------------
+// Las velas de deseo llevan una palabra escrita (Amor, Salud,
+// Prosperidad…). Se elige el deseo, se ven las velas que lo pueden
+// llevar y se pide por WhatsApp con esa palabra.
+// ============================================================
+
+// Deseos para elegir. Se pueden cambiar o añadir aquí.
+const DESEOS = ['Amor', 'Salud', 'Trabajo', 'Familia', 'Prosperidad', 'Abundancia',
+                'Armonía', 'Fortaleza', 'Gratitud', 'Paz', 'Éxitos', 'Alegría'];
+
+// Qué velas llevan palabra. Por el nombre (marcadas, de propósito, de
+// deseos) y, aparte, las que lo muestran en su foto aunque el nombre no lo
+// diga. Si se añade una vela de deseo con otro nombre, va en esta lista.
+const VELAS_DE_DESEO_EXTRA = ['kit1', 'kit4', 'kit10', 'nad28'];
+const PATRON_VELA_DE_DESEO = /marcad|prop[oó]sito|deseo/i;
+
+function velasDeDeseo() {
+  return obtenerTodosLosProductos().filter(p =>
+    PATRON_VELA_DE_DESEO.test(p.nombre) || VELAS_DE_DESEO_EXTRA.includes(p.id));
+}
+
+function initDeseos() {
+  const lista = document.getElementById('deseos-lista');
+  const rejilla = document.getElementById('deseos-velas');
+  const boton = document.getElementById('deseo-pedir');
+  if (!lista || !rejilla || !boton) return;
+  let elegido = null;
+
+  lista.innerHTML = DESEOS.map(d => `
+    <button type="button" class="deseo-chip" aria-pressed="false" data-deseo="${d}">${d}</button>
+  `).join('');
+
+  lista.addEventListener('click', e => {
+    const chip = e.target.closest('.deseo-chip');
+    if (!chip) return;
+    elegido = chip.dataset.deseo;
+    lista.querySelectorAll('.deseo-chip').forEach(c => {
+      const activo = c === chip;
+      c.classList.toggle('active', activo);
+      c.setAttribute('aria-pressed', String(activo));
+    });
+    const palabra = document.getElementById('deseo-palabra');
+    palabra.textContent = elegido;
+    palabra.hidden = false;
+    palabra.classList.remove('aparece'); void palabra.offsetWidth; palabra.classList.add('aparece');
+    document.getElementById('deseo-pista').hidden = true;
+    document.getElementById('deseo-pedir-texto').textContent = 'Pedir mi vela de ' + elegido;
+    boton.disabled = false;
+  });
+
+  boton.addEventListener('click', () => {
+    if (!elegido) return;
+    const mensaje = `¡Hola! Quiero una vela con el deseo *${elegido}*. ¿Qué opciones tienen?`;
+    window.open(WHATSAPP_API + encodeURIComponent(mensaje), '_blank');
+  });
+
+  rejilla.addEventListener('click', e => {
+    const tarjeta = e.target.closest('[data-id]');
+    if (tarjeta) abrirModalProducto(tarjeta.dataset.id);
+  });
+
+  renderVelasDeDeseo();
+}
+
+// Se llama otra vez cuando llega el catálogo de la hoja.
+function renderVelasDeDeseo() {
+  const rejilla = document.getElementById('deseos-velas');
+  if (!rejilla) return;
+  const velas = velasDeDeseo().slice(0, 8);
+  const seccion = document.getElementById('deseos');
+  if (seccion) seccion.hidden = velas.length === 0;
+  rejilla.innerHTML = velas.map(p => `
+    <button type="button" class="deseo-vela" data-id="${p.id}" aria-label="Ver ${p.nombre}">
+      <span class="deseo-vela-foto"><img src="${p.imagen}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>
+      <span class="deseo-vela-nombre">${p.nombre}</span>
+    </button>
+  `).join('');
 }
 
 // Cada promoción lleva a su sitio: la de personalizadas a Personalizadas,

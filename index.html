@@ -70,12 +70,12 @@
          cliente en cada visita. Ahora son 32 KB de CSS (5 KB comprimido) con
          exactamente las clases que usa el sitio.
          Para regenerarlo tras añadir clases nuevas: ver README, sección Tailwind. -->
-    <link rel="stylesheet" href="tailwind.css?v=20261010-temas-carrito">
+    <link rel="stylesheet" href="tailwind.css?v=20261010-cuenta-deseos">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261010-temas-carrito">
+    <link rel="stylesheet" href="theme.css?v=20261010-cuenta-deseos">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -195,6 +195,27 @@
             </div>
         </section>
         
+        <!-- Cuenta atrás para la próxima fecha importante (app.js: initCuentaAtras).
+             Sólo aparece cuando faltan 60 días o menos. -->
+        <section id="cuenta-atras" class="inicio-section section cuenta-atras" hidden>
+            <div class="section-inner">
+                <div class="cuenta-tarjeta">
+                    <div class="cuenta-velas" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="cuenta-antetitulo" id="cuenta-fecha"></span>
+                    <h2 class="cuenta-titulo" id="cuenta-titulo"></h2>
+                    <div class="cuenta-reloj" id="cuenta-reloj" role="timer" aria-live="off">
+                        <div class="cuenta-bloque"><span class="cuenta-numero" id="cuenta-dias">0</span><span class="cuenta-unidad">días</span></div>
+                        <div class="cuenta-bloque"><span class="cuenta-numero" id="cuenta-horas">0</span><span class="cuenta-unidad">horas</span></div>
+                        <div class="cuenta-bloque"><span class="cuenta-numero" id="cuenta-minutos">0</span><span class="cuenta-unidad">minutos</span></div>
+                    </div>
+                    <p class="cuenta-texto" id="cuenta-texto"></p>
+                    <a href="#productos" class="btn cuenta-boton" id="cuenta-boton"></a>
+                </div>
+            </div>
+        </section>
+
         <!-- Promociones Section (parte de inicio) -->
         <section class="inicio-section section section-alt">
             <div class="section-inner">
@@ -216,6 +237,31 @@
             </div>
         </section>
         
+        <!-- Elige tu deseo (app.js: initDeseos) -->
+        <section id="deseos" class="inicio-section section deseos">
+            <div class="section-inner">
+                <div class="section-head">
+                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+                    <span class="section-eyebrow">Velas con intención</span>
+                    <h2 class="section-title">Elige tu deseo</h2>
+                    <p class="section-subtitle">Nuestras velas llevan una palabra escrita. Elige la tuya y te preparamos la vela con ella.</p>
+                </div>
+                <div class="deseos-lista" id="deseos-lista" role="group" aria-label="Deseos"></div>
+                <div class="deseo-elegido" id="deseo-elegido" aria-live="polite">
+                    <p class="deseo-pista" id="deseo-pista">Toca un deseo para pedir tu vela.</p>
+                    <p class="deseo-palabra" id="deseo-palabra" hidden></p>
+                </div>
+                <div class="deseos-accion">
+                    <button type="button" class="btn btn-whatsapp btn-pedido" id="deseo-pedir" disabled>
+                        <i class="fab fa-whatsapp text-2xl" aria-hidden="true"></i>
+                        <span id="deseo-pedir-texto">Elige un deseo</span>
+                    </button>
+                </div>
+                <p class="deseos-velas-titulo">Algunas velas que pueden llevar tu deseo</p>
+                <div class="deseos-velas" id="deseos-velas"></div>
+            </div>
+        </section>
+
         <!-- Videos Section (parte de inicio) -->
         <section id="videos" class="inicio-section section">
             <div class="section-inner">
@@ -732,7 +778,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261010-temas-carrito"></script>
+    <script src="app.js?v=20261010-cuenta-deseos"></script>
     <script src="motion.js?v=20261008-promo-destinos" defer></script>
     <script>
       // Registrar el Service Worker.
