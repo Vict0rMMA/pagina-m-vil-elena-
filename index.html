@@ -70,12 +70,12 @@
          cliente en cada visita. Ahora son 32 KB de CSS (5 KB comprimido) con
          exactamente las clases que usa el sitio.
          Para regenerarlo tras añadir clases nuevas: ver README, sección Tailwind. -->
-    <link rel="stylesheet" href="tailwind.css?v=20261010-letra-pareja">
+    <link rel="stylesheet" href="tailwind.css?v=20261010-rapida">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261010-letra-pareja">
+    <link rel="stylesheet" href="theme.css?v=20261010-rapida">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -250,6 +250,13 @@
                 </div>
                 <p class="deseos-donde">Encuéntralas en estos catálogos</p>
                 <div class="deseos-accion" id="deseos-catalogos"></div>
+                <p class="deseos-o">o pídela directo</p>
+                <div class="deseos-whatsapp">
+                    <button type="button" class="btn btn-whatsapp btn-pedido" id="deseo-pedir">
+                        <i class="fab fa-whatsapp text-2xl" aria-hidden="true"></i>
+                        <span id="deseo-pedir-texto">Pedir por WhatsApp</span>
+                    </button>
+                </div>
                 <p class="deseos-velas-titulo">Algunas velas que pueden llevar tu deseo</p>
                 <div class="deseos-velas" id="deseos-velas"></div>
             </div>
@@ -771,8 +778,8 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261010-letra-pareja"></script>
-    <script src="motion.js?v=20261008-promo-destinos" defer></script>
+    <script src="app.js?v=20261010-rapida"></script>
+    <script src="motion.js?v=20261010-rapida" defer></script>
     <script>
       // Registrar el Service Worker.
       //

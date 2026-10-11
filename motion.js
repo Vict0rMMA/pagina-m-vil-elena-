@@ -140,7 +140,12 @@
 
   function initAmbiente() {
     const lienzo = document.getElementById('hero-ambiente');
-    if (!lienzo || reducido.matches || modesto) return;
+    // En el celular no: las motas obligaban a repintar la página entera
+    // en cada fotograma y el teléfono trabajaba al 55 % con la página
+    // quieta. La portada conserva sus destellos y su halo, que no cuestan.
+    const tactil = typeof window.matchMedia === 'function' &&
+                   window.matchMedia('(pointer: coarse)').matches;
+    if (!lienzo || reducido.matches || modesto || tactil) return;
 
     const ctx = lienzo.getContext('2d', { alpha: true });
     if (!ctx) return;
@@ -181,33 +186,52 @@
       };
     }
 
-    function pintar() {
+    // Cada mota es la misma luz a distinto tamaño y brillo: se dibuja una
+    // vez en un lienzo aparte y luego sólo se copia. Antes se creaba un
+    // degradado nuevo por mota en cada fotograma, y en el celular era lo
+    // que más trabajo daba con la página quieta.
+    const SPRITE = 64;
+    const sprite = document.createElement('canvas');
+    sprite.width = sprite.height = SPRITE;
+    const sctx = sprite.getContext('2d');
+    const luz = sctx.createRadialGradient(SPRITE / 2, SPRITE / 2, 0, SPRITE / 2, SPRITE / 2, SPRITE / 2);
+    luz.addColorStop(0, 'rgba(199, 155, 74, 1)');
+    luz.addColorStop(1, 'rgba(199, 155, 74, 0)');
+    sctx.fillStyle = luz;
+    sctx.fillRect(0, 0, SPRITE, SPRITE);
+
+    // 30 fotogramas por segundo: las motas van tan despacio que no se nota
+    // la diferencia con 60, y es la mitad de trabajo.
+    const PASO = 1000 / 30;
+    let ultimo = 0;
+
+    function pintar(ahora) {
+      rafId = requestAnimationFrame(pintar);
+      if (ahora - ultimo < PASO) return;
+      // Las velocidades estaban pensadas a 60 fps: a 30 cada paso cuenta doble.
+      const k = ultimo ? Math.min((ahora - ultimo) / (1000 / 60), 4) : 1;
+      ultimo = ahora;
       ctx.clearRect(0, 0, ancho, alto);
       for (let i = 0; i < motas.length; i++) {
         const m = motas[i];
-        m.y -= m.vy;
-        m.x += m.vx;
-        m.fase += m.vel;
+        m.y -= m.vy * k;
+        m.x += m.vx * k;
+        m.fase += m.vel * k;
         if (m.y < -12) motas[i] = nuevaMota(false);
 
         // El parpadeo es lo que las hace parecer luz y no puntos.
-        const a = m.alfa * (0.55 + 0.45 * Math.sin(m.fase));
-        const halo = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 4);
-        halo.addColorStop(0, 'rgba(199, 155, 74, ' + a.toFixed(3) + ')');
-        halo.addColorStop(1, 'rgba(199, 155, 74, 0)');
-        ctx.fillStyle = halo;
-        ctx.beginPath();
-        ctx.arc(m.x, m.y, m.r * 4, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.globalAlpha = m.alfa * (0.55 + 0.45 * Math.sin(m.fase));
+        const d = m.r * 8;
+        ctx.drawImage(sprite, m.x - d / 2, m.y - d / 2, d, d);
       }
-      rafId = requestAnimationFrame(pintar);
+      ctx.globalAlpha = 1;
     }
 
     function arrancar() {
       if (rafId === null) rafId = requestAnimationFrame(pintar);
     }
     function parar() {
-      if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+      if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; ultimo = 0; }
     }
 
     dimensionar();
@@ -391,7 +415,12 @@
       escala += (escalaDestino - escala) * 0.18;
       punto.style.transform =
         'translate3d(' + x + 'px,' + y + 'px,0) translate(-50%,-50%) scale(' + escala.toFixed(3) + ')';
-      raf = requestAnimationFrame(bucle);
+      // Si ya llegó a donde está el ratón, se para hasta el próximo
+      // movimiento: antes seguía pintando 60 veces por segundo con el
+      // ratón quieto.
+      const quieto = Math.abs(ratonX - x) < 0.1 && Math.abs(ratonY - y) < 0.1 &&
+                     Math.abs(escalaDestino - escala) < 0.001;
+      raf = quieto ? null : requestAnimationFrame(bucle);
     }
 
     window.addEventListener('pointermove', (e) => {
@@ -401,8 +430,8 @@
         visible = true;
         x = ratonX; y = ratonY;          // aparece donde está el ratón, sin viajar
         punto.classList.add('visible');
-        if (raf === null) raf = requestAnimationFrame(bucle);
       }
+      if (raf === null) raf = requestAnimationFrame(bucle);
     }, { passive: true });
 
     document.addEventListener('pointerleave', () => {
@@ -413,9 +442,11 @@
     // Delegación: un solo par de listeners, vale para lo que se monte después.
     document.addEventListener('pointerover', (e) => {
       if (e.target instanceof Element && e.target.closest(PULSABLE)) escalaDestino = 2.4;
+      if (raf === null && visible) raf = requestAnimationFrame(bucle);
     }, { passive: true });
     document.addEventListener('pointerout', (e) => {
       if (e.target instanceof Element && e.target.closest(PULSABLE)) escalaDestino = 1;
+      if (raf === null && visible) raf = requestAnimationFrame(bucle);
     }, { passive: true });
   }
 

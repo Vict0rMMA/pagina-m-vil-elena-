@@ -6,6 +6,28 @@
 const WHATSAPP_PHONE = '573008220389';
 const WHATSAPP_API = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=`;
 
+// Miniaturas: las fotos de productos pesan 100-340 KB y casi siempre se
+// ven pequeñas. herramientas/miniaturas.py deja una copia WebP de ~30 KB
+// en assets/mini/ con la misma ruta. Donde la foto se ve chica se usa la
+// miniatura; la ficha ampliada sigue con la original.
+function miniatura(src) {
+  if (!src || !src.startsWith('assets/productos/')) return src;
+  return 'assets/mini/' + src.slice('assets/productos/'.length).replace(/\.[a-z]+$/i, '.webp');
+}
+
+// Si una miniatura no existe (foto nueva sin pasar por el script) o el
+// navegador no lee WebP, se pone la original y nadie nota nada. Va en la
+// fase de captura para llegar antes que los onerror de cada imagen.
+document.addEventListener('error', (e) => {
+  const img = e.target;
+  if (!(img instanceof HTMLImageElement) || !img.dataset.original) return;
+  if (!img.currentSrc.includes('/assets/mini/') && !img.src.includes('/assets/mini/')) return;
+  e.stopImmediatePropagation();
+  const original = img.dataset.original;
+  delete img.dataset.original;
+  img.src = original;
+}, true);
+
 // Base de datos de productos
 // CATÁLOGO DE RESPALDO.
 // El catálogo de verdad vive en la hoja de Google "Catálogo Elena Velas y
@@ -2720,7 +2742,7 @@ function renderCarrito() {
       <div class="flex gap-4">
         <!-- Imagen del producto -->
         <div class="flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-xl p-2 border-2 border-gray-200 dark:border-gray-700 group-hover:border-yellow-400 transition-colors">
-          <img src="${item.imagen}" alt="${item.nombre}" 
+          <img src="${miniatura(item.imagen)}" data-original="${item.imagen}" alt="${item.nombre}" 
                class="w-24 h-24 md:w-28 md:h-28 object-contain rounded-lg" 
                onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'112\' height=\'112\'%3E%3Crect fill=\'%23f3f4f6\' width=\'112\' height=\'112\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%239ca3af\' font-family=\'sans-serif\' font-size=\'14\'%3EVela%3C/text%3E%3C/svg%3E';">
         </div>
@@ -3059,7 +3081,8 @@ function renderProductos() {
         <div class="skeleton-image absolute inset-0"></div>
         <img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-          data-src="${producto.imagen}"
+          data-src="${miniatura(producto.imagen)}"
+          data-original="${producto.imagen}"
           alt="${producto.nombre}"
           class="producto-img"
           decoding="async"
@@ -4655,6 +4678,31 @@ function proximaFechaEspecial(ahora) {
   return candidatas[0] || null;
 }
 
+// Fotos que se van turnando en un marco (cuenta atrás y promociones).
+// Sólo la primera se descarga al abrir la página; cada una de las demás
+// se pide justo antes de que le toque salir.
+function imagenesTurnantes(fotos, alt) {
+  return fotos.map((src, i) => {
+    const mini = miniatura(src);
+    const fuente = i === 0 ? `src="${mini}"` : `data-turno="${mini}"`;
+    return `<img ${fuente} data-original="${src}" alt="${alt}" class="${i === 0 ? 'activa' : ''}" decoding="async">`;
+  }).join('');
+}
+
+function pasarFoto(marco) {
+  const imgs = marco.querySelectorAll('img');
+  if (imgs.length < 2) return;
+  const actual = Math.max([...imgs].findIndex(img => img.classList.contains('activa')), 0);
+  const siguiente = (actual + 1) % imgs.length;
+  const cargar = img => { if (img && img.dataset.turno) { img.src = img.dataset.turno; delete img.dataset.turno; } };
+  cargar(imgs[siguiente]);
+  // Si todavía no llegó, se espera al próximo turno en vez de dejar el marco vacío.
+  if (!imgs[siguiente].complete) return;
+  imgs[actual].classList.remove('activa');
+  imgs[siguiente].classList.add('activa');
+  cargar(imgs[(siguiente + 1) % imgs.length]);
+}
+
 // Pone las fotos de la cuenta y, si hay más de una, las va pasando.
 let fotosCuentaActuales = '';
 let fotosCuentaTimer = null;
@@ -4667,20 +4715,12 @@ function ponerFotosCuenta(fotos, nombre) {
   fotosCuentaActuales = clave;
   clearInterval(fotosCuentaTimer);
   marco.hidden = fotos.length === 0;
-  marco.innerHTML = fotos.map((src, i) => `
-    <img src="${src}" alt="${fotos.length > 1 ? '' : nombre}" class="${i === 0 ? 'activa' : ''}"
-         loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
-  `).join('');
+  marco.innerHTML = imagenesTurnantes(fotos, fotos.length > 1 ? '' : nombre);
   if (fotos.length < 2) return;
   marco.setAttribute('aria-label', 'Fotos de velas para la fecha');
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let actual = 0;
   fotosCuentaTimer = setInterval(() => {
-    if (document.hidden) return;
-    const imgs = marco.querySelectorAll('img');
-    imgs[actual].classList.remove('activa');
-    actual = (actual + 1) % imgs.length;
-    imgs[actual].classList.add('activa');
+    if (!document.hidden && marco.offsetParent) pasarFoto(marco);
   }, 4000);
 }
 
@@ -4745,7 +4785,8 @@ function initCuentaAtras() {
 // ------------------------------------------------------------
 // Página propia. Las velas de deseo llevan una palabra escrita (Amor,
 // Salud, Prosperidad…). Se elige el deseo, se ven velas que lo pueden
-// llevar y hay un botón por cada catálogo donde están esas velas.
+// llevar, hay un botón por cada catálogo donde están esas velas y otro
+// para pedirla por WhatsApp con la palabra elegida.
 // ============================================================
 
 // Deseos para elegir. Se pueden cambiar o añadir aquí.
@@ -4796,6 +4837,15 @@ function initDeseos() {
     palabra.hidden = false;
     palabra.classList.remove('aparece'); void palabra.offsetWidth; palabra.classList.add('aparece');
     document.getElementById('deseo-pista').hidden = true;
+    document.getElementById('deseo-pedir-texto').textContent = 'Pedir mi vela de ' + elegido;
+  });
+
+  const pedir = document.getElementById('deseo-pedir');
+  if (pedir) pedir.addEventListener('click', () => {
+    const mensaje = elegido
+      ? `¡Hola! Quiero una vela con el deseo *${elegido}*. ¿Qué opciones tienen?`
+      : '¡Hola! Quiero una vela con un deseo escrito. ¿Qué opciones tienen?';
+    window.open(WHATSAPP_API + encodeURIComponent(mensaje), '_blank');
   });
 
   catalogos.addEventListener('click', e => {
@@ -4834,7 +4884,7 @@ function renderVelasDeDeseo() {
   }
   rejilla.innerHTML = velas.map(p => `
     <button type="button" class="deseo-vela" data-id="${p.id}" aria-label="Ver ${p.nombre}">
-      <span class="deseo-vela-foto"><img src="${p.imagen}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>
+      <span class="deseo-vela-foto"><img src="${miniatura(p.imagen)}" data-original="${p.imagen}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>
       <span class="deseo-vela-nombre">${p.nombre}</span>
     </button>
   `).join('');
@@ -4934,9 +4984,7 @@ function marcoFotosPromo(promo) {
   if (!fotos.length) {
     return `<span class="promo-icono" aria-hidden="true"><i class="${promo.icon || 'fas fa-gift'}"></i></span>`;
   }
-  return `<span class="promo-fotos" aria-hidden="true">${fotos.map((p, i) => `
-    <img src="${p.imagen}" alt="" class="${i === 0 ? 'activa' : ''}" loading="lazy" decoding="async" onerror="this.remove()">`).join('')}
-  </span>`;
+  return `<span class="promo-fotos" aria-hidden="true">${imagenesTurnantes(fotos.map(p => p.imagen), '')}</span>`;
 }
 
 let fotosPromoTimer = null;
@@ -4946,13 +4994,12 @@ function iniciarFotosPromo() {
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   fotosPromoTimer = setInterval(() => {
     if (document.hidden) return;
-    document.querySelectorAll('#promo-slides .promo-fotos').forEach(marco => {
-      const imgs = marco.querySelectorAll('img');
-      if (imgs.length < 2) return;
-      const actual = [...imgs].findIndex(img => img.classList.contains('activa'));
-      imgs[Math.max(actual, 0)].classList.remove('activa');
-      imgs[(actual + 1) % imgs.length].classList.add('activa');
-    });
+    // Sólo la promoción que se está viendo, y sólo si la sección está a la vista.
+    const pista = document.getElementById('promo-slides');
+    if (!pista || !pista.offsetParent) return;
+    const actual = pista.querySelectorAll('.promo-slide')[state.currentPromoSlide || 0];
+    const marco = actual && actual.querySelector('.promo-fotos');
+    if (marco) pasarFoto(marco);
   }, 2800);
 }
 
@@ -5936,7 +5983,7 @@ function renderCatalogoBanners() {
           ${productos.slice(0, 3).map(p => `
             <div class="bg-gray-900 rounded-xl p-3 border border-yellow-500/20 hover:border-yellow-500/50 transition cursor-pointer" onclick="abrirModalProducto('${p.id}')">
               <div class="bg-gray-800 rounded-lg p-2 mb-2 flex items-center justify-center h-32">
-                <img src="${p.imagen}" alt="${p.nombre}" class="max-w-full max-h-full w-auto h-auto object-contain" loading="lazy" decoding="async" onerror="this.parentElement.parentElement.style.display='none'">
+                <img src="${miniatura(p.imagen)}" data-original="${p.imagen}" alt="${p.nombre}" class="max-w-full max-h-full w-auto h-auto object-contain" loading="lazy" decoding="async" onerror="this.parentElement.parentElement.style.display='none'">
               </div>
               <h4 class="font-bold text-white mb-2 text-sm text-center">${p.nombre}</h4>
             </div>
@@ -6006,7 +6053,7 @@ function mostrarToastProducto(producto) {
   toast.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 p-4 max-w-sm w-full flex items-center gap-4 backdrop-blur-md">
       <div class="flex-shrink-0">
-        <img src="${producto.imagen}" alt="${producto.nombre}" 
+        <img src="${miniatura(producto.imagen)}" data-original="${producto.imagen}" alt="${producto.nombre}" 
              class="w-16 h-16 object-cover rounded-xl border border-gray-200"
              onerror="this.remove()">
       </div>

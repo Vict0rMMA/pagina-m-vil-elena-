@@ -316,6 +316,18 @@ Las fotos grandes son el mayor peso del sitio. Antes de subir una, redúcela a
 unos 1000 px de ancho y guárdala como JPEG de calidad ~80. Una foto de producto
 no debería pasar de 200 KB.
 
+Después de añadir o cambiar fotos, crea sus miniaturas:
+
+```bash
+python herramientas/miniaturas.py
+```
+
+Deja en `assets/mini/` una copia WebP de ~30 KB de cada foto (misma ruta,
+extensión `.webp`). Las tarjetas del catálogo, las promociones, "Elige tu
+deseo", la cuenta atrás y el carrito usan la miniatura; la ficha ampliada usa
+la original. Si una miniatura falta, la página carga la original sola, así que
+olvidarlo no rompe nada: sólo hace esa foto más pesada.
+
 ---
 
 ## 📸 Capturas de Pantalla
