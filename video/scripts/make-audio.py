@@ -1,6 +1,6 @@
-"""Genera la música original (pad + campanitas, 120 bpm, 20 s) -> public/audio/music.mp3"""
+"""Genera la música original (pad + campanitas, 120 bpm, 25 s) -> public/audio/music.mp3"""
 import numpy as np, wave, subprocess, os
-SR, DUR = 44100, 20.0
+SR, DUR = 44100, 25.0
 N = int(SR * DUR)
 t = np.arange(N) / SR
 rng = np.random.default_rng(7)
@@ -25,18 +25,18 @@ def pad(f, d):
     return s * env / 3
 
 # acordes (cada 4 s = 8 beats): Am, F, C, G, Am
-chords = [[57,60,64],[53,57,60],[48,55,64],[55,59,62],[57,60,64]]
+chords = [[57,60,64],[53,57,60],[48,55,64],[55,59,62]] * 2
 for k, ch in enumerate(chords):
     for n in ch:
         add(pad(note(n), 4.4), k*4, pan=.5, gain=.16)
     add(pad(note(ch[0]-12), 4.4), k*4, gain=.22)
 # arpegio de campanitas en corcheas desde 3 s
-arp = [[69,72,76,72],[65,69,72,69],[72,76,79,76],[67,71,74,71],[69,72,76,81]]
+arp = [[69,72,76,72],[65,69,72,69],[72,76,79,76],[67,71,74,71]] * 2
 for k, a in enumerate(arp):
     for b in range(8):
         st = k*4 + b*.5
-        if st < 3 or st > 19.2: continue
-        add(bell(note(a[b % 4]), 1.8), st, pan=.3 + .4*((b%2)), gain=.11 if st < 15 else .13)
+        if st < 3 or st > 24.2: continue
+        add(bell(note(a[b % 4]), 1.8), st, pan=.3 + .4*((b%2)), gain=.11 if st < 19.7 else .13)
 # riser inicial (0-3 s) y llama
 tt = np.arange(int(SR*3)) / SR
 noise = rng.normal(size=len(tt)); 
@@ -46,13 +46,13 @@ ris = irfft(sp, len(tt)) * (tt/3)**2.5 * 0.5
 add(ris, 0, gain=.5)
 add(bell(note(81), 3.5), 0.2, gain=.2)
 # acentos en transiciones (3,7,11,15 s)
-for s_ in (3, 7, 11, 15):
+for s_ in (3, 9.6, 16.2, 19.7):
     add(bell(note(93), 2.2), s_, gain=.16); add(bell(note(81), 2.5), s_, gain=.14)
     k_ = int(SR*.5); sw = rng.normal(size=int(SR*.5)); sw = np.convolve(sw, np.ones(12)/12, 'same') * np.linspace(1,0,int(SR*.5))**2
     add(sw*.25, s_-.15, gain=.4)
 # final: acorde de campanas
 for n, o in zip((81, 84, 88, 93), (0, .06, .12, .18)):
-    add(bell(note(n), 4.5), 15.0 + o, gain=.2)
+    add(bell(note(n), 4.5), 19.7 + o, gain=.2)
 # fade in/out + normalizar
 fade = np.minimum(1, t/.6) * np.minimum(1, (DUR - t)/1.5)
 L *= fade; R *= fade

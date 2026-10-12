@@ -1,9 +1,15 @@
 import { staticFile } from "remotion";
 
 export const FPS = 30;
-export const DURATION = 600; // 20 s
+export const DURATION = 750; // 25 s
 export const OV = 12; // frames de solapamiento entre tomas
 export const WEB_URL = "pagina-m-vil-elena.vercel.app";
+export const SOCIAL = [
+  { id: "wa", label: "+57 300 822 0389" },
+  { id: "ig", label: "@velasyaromaselena" },
+  { id: "tt", label: "@velas.elena" },
+  { id: "fb", label: "velasyaromascautiva" },
+] as const;
 export const C = {
   gold: "#E8C77A",
   goldDeep: "#B8893A",
@@ -22,6 +28,11 @@ export const RATIO: Record<string, [number, number]> = {
   "adj3.jpg": [1024, 1536],
   "adj4.jpg": [1086, 1448],
   "adj5.jpg": [1254, 1254],
+  "adj6.jpg": [1024, 1536],
+  "adj7.jpg": [1086, 1448],
+  "adj8.jpg": [1024, 1536],
+  "adj9.jpg": [1086, 1448],
+  "adj10.jpg": [1066, 1280],
   "pesebre-arbolito-angel.jpg": [750, 1000],
   "pino-grande.jpg": [615, 820],
   "noche-velitas-1.jpg": [1000, 913],
