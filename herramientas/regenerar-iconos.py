@@ -11,7 +11,7 @@ Busca todas las clases fa-* del proyecto, se queda sólo con esos glifos y
 reescribe iconos.css + assets/fonts/. Font Awesome completo son 251 KB de
 fuentes; el sitio usa ~50 iconos, que caben en menos de 6 KB.
 """
-import io, os, re, sys, subprocess, tempfile
+import hashlib, io, os, re, sys, subprocess, tempfile
 try:
     from urllib.request import urlopen
 except ImportError:
@@ -71,6 +71,9 @@ def main():
     if not os.path.isdir('assets/fonts'):
         os.makedirs('assets/fonts')
 
+    # El service worker sirve las fuentes del caché primero: sin un ?v= que
+    # cambie con el contenido, un icono nuevo saldría en blanco una visita.
+    huellas = {}
     tmp = tempfile.mkdtemp()
     for nombre, _, _ in FUENTES:
         origen = os.path.join(tmp, nombre + '.woff2')
@@ -82,6 +85,8 @@ def main():
             '--unicodes=' + puntos, '--flavor=woff2', '--layout-features=',
             '--no-hinting', '--desubroutinize', '--output-file=' + destino,
         ])
+        with open(destino, 'rb') as fh:
+            huellas[nombre] = hashlib.md5(fh.read()).hexdigest()[:8]
         print('  %-16s %6.1f KB -> %5.1f KB' % (
             nombre, os.path.getsize(origen) / 1024.0,
             os.path.getsize(destino) / 1024.0))
@@ -92,8 +97,8 @@ def main():
         u'  font-style: normal;\n'
         u'  font-weight: %d;\n'
         u'  font-display: block;\n'
-        u'  src: url("assets/fonts/%s-subset.woff2") format("woff2");\n'
-        u'}' % (familia, peso, nombre)
+        u'  src: url("assets/fonts/%s-subset.woff2?v=%s") format("woff2");\n'
+        u'}' % (familia, peso, nombre, huellas[nombre])
         for nombre, familia, peso in FUENTES)
 
     salida = [

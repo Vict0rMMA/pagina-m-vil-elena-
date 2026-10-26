@@ -926,7 +926,8 @@ input:focus, textarea:focus, select:focus {
   align-items: stretch;
   justify-content: space-around;
   height: 64px;
-  padding: 0 var(--space-2);
+  /* Seis botones: el margen lateral se reduce para que quepan en 320 px. */
+  padding: 0 var(--space-1);
 }
 
 .dock-item,
@@ -934,7 +935,8 @@ input:focus, textarea:focus, select:focus {
 #bottom-dock a {
   position: relative;
   display: flex;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -961,6 +963,12 @@ input:focus, textarea:focus, select:focus {
   font-weight: 500;
   letter-spacing: 0.02em;
   color: inherit !important;
+}
+
+/* En 320 px "Deseos" y "Personaliza" se tocaban. */
+@media (max-width: 359px) {
+  .dock-item span,
+  #bottom-dock span:not(.cart-badge) { font-size: 9px; letter-spacing: 0; }
 }
 
 .dock-item:active i { transform: scale(0.9); }
@@ -1157,8 +1165,9 @@ input:focus, textarea:focus, select:focus {
    ============================================================ */
 
 .scroll-top {
-  right: var(--space-4);
-  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  right: calc(var(--space-4) + 6px + env(safe-area-inset-right, 0px));
+  /* Encima de la burbuja de WhatsApp (56px + 12px de aire). */
+  bottom: calc(148px + env(safe-area-inset-bottom, 0px));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1175,11 +1184,65 @@ input:focus, textarea:focus, select:focus {
 .scroll-top i { font-size: 15px; }
 .scroll-top:active { background: var(--surface-2) !important; }
 
-@media (min-width: 768px) { .scroll-top { right: var(--space-8); bottom: var(--space-8); } }
+@media (min-width: 768px) {
+  .scroll-top {
+    right: calc(var(--space-8) + 6px + env(safe-area-inset-right, 0px));
+    bottom: calc(var(--space-8) + 72px);
+  }
+}
 
 @media (hover: hover) and (pointer: fine) {
   .scroll-top:hover { border-color: var(--gold); color: var(--gold-deep) !important; }
 }
+
+/* --- Burbuja de WhatsApp ---
+   Sin animación en bucle: cualquier animación infinita mantiene al
+   celular trabajando aunque nadie toque la página. */
+
+.wa-burbuja {
+  position: fixed;
+  z-index: 40;
+  right: calc(var(--space-4) + env(safe-area-inset-right, 0px));
+  /* Encima del dock del celular (64px + barra de gestos del iPhone). */
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px; height: 56px;
+  border-radius: var(--r-full);
+  background: #25D366 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22), 0 2px 4px rgba(0, 0, 0, 0.12);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--dur-press) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.wa-burbuja i { font-size: 30px; line-height: 1; color: #FFFFFF !important; }
+.wa-burbuja:active { transform: scale(0.94); }
+.wa-burbuja:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+@media (min-width: 768px) {
+  .wa-burbuja {
+    right: calc(var(--space-8) + env(safe-area-inset-right, 0px));
+    bottom: var(--space-8);
+    width: 60px; height: 60px;
+  }
+  .wa-burbuja i { font-size: 32px; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .wa-burbuja:hover {
+    transform: scale(1.06);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26), 0 3px 6px rgba(0, 0, 0, 0.14);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-burbuja { transition: none; }
+  .wa-burbuja:hover, .wa-burbuja:active { transform: none; }
+}
+
+@media print { .wa-burbuja { display: none; } }
 
 /* ============================================================
    17. Movimiento — solo lo que comunica algo

@@ -1,4 +1,4 @@
-/* Font Awesome 6.4.0 reducido a los 51 iconos que usa este sitio.
+/* Font Awesome 6.4.0 reducido a los 50 iconos que usa este sitio.
  * Generado por herramientas/regenerar-iconos.py — no editar a mano.
  */
 @font-face {
@@ -6,14 +6,14 @@
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("assets/fonts/fa-solid-900-subset.woff2") format("woff2");
+  src: url("assets/fonts/fa-solid-900-subset.woff2?v=0ac11b72") format("woff2");
 }
 @font-face {
   font-family: "Font Awesome 6 Brands";
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("assets/fonts/fa-brands-400-subset.woff2") format("woff2");
+  src: url("assets/fonts/fa-brands-400-subset.woff2?v=1ea3938a") format("woff2");
 }
 
 .fa, .fas, .fa-solid, .fab, .fa-brands {
@@ -38,8 +38,6 @@
 .fa-box-open:before { content: "\f49e"; }
 .fa-check:before { content: "\f00c"; }
 .fa-check-circle:before { content: "\f058"; }
-.fa-chevron-left:before { content: "\f053"; }
-.fa-chevron-right:before { content: "\f054"; }
 .fa-circle-info:before { content: "\f05a"; }
 .fa-cloud-arrow-up:before { content: "\f0ee"; }
 .fa-comment:before { content: "\f075"; }
@@ -67,6 +65,7 @@
 .fa-shopping-cart:before { content: "\f07a"; }
 .fa-snowflake:before { content: "\f2dc"; }
 .fa-spray-can:before { content: "\f5bd"; }
+.fa-star:before { content: "\f005"; }
 .fa-store:before { content: "\f54e"; }
 .fa-tags:before { content: "\f02c"; }
 .fa-th:before { content: "\f00a"; }

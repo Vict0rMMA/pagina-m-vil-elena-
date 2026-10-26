@@ -61,8 +61,8 @@
          glifos que nadie pinta. Ahora: 3 KB de CSS + 5,7 KB de fuentes,
          servidos desde el propio dominio. -->
     <link rel="preload" as="font" type="font/woff2"
-          href="assets/fonts/fa-solid-900-subset.woff2" crossorigin>
-    <link rel="stylesheet" href="iconos.css?v=20260921">
+          href="assets/fonts/fa-solid-900-subset.woff2?v=0ac11b72" crossorigin>
+    <link rel="stylesheet" href="iconos.css?v=20261025-dock">
 
     <!-- Tailwind precompilado.
          Antes esto era <script src="https://cdn.tailwindcss.com">: 124 KB de
@@ -70,12 +70,12 @@
          cliente en cada visita. Ahora son 32 KB de CSS (5 KB comprimido) con
          exactamente las clases que usa el sitio.
          Para regenerarlo tras añadir clases nuevas: ver README, sección Tailwind. -->
-    <link rel="stylesheet" href="tailwind.css?v=20261010-rapida">
+    <link rel="stylesheet" href="tailwind.css?v=20261010-dock">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261010-rapida">
+    <link rel="stylesheet" href="theme.css?v=20261010-dock">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -653,6 +653,13 @@
         
     </main>
     
+    <!-- Burbuja de WhatsApp: wa.me abre la app en el celular y WhatsApp Web en el computador -->
+    <a href="https://wa.me/573008220389?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web"
+       class="wa-burbuja" target="_blank" rel="noopener noreferrer"
+       aria-label="Escr&iacute;benos por WhatsApp" title="Escr&iacute;benos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
     <!-- Botón Volver Arriba -->
     <button id="scroll-to-top" class="scroll-top fixed z-40 opacity-0 invisible transition-all duration-300 hover:scale-110 active:scale-95" aria-label="Volver arriba">
         <i class="fas fa-arrow-up text-xl"></i>
@@ -668,6 +675,14 @@
             <a href="#productos" class="dock-item" aria-label="Productos">
                 <i class="fas fa-store"></i>
                 <span>Productos</span>
+            </a>
+            <a href="#deseos" class="dock-item" aria-label="Elige tu deseo">
+                <i class="fas fa-star"></i>
+                <span>Deseos</span>
+            </a>
+            <a href="#personalizadas" class="dock-item" aria-label="Velas personalizadas">
+                <i class="fas fa-magic"></i>
+                <span>Personaliza</span>
             </a>
             <button id="cart-button-dock" class="dock-item" aria-label="Carrito">
                 <i id="cart-icon-dock" class="fas fa-shopping-bag"></i>
@@ -778,8 +793,8 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261010-rapida"></script>
-    <script src="motion.js?v=20261010-rapida" defer></script>
+    <script src="app.js?v=20261010-dock"></script>
+    <script src="motion.js?v=20261010-dock" defer></script>
     <script>
       // Registrar el Service Worker.
       //
