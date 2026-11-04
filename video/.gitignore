@@ -5,3 +5,10 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+
+# Video personal de cumpleaños (fuera del repo)
+public/cumple/
+src/Cumple/
+src/cumple.ts
+scripts/make-audio-cumple.py
+public/audio/cumple.mp3
