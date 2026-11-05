@@ -12,3 +12,8 @@ src/Cumple/
 src/cumple.ts
 scripts/make-audio-cumple.py
 public/audio/cumple.mp3
+public/grado/
+src/Grado/
+src/grado.ts
+scripts/make-audio-grado.py
+public/audio/grado.mp3
