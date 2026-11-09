@@ -17,3 +17,8 @@ src/Grado/
 src/grado.ts
 scripts/make-audio-grado.py
 public/audio/grado.mp3
+public/lunes/
+src/Lunes/
+src/lunes.ts
+scripts/make-audio-lunes.py
+public/audio/lunes.mp3
