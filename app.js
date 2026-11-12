@@ -3108,7 +3108,7 @@ function renderProductos() {
           onclick="abrirModalProducto('${producto.id}')"
           class="btn btn-primary ripple-effect"
         >
-          Ver Precios
+          Ver precios
         </button>
       </div>
     </div>
@@ -3190,7 +3190,7 @@ function renderProductos() {
           onclick="abrirModalProductoGrupo('${imagen}')"
           class="btn btn-primary ripple-effect"
         >
-          Ver Precios
+          Ver precios
         </button>
       </div>
     </div>
@@ -3219,7 +3219,7 @@ function renderProductos() {
           onclick="abrirModalProducto('${productoPrincipal.id}')"
           class="btn btn-primary ripple-effect"
         >
-          Ver Precios
+          Ver precios
         </button>
       </div>
     </div>

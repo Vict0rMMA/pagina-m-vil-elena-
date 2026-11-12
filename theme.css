@@ -5662,3 +5662,41 @@ h1, h2, h3, h4,
 /* En Contacto ya están los dos WhatsApp grandes: la burbuja estorbaba. */
 body.sin-burbuja .wa-burbuja { opacity: 0; pointer-events: none; transform: scale(0.8); }
 .wa-burbuja { transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }
+
+/* ============================================================
+   55. Pulido final
+   ------------------------------------------------------------
+   Fuera los adornos de plantilla (destellos junto a los títulos,
+   aros flotando en el fondo, círculo que sigue al mouse) y el botón
+   de cada producto pasa a ser una ficha discreta: con 30 tarjetas,
+   30 botones vino a todo el ancho pesaban más que las fotos.
+   ============================================================ */
+
+.titulo-destellos,
+.cursor-elena { display: none !important; }
+
+.section:not(.hero)::after { display: none; }
+.section:not(.hero)::before { animation: none; }
+
+.producto-body .btn-primary {
+  align-self: flex-start;
+  width: auto;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-6);
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--line-strong);
+  color: var(--ink) !important;
+  font-size: var(--text-small);
+  font-weight: 600;
+  box-shadow: none;
+}
+.producto-body .btn-primary::after { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .producto-body .btn-primary:hover {
+    background: var(--ink) !important;
+    border-color: var(--ink);
+    color: var(--gold-ink) !important;
+  }
+}
+.producto-body h3 { font-weight: 600; letter-spacing: -0.005em; }
