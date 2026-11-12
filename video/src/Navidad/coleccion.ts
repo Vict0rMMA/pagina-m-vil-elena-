@@ -33,7 +33,7 @@ export const COLECCION = {
 
 export const MARCA = {
   nombre: "Elena Velas y Aromas",
-  web: "pagina-m-vil-elena.vercel.app",
+  web: "velasyaromaselena.com",
   whatsapp: "+57 300 822 0389",
   instagram: "@velasyaromaselena",
 };
