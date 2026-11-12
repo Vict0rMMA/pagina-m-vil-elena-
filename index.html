@@ -73,7 +73,7 @@
     <link rel="stylesheet" href="tailwind.css?v=20261010-dock">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20261112-videos">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
     <link rel="stylesheet" href="theme.css?v=20261010-dock">
     
@@ -263,17 +263,45 @@
         </section>
 
         <!-- Videos Section (parte de inicio) -->
-        <section id="videos" class="inicio-section section">
-            <div class="section-inner">
-                <div class="section-head">
-                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
-                    <span class="section-eyebrow">Novedades</span>
-                    <h2 class="section-title">Nuevos videos</h2>
-                    <p class="section-subtitle">S&iacute;guenos en TikTok e Instagram para ver los productos reci&eacute;n salidos del taller.</p>
+        <section id="videos" class="inicio-section vid-seccion" aria-labelledby="vid-titulo">
+            <div class="vid-envoltura">
+                <div class="vid-grid">
+                    <div class="vid-texto vid-aparece">
+                        <span class="vid-eyebrow">Novedades del taller</span>
+                        <h2 id="vid-titulo" class="vid-titulo">Reci&eacute;n salidas <em>del taller</em></h2>
+                        <p class="vid-intro">As&iacute; se ven nuestras velas antes de llegar a tus manos. Cada lote, hecho a mano en Medell&iacute;n.</p>
+                        <ul class="vid-lista">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Hechas a mano</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Fragancias premium</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Dise&ntilde;os de temporada</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Pedidos personalizados</li>
+                        </ul>
+                        <!-- renderVideos() pone el enlace con WHATSAPP_PHONE; éste es el respaldo sin JS. -->
+                        <a id="vid-whatsapp" class="vid-boton" target="_blank" rel="noopener noreferrer"
+                           href="https://wa.me/573008220389?text=Hola%2C%20vi%20sus%20videos%20y%20quiero%20hacer%20un%20pedido">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+
+                    <div class="vid-media vid-aparece vid-aparece-tarde">
+                        <div class="vid-escena">
+                            <img class="vid-foto vid-foto-a" src="assets/mini/Navidad-2026/arbol-navidad.webp"
+                                 alt="Vela en forma de &aacute;rbol de Navidad, rosada, empacada con tarjeta de Feliz Navidad"
+                                 width="450" height="600" loading="lazy" decoding="async">
+                            <img class="vid-foto vid-foto-b" src="assets/mini/Navidad-2026/noche-velitas-1.webp"
+                                 alt="Paquete Noche de Velitas: diez velas de colores con frases y figuras del pesebre"
+                                 width="600" height="548" loading="lazy" decoding="async">
+                            <div id="vid-marco" class="vid-marco">
+                                <!-- renderVideos() pone aquí el video principal -->
+                            </div>
+                        </div>
+                        <p class="vid-credito">Video: <a href="https://www.tiktok.com/@velas.elena" target="_blank" rel="noopener noreferrer">@velas.elena</a></p>
+                    </div>
                 </div>
-                
-                <div id="videos-container">
-                    <!-- Videos will be injected by JS -->
+
+                <div id="vid-carril" class="vid-carril" role="list" aria-label="M&aacute;s videos">
+                    <!-- renderVideos() pone aquí las miniaturas -->
                 </div>
             </div>
         </section>
@@ -793,7 +821,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261010-dock"></script>
+    <script src="app.js?v=20261112-videos"></script>
     <script src="motion.js?v=20261010-dock" defer></script>
     <script>
       // Registrar el Service Worker.

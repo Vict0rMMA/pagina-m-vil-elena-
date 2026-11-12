@@ -2174,10 +2174,12 @@ const promociones = [
 // resto. Ahora es una portada alojada aquí que abre el video en TikTok.
 // Las portadas se regeneran con herramientas/portadas-tiktok.py
 const videos = [
-  { plataforma: "local", titulo: "Nuestras velas", videoSrc: "assets/productos/Videos/velas.mp4" },
-  { plataforma: "local", titulo: "Aromas y fragancias", videoSrc: "assets/productos/Videos/aro.mp4" },
-  { plataforma: "local", titulo: "Colección especial", videoSrc: "assets/productos/Videos/al.mp4" },
-  { plataforma: "local", titulo: "Velas artesanales", videoSrc: "assets/productos/Videos/vel.mp4" },
+  // Los -web.mp4 salen de los originales con ffmpeg (-crf 28 -an +faststart).
+  { plataforma: "local", titulo: "Navidad 2026: latas de regalo", videoSrc: "assets/productos/Videos/comercial-navidad-2026-9x16-instagram-web.mp4" },
+  { plataforma: "local", titulo: "Nuestras velas", videoSrc: "assets/productos/Videos/velas-web.mp4" },
+  { plataforma: "local", titulo: "Aromas y fragancias", videoSrc: "assets/productos/Videos/aro-web.mp4" },
+  { plataforma: "local", titulo: "Colección especial", videoSrc: "assets/productos/Videos/al-web.mp4" },
+  { plataforma: "local", titulo: "Velas artesanales", videoSrc: "assets/productos/Videos/vel-web.mp4" },
   { plataforma: "tiktok", titulo: "Pregunta ya por nuestro kit", url: "https://www.tiktok.com/@velas.elena/video/7684359342010748180",
     portada: "assets/productos/Videos/tiktok/7684359342010748180.jpg" },
   { plataforma: "tiktok", titulo: "Somos mayoristas, emprende con nosotros", url: "https://www.tiktok.com/@velas.elena/video/7685743973889035538",
@@ -5182,92 +5184,183 @@ function initVideos() {
   initLazyVideos();
 }
 
+// El video principal de #videos: se descarga y suena sólo mientras está en
+// pantalla. Las miniaturas nunca descargan video, sólo su póster.
 function initLazyVideos() {
-  const videoContainers = document.querySelectorAll('.video-container-lazy');
-  
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const container = entry.target;
-        const videoSrc = container.getAttribute('data-video-src');
-        const placeholder = container.querySelector('.video-placeholder');
-        const video = container.querySelector('video');
-        
-        if (video && videoSrc && !video.src && placeholder) {
-          // Sólo al pulsar: antes se descargaba con sólo asomar en pantalla,
-          // y estos videos pesan hasta 7,7 MB.
-          placeholder.addEventListener('click', () => {
-            video.src = videoSrc;
-            video.load();
-            placeholder.classList.add('hidden');
-            video.classList.remove('hidden');
-            video.play().catch(() => {});
-          }, { once: true });
-          videoObserver.unobserve(container);
-        }
-      }
-    });
-  }, {
-    rootMargin: '50px'
+  const seccion = document.getElementById('videos');
+  const marco = document.getElementById('vid-marco');
+  const carril = document.getElementById('vid-carril');
+  if (!seccion) return;
+
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hayObserver = 'IntersectionObserver' in window;
+
+  // Aparición del texto y la media al entrar en pantalla.
+  const aparecen = seccion.querySelectorAll('.vid-aparece');
+  if (reducido || !hayObserver) {
+    aparecen.forEach(el => el.classList.add('vid-visible'));
+  } else {
+    const obsAparece = new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('vid-visible');
+        obsAparece.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+    aparecen.forEach(el => obsAparece.observe(el));
+  }
+
+  const video = marco && marco.querySelector('.vid-video');
+  const poster = marco && marco.querySelector('.vid-poster');
+  const control = marco && marco.querySelector('.vid-control');
+  if (!video || !control) return;
+
+  let enPantalla = false;
+  // Con movimiento reducido arranca en pausa: se ve el póster y el botón.
+  let pausadoPorUsuario = reducido;
+
+  function pintarControl() {
+    const sonando = !video.paused;
+    marco.classList.toggle('vid-sonando', sonando);
+    control.setAttribute('aria-label', sonando ? 'Pausar video' : 'Reproducir video');
+    control.setAttribute('aria-pressed', sonando ? 'false' : 'true');
+  }
+
+  function cargar() {
+    if (!video.getAttribute('src')) {
+      video.src = video.dataset.src;
+      video.load();
+    }
+  }
+
+  function reproducir() {
+    cargar();
+    const p = video.play();
+    if (p && p.catch) p.catch(pintarControl);
+  }
+
+  video.addEventListener('play', pintarControl);
+  video.addEventListener('pause', pintarControl);
+  // Si el video falla, se retira y queda visible el póster de debajo.
+  video.addEventListener('error', () => {
+    marco.classList.add('vid-fallo');
+    pintarControl();
   });
-  
-  videoContainers.forEach(container => {
-    videoObserver.observe(container);
+
+  control.addEventListener('click', () => {
+    if (video.paused) {
+      pausadoPorUsuario = false;
+      reproducir();
+    } else {
+      pausadoPorUsuario = true;
+      video.pause();
+    }
   });
+
+  if (hayObserver) {
+    const obsVideo = new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        enPantalla = e.isIntersecting;
+        if (enPantalla && !pausadoPorUsuario) reproducir();
+        else if (!enPantalla && !video.paused) video.pause();
+      });
+    }, { threshold: 0.35 });
+    obsVideo.observe(marco);
+  } else if (!pausadoPorUsuario) {
+    reproducir();
+  }
+
+  // Miniaturas propias: cambian el video principal con un fundido.
+  if (!carril) return;
+  carril.addEventListener('click', (ev) => {
+    const mini = ev.target.closest('.vid-mini[data-indice]');
+    if (!mini || mini.getAttribute('aria-pressed') === 'true') return;
+    const elegido = videos[Number(mini.dataset.indice)];
+    if (!elegido || !elegido.videoSrc) return;
+
+    carril.querySelectorAll('.vid-mini[data-indice]').forEach(m =>
+      m.setAttribute('aria-pressed', m === mini ? 'true' : 'false'));
+
+    const cambiar = () => {
+      video.pause();
+      marco.classList.remove('vid-fallo');
+      video.dataset.src = elegido.videoSrc;
+      video.removeAttribute('src');
+      video.poster = mini.dataset.poster;
+      video.setAttribute('aria-label', elegido.titulo);
+      if (poster) poster.src = mini.dataset.poster;
+      if (enPantalla && !pausadoPorUsuario) reproducir();
+      else video.load();
+      marco.classList.remove('vid-cambiando');
+      pintarControl();
+    };
+
+    if (reducido) { cambiar(); return; }
+    marco.classList.add('vid-cambiando');
+    setTimeout(cambiar, 260);
+  });
+
+  pintarControl();
 }
 
 function renderVideos() {
-  const container = document.getElementById('videos-container');
-  if (!container) return;
+  const marco = document.getElementById('vid-marco');
+  const carril = document.getElementById('vid-carril');
+  const botonWa = document.getElementById('vid-whatsapp');
+  if (!marco || !carril) return;
 
-  const conContenido = videos.filter(v => v.videoSrc || v.url);
-
-  if (!conContenido.length) {
-    container.innerHTML = `
-      <div class="reel-vacio">
-        <i class="fas fa-video"></i>
-        <p>Pronto publicaremos nuevos videos.</p>
-      </div>`;
-    return;
+  if (botonWa) {
+    botonWa.href = WHATSAPP_API + encodeURIComponent('Hola, vi sus videos y quiero hacer un pedido');
   }
 
-  container.innerHTML = conContenido.map(video => {
-    // Video propio: se descarga sólo al pulsar, nunca antes.
-    if (video.videoSrc) {
-      const base = video.videoSrc.split('/').pop().replace(/\.mp4$/i, '');
-      const poster = 'assets/productos/Videos/posters/' + base + '.jpg';
+  // Los -web.mp4 son la versión comprimida del mismo video: comparten póster.
+  const posterDe = (src) => 'assets/productos/Videos/posters/' +
+    src.split('/').pop().replace(/(-web)?\.mp4$/i, '') + '.jpg';
+
+  const principal = videos.find(v => v.plataforma === 'local' && v.videoSrc);
+  const iconoPlay = '<svg class="vid-icono-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
+  const iconoPausa = '<svg class="vid-icono-pausa" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>';
+
+  if (principal) {
+    const poster = posterDe(principal.videoSrc);
+    marco.innerHTML = `
+      <img class="vid-poster" src="${poster}" alt="" decoding="async">
+      <video class="vid-video" muted loop playsinline preload="none"
+             poster="${poster}" data-src="${principal.videoSrc}"
+             aria-label="${principal.titulo}"></video>
+      <button type="button" class="vid-control" aria-label="Reproducir video" aria-pressed="true">
+        ${iconoPlay}${iconoPausa}
+      </button>`;
+  } else {
+    marco.closest('.vid-media')?.classList.add('vid-sin-video');
+  }
+
+  carril.innerHTML = videos.map((video, i) => {
+    if (video.plataforma === 'local' && video.videoSrc) {
+      const poster = posterDe(video.videoSrc);
+      const activo = video === principal;
       return `
-      <article class="reel video-container-lazy" data-video-src="${video.videoSrc}">
-        <img class="reel-poster" src="${poster}" alt="" loading="lazy" decoding="async"
-             onerror="this.remove()">
-        <button type="button" class="reel-lanzador video-placeholder" aria-label="Reproducir: ${video.titulo}">
-          <span class="reel-play"><i class="fas fa-play"></i></span>
+      <div role="listitem" class="vid-item">
+        <button type="button" class="vid-mini" data-indice="${i}" data-poster="${poster}"
+                aria-pressed="${activo}">
+          <img src="${poster}" alt="" loading="lazy" decoding="async">
+          <span class="vid-mini-titulo">${video.titulo}</span>
         </button>
-        <video class="reel-video video-el hidden" preload="none" playsinline controls
-               aria-label="${video.titulo}">
-          Tu navegador no soporta videos HTML5.
-        </video>
-        <div class="reel-pie">
-          <h3 class="reel-titulo">${video.titulo}</h3>
-        </div>
-      </article>`;
+      </div>`;
     }
-
-    // Video de TikTok: portada alojada aquí que abre el original.
-    return `
-      <a class="reel reel-enlace" href="${video.url}" target="_blank" rel="noopener noreferrer"
-         aria-label="Ver en TikTok: ${video.titulo}">
-        <img class="reel-poster" src="${video.portada}" alt="" loading="lazy" decoding="async"
-             onerror="this.remove()">
-        <span class="reel-red"><i class="fab fa-tiktok" aria-hidden="true"></i></span>
-        <span class="reel-play"><i class="fas fa-play"></i></span>
-        <div class="reel-pie">
-          <h3 class="reel-titulo">${video.titulo}</h3>
-        </div>
-      </a>`;
+    if (video.url) {
+      return `
+      <div role="listitem" class="vid-item">
+        <a class="vid-mini vid-mini-tiktok" href="${video.url}" target="_blank" rel="noopener noreferrer"
+           aria-label="Ver en TikTok: ${video.titulo}">
+          <img src="${video.portada}" alt="" loading="lazy" decoding="async">
+          <span class="vid-mini-red"><i class="fab fa-tiktok" aria-hidden="true"></i></span>
+          <span class="vid-mini-titulo" aria-hidden="true">${video.titulo}</span>
+        </a>
+      </div>`;
+    }
+    return '';
   }).join('');
-
-  if (typeof refrescarMovimiento === 'function') refrescarMovimiento(container);
 }
 
 // Búsqueda mejorada
