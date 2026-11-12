@@ -5955,3 +5955,154 @@ h1, h2, h3, h4,
 @media (min-width: 900px) {
   .dsw .deseos-velas { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-6); }
 }
+
+/* ============================================================
+   59. Personalizadas: una sola tarjeta
+   ------------------------------------------------------------
+   Antes: dos videos sueltos con un hueco debajo y un formulario en
+   caja blanca aparte. Ahora una tarjeta partida: lado oscuro con los
+   trabajos y las ocasiones, lado claro con el formulario.
+   ============================================================ */
+
+.pz-cuerpo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 0;
+  margin-top: clamp(48px, 7vw, 88px);
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 30px 70px -30px rgba(60, 40, 20, 0.35);
+}
+
+.pz-lado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: clamp(28px, 5vw, 56px);
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(199, 155, 74, 0.22), rgba(30, 20, 16, 0) 70%),
+    #1E1410;
+  color: #F3EADA;
+}
+.pz-lado-eyebrow {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--gold-veil);
+}
+.pz-lado-titulo {
+  margin: 0;
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #FFFCF6;
+}
+
+#personalizadas .pz-lado .pz-reels.reel-rail {
+  position: static;
+  gap: var(--space-4);
+}
+#personalizadas .pz-lado .reel { box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.7); }
+
+.pz-ocasiones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pz-ocasiones li {
+  padding: 6px 14px;
+  border: 1px solid rgba(243, 234, 218, 0.22);
+  border-radius: var(--r-full);
+  font-size: 0.8125rem;
+  color: rgba(243, 234, 218, 0.85);
+}
+
+/* El formulario ya no es otra caja: es la mitad clara de la tarjeta. */
+.pz-cuerpo .pz-form .panel {
+  height: 100%;
+  margin: 0;
+  padding: clamp(28px, 5vw, 56px);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--surface) !important;
+}
+.pz-cuerpo .pz-form .panel-title {
+  margin-bottom: var(--space-1);
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  letter-spacing: -0.025em;
+}
+.pz-form .form-input,
+.pz-form textarea.form-input {
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  background: #F4EFE6 !important;
+  padding: 15px 18px;
+}
+.pz-form .form-input:hover { background: #EFE8DC !important; }
+.pz-form .form-input:focus {
+  border-color: var(--gold) !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 0 0 4px rgba(168, 129, 60, 0.14);
+}
+.pz-form .form-label { font-size: 0.875rem; color: var(--ink-2); }
+.pz-form .choice-btn {
+  min-height: 50px;
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  background: #F4EFE6 !important;
+  color: var(--ink) !important;
+  font-weight: 600;
+}
+.pz-form .choice-btn[aria-pressed="true"] {
+  background: var(--ink) !important;
+  color: var(--gold-ink) !important;
+}
+.pz-form .btn-whatsapp { min-height: 58px; border-radius: 14px; margin-top: var(--space-2); }
+
+@media (min-width: 900px) {
+  .pz-cuerpo { grid-template-columns: 1fr 1fr; align-items: stretch; }
+}
+
+/* Personalizadas en vino: el color de los botones de compra, en vez del
+   café oscuro que ya llevan Contacto y Navidad. */
+.pz-cabeza {
+  --velo:
+    linear-gradient(90deg, rgba(58, 12, 22, 0.86) 0%, rgba(70, 16, 28, 0.62) 55%, rgba(70, 16, 28, 0.4) 100%);
+}
+@media (max-width: 899px) {
+  .pz-cabeza { --velo: linear-gradient(180deg, rgba(70, 16, 28, 0.62) 0%, rgba(50, 10, 18, 0.82) 100%); }
+}
+.pz-cabeza .pz-pasos li { border-color: rgba(255, 220, 200, 0.2); }
+.pz-lado {
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 0%, rgba(217, 160, 90, 0.28), rgba(110, 27, 39, 0) 70%),
+    linear-gradient(160deg, #7A1F2E 0%, #5A1420 55%, #3E0D16 100%);
+}
+.pz-ocasiones li { border-color: rgba(255, 225, 205, 0.28); }
+
+/* La cinta del contacto ahora va al final, antes del pie. */
+.cinta-contacto { padding: var(--space-12) 0 var(--space-4); }
+.ctc-cuerpo { padding-bottom: 0; }
+.ctc-pie { margin-top: var(--space-8); padding-bottom: var(--space-8); }
+
+#personalizadas .pz-form input.form-input,
+#personalizadas .pz-form textarea.form-input {
+  border: 1px solid transparent !important;
+  background: #F4EFE6 !important;
+  border-radius: 14px !important;
+}
+#personalizadas .pz-form input.form-input:focus,
+#personalizadas .pz-form textarea.form-input:focus {
+  border-color: var(--gold) !important;
+  background: #FFFFFF !important;
+}
+@media (max-width: 899px) {
+  .pz-cuerpo { margin-left: var(--space-4); margin-right: var(--space-4); border-radius: 22px; }
+}
