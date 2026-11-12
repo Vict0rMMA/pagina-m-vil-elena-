@@ -1,0 +1,9 @@
+# Fuera del despliegue: no son parte de la página y no deben quedar
+# descargables en velasyaromaselena.com.
+video/
+herramientas/
+README.md
+tailwind.config.js
+tailwind.entrada.css
+assets/productos/EJEMPLO-PRODUCTO.txt
+assets/productos/README.md
