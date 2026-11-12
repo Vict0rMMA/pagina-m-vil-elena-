@@ -6318,3 +6318,50 @@ h1, h2, h3, h4,
   .ctc-red-seguir { grid-column: 3; grid-row: 1 / span 2; margin: 0; padding: 8px 14px; }
   .ctc-red::before { width: 45%; top: -60%; right: -10%; }
 }
+
+/* Personalizadas: cabecera centrada, con las ocasiones como fichas. */
+.pz-cabeza .pz-texto {
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.pz-cabeza .pz-intro { max-width: 38rem; margin-left: auto; margin-right: auto; font-size: 1.0625rem; }
+.pz-ocasiones-cabeza {
+  justify-content: center;
+  margin: var(--space-8) 0 var(--space-8);
+}
+.pz-ocasiones-cabeza li {
+  padding: 8px 16px;
+  border-color: rgba(255, 230, 210, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-size: 0.875rem;
+  color: #FFF6EC;
+}
+.pz-ir-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: 0 var(--space-8);
+  border-radius: var(--r-full);
+  background: #FFFCF6;
+  color: #5A1420;
+  font-weight: 700;
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.6);
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.pz-ir-boton i { font-size: 12px; }
+.pz-ir-boton:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .pz-ir-boton:hover { transform: translateY(-2px); }
+}
+.pz-cabeza { --velo: radial-gradient(ellipse 80% 75% at 50% 50%, rgba(58, 12, 22, 0.86), rgba(70, 16, 28, 0.62) 80%); }
+@media (max-width: 899px) {
+  .pz-cabeza { --velo: linear-gradient(180deg, rgba(70, 16, 28, 0.7) 0%, rgba(50, 10, 18, 0.85) 100%); }
+}
+.pz-lado-nota { margin: auto 0 0; font-size: 0.9375rem; color: rgba(255, 236, 222, 0.75); }
