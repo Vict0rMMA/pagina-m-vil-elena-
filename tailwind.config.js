@@ -13,8 +13,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        playfair: ['Playfair Display', 'serif'],
-        montserrat: ['Montserrat', 'sans-serif']
+        playfair: ['Fraunces', 'serif'],
+        montserrat: ['Figtree', 'sans-serif']
       }
     }
   },

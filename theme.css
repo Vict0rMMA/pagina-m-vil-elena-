@@ -68,8 +68,10 @@
   --space-24: 96px;
 
   /* --- Tipografía: las dos del logo --- */
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: Montserrat, system-ui, -apple-system, sans-serif;
+  /* Fraunces (títulos) y Figtree (texto). Antes Playfair + Montserrat,
+     la pareja de plantilla que se ve en todas partes. */
+  --font-display: Fraunces, Georgia, serif;
+  --font-body: Figtree, system-ui, -apple-system, sans-serif;
 
   --text-display: clamp(2.25rem, 7vw, 3.75rem);
   --text-h2:      clamp(1.75rem, 4.5vw, 2.5rem);
@@ -926,7 +928,7 @@ input:focus, textarea:focus, select:focus {
   align-items: stretch;
   justify-content: space-around;
   height: 64px;
-  /* Seis botones: el margen lateral se reduce para que quepan en 320 px. */
+  /* Cinco botones; el margen lateral reducido sigue dando aire en 320 px. */
   padding: 0 var(--space-1);
 }
 
@@ -5170,7 +5172,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    ============================================================ */
 
 .pz {
-  padding: clamp(80px, 12vw, 144px) 0;
+  padding: 0 0 clamp(80px, 12vw, 144px);
   background: var(--bg-2);
 }
 
@@ -5244,3 +5246,419 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   #personalizadas .pz-reels.reel-rail { gap: var(--space-6); }
   .pz-reels .reel:nth-child(2) { margin-top: var(--space-24); }
 }
+
+/* ============================================================
+   52. Tipografía
+   ------------------------------------------------------------
+   tailwind.css y styles.css traen Playfair y Montserrat escritos a
+   mano en .font-playfair / .font-montserrat: aquí se reconducen a las
+   variables. Fraunces con "SOFT" a media: remates redondeados, de
+   vela hecha a mano, sin perder la elegancia del título.
+   ============================================================ */
+
+.font-playfair { font-family: var(--font-display) !important; }
+.font-montserrat { font-family: var(--font-body) !important; }
+
+h1, h2, h3, h4,
+.font-playfair,
+:is(.hero-title, .section-title, .lnd-titulo, .lnd-frase, .vid-titulo, .panel-title,
+    .hero-eyebrow, .section-eyebrow, .lnd-eyebrow, .vid-eyebrow, .promo-eyebrow) {
+  font-variation-settings: "SOFT" 50;
+}
+
+/* ============================================================
+   53. Capas de video de fondo
+   ------------------------------------------------------------
+   Contacto, Navidad y Personalizadas llevan un video de fondo. La
+   foto pinta primero; el video se pide sólo cuando la sección se ve
+   (app.js: initCapasFondo) y se pausa al salir. En pantallas anchas
+   va la versión desenfocada: el original es vertical y se pixelaría.
+   ============================================================ */
+
+.capa-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.capa-fondo-img,
+.capa-fondo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.capa-fondo-video { opacity: 0; transition: opacity 900ms var(--ease-suave); }
+.capa-fondo-video.lista { opacity: 1; }
+.capa-fondo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--velo, linear-gradient(180deg, rgba(24, 14, 10, 0.72), rgba(24, 14, 10, 0.82)));
+}
+/* El contenido va encima de la capa. */
+.capa-fondo ~ * { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .capa-fondo-video { display: none; }
+}
+
+/* Contacto: portada a pantalla casi completa. */
+.ctc-cabeza {
+  display: flex;
+  align-items: center;
+  min-height: calc(92svh - 64px);
+  --velo:
+    radial-gradient(ellipse 80% 70% at 30% 50%, rgba(24, 14, 10, 0.82), rgba(24, 14, 10, 0.55) 75%),
+    linear-gradient(180deg, rgba(24, 14, 10, 0.35), rgba(24, 14, 10, 0.75));
+}
+.ctc-cabeza > .lnd-envoltura { width: 100%; }
+.ctc-wa-link {
+  background: rgba(30, 20, 16, 0.45);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Navidad: el video, muy oscurecido, sólo da vida al fondo. */
+.lnd-oscuro { --velo: linear-gradient(180deg, rgba(30, 20, 16, 0.86), rgba(30, 20, 16, 0.92)); }
+
+/* --- Personalizadas: cabecera oscura con video --- */
+
+.pz-cabeza {
+  position: relative;
+  padding: clamp(96px, 14vw, 168px) 0 clamp(80px, 12vw, 144px);
+  color: #F3EADA;
+  overflow: hidden;
+  --velo:
+    radial-gradient(ellipse 75% 70% at 25% 50%, rgba(24, 14, 10, 0.85), rgba(24, 14, 10, 0.6) 80%),
+    linear-gradient(180deg, rgba(24, 14, 10, 0.4), rgba(24, 14, 10, 0.8));
+}
+.pz-cabeza .pz-texto { max-width: 44rem; }
+.pz-cabeza .lnd-eyebrow { color: var(--gold-veil); }
+.pz-cabeza .pz-titulo { color: #FFFCF6; }
+.pz-cabeza .pz-titulo em { color: var(--gold-veil); }
+.pz-cabeza .pz-intro { color: rgba(243, 234, 218, 0.82); }
+.pz-cabeza .pz-pasos li { border-color: rgba(243, 234, 218, 0.22); }
+.pz-cabeza .pz-num { color: var(--gold-veil); }
+.pz-cabeza .pz-pasos h3 { color: #FFFCF6; }
+.pz-cabeza .pz-pasos p { color: rgba(243, 234, 218, 0.75); }
+.pz-cabeza .pz-ir { color: var(--gold-veil); }
+@media (min-width: 900px) {
+  .pz-cabeza .pz-pasos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+  .pz-cabeza .pz-pasos li,
+  .pz-cabeza .pz-pasos li:last-child { border-bottom: 0; grid-template-columns: 1fr; gap: var(--space-2); }
+}
+
+.pz-cuerpo {
+  display: grid;
+  gap: var(--space-12);
+  padding-top: clamp(64px, 9vw, 112px);
+}
+.pz-cuerpo .pz-form { margin: 0; max-width: none; }
+@media (min-width: 900px) {
+  .pz-cuerpo { grid-template-columns: 7fr 5fr; gap: clamp(48px, 6vw, 96px); align-items: start; }
+}
+
+/* --- Formulario: como una hoja de pedido, no como un formulario de
+   plantilla. Campos con sólo la línea de abajo, etiquetas numeradas
+   en la letra de los títulos y opciones como fichas. --- */
+
+.pz-form .panel {
+  padding: clamp(28px, 5vw, 56px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-2);
+}
+.pz-form .panel-title {
+  margin: 0 0 var(--space-8);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 600;
+  text-align: left;
+  color: var(--ink);
+}
+.pz-form form { counter-reset: campo; }
+.pz-form form > div { margin: 0 !important; padding: var(--space-6) 0 0; }
+.pz-form .form-label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+.pz-form form > div:not(:last-child) > .form-label::before {
+  counter-increment: campo;
+  content: "0" counter(campo);
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold);
+}
+.pz-form .form-input {
+  width: 100%;
+  padding: var(--space-3) 0;
+  border: 0;
+  border-bottom: 1.5px solid var(--line-strong);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  color: var(--ink);
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+.pz-form textarea.form-input { resize: vertical; }
+.pz-form .form-input::placeholder { color: var(--ink-3); opacity: 0.7; }
+.pz-form .form-input:focus {
+  outline: none;
+  border-bottom-color: var(--gold-deep);
+  box-shadow: 0 1.5px 0 0 var(--gold-deep);
+}
+.pz-form .choice-btn {
+  flex: 1;
+  min-height: 48px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.pz-form .choice-btn[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--gold-ink);
+}
+.pz-form .btn-whatsapp { min-height: 56px; font-size: 1.0625rem; }
+
+/* Los dos trabajos al lado del formulario. */
+#personalizadas .pz-cuerpo .pz-reels.reel-rail { max-width: 460px; }
+
+/* --- Velas de la vitrina más reales ---
+   Cera con volumen (luz a la izquierda, sombra a la derecha), remate de
+   color con brillo, llama con su núcleo azul y halo en la pared, pabilo
+   quemado, sombra sobre la madera y madera con vetas. Todo estático. */
+
+.dsw-vitrina {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 55%, rgba(255, 186, 96, 0.20), rgba(30, 20, 16, 0) 70%),
+    radial-gradient(ellipse 120% 80% at 50% 100%, #2B1C14 0%, #1A110D 70%);
+}
+
+.dsw-vela::before {
+  /* El halo de la llama sobre la pared. */
+  content: "";
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 190, 100, 0.22) 0%, rgba(255, 160, 60, 0.08) 40%, rgba(255, 160, 60, 0) 70%);
+  pointer-events: none;
+}
+.dsw-vela::after {
+  /* Sombra de la vela sobre la madera. */
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 130%;
+  height: 10px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 70%);
+  z-index: -1;
+}
+.dsw-muestra .dsw-vela::before { opacity: 0.5; }
+
+.dsw-llama {
+  width: 11px;
+  height: 22px;
+  margin-bottom: 6px;
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  background:
+    radial-gradient(ellipse 40% 30% at 50% 82%, rgba(90, 140, 255, 0.85) 0%, rgba(90, 140, 255, 0) 100%),
+    radial-gradient(ellipse 55% 70% at 50% 68%, #FFFDF2 0%, #FFE9A8 30%, #FFC24D 58%, rgba(240, 120, 30, 0.85) 82%, rgba(240, 120, 30, 0) 100%);
+  box-shadow:
+    0 0 10px 3px rgba(255, 196, 100, 0.55),
+    0 0 26px 10px rgba(255, 160, 60, 0.22);
+  filter: blur(0.2px);
+}
+.dsw-llama::after {
+  width: 2px;
+  height: 7px;
+  bottom: -6px;
+  border-radius: 1px;
+  background: linear-gradient(180deg, #1A100A, #4A3426);
+  transform: translateX(-50%) rotate(-6deg);
+}
+
+.dsw-cuerpo {
+  border-radius: 9px 9px 5px 5px / 6px 6px 4px 4px;
+  background:
+    radial-gradient(ellipse 90% 18% at 50% 2%, rgba(255, 214, 150, 0.45), rgba(255, 214, 150, 0) 100%),
+    linear-gradient(90deg,
+      #CFC4AF 0%, #EDE5D5 12%, #FFFDF7 30%, #FBF6EA 48%, #F1E9DA 66%, #DCD0BA 86%, #B9AC95 100%);
+  box-shadow: inset 0 -12px 18px -12px rgba(80, 60, 30, 0.35);
+}
+.dsw-cuerpo::before {
+  height: 24%;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--tinta) 70%, #000) 0%,
+      var(--tinta) 22%,
+      color-mix(in srgb, var(--tinta) 65%, #fff) 38%,
+      var(--tinta) 55%,
+      color-mix(in srgb, var(--tinta) 75%, #000) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 58%, 92% 64%, 86% 92%, 79% 66%, 68% 60%, 60% 100%, 52% 70%, 40% 62%, 31% 88%, 24% 64%, 12% 60%, 6% 80%, 0 70%);
+}
+.dsw-palabra {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55), 0 -0.5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.dsw-base {
+  height: 22px;
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(60, 35, 15, 0) 0px, rgba(60, 35, 15, 0) 18px,
+      rgba(60, 35, 15, 0.18) 19px, rgba(60, 35, 15, 0) 22px,
+      rgba(255, 220, 170, 0.08) 34px, rgba(60, 35, 15, 0) 40px),
+    linear-gradient(180deg, #B07D46 0%, #8C5F32 40%, #6A4422 75%, #4E3118 100%);
+  box-shadow:
+    0 14px 26px -10px rgba(0, 0, 0, 0.7),
+    inset 0 2px 0 rgba(255, 220, 170, 0.35),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.dsw-velas { position: relative; z-index: 1; }
+
+/* ============================================================
+   54. Movimiento con el scroll
+   ------------------------------------------------------------
+   1) La cinta de fotos: dos filas que se deslizan solas en sentidos
+      contrarios. Sólo mueve transform (lo hace la tarjeta gráfica) y
+      app.js la pausa cuando no se ve.
+   2) Profundidad: las fotos avanzan a distinta velocidad al bajar.
+      Va atado al scroll con animation-timeline, sin JavaScript; donde
+      el navegador no lo soporta, simplemente no se mueven.
+   ============================================================ */
+
+.cinta {
+  display: grid;
+  gap: var(--space-4);
+  padding: clamp(40px, 6vw, 72px) 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+.cinta-fila {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.cinta-pista {
+  display: flex;
+  width: max-content;
+  animation: cinta-corre 70s linear infinite;
+}
+.cinta-copia { display: flex; }
+.cinta-inversa .cinta-pista { animation-direction: reverse; animation-duration: 80s; }
+.cinta.pausada .cinta-pista { animation-play-state: paused; }
+.cinta img {
+  flex: none;
+  width: 150px;
+  height: 188px;
+  margin-right: var(--space-4);
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+}
+@keyframes cinta-corre { to { transform: translateX(-50%); } }
+@media (min-width: 900px) {
+  .cinta img { width: 210px; height: 262px; margin-right: var(--space-6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinta-pista { animation: none; }
+  .cinta-fila { overflow-x: auto; }
+  .cinta-copia { display: none; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* La portada se aleja al bajar. */
+    .hero-landing .hero-inner {
+      animation: hero-se-va linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 70vh;
+    }
+    .hero-landing .hero-fondo-img,
+    .hero-landing .hero-fondo-video {
+      animation: fondo-se-acerca linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+
+    /* Collage del inicio y fotos de los videos: dos velocidades. */
+    .lnd-collage-a, .vid-foto-a {
+      animation: sube-lento linear both;
+      animation-timeline: view();
+    }
+    .lnd-collage-b, .vid-foto-b {
+      animation: sube-rapido linear both;
+      animation-timeline: view();
+    }
+
+    /* Galería de Navidad y trabajos personalizados: entran con zoom
+       y las piezas alternas flotan a otra velocidad. */
+    .lnd-foto img, .pz-reels .reel, .dsw-vitrina {
+      animation: entra-zoom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+    .lnd-pieza:nth-child(even) {
+      animation: sube-lento linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+@keyframes hero-se-va { to { opacity: 0.15; translate: 0 -60px; scale: 0.96; } }
+@keyframes fondo-se-acerca { to { scale: 1.12; } }
+@keyframes sube-lento { from { translate: 0 40px; } to { translate: 0 -40px; } }
+@keyframes sube-rapido { from { translate: 0 110px; } to { translate: 0 -110px; } }
+@keyframes entra-zoom { from { scale: 0.9; opacity: 0.4; } to { scale: 1; opacity: 1; } }
+
+/* En el celular ya están la barra de abajo (con Inicio) y la burbuja de
+   WhatsApp: la flecha de volver arriba sobraba y saturaba la pantalla. */
+@media (max-width: 767px) {
+  .scroll-top { display: none !important; }
+}
+
+/* --- Celular más despejado --- */
+@media (max-width: 767px) {
+  /* El logo ya está en la cabecera: en la portada sobraba. */
+  .hero-landing .hero-logo { display: none; }
+  .hero.hero-landing { padding-top: var(--space-12); padding-bottom: calc(var(--space-16) + var(--space-4)); }
+  .hero-landing .hero-title { font-size: clamp(2.25rem, 10vw, 2.75rem); margin-bottom: var(--space-4); }
+  .hero-landing .hero-subtitle { font-size: 0.9375rem; line-height: 1.6; margin-bottom: var(--space-6); }
+  .hero-landing .hero-actions .btn { min-height: 50px; font-size: 0.9375rem; }
+  .hero-confianza { flex-direction: row; gap: var(--space-2) var(--space-4); margin-top: var(--space-6); }
+  .hero-confianza li { font-size: 0.8125rem; }
+}
+
+/* En Contacto ya están los dos WhatsApp grandes: la burbuja estorbaba. */
+body.sin-burbuja .wa-burbuja { opacity: 0; pointer-events: none; transform: scale(0.8); }
+.wa-burbuja { transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }

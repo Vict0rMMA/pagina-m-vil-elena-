@@ -2272,3 +2272,37 @@ section.vid-seccion {
   .vid-mini:hover, .vid-mini:active,
   .vid-boton:active, .vid-control:active { transform: none; }
 }
+
+/* Botón de sonido: abajo a la izquierda, con texto para que se vea. */
+.vid-sonido {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-4) 0 var(--space-3);
+  border: 0;
+  border-radius: var(--r-full);
+  background: rgba(23, 22, 21, 0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--gold-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+.vid-sonido svg { width: 20px; height: 20px; fill: currentColor; }
+.vid-icono-sonido { display: none; }
+.vid-con-sonido .vid-icono-sonido { display: block; }
+.vid-con-sonido .vid-icono-mudo { display: none; }
+.vid-con-sonido .vid-sonido-texto { display: none; }
+.vid-con-sonido .vid-sonido { padding: 0; width: 48px; justify-content: center; }
+.vid-sonido:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .vid-sonido:hover { background: rgba(23, 22, 21, 0.72); }
+}

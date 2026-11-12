@@ -2239,6 +2239,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCuentaAtras();
   initDeseos();
   initHeroFondo();
+  initCapasFondo();
   initLanding();
   initVideos();
   initMouseWheelScroll();
@@ -5272,11 +5273,55 @@ function initHeroFondo() {
   else window.addEventListener('load', arrancar, { once: true });
 }
 
+// Videos de fondo de Contacto, Navidad y Personalizadas. Pesan entre 200
+// y 800 KB: no se piden hasta que su sección aparece en pantalla, y se
+// pausan al salir. Sin movimiento o con ahorro de datos, sólo la foto.
+function initCapasFondo() {
+  const videos = document.querySelectorAll('.capa-fondo-video');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+  const red = navigator.connection || {};
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducido || red.saveData === true || /2g/.test(red.effectiveType || '')) return;
+  const ancho = window.matchMedia('(min-width: 900px)').matches;
+
+  const obs = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => {
+      const video = e.target.querySelector('.capa-fondo-video');
+      if (!video) return;
+      if (!e.isIntersecting) { video.pause(); return; }
+      if (!video.getAttribute('src')) {
+        video.src = (ancho && video.dataset.srcAncho) || video.dataset.src;
+        video.addEventListener('playing', () => video.classList.add('lista'), { once: true });
+        video.addEventListener('error', () => video.remove(), { once: true });
+      }
+      const p = video.play();
+      if (p && p.catch) p.catch(() => {});
+    });
+  }, { threshold: 0.05 });
+  videos.forEach(v => obs.observe(v.closest('.capa-fondo').parentElement));
+}
+
 // Bloques tipo landing del inicio: la galería de Navidad abre cada
 // producto; si la hoja lo cambió de id, lleva al catálogo de Navidad.
 function initLanding() {
   const anio = document.getElementById('ctc-anio');
   if (anio) anio.textContent = new Date().getFullYear();
+
+  // Mientras se ven los WhatsApp grandes del contacto, la burbuja se esconde.
+  const cabezaContacto = document.querySelector('.ctc-cabeza');
+  if (cabezaContacto && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => document.body.classList.toggle('sin-burbuja', e.isIntersecting))
+      .observe(cabezaContacto);
+  }
+
+  // La cinta de fotos sólo corre mientras se ve: una animación en bucle
+  // fuera de pantalla seguiría gastando batería.
+  const cinta = document.querySelector('.cinta');
+  if (cinta && 'IntersectionObserver' in window) {
+    cinta.classList.add('pausada');
+    new IntersectionObserver(([e]) => cinta.classList.toggle('pausada', !e.isIntersecting))
+      .observe(cinta);
+  }
 
   const galeria = document.getElementById('lnd-galeria');
   if (!galeria) return;
@@ -5346,7 +5391,25 @@ function initLazyVideos() {
   const video = marco && marco.querySelector('.vid-video');
   const poster = marco && marco.querySelector('.vid-poster');
   const control = marco && marco.querySelector('.vid-control');
+  const sonido = marco && marco.querySelector('.vid-sonido');
   if (!video || !control) return;
+
+  // Los navegadores no dejan arrancar un video con sonido: empieza en
+  // silencio y este botón lo activa. Desde ahí, los que se elijan suenan.
+  let conSonido = false;
+  function pintarSonido() {
+    if (!sonido) return;
+    marco.classList.toggle('vid-con-sonido', conSonido);
+    sonido.setAttribute('aria-pressed', String(conSonido));
+    sonido.setAttribute('aria-label', conSonido ? 'Silenciar video' : 'Activar sonido');
+    sonido.querySelector('.vid-sonido-texto').textContent = conSonido ? 'Sonido activado' : 'Activar sonido';
+  }
+  if (sonido) sonido.addEventListener('click', () => {
+    conSonido = !conSonido;
+    video.muted = !conSonido;
+    if (conSonido && video.paused) { pausadoPorUsuario = false; reproducir(); }
+    pintarSonido();
+  });
 
   let enPantalla = false;
   // Con movimiento reducido arranca en pausa: se ve el póster y el botón.
@@ -5421,6 +5484,7 @@ function initLazyVideos() {
       video.removeAttribute('src');
       video.poster = mini.dataset.poster;
       video.setAttribute('aria-label', elegido.titulo);
+      video.muted = !conSonido;
       if (poster) poster.src = mini.dataset.poster;
       if (enPantalla && !pausadoPorUsuario) reproducir();
       else video.load();
@@ -5434,6 +5498,7 @@ function initLazyVideos() {
   });
 
   pintarControl();
+  pintarSonido();
 }
 
 function renderVideos() {
@@ -5453,6 +5518,8 @@ function renderVideos() {
   const principal = videos.find(v => v.plataforma === 'local' && v.videoSrc);
   const iconoPlay = '<svg class="vid-icono-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
   const iconoPausa = '<svg class="vid-icono-pausa" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>';
+  const iconoMudo = '<svg class="vid-icono-mudo" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l5-4v14l-5-4H4z"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+  const iconoSonido = '<svg class="vid-icono-sonido" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l5-4v14l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
 
   if (principal) {
     const poster = posterDe(principal.videoSrc);
@@ -5463,6 +5530,9 @@ function renderVideos() {
              aria-label="${principal.titulo}"></video>
       <button type="button" class="vid-control" aria-label="Reproducir video" aria-pressed="true">
         ${iconoPlay}${iconoPausa}
+      </button>
+      <button type="button" class="vid-sonido" aria-pressed="false">
+        ${iconoMudo}${iconoSonido}<span class="vid-sonido-texto">Activar sonido</span>
       </button>`;
   } else {
     marco.closest('.vid-media')?.classList.add('vid-sin-video');
