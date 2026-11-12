@@ -2223,7 +2223,9 @@ section.vid-seccion {
   .vid-texto { margin: 0; text-align: left; }
   .vid-lista { margin-left: 0; }
 
-  .vid-escena { width: 100%; max-width: 360px; }
+  /* Más angosto que la columna: a los lados queda el aire donde asoman
+     las fotos sin pisar el texto ni salirse de la pantalla. */
+  .vid-escena { width: 64%; max-width: 360px; }
 
   .vid-foto {
     position: absolute;
@@ -2233,22 +2235,29 @@ section.vid-seccion {
     border-radius: var(--r-xl);
     box-shadow: var(--shadow-2);
   }
+  /* Asoman casi enteras a los lados: antes el video tapaba dos tercios. */
   .vid-foto-a {
-    top: 10%;
-    left: -34%;
-    width: 52%;
+    top: 8%;
+    left: -44%;
+    width: 56%;
     aspect-ratio: 3 / 4;
     transform: rotate(-6deg);
   }
   .vid-foto-b {
-    right: -30%;
-    bottom: 12%;
-    width: 50%;
+    right: -40%;
+    bottom: 10%;
+    width: 52%;
     aspect-ratio: 1 / 1;
     transform: rotate(5deg);
   }
 
   .vid-mini { width: 120px; }
+}
+
+/* Entre 900 y 1199 hay menos aire a la derecha: las fotos se recogen. */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .vid-foto-a { left: -36%; width: 50%; }
+  .vid-foto-b { right: -28%; width: 44%; }
   /* Centrado con márgenes automáticos y no con justify-content: si las
      miniaturas no caben, justify-content:center corta las primeras. */
   .vid-item:first-child { margin-left: auto; }
