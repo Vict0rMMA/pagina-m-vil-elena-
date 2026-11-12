@@ -5730,7 +5730,7 @@ function initNavegacionSecciones() {
   const hash = window.location.hash.replace('#', '') || 'inicio';
   
   // Si el hash es 'videos', redirigir a inicio (los videos están en inicio)
-  const hashFinal = hash === 'videos' ? 'inicio' : hash;
+  const hashFinal = hash === 'videos' ? 'novedades' : hash;
   mostrarSeccion(hashFinal);
   
   // Escuchar cambios en los enlaces del menú
@@ -5752,8 +5752,8 @@ function initNavegacionSecciones() {
 
       // Si el enlace es a videos, cambiar a inicio
       if (hash === 'videos') {
-        hash = 'inicio';
-        // Scroll a videos dentro de inicio
+        hash = 'novedades';
+        // Scroll a videos dentro de Novedades
         setTimeout(() => {
           const videosSection = document.getElementById('videos');
           if (videosSection) {
@@ -5781,7 +5781,7 @@ function initNavegacionSecciones() {
   window.addEventListener('hashchange', () => {
     let hash = window.location.hash.replace('#', '') || 'inicio';
     if (hash === 'videos') {
-      hash = 'inicio';
+      hash = 'novedades';
       setTimeout(() => {
         const videosSection = document.getElementById('videos');
         if (videosSection) {
@@ -5795,7 +5795,9 @@ function initNavegacionSecciones() {
 
 function mostrarSeccion(seccionId) {
   // Lista de secciones válidas
-  const secciones = ['inicio', 'productos', 'personalizadas', 'deseos', 'contacto', 'videos'];
+  const secciones = ['inicio', 'productos', 'novedades', 'personalizadas', 'deseos', 'contacto'];
+  // Los videos y la cuenta atrás viven ahora en Novedades.
+  if (seccionId === 'videos' || seccionId === 'cuenta-atras') seccionId = 'novedades';
   
   // Si la sección no es válida, usar 'inicio'
   if (!secciones.includes(seccionId)) {

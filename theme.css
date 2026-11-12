@@ -6106,3 +6106,95 @@ h1, h2, h3, h4,
 @media (max-width: 899px) {
   .pz-cuerpo { margin-left: var(--space-4); margin-right: var(--space-4); border-radius: 22px; }
 }
+
+/* ============================================================
+   60. Novedades y Promociones
+   ============================================================ */
+
+/* Novedades: la cuenta atrás queda en una franja vino bajo los videos. */
+.novedades .cuenta-atras {
+  padding: clamp(64px, 9vw, 112px) 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 85% 20%, rgba(217, 160, 90, 0.25), rgba(110, 27, 39, 0) 70%),
+    linear-gradient(160deg, #7A1F2E 0%, #5A1420 55%, #3E0D16 100%);
+}
+.novedades .cuenta-atras::before, .novedades .cuenta-atras::after { display: none; }
+.novedades .cuenta-fecha { color: var(--gold-veil); font-weight: 600; }
+.novedades .cuenta-titulo { color: #FFFCF6; font-size: clamp(2rem, 4.6vw, 3.25rem); }
+.novedades .cuenta-titulo :is(em, strong, span) { color: var(--gold-veil); }
+.novedades .cuenta-texto { color: rgba(255, 240, 230, 0.82); }
+.novedades .cuenta-boton {
+  background: #FFFCF6 !important;
+  background-image: none !important;
+  color: #5A1420 !important;
+}
+.novedades .cuenta-boton::after { display: none; }
+.novedades .cuenta-fotos { border-radius: var(--r-xl); box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.6); }
+
+/* Promociones: tarjeta partida, foto grande a la izquierda. */
+.promo-carrusel {
+  border: 0;
+  border-radius: 28px;
+  box-shadow: 0 30px 70px -30px rgba(60, 40, 20, 0.35);
+}
+.promo-carrusel::before { display: none; }
+.promo-slide,
+.promo-slide:is(*) { padding: 0 !important; align-items: stretch; }
+.promo-cuerpo {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "icon" "copy" "action";
+  gap: 0;
+  width: 100%;
+  max-width: none;
+}
+.promo-fotos {
+  width: 100%;
+  height: 240px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.promo-icono {
+  width: 100%;
+  height: 240px;
+  border: 0;
+  border-radius: 0;
+  font-size: 56px;
+  background:
+    radial-gradient(ellipse 70% 70% at 50% 40%, rgba(217, 160, 90, 0.35), rgba(110, 27, 39, 0) 70%),
+    linear-gradient(160deg, #7A1F2E, #3E0D16);
+  color: var(--gold-veil);
+}
+.promo-copy {
+  padding: var(--space-8) var(--space-8) var(--space-4);
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+.promo-titulo {
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem) !important;
+  line-height: 1.08 !important;
+  text-align: left !important;
+  color: var(--ink);
+}
+.promo-texto { text-align: left !important; font-size: 1rem; color: var(--ink-2); max-width: 34rem; }
+.promo-accion {
+  justify-self: start;
+  margin: 0 var(--space-8) var(--space-8);
+  background: var(--accion) !important;
+  background-image: var(--grad-accion) !important;
+  border: 0 !important;
+  color: var(--gold-ink) !important;
+}
+.promo-puntos { margin-top: var(--space-2); }
+
+@media (min-width: 768px) {
+  .promo-cuerpo {
+    grid-template-columns: 42% minmax(0, 1fr);
+    grid-template-areas: "icon copy" "icon action";
+    grid-template-rows: 1fr auto;
+    min-height: 340px;
+  }
+  .promo-fotos, .promo-icono { height: 100%; min-height: 340px; }
+  .promo-copy { align-self: end; padding: var(--space-12) var(--space-12) var(--space-6); }
+  .promo-accion { margin: 0 var(--space-12) var(--space-12); }
+}

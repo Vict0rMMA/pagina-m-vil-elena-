@@ -74,7 +74,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css?v=20261112-fondos">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261112-form2">
+    <link rel="stylesheet" href="theme.css?v=20261112-novedades">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -140,6 +140,7 @@
                 <div class="desktop-menu hidden md:flex items-center gap-8">
                     <a href="#inicio" class="nav-link">Inicio</a>
                     <a href="#productos" class="nav-link">Productos</a>
+                    <a href="#novedades" class="nav-link">Novedades</a>
                     <a href="#personalizadas" class="nav-link">Personalizadas</a>
                     <a href="#deseos" class="nav-link">Elige tu deseo</a>
                     <a href="#contacto" class="nav-link">Contacto</a>
@@ -162,6 +163,7 @@
             <div id="mobile-menu" class="mobile-menu hidden md:hidden">
                 <a href="#inicio">Inicio</a>
                 <a href="#productos">Productos</a>
+                <a href="#novedades">Novedades</a>
                 <a href="#personalizadas">Personalizadas</a>
                 <a href="#deseos">Elige tu deseo</a>
                 <a href="#contacto">Contacto</a>
@@ -210,8 +212,8 @@
                     <li><i class="fas fa-store" aria-hidden="true"></i> Detal y por mayor</li>
                 </ul>
             </div>
-            <a href="#videos" class="hero-bajar" aria-label="Ver nuestros videos">
-                <span>Mira los videos</span>
+            <a href="#novedades" class="hero-bajar" aria-label="Ver las novedades en video">
+                <span>Mira las novedades</span>
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </a>
         </section>
@@ -283,9 +285,57 @@
             </div>
         </section>
         
+        
+        <!-- Novedades: página propia con los videos de la temporada y la
+             cuenta atrás de la próxima fecha (antes iban en el inicio). -->
+        <div id="novedades" class="page-section novedades">
+        <!-- Videos Section (parte de inicio) -->
+        <section id="videos" class="vid-seccion" aria-labelledby="vid-titulo">
+            <div class="vid-envoltura">
+                <div class="vid-grid">
+                    <div class="vid-texto vid-aparece">
+                        <span class="vid-eyebrow">Novedades de Navidad</span>
+                        <h2 id="vid-titulo" class="vid-titulo">Nuevos productos <em>navide&ntilde;os</em></h2>
+                        <p class="vid-intro">Mira en video las velas de esta temporada antes de que lleguen a tus manos. Hechas a mano en Medell&iacute;n.</p>
+                        <ul class="vid-lista">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Hechas a mano</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Fragancias premium</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Dise&ntilde;os de temporada</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Pedidos personalizados</li>
+                        </ul>
+                        <!-- renderVideos() pone el enlace con WHATSAPP_PHONE; éste es el respaldo sin JS. -->
+                        <a id="vid-whatsapp" class="vid-boton" target="_blank" rel="noopener noreferrer"
+                           href="https://wa.me/573008220389?text=Hola%2C%20vi%20sus%20videos%20y%20quiero%20hacer%20un%20pedido">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <span>Pedir por WhatsApp</span>
+                        </a>
+                    </div>
+
+                    <div class="vid-media vid-aparece vid-aparece-tarde">
+                        <div class="vid-escena">
+                            <img class="vid-foto vid-foto-a" src="assets/mini/Navidad-2026/arbol-navidad.webp"
+                                 alt="Vela en forma de &aacute;rbol de Navidad, rosada, empacada con tarjeta de Feliz Navidad"
+                                 width="450" height="600" loading="lazy" decoding="async">
+                            <img class="vid-foto vid-foto-b" src="assets/mini/Navidad-2026/noche-velitas-1.webp"
+                                 alt="Paquete Noche de Velitas: diez velas de colores con frases y figuras del pesebre"
+                                 width="600" height="548" loading="lazy" decoding="async">
+                            <div id="vid-marco" class="vid-marco">
+                                <!-- renderVideos() pone aquí el video principal -->
+                            </div>
+                        </div>
+                        <p class="vid-credito">Video: <a href="https://www.tiktok.com/@velas.elena" target="_blank" rel="noopener noreferrer">@velas.elena</a></p>
+                    </div>
+                </div>
+
+                <div id="vid-carril" class="vid-carril" role="list" aria-label="M&aacute;s videos">
+                    <!-- renderVideos() pone aquí las miniaturas -->
+                </div>
+            </div>
+        </section>
+
         <!-- Cuenta atrás para la próxima fecha importante (app.js: initCuentaAtras).
              Sólo aparece cuando faltan 60 días o menos. -->
-        <section id="cuenta-atras" class="inicio-section section cuenta-atras" hidden>
+        <section id="cuenta-atras" class="section cuenta-atras" hidden>
             <div class="section-inner">
                 <div class="cuenta-panel">
                     <div class="cuenta-fotos" id="cuenta-fotos" hidden></div>
@@ -298,7 +348,8 @@
                 </div>
             </div>
         </section>
-        
+        </div>
+
         <!-- Elige tu deseo: página propia (app.js: initDeseos) -->
         <section id="deseos" class="page-section deseos dsw" aria-labelledby="dsw-titulo">
             <!-- Elige tu deseo tipo landing: a un lado se eligen las palabras,
@@ -402,49 +453,6 @@
             </div>
         </section>
 
-        <!-- Videos Section (parte de inicio) -->
-        <section id="videos" class="inicio-section vid-seccion" aria-labelledby="vid-titulo">
-            <div class="vid-envoltura">
-                <div class="vid-grid">
-                    <div class="vid-texto vid-aparece">
-                        <span class="vid-eyebrow">Novedades de Navidad</span>
-                        <h2 id="vid-titulo" class="vid-titulo">Nuevos productos <em>navide&ntilde;os</em></h2>
-                        <p class="vid-intro">Mira en video las velas de esta temporada antes de que lleguen a tus manos. Hechas a mano en Medell&iacute;n.</p>
-                        <ul class="vid-lista">
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Hechas a mano</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Fragancias premium</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Dise&ntilde;os de temporada</li>
-                            <li><i class="fas fa-check" aria-hidden="true"></i> Pedidos personalizados</li>
-                        </ul>
-                        <!-- renderVideos() pone el enlace con WHATSAPP_PHONE; éste es el respaldo sin JS. -->
-                        <a id="vid-whatsapp" class="vid-boton" target="_blank" rel="noopener noreferrer"
-                           href="https://wa.me/573008220389?text=Hola%2C%20vi%20sus%20videos%20y%20quiero%20hacer%20un%20pedido">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                            <span>Pedir por WhatsApp</span>
-                        </a>
-                    </div>
-
-                    <div class="vid-media vid-aparece vid-aparece-tarde">
-                        <div class="vid-escena">
-                            <img class="vid-foto vid-foto-a" src="assets/mini/Navidad-2026/arbol-navidad.webp"
-                                 alt="Vela en forma de &aacute;rbol de Navidad, rosada, empacada con tarjeta de Feliz Navidad"
-                                 width="450" height="600" loading="lazy" decoding="async">
-                            <img class="vid-foto vid-foto-b" src="assets/mini/Navidad-2026/noche-velitas-1.webp"
-                                 alt="Paquete Noche de Velitas: diez velas de colores con frases y figuras del pesebre"
-                                 width="600" height="548" loading="lazy" decoding="async">
-                            <div id="vid-marco" class="vid-marco">
-                                <!-- renderVideos() pone aquí el video principal -->
-                            </div>
-                        </div>
-                        <p class="vid-credito">Video: <a href="https://www.tiktok.com/@velas.elena" target="_blank" rel="noopener noreferrer">@velas.elena</a></p>
-                    </div>
-                </div>
-
-                <div id="vid-carril" class="vid-carril" role="list" aria-label="M&aacute;s videos">
-                    <!-- renderVideos() pone aquí las miniaturas -->
-                </div>
-            </div>
-        </section>
         
         <!-- Velas Personalizadas Section -->
         <section id="personalizadas" class="page-section pz" aria-labelledby="pz-titulo">
@@ -936,7 +944,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261112-letra2"></script>
+    <script src="app.js?v=20261112-novedades"></script>
     <script src="motion.js?v=20261010-dock" defer></script>
     <script>
       // Registrar el Service Worker.
