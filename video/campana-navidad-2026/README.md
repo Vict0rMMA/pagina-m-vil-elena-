@@ -57,8 +57,8 @@ En el catálogo público los precios aparecen como **"Consulta por WhatsApp"** h
 - **Estilo fotográfico:** fondo oscuro de terciopelo verde, luz cálida lateral, reflejo en el piso y bokeh dorado; o las fotos reales con gradación cálida.
 
 ## 5. Entregables (carpeta `out/navidad-2026/`)
-- `comercial-navidad-2026-16x9.mp4`: 1920×1080, 48 s
-- `comercial-navidad-2026-9x16.mp4`: 1080×1920, 48 s (Reels/TikTok)
+- `comercial-navidad-2026-16x9.mp4`: 1920×1080, 50 s
+- `comercial-navidad-2026-9x16.mp4`: 1080×1920, 50 s (Reels/TikTok)
 - `catalogo-navidad-2026.pdf`: 15 páginas en alta resolución
 - `catalogo/redes/`: 15 imágenes 1080×1350 para carrusel de Instagram
 - `recursos-productos/`: 11 fotos de producto sin fondo, sobre estudio verde

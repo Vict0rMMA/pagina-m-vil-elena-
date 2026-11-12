@@ -1,14 +1,14 @@
 """Música original para la campaña Navidad 2026: arreglo instrumental de "Noche de paz"
-(F. X. Gruber, 1818 — dominio público). Celesta + cuerdas + campanas, 48 s.
-Compás de 3/4 a 100 bpm => 1 compás = 1,8 s = 54 fotogramas a 30 fps (sincronizado con el video).
+(F. X. Gruber, 1818 — dominio público). Celesta + cuerdas + campanas, 50 s.
+Compás de 3/4 a 95 bpm a 30 fps (sincronizado con el video).
 Salida: public/audio/navidad.mp3"""
 import numpy as np, wave, subprocess, os
 from numpy.fft import rfft, irfft, rfftfreq
-SR, DUR = 44100, 48.0
+SR, DUR = 44100, 50.0
 N = int(SR * DUR); t = np.arange(N) / SR
 rng = np.random.default_rng(26)
 L = np.zeros(N); R = np.zeros(N)
-BEAT = 60 / 100
+BEAT = 60 / 95
 START = 2.4  # la melodía entra en el fotograma 72
 mid = lambda m: 440 * 2 ** ((m - 69) / 12)
 
@@ -71,7 +71,7 @@ n = int(SR * .16); put(band(rng.normal(size=n), 2500, 9500) * np.exp(-np.arange(
 n = int(SR * 1.4); put(band(rng.normal(size=n), 150, 1600) * np.sin(np.linspace(0, np.pi, n))**2, .65, .5, .18)
 for i, m in enumerate([84, 88, 91, 96]): put(bell(mid(m), 3.5), .9 + i * .09, .3 + i*.13, .09)
 # acentos en los cambios de escena (fotogramas 168, 264, 858, 1050)
-for fr in (180, 276, 1032, 1230):
+for fr in (120, 240, 330, 1254):
     s0 = fr / 30
     n = int(SR * .8); x = band(rng.normal(size=n), 2000, 9000); tt = np.linspace(0, 1, n)
     put(x * tt**3 * (1 - tt)**.3, s0 - .8, .5, .1)
