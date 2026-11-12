@@ -3364,7 +3364,7 @@ function abrirModalProductoGrupo(imagen) {
           <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="ampliarImagenProducto('${imagen}', 'Productos Disponibles')"><i class="fas fa-expand"></i></button>
         <img 
           src="${imagen}" 
-          alt="Productos"
+          alt="${productosGrupo.map(p => p.nombre).join(', ')}"
           class="w-full h-auto max-h-[500px] md:max-h-[600px] object-contain mx-auto rounded-lg transition-transform duration-300 group-hover:scale-105"
           style=""
           onerror="this.style.filter='grayscale(100%) opacity(0.5)'; this.style.padding='20px';"
@@ -4691,11 +4691,13 @@ function proximaFechaEspecial(ahora) {
 // Fotos que se van turnando en un marco (cuenta atrás y promociones).
 // Sólo la primera se descarga al abrir la página; cada una de las demás
 // se pide justo antes de que le toque salir.
+// alt: un texto para todas o una lista con el de cada foto.
 function imagenesTurnantes(fotos, alt) {
   return fotos.map((src, i) => {
     const mini = miniatura(src);
     const fuente = i === 0 ? `src="${mini}"` : `data-turno="${mini}"`;
-    return `<img ${fuente} data-original="${src}" alt="${alt}" class="${i === 0 ? 'activa' : ''}" decoding="async">`;
+    const texto = Array.isArray(alt) ? (alt[i] || '') : alt;
+    return `<img ${fuente} data-original="${src}" alt="${texto}" class="${i === 0 ? 'activa' : ''}" decoding="async">`;
   }).join('');
 }
 
@@ -4725,7 +4727,7 @@ function ponerFotosCuenta(fotos, nombre) {
   fotosCuentaActuales = clave;
   clearInterval(fotosCuentaTimer);
   marco.hidden = fotos.length === 0;
-  marco.innerHTML = imagenesTurnantes(fotos, fotos.length > 1 ? '' : nombre);
+  marco.innerHTML = imagenesTurnantes(fotos, nombre || 'Velas hechas a mano por Elena Velas y Aromas');
   if (fotos.length < 2) return;
   marco.setAttribute('aria-label', 'Fotos de velas para la fecha');
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -4756,7 +4758,8 @@ function initCuentaAtras() {
     // Las fotos de la fecha o, si no tiene, la de su vela (o la primera de su categoría).
     const vela = (f.producto && buscarProducto(f.producto)) ||
       (productos[categoryMap[f.filtro]] || obtenerTodosLosProductos())[0];
-    ponerFotosCuenta(f.fotos || (vela && vela.imagen ? [vela.imagen] : []), vela ? vela.nombre : '');
+    ponerFotosCuenta(f.fotos || (vela && vela.imagen ? [vela.imagen] : []),
+      f.fotos ? `Velas para ${f.nombre}` : (vela ? vela.nombre : ''));
 
     // Días de calendario, no de 24 horas: el 6 a las 11 p. m. ya es "mañana".
     const hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
@@ -4934,7 +4937,7 @@ function renderVelasDeDeseo() {
   }
   rejilla.innerHTML = velas.map(p => `
     <button type="button" class="deseo-vela" data-id="${p.id}" aria-label="Ver ${p.nombre}">
-      <span class="deseo-vela-foto"><img src="${miniatura(p.imagen)}" data-original="${p.imagen}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>
+      <span class="deseo-vela-foto"><img src="${miniatura(p.imagen)}" data-original="${p.imagen}" alt="${p.nombre}" loading="lazy" decoding="async" onerror="this.remove()"></span>
       <span class="deseo-vela-nombre">${p.nombre}</span>
     </button>
   `).join('');
@@ -5034,7 +5037,7 @@ function marcoFotosPromo(promo) {
   if (!fotos.length) {
     return `<span class="promo-icono" aria-hidden="true"><i class="${promo.icon || 'fas fa-gift'}"></i></span>`;
   }
-  return `<span class="promo-fotos" aria-hidden="true">${imagenesTurnantes(fotos.map(p => p.imagen), '')}</span>`;
+  return `<span class="promo-fotos" aria-hidden="true">${imagenesTurnantes(fotos.map(p => p.imagen), fotos.map(p => p.nombre))}</span>`;
 }
 
 let fotosPromoTimer = null;
@@ -5438,7 +5441,7 @@ function renderVideos() {
   if (principal) {
     const poster = posterDe(principal.videoSrc);
     marco.innerHTML = `
-      <img class="vid-poster" src="${poster}" alt="" decoding="async">
+      <img class="vid-poster" src="${poster}" alt="Portada del video: ${principal.titulo}" decoding="async">
       <video class="vid-video" muted loop playsinline preload="none"
              poster="${poster}" data-src="${principal.videoSrc}"
              aria-label="${principal.titulo}"></video>
@@ -5457,7 +5460,7 @@ function renderVideos() {
       <div role="listitem" class="vid-item">
         <button type="button" class="vid-mini" data-indice="${i}" data-poster="${poster}"
                 aria-pressed="${activo}">
-          <img src="${poster}" alt="" loading="lazy" decoding="async">
+          <img src="${poster}" alt="Video de velas: ${video.titulo}" loading="lazy" decoding="async">
           <span class="vid-mini-titulo">${video.titulo}</span>
         </button>
       </div>`;
@@ -5467,7 +5470,7 @@ function renderVideos() {
       <div role="listitem" class="vid-item">
         <a class="vid-mini vid-mini-tiktok" href="${video.url}" target="_blank" rel="noopener noreferrer"
            aria-label="Ver en TikTok: ${video.titulo}">
-          <img src="${video.portada}" alt="" loading="lazy" decoding="async">
+          <img src="${video.portada}" alt="Video de TikTok: ${video.titulo}" loading="lazy" decoding="async">
           <span class="vid-mini-red"><i class="fab fa-tiktok" aria-hidden="true"></i></span>
           <span class="vid-mini-titulo" aria-hidden="true">${video.titulo}</span>
         </a>

@@ -188,7 +188,7 @@ Modifica las variables CSS en `styles.css`:
 ## 🌐 Despliegue (Vercel)
 
 El sitio se despliega solo: **cada `git push` a `main` publica una versión nueva**
-en https://pagina-m-vil-elena.vercel.app. No hay paso de compilación, así que un
+en https://www.velasyaromaselena.com. No hay paso de compilación, así que un
 error de código nunca tumba el despliegue — pero tampoco hay nadie que avise, así
 que conviene abrir la página después de cada push.
 
