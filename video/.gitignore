@@ -23,3 +23,5 @@ src/lunes.ts
 scripts/make-audio-lunes.py
 public/audio/lunes.mp3
 public/navidad/referencias/
+src/aviso.tsx
+public/aviso/
