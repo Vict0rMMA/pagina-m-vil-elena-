@@ -52,11 +52,8 @@
     <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
     
     <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..800,0..100;1,9..144,300..800,0..100&family=Figtree:ital,wght@0,300..800;1,400..600&display=swap" rel="stylesheet">
+    <!-- Sin fuentes externas: la letra del sistema (San Francisco en iPhone,
+         Roboto en Android, Segoe en Windows) se ve limpia y carga al instante. -->
     
     <!-- Iconos propios: sólo los 51 que usa el sitio.
          Antes: 19 KB de CSS + 251 KB de fuentes desde cdnjs, con miles de
@@ -77,7 +74,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css?v=20261112-fondos">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261112-pulido">
+    <link rel="stylesheet" href="theme.css?v=20261112-letra2">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -338,7 +335,10 @@
                 </div>
 
                 <div class="dsw-ejemplos">
-                    <p class="deseos-velas-titulo">Algunas velas que pueden llevar tu deseo</p>
+                    <div class="dsw-ejemplos-cabeza">
+                        <h3 class="dsw-ejemplos-titulo">Velas que pueden llevar tu deseo</h3>
+                        <p class="dsw-ejemplos-texto">Toca una para ver sus precios.</p>
+                    </div>
                     <div class="deseos-velas" id="deseos-velas"></div>
                 </div>
             </div>
@@ -476,6 +476,33 @@
             </div>
 
             <div class="lnd-envoltura pz-cuerpo">
+                <!-- Los dos trabajos, grandes y parejos -->
+                    <div class="reel-rail pz-reels" data-revelar data-revelar-orden="1">
+                    <article class="reel video-container-lazy" data-video-src="assets/productos/Videos-Velas-Personalizadas/WhatsApp Video 2025-11-01 at 8.35.45 PM.mp4">
+                            <img class="reel-poster" src="assets/productos/Videos/posters/pers1.jpg" alt="Portada del video: vela con diseño personalizado" loading="lazy" decoding="async" onerror="this.remove()">
+                            <button type="button" class="reel-lanzador video-placeholder" aria-label="Reproducir: Diseño personalizado">
+                                <span class="reel-play"><i class="fas fa-play"></i></span>
+                            </button>
+                            <video class="reel-video video-el hidden" preload="none" playsinline controls aria-label="Diseño personalizado">
+                                Tu navegador no soporta videos HTML5.
+                            </video>
+                            <div class="reel-pie">
+                                <h3 class="reel-titulo">Diseño personalizado</h3>
+                            </div>
+                        </article>
+                    <article class="reel video-container-lazy" data-video-src="assets/productos/Videos-Velas-Personalizadas/WhatsApp Video 2025-11-01 at 8.36.22 PM.mp4">
+                            <img class="reel-poster" src="assets/productos/Videos/posters/pers2.jpg" alt="Portada del video: velas personalizadas hechas a medida" loading="lazy" decoding="async" onerror="this.remove()">
+                            <button type="button" class="reel-lanzador video-placeholder" aria-label="Reproducir: Trabajos a medida">
+                                <span class="reel-play"><i class="fas fa-play"></i></span>
+                            </button>
+                            <video class="reel-video video-el hidden" preload="none" playsinline controls aria-label="Trabajos a medida">
+                                Tu navegador no soporta videos HTML5.
+                            </video>
+                            <div class="reel-pie">
+                                <h3 class="reel-titulo">Trabajos a medida</h3>
+                            </div>
+                        </article>
+                    </div>
                 <div class="pz-form">
                     <div class="panel">
                         <h3 class="panel-title">Cu&eacute;ntanos tu idea</h3>
@@ -600,33 +627,6 @@
                         </form>
                     </div>
                 </div>
-                <!-- Los dos trabajos, escalonados -->
-                    <div class="reel-rail pz-reels" data-revelar data-revelar-orden="1">
-                    <article class="reel video-container-lazy" data-video-src="assets/productos/Videos-Velas-Personalizadas/WhatsApp Video 2025-11-01 at 8.35.45 PM.mp4">
-                            <img class="reel-poster" src="assets/productos/Videos/posters/pers1.jpg" alt="Portada del video: vela con diseño personalizado" loading="lazy" decoding="async" onerror="this.remove()">
-                            <button type="button" class="reel-lanzador video-placeholder" aria-label="Reproducir: Diseño personalizado">
-                                <span class="reel-play"><i class="fas fa-play"></i></span>
-                            </button>
-                            <video class="reel-video video-el hidden" preload="none" playsinline controls aria-label="Diseño personalizado">
-                                Tu navegador no soporta videos HTML5.
-                            </video>
-                            <div class="reel-pie">
-                                <h3 class="reel-titulo">Diseño personalizado</h3>
-                            </div>
-                        </article>
-                    <article class="reel video-container-lazy" data-video-src="assets/productos/Videos-Velas-Personalizadas/WhatsApp Video 2025-11-01 at 8.36.22 PM.mp4">
-                            <img class="reel-poster" src="assets/productos/Videos/posters/pers2.jpg" alt="Portada del video: velas personalizadas hechas a medida" loading="lazy" decoding="async" onerror="this.remove()">
-                            <button type="button" class="reel-lanzador video-placeholder" aria-label="Reproducir: Trabajos a medida">
-                                <span class="reel-play"><i class="fas fa-play"></i></span>
-                            </button>
-                            <video class="reel-video video-el hidden" preload="none" playsinline controls aria-label="Trabajos a medida">
-                                Tu navegador no soporta videos HTML5.
-                            </video>
-                            <div class="reel-pie">
-                                <h3 class="reel-titulo">Trabajos a medida</h3>
-                            </div>
-                        </article>
-                    </div>
             </div>
         </section>
         
@@ -717,6 +717,15 @@
                 </div>
             </div>
 
+            <div class="cinta cinta-contacto" aria-label="Algunas de nuestras velas">
+                <div class="cinta-fila">
+                    <div class="cinta-pista"><img src="assets/mini/Navidad-2026/vela-papa-noel.webp" alt="Vela Papá Noel" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/kit-12-deseos.webp" alt="Kit 12 deseos estrellas" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-dorada.webp" alt="Vela dorada" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/muneco-ano-viejo.webp" alt="Vela muñeco año viejo" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-degrade-larga.webp" alt="Vela degradé larga" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/caja-proposito-x6.webp" alt="Caja de velas propósito" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/souvenir-navideno.webp" alt="Souvenir navideño" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/poli-mediano.webp" alt="Vela poli mediana" width="200" height="250" loading="lazy" decoding="async"><span class="cinta-copia" aria-hidden="true"><img src="assets/mini/Navidad-2026/vela-papa-noel.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/kit-12-deseos.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-dorada.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/muneco-ano-viejo.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-degrade-larga.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/caja-proposito-x6.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/souvenir-navideno.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/poli-mediano.webp" alt="" width="200" height="250" loading="lazy" decoding="async"></span></div>
+                </div>
+                <div class="cinta-fila cinta-inversa">
+                    <div class="cinta-pista"><img src="assets/mini/Navidad-2026/vela-marcada.webp" alt="Vela marcada" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/arbol-navidad.webp" alt="Vela árbol de Navidad" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-huella-mascota.webp" alt="Vela huella de mascota" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/pino-pequeno.webp" alt="Vela pino pequeño" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-proposito.webp" alt="Vela propósito" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/pesebre-arbolito-angel.webp" alt="Vela pesebre con ángel" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-degrade-pequena.webp" alt="Vela degradé pequeña" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/noche-velitas-1.webp" alt="Noche de Velitas" width="200" height="250" loading="lazy" decoding="async"><span class="cinta-copia" aria-hidden="true"><img src="assets/mini/Navidad-2026/vela-marcada.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/arbol-navidad.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-huella-mascota.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/pino-pequeno.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-proposito.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/pesebre-arbolito-angel.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/vela-degrade-pequena.webp" alt="" width="200" height="250" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/noche-velitas-1.webp" alt="" width="200" height="250" loading="lazy" decoding="async"></span></div>
+                </div>
+            </div>
+
             <div class="ctc-cuerpo">
                 <div class="lnd-envoltura">
                     <div class="ctc-cuerpo-grid">
@@ -727,6 +736,10 @@
                                 <span class="lnd-frase-suave">cuenta una historia.</span>
                             </p>
                             <p class="ctc-texto">Fabricamos velas decorativas y de consumo con las mejores fragancias.</p>
+                            <div class="ctc-fotos" data-revelar data-revelar-orden="1">
+                                <img src="assets/mini/Navidad-2026/bola-navidad.webp" alt="Velas bola de Navidad verde y roja con relieve" width="300" height="375" loading="lazy" decoding="async">
+                                <img src="assets/mini/Navidad-2026/angel.webp" alt="Velas en forma de ángel, grande y pequeño" width="300" height="375" loading="lazy" decoding="async">
+                            </div>
                         </div>
                         <ul class="lnd-puntos ctc-puntos">
                             <li data-revelar>
@@ -914,7 +927,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261112-pulido"></script>
+    <script src="app.js?v=20261112-letra2"></script>
     <script src="motion.js?v=20261010-dock" defer></script>
     <script>
       // Registrar el Service Worker.

@@ -4937,7 +4937,14 @@ function initDeseos() {
 function renderVelasDeDeseo() {
   const rejilla = document.getElementById('deseos-velas');
   if (!rejilla) return;
-  const velas = velasDeDeseo().slice(0, 8);
+  // Sin repetir: la hoja trae la misma vela en dos catálogos.
+  const vistos = new Set();
+  const velas = velasDeDeseo().filter(p => {
+    const clave = p.nombre.trim().toLowerCase();
+    if (vistos.has(clave)) return false;
+    vistos.add(clave);
+    return true;
+  }).slice(0, 8);
   const seccion = document.getElementById('deseos');
   if (seccion) seccion.hidden = velas.length === 0;
   // Un botón por cada catálogo que tiene velas de deseo.
@@ -5316,11 +5323,12 @@ function initLanding() {
 
   // La cinta de fotos sólo corre mientras se ve: una animación en bucle
   // fuera de pantalla seguiría gastando batería.
-  const cinta = document.querySelector('.cinta');
-  if (cinta && 'IntersectionObserver' in window) {
-    cinta.classList.add('pausada');
-    new IntersectionObserver(([e]) => cinta.classList.toggle('pausada', !e.isIntersecting))
-      .observe(cinta);
+  if ('IntersectionObserver' in window) {
+    document.querySelectorAll('.cinta').forEach(cinta => {
+      cinta.classList.add('pausada');
+      new IntersectionObserver(([e]) => cinta.classList.toggle('pausada', !e.isIntersecting))
+        .observe(cinta);
+    });
   }
 
   const galeria = document.getElementById('lnd-galeria');
@@ -5731,7 +5739,17 @@ function initNavegacionSecciones() {
     enlace.addEventListener('click', (e) => {
       e.preventDefault();
       let hash = enlace.getAttribute('href').replace('#', '');
-      
+
+      // Un ancla dentro de una sección (el formulario, por ejemplo) no es
+      // una sección: se baja hasta ella sin cambiar de página.
+      const destino = document.getElementById(hash);
+      if (destino && !destino.classList.contains('page-section') && destino.closest('.page-section')) {
+        const seccion = destino.closest('.page-section');
+        if (seccion.style.display === 'none' || seccion.hidden) mostrarSeccion(seccion.id);
+        setTimeout(() => destino.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+        return;
+      }
+
       // Si el enlace es a videos, cambiar a inicio
       if (hash === 'videos') {
         hash = 'inicio';
