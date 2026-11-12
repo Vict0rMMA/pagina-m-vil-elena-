@@ -16,8 +16,8 @@ import { COLECCION, MARCA, PALETA as P, PRODUCTOS, Producto } from "./coleccion"
 import { CatalogoComp } from "./catalogo";
 import { Bokeh, FPS, Flame, Flare, GoldDust, Grade, Snow, clamp, useLayout } from "./fx";
 
-const DURATION = 1290; // 43 s
-const T = { titulo: 168, productos: 264, porProducto: 66, experiencia: 858, regalo: 960, cierre: 1050 };
+const DURATION = 1440; // 48 s
+const T = { titulo: 180, productos: 276, porProducto: 84, experiencia: 1032, regalo: 1140, cierre: 1230 };
 const OV = 12;
 const foto = (f: string) => staticFile(`navidad/fotos/${f}`);
 const recorte = (f: string) => staticFile(`navidad/recortes/${f}`);
@@ -38,7 +38,7 @@ const ease = Easing.bezier(0.45, 0, 0.2, 1);
 const Fade: React.FC<{ len: number; children: React.ReactNode; out?: boolean }> = ({ len, children, out = true }) => {
   const f = useCurrentFrame();
   const o = interpolate(f, out ? [0, OV, len - OV, len] : [0, OV], out ? [0, 1, 1, 0] : [0, 1], clamp);
-  const b = interpolate(f, [0, OV], [14, 0], clamp);
+  const b = interpolate(f, [0, OV], [6, 0], clamp);
   return <AbsoluteFill style={{ opacity: o, filter: b > 0.1 ? `blur(${b}px)` : undefined }}>{children}</AbsoluteFill>;
 };
 
@@ -211,9 +211,9 @@ const FotoCine: React.FC<{ p: Producto; dur: number; dir: number }> = ({ p, dur,
   const mask = `radial-gradient(ellipse 60% ${wide ? 55 : 38}% at 50% ${wide ? 52 : 46}%, #000 55%, transparent 100%)`;
   const capa = (
     <>
-      <Img src={foto(p.foto)} style={{ ...style, filter: "blur(7px) brightness(.8) saturate(1.05)" }} />
+      <Img src={foto(p.foto)} style={{ ...style, filter: "brightness(1.06) contrast(1.05) saturate(1.08)" }} />
       <AbsoluteFill style={{ WebkitMaskImage: mask, maskImage: mask }}>
-        <Img src={foto(p.foto)} style={{ ...style, filter: "contrast(1.05) saturate(1.05)" }} />
+        <Img src={foto(p.foto)} style={{ ...style, filter: "brightness(1.06) contrast(1.05) saturate(1.08)" }} />
       </AbsoluteFill>
     </>
   );
@@ -222,7 +222,7 @@ const FotoCine: React.FC<{ p: Producto; dur: number; dir: number }> = ({ p, dur,
   const fade = "linear-gradient(90deg, transparent 0%, #000 22%)";
   return (
     <AbsoluteFill style={{ overflow: "hidden", background: P.noche }}>
-      <Img src={foto(p.foto)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "blur(40px) brightness(.45)", transform: "scale(1.2)" }} />
+      <Img src={foto(p.foto)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "blur(40px) brightness(.6)", transform: "scale(1.2)" }} />
       <div style={{ position: "absolute", top: 0, bottom: 0, left: width * 0.34, right: 0, overflow: "hidden", WebkitMaskImage: fade, maskImage: fade }}>{capa}</div>
     </AbsoluteFill>
   );
@@ -233,7 +233,7 @@ const Estudio: React.FC<{ p: Producto; dur: number }> = ({ p, dur }) => {
   const f = useCurrentFrame();
   const { u, width, height, wide } = useLayout();
   const areaW = wide ? width * 0.56 : width * 0.88;
-  const maxH = height * (wide ? 0.6 : 0.38);
+  const maxH = height * (wide ? 0.66 : 0.5);
   let w = areaW;
   let h = w / p.recorteRatio;
   if (h > maxH) {
@@ -247,10 +247,10 @@ const Estudio: React.FC<{ p: Producto; dur: number }> = ({ p, dur }) => {
   const zoom = interpolate(f, [0, dur], [0.94, 1.04], clamp);
   const sheen = interpolate(f, [10, dur], [-30, 130], clamp);
   return (
-    <AbsoluteFill style={{ background: `radial-gradient(ellipse 70% 60% at ${(cx / width) * 100}% 45%, #2a4a39 0%, ${P.bosqueProfundo} 55%, #060c08 100%)` }}>
+    <AbsoluteFill style={{ background: `radial-gradient(ellipse 70% 60% at ${(cx / width) * 100}% 45%, #3d6650 0%, ${P.bosque} 55%, #0d1a12 100%)` }}>
       <div style={{ position: "absolute", left: 0, right: 0, top: floor, bottom: 0, background: "linear-gradient(180deg, rgba(216,189,138,.10), rgba(0,0,0,.5))", borderTop: `1px solid rgba(216,189,138,.25)` }} />
       <Bokeh seed={p.id} count={12} opacity={0.4} />
-      <AbsoluteFill style={{ mixBlendMode: "screen", background: `radial-gradient(ellipse ${w * 0.9}px ${h * 0.9}px at ${cx}px ${floor - h * 0.55}px, rgba(255,214,150,.28), transparent 70%)` }} />
+      <AbsoluteFill style={{ mixBlendMode: "screen", background: `radial-gradient(ellipse ${w * 0.9}px ${h * 0.9}px at ${cx}px ${floor - h * 0.55}px, rgba(255,220,160,.42), transparent 70%)` }} />
       <div style={{ position: "absolute", left: cx - w / 2, top: floor - h, width: w, height: h * 2, perspective: 1600 }}>
         <div style={{ transform: `rotateY(${rot}deg) scale(${zoom * (0.9 + e * 0.1)})`, transformOrigin: "50% 50%", opacity: e }}>
           <div style={{ position: "relative", width: w, height: h }}>
@@ -297,8 +297,8 @@ const Ficha: React.FC<{ p: Producto; n: number }> = ({ p, n }) => {
         justifyContent: wide ? "center" : "flex-end",
         padding: wide ? `0 0 0 ${width * 0.06}px` : `0 ${60 * u}px ${height * 0.09}px`,
         background: wide
-          ? "linear-gradient(90deg, rgba(8,6,4,.88) 0%, rgba(8,6,4,.55) 32%, transparent 52%)"
-          : "linear-gradient(0deg, rgba(8,6,4,.9) 0%, rgba(8,6,4,.55) 26%, transparent 44%)",
+          ? "linear-gradient(90deg, rgba(8,6,4,.85) 0%, rgba(8,6,4,.4) 28%, transparent 42%)"
+          : "linear-gradient(0deg, rgba(8,6,4,.85) 0%, rgba(8,6,4,.4) 20%, transparent 32%)",
       }}
     >
       <div style={{ maxWidth: wide ? width * 0.36 : undefined }}>
@@ -340,7 +340,7 @@ const Momento: React.FC<{ i: number }> = ({ i }) => {
     <Fade len={len}>
       {modo === "foto" ? <FotoCine p={p} dur={len} dir={i % 4 === 0 ? 1 : -1} /> : <Estudio p={p} dur={len} />}
       <GoldDust count={22} seed={`m${i}`} />
-      <Grade />
+      <Grade strength={0.55} />
       <Ficha p={p} n={i + 1} />
     </Fade>
   );
@@ -382,7 +382,7 @@ const Mesa: React.FC = () => {
           <Regalo x={width * (wide ? 0.04 : 0.02)} y={floor + 10 * u} s={(wide ? 200 : 170) * u} c={P.vino} lazo={P.champagne} d={14} />
           <Regalo x={width * (wide ? 0.86 : 0.74)} y={floor + 14 * u} s={(wide ? 170 : 150) * u} c={P.bosque} lazo={P.champagneClaro} d={20} />
           {items.map(({ p, x, h, d }) => {
-            const maxW = width * (wide ? 0.3 : 0.36);
+            const maxW = width * (wide ? 0.32 : 0.42);
             const hh = Math.min(height * h, maxW / p.recorteRatio);
             const ww = hh * p.recorteRatio;
             const e = spring({ frame: f - d, fps: FPS, config: { damping: 16 } });
@@ -423,7 +423,7 @@ const Personalizadas: React.FC = () => {
   return (
     <Fade len={len}>
       <AbsoluteFill style={{ overflow: "hidden" }}>
-        <Img src={foto("sagrada-familia-empacada.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 62%", transform: `scale(${s})`, transformOrigin: "50% 62%", filter: "saturate(1.05) brightness(.95)" }} />
+        <Img src={foto("sagrada-familia-empacada.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 62%", transform: `scale(${s})`, transformOrigin: "50% 62%", filter: "saturate(1.08) brightness(1.05)" }} />
       </AbsoluteFill>
       <GoldDust count={26} seed="pz" />
       <Grade />
@@ -431,7 +431,7 @@ const Personalizadas: React.FC = () => {
         style={{
           justifyContent: wide ? "center" : "flex-end",
           padding: wide ? `0 0 0 ${width * 0.06}px` : `0 ${60 * u}px ${height * 0.09}px`,
-          background: wide ? "linear-gradient(90deg, rgba(8,6,4,.85), transparent 50%)" : "linear-gradient(0deg, rgba(8,6,4,.88), transparent 42%)",
+          background: wide ? "linear-gradient(90deg, rgba(8,6,4,.85), transparent 50%)" : "linear-gradient(0deg, rgba(8,6,4,.85), transparent 32%)",
         }}
       >
         <div style={{ maxWidth: wide ? width * 0.4 : undefined }}>
@@ -452,14 +452,14 @@ const Cierre: React.FC = () => {
   const { u, width, height, wide } = useLayout();
   const filas = wide ? [["casita", "arco", "pinos", "portal", "renos"]] : [["arco", "pinos", "portal"], ["casita", "renos"]];
   const pullBack = interpolate(f, [0, 120], [1.18, 1.0], { ...clamp, easing: ease });
-  const dim = interpolate(f, [60, 130], [1, 0.55], clamp);
+  const dim = interpolate(f, [60, 130], [1.05, 0.85], clamp);
   const logo = spring({ frame: f - 70, fps: FPS, config: { damping: 18 } });
   const a = (d: number) => interpolate(f, [d, d + 18], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
   const gap = 24 * u;
   const shelves = filas.map((ids, r) => {
     const ps = ids.map(byId);
-    const rowH = height * (wide ? 0.22 : 0.15);
-    const y = height * (wide ? 0.5 : 0.3 + r * 0.2);
+    const rowH = height * (wide ? 0.26 : 0.17);
+    const y = height * (wide ? 0.5 : 0.27 + r * 0.21);
     const ws = ps.map((p) => rowH * p.recorteRatio);
     const total = ws.reduce((m, n) => m + n, 0) + gap * (ps.length - 1);
     const fit = Math.min(1, (width * 0.92) / total);

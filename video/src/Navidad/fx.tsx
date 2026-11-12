@@ -152,7 +152,7 @@ export const Flame: React.FC<{ size: number; intensity?: number }> = ({ size, in
 export const Grade: React.FC<{ strength?: number }> = ({ strength = 1 }) => (
   <AbsoluteFill style={{ pointerEvents: "none" }}>
     <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(255,170,90,.10), transparent 40%, rgba(25,10,0,.25))", mixBlendMode: "soft-light", opacity: strength }} />
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse at center, transparent 48%, rgba(5,3,1,.72) 100%)", opacity: strength }} />
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse at center, transparent 48%, rgba(5,3,1,.6) 100%)", opacity: strength }} />
   </AbsoluteFill>
 );
 
