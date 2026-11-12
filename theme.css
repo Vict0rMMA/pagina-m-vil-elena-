@@ -6365,3 +6365,256 @@ h1, h2, h3, h4,
   .pz-cabeza { --velo: linear-gradient(180deg, rgba(70, 16, 28, 0.7) 0%, rgba(50, 10, 18, 0.85) 100%); }
 }
 .pz-lado-nota { margin: auto 0 0; font-size: 0.9375rem; color: rgba(255, 236, 222, 0.75); }
+
+/* ============================================================
+   62. Ventana de producto
+   ------------------------------------------------------------
+   El fondo de la ventana estaba pintado de blanco entero: no se veía
+   la página detrás. Ahora se oscurece con desenfoque y la hoja entra
+   subiendo. En computador es una tarjeta centrada en dos columnas:
+   la foto grande a la izquierda y la compra a la derecha.
+   ============================================================ */
+
+#product-modal { background: transparent !important; border-radius: 0; }
+#product-overlay {
+  background: rgba(20, 13, 10, 0.55) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+#product-modal:not(.hidden) #product-overlay { animation: modal-fondo 260ms var(--ease-out) both; }
+#product-modal:not(.hidden) .product-modal-sheet { animation: modal-sube 420ms var(--ease-suave) both; }
+#product-modal.saliendo #product-overlay { animation: modal-fondo-sale 200ms var(--ease-out) both; }
+#product-modal.saliendo .product-modal-sheet { animation: modal-baja 200ms var(--ease-out) both; }
+
+@keyframes modal-fondo { from { opacity: 0; } }
+@keyframes modal-fondo-sale { to { opacity: 0; } }
+@keyframes modal-sube { from { opacity: 0; transform: translateY(48px) scale(0.98); } }
+@keyframes modal-baja { to { opacity: 0; transform: translateY(24px) scale(0.98); } }
+
+.product-modal-sheet {
+  background: var(--surface) !important;
+  box-shadow: 0 -20px 60px -20px rgba(0, 0, 0, 0.45) !important;
+}
+#product-modal-content { background: transparent !important; }
+
+.ficha { position: relative; max-width: none; gap: 0; }
+.ficha-cerrar {
+  position: absolute !important;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 3;
+  width: 44px; height: 44px;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-radius: var(--r-full) !important;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.35) !important;
+}
+.ficha-foto {
+  position: relative;
+  margin: calc(var(--space-4) * -1) calc(var(--space-4) * -1) 0;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.ficha-foto img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  object-fit: cover;
+}
+.ficha-foto .producto-zoom { top: var(--space-3); left: var(--space-3); right: auto; }
+.ficha-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+}
+.ficha-cabecera { padding: 0; text-align: left; }
+.ficha-marca { display: block; margin-bottom: var(--space-1); font-size: 0.8125rem; font-weight: 600; color: var(--gold-deep); }
+.ficha-nombre { font-size: clamp(1.625rem, 3vw, 2.125rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; }
+.ficha-titulo { font-size: 0.875rem !important; font-weight: 600; letter-spacing: 0 !important; text-transform: none !important; color: var(--ink) !important; }
+
+.ficha-specs { border: 0 !important; border-radius: 14px !important; background: #F4EFE6; overflow: hidden; }
+.ficha-spec, .ficha-spec:nth-child(odd) { background: transparent; border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+
+.ficha-tipo, .ficha-opcion {
+  border: 1.5px solid var(--line) !important;
+  border-radius: 14px !important;
+  background: var(--surface) !important;
+}
+.ficha-tipo.active, .ficha-opcion.active {
+  border-color: var(--ink) !important;
+  background: var(--surface) !important;
+  box-shadow: 0 0 0 1px var(--ink) !important;
+}
+.ficha-opcion-precio { font-size: 1.125rem !important; font-weight: 700 !important; color: var(--ink) !important; }
+
+.ficha-total {
+  align-items: baseline;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.ficha-total-etiqueta { text-transform: none !important; letter-spacing: 0 !important; font-size: 0.9375rem !important; }
+.ficha-total-valor { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: -0.02em; color: var(--ink) !important; }
+#ficha-agregar { min-height: 56px; border-radius: 14px; font-size: 1rem; }
+#ficha-agregar:disabled { opacity: 0.45; }
+
+@media (min-width: 768px) {
+  .product-modal-sheet {
+    top: 50% !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    width: min(1040px, calc(100vw - 48px));
+    max-height: min(88dvh, 760px) !important;
+    transform: translate(-50%, -50%);
+    border-radius: 28px !important;
+    overflow: hidden !important;
+    display: flex;
+  }
+  #product-modal:not(.hidden) .product-modal-sheet { animation-name: modal-aparece; }
+  #product-modal.saliendo .product-modal-sheet { animation-name: modal-desaparece; }
+  #product-modal-content { padding: 0 !important; width: 100%; overflow-y: auto; }
+  .ficha { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 100%; }
+  .ficha-foto { margin: 0; height: 100%; position: sticky; top: 0; max-height: min(88dvh, 760px); }
+  .ficha-foto img { height: 100%; aspect-ratio: auto; }
+  .ficha-info { padding: var(--space-12) var(--space-12) var(--space-8); }
+}
+@keyframes modal-aparece { from { opacity: 0; transform: translate(-50%, calc(-50% + 32px)) scale(0.97); } to { transform: translate(-50%, -50%); } }
+@keyframes modal-desaparece { to { opacity: 0; transform: translate(-50%, calc(-50% + 16px)) scale(0.98); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #product-modal:not(.hidden) #product-overlay,
+  #product-modal:not(.hidden) .product-modal-sheet { animation: none; }
+}
+
+/* ============================================================
+   63. Contacto: mosaico de videos y fotos que se turnan
+   ------------------------------------------------------------
+   Los videos son verticales: tres lado a lado llenan la pantalla
+   ancha sin estirarse, así que se ven nítidos y con poco velo.
+   En el celular queda sólo el primero.
+   ============================================================ */
+
+.capa-mosaico { display: grid; grid-template-columns: 1fr; }
+.capa-mosaico .capa-fondo-video {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+.capa-mosaico .capa-fondo-video:not(:first-child) { display: none; }
+@media (min-width: 900px) {
+  .capa-mosaico { grid-template-columns: repeat(3, 1fr); gap: 4px; background: #1A120E; }
+  .capa-mosaico .capa-fondo-video:not(:first-child) { display: block; }
+}
+.ctc-cabeza {
+  --velo:
+    linear-gradient(90deg, rgba(20, 12, 9, 0.72) 0%, rgba(20, 12, 9, 0.42) 55%, rgba(20, 12, 9, 0.22) 100%);
+}
+@media (max-width: 899px) {
+  .ctc-cabeza { --velo: linear-gradient(180deg, rgba(20, 12, 9, 0.45) 0%, rgba(20, 12, 9, 0.7) 100%); }
+}
+
+.ctc-fotos { align-items: start; }
+.ctc-foto-marco {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-2);
+}
+.ctc-foto-marco:nth-child(2) { margin-top: var(--space-12); }
+.ctc-fotos .ctc-foto-marco img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 900ms var(--ease-suave), transform 3600ms linear;
+}
+.ctc-fotos .ctc-foto-marco img.activa { opacity: 1; transform: scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .ctc-fotos .ctc-foto-marco img { transition: none; transform: none; }
+}
+
+/* Logo de la cabecera más nítido y el nombre con más presencia. */
+.brand-mark { image-rendering: auto; filter: drop-shadow(0 1px 1px rgba(90, 60, 20, 0.25)); }
+.brand-name { font-weight: 700 !important; letter-spacing: -0.01em; }
+
+/* ============================================================
+   64. Vitrina de deseos más cálida
+   ------------------------------------------------------------
+   Luces desenfocadas de fondo (como velas lejos), velas un poco más
+   anchas, su reflejo en la madera y la pista como ficha. Sin elegir
+   nada, las velas de muestra ya se ven enteras, no apagadas.
+   ============================================================ */
+
+.dsw-vitrina {
+  background:
+    radial-gradient(circle at 14% 24%, rgba(255, 196, 110, 0.35) 0 3px, rgba(255, 196, 110, 0) 22px),
+    radial-gradient(circle at 82% 18%, rgba(255, 210, 140, 0.28) 0 4px, rgba(255, 210, 140, 0) 30px),
+    radial-gradient(circle at 70% 40%, rgba(255, 170, 90, 0.18) 0 2px, rgba(255, 170, 90, 0) 18px),
+    radial-gradient(circle at 26% 46%, rgba(255, 220, 160, 0.16) 0 2px, rgba(255, 220, 160, 0) 16px),
+    radial-gradient(circle at 92% 58%, rgba(255, 190, 120, 0.2) 0 3px, rgba(255, 190, 120, 0) 26px),
+    radial-gradient(ellipse 65% 50% at 50% 62%, rgba(255, 176, 86, 0.32), rgba(30, 20, 16, 0) 72%),
+    linear-gradient(180deg, #2E1E16 0%, #1B120D 70%, #120C09 100%);
+  border: 1px solid rgba(255, 220, 170, 0.08);
+}
+.dsw-vitrina::after {
+  /* reflejo cálido sobre la madera */
+  content: "";
+  position: absolute;
+  left: 10%; right: 10%;
+  bottom: calc(var(--space-6) + 4px);
+  height: 30px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 190, 100, 0.35), rgba(255, 190, 100, 0) 70%);
+  pointer-events: none;
+}
+.dsw-muestra .dsw-vela { opacity: 0.92; }
+.dsw-muestra .dsw-vela::before { opacity: 1; }
+.dsw-vela { flex-basis: 56px; }
+.dsw-palabra { font-size: clamp(12px, 2.8vw, 17px); }
+
+.dsw-pista {
+  left: 50%;
+  right: auto;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 8px 16px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 225, 190, 0.18);
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-size: 0.8125rem;
+  color: #FFF1DE;
+}
+@media (min-width: 900px) {
+  .dsw-vela { flex-basis: 70px; }
+}
+
+.hero-bajar { text-transform: none; letter-spacing: 0; font-size: 0.875rem; }
+
+/* Envíos y pagos del contacto: más grandes y legibles. */
+.ctc-puntos li { padding: var(--space-8) 0; }
+.ctc-puntos h3 { font-size: clamp(1.75rem, 3.4vw, 2.25rem) !important; margin-bottom: var(--space-2); }
+.ctc-puntos p { font-size: 1.0625rem; line-height: 1.6; }
+.ctc-pagos { gap: var(--space-3); margin-top: var(--space-4); }
+.ctc-pagos li {
+  min-height: 56px;
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-1);
+}
+.ctc-pago-icono { width: 42px; height: 42px; font-size: 18px; }
+.ctc-pago-icono img { width: 28px; height: 28px; }

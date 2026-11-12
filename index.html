@@ -74,7 +74,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css?v=20261112-fondos">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261112-pz3">
+    <link rel="stylesheet" href="theme.css?v=20261112-ctc">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -129,7 +129,7 @@
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <a href="#inicio" class="brand" aria-label="Elena Velas y Aromas - inicio">
-                    <img src="assets/logos/elena-marca.png" alt="Logo de Elena Velas y Aromas" class="brand-mark" loading="eager" width="34" height="34" aria-hidden="true">
+                    <img src="assets/logos/elena-marca-nitida.png" alt="Logo de Elena Velas y Aromas" class="brand-mark" loading="eager" width="34" height="34" aria-hidden="true">
                     <span class="brand-text">
                         <span class="brand-name">Elena</span>
                         <span class="brand-tag">Velas y Aromas</span>
@@ -140,7 +140,7 @@
                 <div class="desktop-menu hidden md:flex items-center gap-8">
                     <a href="#inicio" class="nav-link">Inicio</a>
                     <a href="#productos" class="nav-link">Productos</a>
-                    <a href="#novedades" class="nav-link">Novedades</a>
+                    <a href="#novedades" class="nav-link">Lo nuevo</a>
                     <a href="#personalizadas" class="nav-link">Personalizadas</a>
                     <a href="#deseos" class="nav-link">Elige tu deseo</a>
                     <a href="#contacto" class="nav-link">Contacto</a>
@@ -163,7 +163,7 @@
             <div id="mobile-menu" class="mobile-menu hidden md:hidden">
                 <a href="#inicio">Inicio</a>
                 <a href="#productos">Productos</a>
-                <a href="#novedades">Novedades</a>
+                <a href="#novedades">Lo nuevo</a>
                 <a href="#personalizadas">Personalizadas</a>
                 <a href="#deseos">Elige tu deseo</a>
                 <a href="#contacto">Contacto</a>
@@ -193,7 +193,7 @@
                        data-src-ancho="assets/productos/Videos/taller-produccion-suave-web.mp4"></video>
             </div>
             <div class="hero-inner">
-                <img src="assets/logos/elena-marca.png" alt="Logo de Elena Velas y Aromas: una vela encendida" class="hero-logo" width="118" height="118" loading="eager" aria-hidden="true">
+                <img src="assets/logos/elena-marca-nitida.png" alt="Logo de Elena Velas y Aromas: una vela encendida" class="hero-logo" width="118" height="118" loading="eager" aria-hidden="true">
                 <span class="hero-eyebrow">Hechas a mano en Medellín</span>
                 <!-- El nombre ya está en el logo de arriba: el titular dice qué se vende. -->
                 <h1 class="hero-title">Velas artesanales para regalar y emprender</h1>
@@ -213,7 +213,7 @@
                 </ul>
             </div>
             <a href="#novedades" class="hero-bajar" aria-label="Ver las novedades en video">
-                <span>Mira las novedades</span>
+                <span>Mira lo nuevo</span>
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </a>
         </section>
@@ -691,13 +691,16 @@
             <!-- Contacto tipo landing: franja oscura con los WhatsApp, el lema
                  con envíos y pagos en crema, y las redes como lista grande. -->
             <div class="ctc-cabeza">
-            <div class="capa-fondo" aria-hidden="true">
-                <picture>
-                    <source media="(min-width: 900px)" srcset="assets/productos/Videos/posters/velas-encendidas-suave.jpg">
-                    <img class="capa-fondo-img" src="assets/productos/Videos/posters/velas-encendidas.jpg" alt="Velas con palabras encendidas" loading="lazy" decoding="async">
-                </picture>
+            <div class="capa-fondo capa-mosaico" aria-hidden="true">
                 <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       data-src="assets/productos/Videos/velas-encendidas-web.mp4" data-src-ancho="assets/productos/Videos/velas-encendidas-suave-web.mp4"></video>
+                       poster="assets/productos/Videos/posters/velas-encendidas.jpg"
+                       data-src="assets/productos/Videos/velas-encendidas-web.mp4"></video>
+                <video class="capa-fondo-video" muted loop playsinline preload="none"
+                       poster="assets/productos/Videos/posters/cajas-estrellas-navidad.jpg"
+                       data-src="assets/productos/Videos/cajas-estrellas-navidad-web.mp4"></video>
+                <video class="capa-fondo-video" muted loop playsinline preload="none"
+                       poster="assets/productos/Videos/posters/velas-degrade.jpg"
+                       data-src="assets/productos/Videos/velas-degrade-web.mp4"></video>
             </div>
                 <div class="lnd-envoltura ctc-cabeza-grid">
                     <div data-revelar>
@@ -739,8 +742,8 @@
                             </p>
                             <p class="ctc-texto">Fabricamos velas decorativas y de consumo con las mejores fragancias.</p>
                             <div class="ctc-fotos" data-revelar data-revelar-orden="1">
-                                <img src="assets/mini/Navidad-2026/bola-navidad.webp" alt="Velas bola de Navidad verde y roja con relieve" width="300" height="375" loading="lazy" decoding="async">
-                                <img src="assets/mini/Navidad-2026/angel.webp" alt="Velas en forma de ángel, grande y pequeño" width="300" height="375" loading="lazy" decoding="async">
+                                <div class="ctc-foto-marco"><img src="assets/mini/Navidad-2026/bola-navidad.webp" alt="Velas bola de Navidad verde y roja" width="300" height="375" loading="lazy" decoding="async" class="activa"><img src="assets/mini/Navidad-2026/pino-grande.webp" alt="Velas pino rojo y blanco" width="300" height="375" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/pesebre-casa.webp" alt="Vela pesebre casa" width="300" height="375" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/muneco-nieve.webp" alt="Vela muñeco de nieve" width="300" height="375" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/arbol-navidad.webp" alt="Vela árbol de Navidad empacada" width="300" height="375" loading="lazy" decoding="async"></div>
+                                <div class="ctc-foto-marco"><img src="assets/mini/Navidad-2026/angel.webp" alt="Velas en forma de ángel" width="300" height="375" loading="lazy" decoding="async" class="activa"><img src="assets/mini/Navidad-2026/peonia-grande.webp" alt="Vela peonía grande" width="300" height="375" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/pesebre-estrella-arco.webp" alt="Vela pesebre con estrella" width="300" height="375" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/bola-pesebre.webp" alt="Vela bola con pesebre" width="300" height="375" loading="lazy" decoding="async"><img src="assets/mini/Navidad-2026/pesebre-choza.webp" alt="Vela pesebre choza" width="300" height="375" loading="lazy" decoding="async"></div>
                             </div>
                         </div>
                         <ul class="lnd-puntos ctc-puntos">
@@ -947,7 +950,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261112-novedades"></script>
+    <script src="app.js?v=20261112-ctc"></script>
     <script src="motion.js?v=20261010-dock" defer></script>
     <script>
       // Registrar el Service Worker.

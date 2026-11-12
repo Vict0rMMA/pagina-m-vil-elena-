@@ -3571,19 +3571,23 @@ function renderFichaProducto(producto) {
 
   return `
     <div class="ficha">
-      <div class="ficha-cabecera">
-        <h3 class="ficha-nombre">${producto.nombre}</h3>
-        <button onclick="cerrarModalProducto()" class="ficha-cerrar" aria-label="Cerrar">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
+      <button onclick="cerrarModalProducto()" class="ficha-cerrar" aria-label="Cerrar">
+        <i class="fas fa-times"></i>
+      </button>
 
-      <div class="modal-media modal-media-lg" id="product-image-container">
+      <!-- En computador la foto ocupa media ventana; en el celular va arriba. -->
+      <div class="ficha-foto" id="product-image-container">
         <button type="button" class="producto-zoom" aria-label="Ampliar imagen"
                 onclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre.replace(/'/g, "\\'")}')">
           <i class="fas fa-expand"></i>
         </button>
-        <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" decoding="async">
+        <img src="${producto.imagen}" alt="${producto.nombre}" decoding="async">
+      </div>
+
+      <div class="ficha-info">
+      <div class="ficha-cabecera">
+        <span class="ficha-marca">Elena Velas y Aromas</span>
+        <h3 class="ficha-nombre">${producto.nombre}</h3>
       </div>
 
       ${ambos ? '' : `<span class="ficha-etiqueta">${hayDetal ? 'Venta al detal' : 'Venta al por mayor'}</span>`}
@@ -3601,6 +3605,7 @@ function renderFichaProducto(producto) {
       <button type="button" id="ficha-agregar" class="btn btn-primary btn-block"${arranca ? '' : ' disabled'}>
         ${arranca ? 'Agregar al carrito' : 'Elige una presentación'}
       </button>
+      </div>
     </div>`;
 }
 
@@ -4539,16 +4544,21 @@ function abrirModalProducto(productoId) {
 
 function cerrarModalProducto() {
   const modal = document.getElementById('product-modal');
-  if (modal) {
-    modal.classList.add('hidden');
-  }
-  document.body.style.overflow = '';
-  
-  // Limpiar el contenido del modal para evitar acumulación de listeners
   const content = document.getElementById('product-modal-content');
-  if (content) {
-    content.innerHTML = '';
-  }
+  document.body.style.overflow = '';
+  if (!modal || modal.classList.contains('hidden')) return;
+
+  // Sale con un fundido corto; la entrada la hace el CSS al quitar "hidden".
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const terminar = () => {
+    modal.classList.add('hidden');
+    modal.classList.remove('saliendo');
+    // Limpiar el contenido del modal para evitar acumulación de listeners
+    if (content) content.innerHTML = '';
+  };
+  if (reducido) { terminar(); return; }
+  modal.classList.add('saliendo');
+  setTimeout(terminar, 200);
 }
 
 // Función para ampliar imagen del producto
@@ -5293,19 +5303,21 @@ function initCapasFondo() {
 
   const obs = new IntersectionObserver((entradas) => {
     entradas.forEach(e => {
-      const video = e.target.querySelector('.capa-fondo-video');
-      if (!video) return;
-      if (!e.isIntersecting) { video.pause(); return; }
-      if (!video.getAttribute('src')) {
-        video.src = (ancho && video.dataset.srcAncho) || video.dataset.src;
-        video.addEventListener('playing', () => video.classList.add('lista'), { once: true });
-        video.addEventListener('error', () => video.remove(), { once: true });
-      }
-      const p = video.play();
-      if (p && p.catch) p.catch(() => {});
+      // Una capa puede traer varios videos (el mosaico del contacto).
+      e.target.querySelectorAll('.capa-fondo-video').forEach(video => {
+        if (getComputedStyle(video).display === 'none') return;
+        if (!e.isIntersecting) { video.pause(); return; }
+        if (!video.getAttribute('src')) {
+          video.src = (ancho && video.dataset.srcAncho) || video.dataset.src;
+          video.addEventListener('playing', () => video.classList.add('lista'), { once: true });
+          video.addEventListener('error', () => video.remove(), { once: true });
+        }
+        const p = video.play();
+        if (p && p.catch) p.catch(() => {});
+      });
     });
   }, { threshold: 0.05 });
-  videos.forEach(v => obs.observe(v.closest('.capa-fondo').parentElement));
+  new Set([...videos].map(v => v.closest('.capa-fondo').parentElement)).forEach(c => obs.observe(c));
 }
 
 // Bloques tipo landing del inicio: la galería de Navidad abre cada
@@ -5313,6 +5325,28 @@ function initCapasFondo() {
 function initLanding() {
   const anio = document.getElementById('ctc-anio');
   if (anio) anio.textContent = new Date().getFullYear();
+
+  // Las fotos del contacto se van turnando, cada marco a su ritmo, y sólo
+  // mientras se ven.
+  const marcos = document.querySelectorAll('.ctc-foto-marco');
+  if (marcos.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let visibles = false;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { visibles = e.isIntersecting; })
+        .observe(marcos[0].parentElement);
+    }
+    marcos.forEach((marco, n) => {
+      const fotos = marco.querySelectorAll('img');
+      if (fotos.length < 2) return;
+      let actual = 0;
+      setTimeout(() => setInterval(() => {
+        if (!visibles || document.hidden) return;
+        fotos[actual].classList.remove('activa');
+        actual = (actual + 1) % fotos.length;
+        fotos[actual].classList.add('activa');
+      }, 3600), n * 1800);
+    });
+  }
 
   // Mientras se ven los WhatsApp grandes del contacto, la burbuja se esconde.
   const cabezaContacto = document.querySelector('.ctc-cabeza');
