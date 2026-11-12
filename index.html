@@ -75,9 +75,9 @@
     <link rel="stylesheet" href="tailwind.css?v=20261010-dock">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=20261112-fotos">
+    <link rel="stylesheet" href="styles.css?v=20261112-moderna">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261112-landing">
+    <link rel="stylesheet" href="theme.css?v=20261112-moderna">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -181,10 +181,17 @@
                  video (850 KB) lo pone initHeroFondo() después de cargar la
                  página, y nunca con movimiento reducido o ahorro de datos. -->
             <div class="hero-fondo" aria-hidden="true">
-                <img class="hero-fondo-img" src="assets/productos/Videos/posters/taller-produccion-hd.jpg"
-                     alt="Estantería del taller llena de velas navideñas de colores" width="720" height="1280" fetchpriority="high" decoding="async">
+                <!-- El video es vertical: en pantallas anchas se estiraría y se
+                     vería pixelado, así que ahí va una versión desenfocada a
+                     propósito, como un fondo de foto. -->
+                <picture>
+                    <source media="(min-width: 900px)" srcset="assets/productos/Videos/posters/taller-produccion-suave.jpg">
+                    <img class="hero-fondo-img" src="assets/productos/Videos/posters/taller-produccion-hd.jpg"
+                         alt="Estantería llena de velas navideñas de colores" width="720" height="1280" fetchpriority="high" decoding="async">
+                </picture>
                 <video class="hero-fondo-video" muted loop playsinline preload="none"
-                       data-src="assets/productos/Videos/taller-produccion-web.mp4"></video>
+                       data-src="assets/productos/Videos/taller-produccion-web.mp4"
+                       data-src-ancho="assets/productos/Videos/taller-produccion-suave-web.mp4"></video>
             </div>
             <div class="hero-inner">
                 <img src="assets/logos/elena-marca.png" alt="Logo de Elena Velas y Aromas: una vela encendida" class="hero-logo" width="118" height="118" loading="eager" aria-hidden="true">
@@ -206,8 +213,8 @@
                     <li><i class="fas fa-store" aria-hidden="true"></i> Detal y por mayor</li>
                 </ul>
             </div>
-            <a href="#videos" class="hero-bajar" aria-label="Ver videos del taller">
-                <span>Mira el taller</span>
+            <a href="#videos" class="hero-bajar" aria-label="Ver nuestros videos">
+                <span>Mira los videos</span>
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </a>
         </section>
@@ -215,7 +222,7 @@
         <!-- El taller: bloque editorial tipo landing (sólo en inicio) -->
         <section class="inicio-section lnd lnd-taller" aria-labelledby="lnd-taller-titulo">
             <div class="lnd-envoltura">
-                <span class="lnd-eyebrow" data-revelar>El taller</span>
+                <span class="lnd-eyebrow" data-revelar>Nuestra esencia</span>
                 <h2 id="lnd-taller-titulo" class="lnd-frase" data-revelar>
                     Cada vela sale de nuestras manos en Medell&iacute;n
                     <span class="lnd-frase-suave">con la fragancia y la palabra que t&uacute; eliges.</span>
@@ -232,7 +239,7 @@
                     <ul class="lnd-puntos">
                         <li data-revelar>
                             <h3>Hechas a mano</h3>
-                            <p>Cada vela se hace a mano en nuestro taller de Medell&iacute;n, lote por lote.</p>
+                            <p>Cada vela se hace a mano en Medell&iacute;n, lote por lote.</p>
                         </li>
                         <li data-revelar data-revelar-orden="1">
                             <h3>Con tu palabra</h3>
@@ -286,34 +293,44 @@
         </section>
         
         <!-- Elige tu deseo: página propia (app.js: initDeseos) -->
-        <section id="deseos" class="page-section section deseos">
-            <div class="section-inner">
-                <div class="section-head">
-                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
-                    <span class="section-eyebrow">Velas con intención</span>
-                    <h2 class="section-title">Elige tu deseo</h2>
-                    <p class="section-subtitle">Nuestras velas llevan una palabra escrita. Elige hasta 10 deseos, uno por vela, y te las preparamos.</p>
+        <section id="deseos" class="page-section deseos dsw" aria-labelledby="dsw-titulo">
+            <!-- Elige tu deseo tipo landing: a un lado se eligen las palabras,
+                 al otro se ven las velas armándose con ellas (app.js: initDeseos). -->
+            <div class="lnd-envoltura">
+                <div class="dsw-grid">
+                    <div class="dsw-texto">
+                        <span class="lnd-eyebrow">Velas con intenci&oacute;n</span>
+                        <h2 id="dsw-titulo" class="lnd-titulo dsw-titulo">Elige tu <em>deseo</em></h2>
+                        <p class="dsw-intro">Cada vela lleva una palabra escrita. Elige hasta 10 deseos, uno por vela, y te las preparamos.</p>
+
+                        <div class="deseos-lista" id="deseos-lista" role="group" aria-label="Deseos"></div>
+                        <p class="deseo-cuenta" id="deseo-cuenta" aria-live="polite" hidden>
+                            <span></span>
+                            <button type="button" class="deseo-borrar" id="deseo-borrar">Borrar</button>
+                        </p>
+
+                        <div class="dsw-acciones">
+                            <button type="button" class="btn btn-whatsapp btn-pedido" id="deseo-pedir">
+                                <i class="fab fa-whatsapp text-2xl" aria-hidden="true"></i>
+                                <span id="deseo-pedir-texto">Pedir por WhatsApp</span>
+                            </button>
+                        </div>
+                        <p class="deseos-donde">O encu&eacute;ntralas en estos cat&aacute;logos:</p>
+                        <div class="deseos-accion dsw-catalogos" id="deseos-catalogos"></div>
+                    </div>
+
+                    <!-- La vitrina: una vela por deseo, con la palabra de arriba a abajo. -->
+                    <div class="dsw-vitrina" id="deseo-elegido">
+                        <div class="dsw-velas" id="deseo-palabra" aria-live="polite"></div>
+                        <div class="dsw-base" aria-hidden="true"></div>
+                        <p class="deseo-pista dsw-pista" id="deseo-pista">Toca un deseo y mira c&oacute;mo queda escrito en tu vela.</p>
+                    </div>
                 </div>
-                <div class="deseos-lista" id="deseos-lista" role="group" aria-label="Deseos"></div>
-                <p class="deseo-cuenta" id="deseo-cuenta" aria-live="polite" hidden>
-                    <span></span>
-                    <button type="button" class="deseo-borrar" id="deseo-borrar">Borrar</button>
-                </p>
-                <div class="deseo-elegido" id="deseo-elegido">
-                    <p class="deseo-pista" id="deseo-pista">Toca los deseos que quieras y míralos como irán escritos en tus velas.</p>
-                    <p class="deseo-palabra" id="deseo-palabra" hidden></p>
+
+                <div class="dsw-ejemplos">
+                    <p class="deseos-velas-titulo">Algunas velas que pueden llevar tu deseo</p>
+                    <div class="deseos-velas" id="deseos-velas"></div>
                 </div>
-                <p class="deseos-donde">Encuéntralas en estos catálogos</p>
-                <div class="deseos-accion" id="deseos-catalogos"></div>
-                <p class="deseos-o">o pídela directo</p>
-                <div class="deseos-whatsapp">
-                    <button type="button" class="btn btn-whatsapp btn-pedido" id="deseo-pedir">
-                        <i class="fab fa-whatsapp text-2xl" aria-hidden="true"></i>
-                        <span id="deseo-pedir-texto">Pedir por WhatsApp</span>
-                    </button>
-                </div>
-                <p class="deseos-velas-titulo">Algunas velas que pueden llevar tu deseo</p>
-                <div class="deseos-velas" id="deseos-velas"></div>
             </div>
         </section>
 
@@ -412,20 +429,23 @@
         </section>
         
         <!-- Velas Personalizadas Section -->
-        <section id="personalizadas" class="page-section section section-alt">
-            <div class="section-inner">
-                <div class="section-head">
-                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
-                    <span class="section-eyebrow">A tu medida</span>
-                    <h2 class="section-title">Velas personalizadas</h2>
-                    <p class="section-subtitle">
-                        Cuéntanos la ocasión y el diseño que imaginas. Estos son algunos de los
-                        trabajos que hemos hecho; por WhatsApp resolvemos cualquier duda.
-                    </p>
-                </div>
-                
-                <!-- Videos Section -->
-                <div class="reel-rail">
+        <section id="personalizadas" class="page-section pz" aria-labelledby="pz-titulo">
+            <div class="lnd-envoltura">
+                <div class="pz-grid">
+                    <div class="pz-texto">
+                        <span class="lnd-eyebrow" data-revelar>A tu medida</span>
+                        <h2 id="pz-titulo" class="lnd-titulo pz-titulo" data-revelar>Velas <em>personalizadas</em></h2>
+                        <p class="pz-intro" data-revelar>Cu&eacute;ntanos la ocasi&oacute;n y el dise&ntilde;o que imaginas: bautizos, quince a&ntilde;os, bodas, empresas&hellip; Estos son algunos de los trabajos que hemos hecho.</p>
+                        <ol class="pz-pasos">
+                            <li data-revelar><span class="pz-num">01</span><div><h3>Cu&eacute;ntanos la ocasi&oacute;n</h3><p>Tu nombre y para qu&eacute; es la vela.</p></div></li>
+                            <li data-revelar data-revelar-orden="1"><span class="pz-num">02</span><div><h3>Describe tu dise&ntilde;o</h3><p>Colores, texto y forma. Si tienes una foto de referencia, la adjuntas.</p></div></li>
+                            <li data-revelar data-revelar-orden="2"><span class="pz-num">03</span><div><h3>Te respondemos por WhatsApp</h3><p>Ah&iacute; resolvemos dudas, precio y entrega.</p></div></li>
+                        </ol>
+                        <a href="#form-personalizada" class="lnd-enlace pz-ir">Llenar el formulario <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+
+                    <!-- Los dos trabajos, escalonados -->
+                    <div class="reel-rail pz-reels" data-revelar data-revelar-orden="1">
                     <article class="reel video-container-lazy" data-video-src="assets/productos/Videos-Velas-Personalizadas/WhatsApp Video 2025-11-01 at 8.35.45 PM.mp4">
                             <img class="reel-poster" src="assets/productos/Videos/posters/pers1.jpg" alt="Portada del video: vela con diseño personalizado" loading="lazy" decoding="async" onerror="this.remove()">
                             <button type="button" class="reel-lanzador video-placeholder" aria-label="Reproducir: Diseño personalizado">
@@ -450,10 +470,11 @@
                                 <h3 class="reel-titulo">Trabajos a medida</h3>
                             </div>
                         </article>
+                    </div>
                 </div>
-                
+
                 <!-- Formulario -->
-                <div class="max-w-3xl mx-auto">
+                <div class="pz-form">
                     <div class="panel">
                         <h3 class="panel-title">Cu&eacute;ntanos tu idea</h3>
                         
@@ -626,159 +647,91 @@
         </section>
         
         <!-- Contacto Section -->
-        <section id="contacto" class="page-section section section-alt">
-            <div class="section-inner">
-                <div class="section-head">
-                    <span class="titulo-destellos" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
-                    <span class="section-eyebrow">Hablemos</span>
-                    <h2 class="section-title">Conecta con nosotros</h2>
-                    <p class="section-subtitle">Escr&iacute;benos por WhatsApp y te ayudamos con tu pedido.</p>
+        <section id="contacto" class="page-section ctc" aria-labelledby="ctc-titulo">
+            <!-- Contacto tipo landing: franja oscura con los WhatsApp, el lema
+                 con envíos y pagos en crema, y las redes como lista grande. -->
+            <div class="ctc-cabeza">
+                <div class="lnd-envoltura ctc-cabeza-grid">
+                    <div data-revelar>
+                        <span class="lnd-eyebrow">Hablemos</span>
+                        <h2 id="ctc-titulo" class="lnd-titulo">Cu&eacute;ntanos qu&eacute; velas <em>necesitas</em></h2>
+                        <p class="ctc-intro">Escr&iacute;benos por WhatsApp y te ayudamos con tu pedido, al detal o por mayor.</p>
+                    </div>
+                    <div class="ctc-wa" data-revelar data-revelar-orden="1">
+                        <a class="ctc-wa-link" href="https://wa.me/573008220389" target="_blank" rel="noopener noreferrer"
+                           aria-label="Escribir por WhatsApp al +57 300 822 0389">
+                            <span class="ctc-wa-icono"><i class="fab fa-whatsapp" aria-hidden="true"></i></span>
+                            <span class="ctc-wa-texto">
+                                <span class="ctc-wa-numero">300 822 0389</span>
+                                <span class="ctc-wa-accion">Escribir por WhatsApp</span>
+                            </span>
+                            <i class="fas fa-arrow-right ctc-wa-flecha" aria-hidden="true"></i>
+                        </a>
+                        <a class="ctc-wa-link" href="https://wa.me/573015531679" target="_blank" rel="noopener noreferrer"
+                           aria-label="Escribir por WhatsApp al +57 301 553 1679">
+                            <span class="ctc-wa-icono"><i class="fab fa-whatsapp" aria-hidden="true"></i></span>
+                            <span class="ctc-wa-texto">
+                                <span class="ctc-wa-numero">301 553 1679</span>
+                                <span class="ctc-wa-accion">Escribir por WhatsApp</span>
+                            </span>
+                            <i class="fas fa-arrow-right ctc-wa-flecha" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
+            </div>
 
-                <!-- Envíos y Pagos Section - En Cuadro Separado -->
-                <div class="max-w-4xl mx-auto mb-12">
-                    <div class="panel">
-                        <h3 class="panel-title">Env&iacute;os y pagos</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Envío a Domicilio -->
-                            <article class="dato-card">
-                                <span class="dato-icono"><i class="fas fa-truck-fast"></i></span>
-                                <h4 class="dato-titulo">Env&iacute;o a domicilio</h4>
-                                <p class="dato-destacado">
-                                    <i class="fas fa-globe-americas" aria-hidden="true"></i>
-                                    Hacemos env&iacute;o a todo Colombia
-                                </p>
-                                <ul class="dato-chips">
-                                    <li><i class="fas fa-bolt" aria-hidden="true"></i>R&aacute;pido</li>
-                                    <li><i class="fas fa-shield-halved" aria-hidden="true"></i>Seguro</li>
-                                    <li><i class="fas fa-box-open" aria-hidden="true"></i>Protegido</li>
+            <div class="ctc-cuerpo">
+                <div class="lnd-envoltura">
+                    <div class="ctc-cuerpo-grid">
+                        <div data-revelar>
+                            <span class="lnd-eyebrow">Elena Velas y Aromas</span>
+                            <p class="lnd-frase ctc-lema">
+                                Donde cada vela
+                                <span class="lnd-frase-suave">cuenta una historia.</span>
+                            </p>
+                            <p class="ctc-texto">Fabricamos velas decorativas y de consumo con las mejores fragancias.</p>
+                        </div>
+                        <ul class="lnd-puntos ctc-puntos">
+                            <li data-revelar>
+                                <h3>Env&iacute;os a toda Colombia</h3>
+                                <p>R&aacute;pido, seguro y bien protegido hasta tu puerta.</p>
+                            </li>
+                            <li data-revelar data-revelar-orden="1">
+                                <h3>Pago contra entrega</h3>
+                                <p>En Medell&iacute;n pagas cuando recibes tu pedido.</p>
+                            </li>
+                            <li data-revelar data-revelar-orden="2">
+                                <h3>Medios de pago</h3>
+                                <ul class="ctc-pagos">
+                                    <li><span class="ctc-pago-icono"><i class="fas fa-money-bill-wave" aria-hidden="true"></i></span> Efectivo</li>
+                                    <li><span class="ctc-pago-icono"><img src="assets/icons/nequi.png" alt="Nequi" width="22" height="22" loading="lazy" decoding="async"></span> Nequi</li>
+                                    <li><span class="ctc-pago-icono"><img src="assets/icons/bancolombia.png" alt="Bancolombia" width="22" height="22" loading="lazy" decoding="async"></span> Bancolombia</li>
                                 </ul>
-                            </article>
-
-                            <article class="dato-card">
-                                <span class="dato-icono"><i class="fas fa-wallet"></i></span>
-                                <h4 class="dato-titulo">M&eacute;todos de pago</h4>
-                                <p class="dato-destacado">
-                                    <i class="fas fa-location-dot" aria-hidden="true"></i>
-                                    Pagos contra entrega en Medell&iacute;n
-                                </p>
-                                <ul class="dato-pagos">
-                                    <li>
-                                        <span class="dato-pago-icono"><i class="fas fa-money-bill-wave"></i></span>
-                                        Efectivo
-                                    </li>
-                                    <li>
-                                        <span class="dato-pago-icono"><img src="assets/icons/nequi.png" alt="Nequi" width="22" height="22" loading="lazy" decoding="async"></span>
-                                        Nequi
-                                    </li>
-                                    <li>
-                                        <span class="dato-pago-icono"><img src="assets/icons/bancolombia.png" alt="Bancolombia" width="22" height="22" loading="lazy" decoding="async"></span>
-                                        Bancolombia
-                                    </li>
-                                </ul>
-                            </article>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
-                </div>
 
-                <!-- Lema de marca -->
-                <div class="max-w-3xl mx-auto mb-12">
-                    <div class="panel panel-accent">
-                        <div class="flex items-center justify-center gap-3 mb-4">
-                            <h3 class="panel-title">Elena Velas y Aromas</h3>
-                        </div>
-                        <p class="text-center text-gray-800 text-base md:text-lg leading-relaxed">
-                            Donde cada vela cuenta una historia<br>
-                            Empresa dedicada a fabricación de velas con las mejores fragancias, decorativas y de consumo
-                        </p>
+                    <div class="ctc-redes" data-revelar>
+                        <span class="lnd-eyebrow">S&iacute;guenos</span>
+                        <a class="ctc-red" href="https://www.instagram.com/velasyaromaselena" target="_blank" rel="noopener noreferrer">
+                            <span class="ctc-red-nombre"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</span>
+                            <span class="ctc-red-cuenta">@velasyaromaselena</span>
+                            <i class="fas fa-arrow-up-right-from-square ctc-red-flecha" aria-hidden="true"></i>
+                        </a>
+                        <a class="ctc-red" href="https://www.tiktok.com/@velas.elena" target="_blank" rel="noopener noreferrer">
+                            <span class="ctc-red-nombre"><i class="fab fa-tiktok" aria-hidden="true"></i> TikTok</span>
+                            <span class="ctc-red-cuenta">@velas.elena</span>
+                            <i class="fas fa-arrow-up-right-from-square ctc-red-flecha" aria-hidden="true"></i>
+                        </a>
+                        <a class="ctc-red" href="https://www.facebook.com/velasyaromascautiva" target="_blank" rel="noopener noreferrer">
+                            <span class="ctc-red-nombre"><i class="fab fa-facebook-f" aria-hidden="true"></i> Facebook</span>
+                            <span class="ctc-red-cuenta">Velas y Aromas</span>
+                            <i class="fas fa-arrow-up-right-from-square ctc-red-flecha" aria-hidden="true"></i>
+                        </a>
                     </div>
-                </div>
 
-                <!-- Contacto directo por WhatsApp -->
-                <div class="max-w-3xl mx-auto mb-12">
-                    <div class="panel wa-panel">
-                        <span class="wa-eyebrow"><i class="fab fa-whatsapp" aria-hidden="true"></i> Contacto directo</span>
-                        <h4 class="panel-title">Escr&iacute;benos ahora</h4>
-                        <p class="social-intro">Elige un n&uacute;mero y conversemos por WhatsApp.</p>
-                        <div class="wa-grid">
-                            <a class="wa-link" href="https://wa.me/573008220389" aria-label="Escribir por WhatsApp al +57 300 822 0389"
-                               target="_blank" rel="noopener noreferrer">
-                                <span class="wa-icono"><i class="fab fa-whatsapp"></i></span>
-                                <span class="wa-detalle">
-                                    <span class="wa-numero">+57 300 822 0389</span>
-                                    <span class="wa-accion">Escribir por WhatsApp</span>
-                                </span>
-                                <i class="fas fa-arrow-right wa-flecha" aria-hidden="true"></i>
-                            </a>
-                            <a class="wa-link" href="https://wa.me/573015531679" aria-label="Escribir por WhatsApp al +57 301 553 1679"
-                               target="_blank" rel="noopener noreferrer">
-                                <span class="wa-icono"><i class="fab fa-whatsapp"></i></span>
-                                <span class="wa-detalle">
-                                    <span class="wa-numero">+57 301 553 1679</span>
-                                    <span class="wa-accion">Escribir por WhatsApp</span>
-                                </span>
-                                <i class="fas fa-arrow-right wa-flecha" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Redes sociales -->
-                <div class="max-w-3xl mx-auto mb-12">
-                    <div class="panel social-panel">
-                        <span class="social-eyebrow">Nuestra comunidad</span>
-                        <h4 class="panel-title">S&iacute;guenos</h4>
-                        <p class="social-intro">Publicamos cada lote reci&eacute;n salido del taller.</p>
-                        <div class="social-grid">
-                            <a href="https://www.instagram.com/velasyaromaselena"
-                               target="_blank" rel="noopener noreferrer"
-                               class="social-link" data-red="instagram">
-                                <span class="social-icono"><i class="fab fa-instagram"></i></span>
-                                <span class="social-texto">
-                                    <span class="social-nombre">Instagram</span>
-                                    <span class="social-cuenta">@velasyaromaselena</span>
-                                </span>
-                                <i class="fas fa-arrow-up-right-from-square social-flecha" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://www.tiktok.com/@velas.elena"
-                               target="_blank" rel="noopener noreferrer"
-                               class="social-link" data-red="tiktok">
-                                <span class="social-icono"><i class="fab fa-tiktok"></i></span>
-                                <span class="social-texto">
-                                    <span class="social-nombre">TikTok</span>
-                                    <span class="social-cuenta">@velas.elena</span>
-                                </span>
-                                <i class="fas fa-arrow-up-right-from-square social-flecha" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://www.facebook.com/velasyaromascautiva/?_rdc=2&amp;_rdr#"
-                               target="_blank" rel="noopener noreferrer"
-                               class="social-link" data-red="facebook">
-                                <span class="social-icono"><i class="fab fa-facebook-f"></i></span>
-                                <span class="social-texto">
-                                    <span class="social-nombre">Facebook</span>
-                                    <span class="social-cuenta">Velas y Aromas</span>
-                                </span>
-                                <i class="fas fa-arrow-up-right-from-square social-flecha" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Info Block - En Cuadro Separado -->
-                <div class="max-w-4xl mx-auto mb-12">
-                    <div class="panel">
-                        <h4 class="panel-title">Estamos aqu&iacute; para ti</h4>
-                        <p class="text-center text-white/95 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-                            Contáctanos por cualquiera de nuestros canales. Estamos disponibles para resolver tus dudas, ayudarte con tu pedido y crear la experiencia perfecta para ti.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Footer Copyright -->
-                <div class="text-center mt-12 pt-8 border-t border-white/10">
-                    <p class="text-white/60 text-sm">
-                        &copy; 2024 Elena Velas y Aromas. Todos los derechos reservados.
+                    <p class="ctc-pie">
+                        &copy; <span id="ctc-anio">2026</span> Elena Velas y Aromas &middot; Hechas a mano en Medell&iacute;n
                     </p>
                 </div>
             </div>
@@ -926,7 +879,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261112-seo"></script>
+    <script src="app.js?v=20261112-moderna"></script>
     <script src="motion.js?v=20261010-dock" defer></script>
     <script>
       // Registrar el Service Worker.

@@ -4740,3 +4740,507 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   .lnd-foto img, .lnd-enlace i { transition: none; }
   .lnd-foto:hover img, .lnd-enlace:hover i { transform: none; }
 }
+
+/* ============================================================
+   48. Contacto tipo landing
+   ------------------------------------------------------------
+   Franja oscura con los dos WhatsApp, el lema con envíos y pagos
+   en crema (reutiliza .lnd-frase y .lnd-puntos del inicio) y las
+   redes como lista grande.
+   ============================================================ */
+
+.ctc { padding: 0; background: var(--bg); }
+
+.ctc-cabeza {
+  position: relative;
+  padding: clamp(80px, 12vw, 144px) 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 85% 30%, rgba(199, 155, 74, 0.18), rgba(30, 20, 16, 0) 70%),
+    #1E1410;
+  color: #F3EADA;
+  overflow: hidden;
+}
+.ctc-cabeza .lnd-eyebrow { color: var(--gold-veil); }
+
+.ctc-cabeza-grid {
+  display: grid;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.ctc-intro {
+  max-width: 28rem;
+  margin: var(--space-6) 0 0;
+  line-height: 1.7;
+  color: rgba(243, 234, 218, 0.8);
+}
+
+.ctc-wa { display: grid; gap: var(--space-3); }
+
+.ctc-wa-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 88px;
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid rgba(243, 234, 218, 0.18);
+  border-radius: var(--r-xl);
+  background: rgba(243, 234, 218, 0.05);
+  color: #FFFCF6;
+  transition: background-color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-press) var(--ease-out);
+}
+.ctc-wa-link:active { transform: scale(0.98); }
+
+.ctc-wa-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px; height: 52px;
+  border-radius: var(--r-full);
+  background: #25D366;
+  color: #FFFFFF;
+  font-size: 26px;
+}
+.ctc-wa-icono i { color: inherit !important; }
+
+.ctc-wa-texto { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.ctc-wa-numero {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.ctc-wa-accion { font-size: var(--text-small); color: rgba(243, 234, 218, 0.7); }
+.ctc-wa-flecha { font-size: 16px; color: var(--gold-veil); transition: transform var(--dur-base) var(--ease-out); }
+
+@media (hover: hover) and (pointer: fine) {
+  .ctc-wa-link:hover { background: rgba(243, 234, 218, 0.1); border-color: rgba(243, 234, 218, 0.4); }
+  .ctc-wa-link:hover .ctc-wa-flecha { transform: translateX(4px); }
+}
+
+.ctc-cuerpo { padding: clamp(80px, 12vw, 144px) 0 var(--space-12); }
+
+.ctc-cuerpo-grid { display: grid; gap: var(--space-12); }
+
+.ctc-lema { margin-bottom: var(--space-6); max-width: 14ch; }
+.ctc-texto { max-width: 26rem; margin: 0; line-height: 1.7; color: var(--ink-2); }
+
+.ctc-pagos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ctc-pagos li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-1) var(--space-4) var(--space-1) var(--space-1);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-full);
+  background: var(--surface);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--ink);
+}
+.ctc-pago-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: var(--r-full);
+  background: var(--gold-mist);
+  color: var(--gold-deep);
+}
+.ctc-pago-icono img { width: 22px; height: 22px; object-fit: contain; }
+
+/* Redes: filas grandes separadas por filetes. */
+.ctc-redes { margin-top: clamp(64px, 10vw, 120px); }
+.ctc-red {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-1) var(--space-4);
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+.ctc-red:last-child { border-bottom: 1px solid var(--line-strong); }
+.ctc-red-nombre {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+.ctc-red-nombre i { font-size: 0.6em; color: var(--gold-deep); }
+.ctc-red-cuenta { grid-column: 1; font-size: var(--text-small); color: var(--ink-3); }
+.ctc-red-flecha {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 18px;
+  color: var(--gold-deep);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .ctc-red:hover .ctc-red-nombre { color: var(--gold-deep); }
+  .ctc-red:hover .ctc-red-flecha { transform: translate(3px, -3px); }
+}
+
+.ctc-pie {
+  margin: var(--space-16) 0 0;
+  font-size: var(--text-micro);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+.ctc-wa-link:focus-visible,
+.ctc-red:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: var(--r-lg); }
+
+@media (min-width: 900px) {
+  .ctc-cabeza-grid { grid-template-columns: 7fr 5fr; gap: clamp(64px, 8vw, 120px); }
+  .ctc-cuerpo-grid { grid-template-columns: 5fr 6fr; gap: clamp(64px, 9vw, 140px); align-items: start; }
+  .ctc-red { grid-template-columns: 1fr auto auto; }
+  .ctc-red-cuenta { grid-column: 2; grid-row: 1; }
+  .ctc-red-flecha { grid-column: 3; grid-row: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctc-wa-link, .ctc-wa-flecha, .ctc-red-flecha { transition: none; }
+  .ctc-wa-link:active, .ctc-wa-link:hover .ctc-wa-flecha, .ctc-red:hover .ctc-red-flecha { transform: none; }
+}
+
+/* ============================================================
+   49. Antetítulos
+   ------------------------------------------------------------
+   Antes: mayúsculas diminutas con mucho espaciado, el antetítulo de
+   plantilla. Ahora: cursiva de la marca, en oro, con un filete corto
+   delante, como se rotula a mano.
+   ============================================================ */
+
+:is(.hero-eyebrow, .section-eyebrow, .lnd-eyebrow, .vid-eyebrow) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+:is(.hero-eyebrow, .section-eyebrow, .lnd-eyebrow, .vid-eyebrow)::before {
+  content: "";
+  flex: none;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.promo-eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.promo-novedades .promo-eyebrow { letter-spacing: 0; }
+
+/* ============================================================
+   50. Elige tu deseo tipo landing
+   ------------------------------------------------------------
+   A un lado se eligen las palabras; al otro, en una vitrina oscura,
+   se arman las velas con la palabra de abajo arriba, como las de
+   verdad. Sin bucles de animación: sólo la vela nueva sube al llegar.
+   ============================================================ */
+
+.dsw {
+  padding: clamp(80px, 12vw, 144px) 0;
+  background: var(--bg);
+}
+
+.dsw-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* En el celular la vitrina va justo debajo de las palabras, para ver
+   las velas mientras se eligen. */
+.dsw-texto { display: contents; }
+.dsw-texto > .lnd-eyebrow { order: 1; margin-bottom: 0; }
+.dsw-titulo { order: 2; }
+.dsw-intro { order: 3; }
+.dsw .deseos-lista { order: 4; }
+.dsw .deseo-cuenta { order: 5; }
+.dsw-vitrina { order: 6; }
+.dsw-acciones { order: 7; }
+.dsw .deseos-donde { order: 8; }
+.dsw-catalogos { order: 9; }
+
+.dsw-titulo { color: var(--ink); }
+.dsw-titulo em { color: var(--gold); }
+
+.dsw-intro {
+  max-width: 30rem;
+  margin: 0;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.dsw .deseos-lista {
+  justify-content: flex-start;
+  max-width: none;
+  margin: 0;
+}
+.dsw .deseo-cuenta { justify-content: flex-start; margin: 0; }
+
+.dsw-acciones .btn { width: 100%; }
+.dsw .deseos-donde { margin: 0; text-align: left; }
+.dsw-catalogos { justify-content: flex-start; margin: 0; }
+.dsw-catalogos .btn {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  background-image: none;
+  border: 1px solid var(--line-strong);
+  color: var(--ink) !important;
+  font-size: var(--text-small);
+  box-shadow: none;
+}
+.dsw-catalogos .btn::after { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .dsw-catalogos .btn:hover { background: var(--gold-mist); border-color: var(--gold); color: var(--gold-deep) !important; }
+}
+
+/* --- La vitrina --- */
+
+.dsw-vitrina {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 300px;
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  border-radius: var(--r-xl);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 70%, rgba(255, 196, 102, 0.22), rgba(30, 20, 16, 0) 70%),
+    linear-gradient(180deg, #2A1C15 0%, #1E1410 100%);
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+}
+
+.dsw-velas {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(4px, 1.2vw, 10px);
+  height: 82%;
+  padding: 0 var(--space-2);
+}
+
+.dsw-vela {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 46px;
+  min-width: 0;
+  height: var(--alto, 90%);
+}
+.dsw-muestra .dsw-vela { opacity: 0.4; }
+
+/* Llama y pabilo: estáticos, con su brillo. */
+.dsw-llama {
+  position: relative;
+  flex: none;
+  width: 9px;
+  height: 15px;
+  margin-bottom: 7px;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(circle at 50% 70%, #FFF6D6 0%, #FFD36B 45%, #F08A24 100%);
+  box-shadow: 0 0 12px 4px rgba(255, 190, 90, 0.45), 0 0 28px 10px rgba(255, 170, 60, 0.18);
+}
+.dsw-llama::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 1.5px;
+  height: 7px;
+  transform: translateX(-50%);
+  background: #3A2A20;
+}
+
+.dsw-cuerpo {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 7px 7px 4px 4px;
+  background: linear-gradient(90deg, #E9E1D2 0%, #FFFDF8 35%, #FBF6EC 65%, #DCD2C0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* El remate de color que chorrea, como en las velas de deseo. */
+.dsw-cuerpo::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 22%;
+  background: var(--tinta);
+  clip-path: polygon(0 0, 100% 0, 100% 62%, 86% 78%, 72% 60%, 58% 92%, 44% 70%, 30% 100%, 16% 72%, 0 86%);
+}
+.dsw-palabra {
+  position: relative;
+  margin-top: 18%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-body);
+  font-size: clamp(11px, 2.6vw, 16px);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--tinta);
+}
+
+.dsw-vela.nueva { animation: dsw-sube 420ms var(--ease-suave) both; }
+@keyframes dsw-sube {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* La base de madera. */
+.dsw-base {
+  height: 18px;
+  margin: 0 calc(var(--space-2) * -1);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #A5743F 0%, #7D532A 55%, #5C3B1C 100%);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255, 220, 170, 0.25);
+}
+
+.dsw-pista {
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-6);
+  right: var(--space-6);
+  margin: 0;
+  font-size: var(--text-small);
+  text-align: center;
+  color: rgba(243, 234, 218, 0.75);
+}
+
+.dsw-ejemplos { margin-top: clamp(64px, 9vw, 112px); }
+
+@media (min-width: 900px) {
+  .dsw-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 7vw, 112px);
+    align-items: center;
+  }
+  .dsw-texto { display: flex; flex-direction: column; gap: var(--space-6); }
+  .dsw-vitrina { height: 460px; padding: var(--space-12) var(--space-8) var(--space-8); }
+  .dsw-acciones .btn { width: auto; min-width: 280px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsw-vela.nueva { animation: none; }
+}
+
+/* ============================================================
+   51. Personalizadas tipo landing
+   ------------------------------------------------------------
+   Título grande con tres pasos numerados y los dos trabajos en
+   video escalonados al lado. El formulario no cambia, sólo su marco.
+   ============================================================ */
+
+.pz {
+  padding: clamp(80px, 12vw, 144px) 0;
+  background: var(--bg-2);
+}
+
+.pz-grid { display: grid; gap: var(--space-12); }
+
+.pz-titulo { color: var(--ink); }
+.pz-titulo em { color: var(--gold); }
+
+.pz-intro {
+  max-width: 32rem;
+  margin: var(--space-6) 0 0;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.pz-pasos {
+  margin: var(--space-8) 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+.pz-pasos li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--line-strong);
+}
+.pz-pasos li:last-child { border-bottom: 1px solid var(--line-strong); }
+.pz-num {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.6;
+}
+.pz-pasos h3 {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.6vw, 1.5rem);
+  font-weight: 600;
+  color: var(--ink);
+}
+.pz-pasos p { margin: 0; line-height: 1.6; color: var(--ink-2); }
+
+/* Los dos videos, el segundo más abajo. */
+#personalizadas .pz-reels.reel-rail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.pz-reels .reel:nth-child(2) { margin-top: var(--space-12); }
+
+.pz-form {
+  max-width: 48rem;
+  margin: clamp(64px, 9vw, 112px) auto 0;
+}
+.pz-form .panel {
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-3);
+}
+
+@media (min-width: 900px) {
+  .pz-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 7vw, 112px);
+    align-items: center;
+  }
+  #personalizadas .pz-reels.reel-rail { gap: var(--space-6); }
+  .pz-reels .reel:nth-child(2) { margin-top: var(--space-24); }
+}

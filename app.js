@@ -2182,7 +2182,7 @@ const videos = [
   { plataforma: "local", titulo: "Velas de la Virgen en colores", videoSrc: "assets/productos/Videos/velas-virgen-colores-web.mp4" },
   { plataforma: "local", titulo: "Velas degradé", videoSrc: "assets/productos/Videos/velas-degrade-web.mp4" },
   // Antes "Aromas y fragancias" (aro.mp4): era el mismo clip, en menos resolución.
-  { plataforma: "local", titulo: "En producción en el taller", videoSrc: "assets/productos/Videos/taller-produccion-web.mp4" },
+  { plataforma: "local", titulo: "En producción", videoSrc: "assets/productos/Videos/taller-produccion-web.mp4" },
   { plataforma: "local", titulo: "Nuestras velas", videoSrc: "assets/productos/Videos/velas-web.mp4" },
   { plataforma: "local", titulo: "Colección especial", videoSrc: "assets/productos/Videos/al-web.mp4" },
   { plataforma: "local", titulo: "Velas artesanales", videoSrc: "assets/productos/Videos/vel-web.mp4" },
@@ -4839,8 +4839,15 @@ function initDeseos() {
     <button type="button" class="deseo-chip" aria-pressed="false" data-deseo="${d}">${d}</button>
   `).join('');
 
+  // La vitrina: una vela por deseo. Sin elegir nada se ven tres de
+  // muestra, tenues, para que se entienda qué va a pasar.
   const palabra = document.getElementById('deseo-palabra');
   const pista = document.getElementById('deseo-pista');
+  const COLORES_VELA = ['#B3263A', '#7A3E9D', '#D9822B', '#2F7D5B', '#C2185B', '#1F6FA8', '#8A5A12', '#3B8F3B', '#D24E2A', '#5A4FB3'];
+  const velaHTML = (d, i, extra) =>
+    `<span class="dsw-vela${extra}" style="--tinta:${COLORES_VELA[i % COLORES_VELA.length]};--alto:${86 + (i * 37 % 5) * 3}%">` +
+    `<span class="dsw-llama" aria-hidden="true"></span><span class="dsw-cuerpo"><span class="dsw-palabra">${d}</span></span></span>`;
+  let ultimo = null;
   const cuenta = document.getElementById('deseo-cuenta');
   const textoPedir = document.getElementById('deseo-pedir-texto');
 
@@ -4854,10 +4861,12 @@ function initDeseos() {
     });
 
     const n = elegidos.length;
-    palabra.hidden = n === 0;
     pista.hidden = n > 0;
-    palabra.classList.toggle('varias', n > 1);
-    palabra.innerHTML = elegidos.map(d => `<span>${d}</span>`).join('');
+    palabra.classList.toggle('dsw-muestra', n === 0);
+    palabra.setAttribute('aria-label', n ? 'Tus velas: ' + elegidos.join(', ') : 'Ejemplo de velas con deseo');
+    palabra.innerHTML = n
+      ? elegidos.map((d, i) => velaHTML(d, i, d === ultimo ? ' nueva' : '')).join('')
+      : ['Amor', 'Salud', 'Paz'].map((d, i) => velaHTML(d, i, '')).join('');
     if (cuenta) {
       cuenta.hidden = n === 0;
       cuenta.querySelector('span').textContent = n === MAX_DESEOS
@@ -4875,11 +4884,12 @@ function initDeseos() {
     const deseo = chip.dataset.deseo;
     if (elegidos.includes(deseo)) {
       elegidos = elegidos.filter(d => d !== deseo);
+      ultimo = null;
     } else {
       elegidos.push(deseo);
+      ultimo = deseo;
     }
     pintarElegidos();
-    palabra.classList.remove('aparece'); void palabra.offsetWidth; palabra.classList.add('aparece');
   });
 
   const borrar = document.getElementById('deseo-borrar');
@@ -4887,6 +4897,8 @@ function initDeseos() {
     elegidos = [];
     pintarElegidos();
   });
+
+  pintarElegidos();
 
   const pedir = document.getElementById('deseo-pedir');
   if (pedir) pedir.addEventListener('click', () => {
@@ -5239,7 +5251,8 @@ function initHeroFondo() {
   if (reducido || red.saveData === true || /2g/.test(red.effectiveType || '')) return;
 
   const arrancar = () => {
-    video.src = video.dataset.src;
+    const ancho = video.dataset.srcAncho && window.matchMedia('(min-width: 900px)').matches;
+    video.src = ancho ? video.dataset.srcAncho : video.dataset.src;
     video.addEventListener('playing', () => video.classList.add('lista'), { once: true });
     // Si falla, la foto de debajo sigue ahí.
     video.addEventListener('error', () => video.remove(), { once: true });
@@ -5262,6 +5275,9 @@ function initHeroFondo() {
 // Bloques tipo landing del inicio: la galería de Navidad abre cada
 // producto; si la hoja lo cambió de id, lleva al catálogo de Navidad.
 function initLanding() {
+  const anio = document.getElementById('ctc-anio');
+  if (anio) anio.textContent = new Date().getFullYear();
+
   const galeria = document.getElementById('lnd-galeria');
   if (!galeria) return;
 
