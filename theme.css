@@ -68,8 +68,10 @@
   --space-24: 96px;
 
   /* --- Tipografía: las dos del logo --- */
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: Montserrat, system-ui, -apple-system, sans-serif;
+  /* Fraunces (títulos) y Figtree (texto). Antes Playfair + Montserrat,
+     la pareja de plantilla que se ve en todas partes. */
+  --font-display: Fraunces, Georgia, serif;
+  --font-body: Figtree, system-ui, -apple-system, sans-serif;
 
   --text-display: clamp(2.25rem, 7vw, 3.75rem);
   --text-h2:      clamp(1.75rem, 4.5vw, 2.5rem);
@@ -926,7 +928,8 @@ input:focus, textarea:focus, select:focus {
   align-items: stretch;
   justify-content: space-around;
   height: 64px;
-  padding: 0 var(--space-2);
+  /* Seis botones: el margen lateral se reduce para que quepan en 320 px. */
+  padding: 0 var(--space-1);
 }
 
 .dock-item,
@@ -934,7 +937,8 @@ input:focus, textarea:focus, select:focus {
 #bottom-dock a {
   position: relative;
   display: flex;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -961,6 +965,12 @@ input:focus, textarea:focus, select:focus {
   font-weight: 500;
   letter-spacing: 0.02em;
   color: inherit !important;
+}
+
+/* En 320 px "Deseos" y "Personaliza" se tocaban. */
+@media (max-width: 359px) {
+  .dock-item span,
+  #bottom-dock span:not(.cart-badge) { font-size: 9px; letter-spacing: 0; }
 }
 
 .dock-item:active i { transform: scale(0.9); }
@@ -1157,8 +1167,9 @@ input:focus, textarea:focus, select:focus {
    ============================================================ */
 
 .scroll-top {
-  right: var(--space-4);
-  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  right: calc(var(--space-4) + 6px + env(safe-area-inset-right, 0px));
+  /* Encima de la burbuja de WhatsApp (56px + 12px de aire). */
+  bottom: calc(148px + env(safe-area-inset-bottom, 0px));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1175,11 +1186,65 @@ input:focus, textarea:focus, select:focus {
 .scroll-top i { font-size: 15px; }
 .scroll-top:active { background: var(--surface-2) !important; }
 
-@media (min-width: 768px) { .scroll-top { right: var(--space-8); bottom: var(--space-8); } }
+@media (min-width: 768px) {
+  .scroll-top {
+    right: calc(var(--space-8) + 6px + env(safe-area-inset-right, 0px));
+    bottom: calc(var(--space-8) + 72px);
+  }
+}
 
 @media (hover: hover) and (pointer: fine) {
   .scroll-top:hover { border-color: var(--gold); color: var(--gold-deep) !important; }
 }
+
+/* --- Burbuja de WhatsApp ---
+   Sin animación en bucle: cualquier animación infinita mantiene al
+   celular trabajando aunque nadie toque la página. */
+
+.wa-burbuja {
+  position: fixed;
+  z-index: 40;
+  right: calc(var(--space-4) + env(safe-area-inset-right, 0px));
+  /* Encima del dock del celular (64px + barra de gestos del iPhone). */
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px; height: 56px;
+  border-radius: var(--r-full);
+  background: #25D366 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22), 0 2px 4px rgba(0, 0, 0, 0.12);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--dur-press) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.wa-burbuja i { font-size: 30px; line-height: 1; color: #FFFFFF !important; }
+.wa-burbuja:active { transform: scale(0.94); }
+.wa-burbuja:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+@media (min-width: 768px) {
+  .wa-burbuja {
+    right: calc(var(--space-8) + env(safe-area-inset-right, 0px));
+    bottom: var(--space-8);
+    width: 60px; height: 60px;
+  }
+  .wa-burbuja i { font-size: 32px; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .wa-burbuja:hover {
+    transform: scale(1.06);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26), 0 3px 6px rgba(0, 0, 0, 0.14);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-burbuja { transition: none; }
+  .wa-burbuja:hover, .wa-burbuja:active { transform: none; }
+}
+
+@media print { .wa-burbuja { display: none; } }
 
 /* ============================================================
    17. Movimiento — solo lo que comunica algo
@@ -4069,8 +4134,34 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   border-color: var(--gold-deep);
   color: var(--gold-ink);
 }
+.deseo-chip:disabled { opacity: 0.45; cursor: not-allowed; }
 @media (hover: hover) and (pointer: fine) {
-  .deseo-chip:hover:not(.active) { border-color: var(--gold); color: var(--gold-deep); background: var(--gold-mist); }
+  .deseo-chip:hover:not(.active):not(:disabled) { border-color: var(--gold); color: var(--gold-deep); background: var(--gold-mist); }
+}
+
+/* "3 de 10 deseos elegidos · Borrar" */
+.deseo-cuenta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: calc(var(--space-8) * -1 + var(--space-3)) 0 var(--space-4);
+  font-size: var(--text-small);
+  color: var(--ink-2);
+}
+.deseo-cuenta[hidden] { display: none; }
+.deseo-borrar {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--gold-deep);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 /* La palabra elegida, grande, como irá escrita en la vela. */
@@ -4090,6 +4181,22 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   font-weight: 700;
   line-height: 1.1;
   color: var(--gold-deep);
+}
+/* Varios deseos: más pequeños y separados por un punto dorado. */
+.deseo-palabra.varias {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 44rem;
+  margin: 0 auto;
+  column-gap: var(--space-3);
+  row-gap: var(--space-1);
+  font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+}
+.deseo-palabra.varias span:not(:last-child)::after {
+  content: "·";
+  margin-left: var(--space-3);
+  color: var(--gold-lite);
 }
 .deseo-palabra.aparece { animation: deseo-aparece var(--dur-lenta) var(--ease-suave) both; }
 @keyframes deseo-aparece {
@@ -4199,4 +4306,2396 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 @media (prefers-reduced-motion: reduce) {
   .deseo-palabra.aparece { animation: none; }
+}
+
+/* ============================================================
+   46. Hero tipo landing
+   ------------------------------------------------------------
+   El taller lleno de velas de fondo, oscurecido con el vino y el
+   tostado de la marca para que el texto crema se lea encima. La
+   foto pinta al instante; el video la cubre cuando ya está sonando.
+   ============================================================ */
+
+.hero.hero-landing {
+  min-height: calc(100svh - 64px);
+  padding: var(--space-16) var(--space-4) calc(var(--space-16) + var(--space-8));
+  background: #1E1410;
+  color: var(--gold-ink);
+}
+
+/* Las capas del hero anterior ya no van: el fondo es la foto. */
+.hero-landing::before { display: none; }
+
+.hero-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.hero-fondo-img,
+.hero-fondo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+.hero-fondo-video { opacity: 0; transition: opacity 900ms var(--ease-suave); }
+.hero-fondo-video.lista { opacity: 1; }
+
+/* Velo: más oscuro en el centro, donde va el texto, y abajo, donde la
+   página sigue en crema. */
+.hero-fondo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 48%, rgba(24, 14, 10, 0.72) 0%, rgba(24, 14, 10, 0.45) 70%, rgba(24, 14, 10, 0.35) 100%),
+    linear-gradient(180deg, rgba(88, 21, 32, 0.35) 0%, rgba(24, 14, 10, 0) 40%, rgba(24, 14, 10, 0.55) 100%);
+}
+
+.hero-landing .hero-inner { max-width: 46rem; }
+
+.hero-landing .hero-logo {
+  width: clamp(72px, 16vw, 96px);
+  filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.45));
+}
+
+.hero-landing .hero-eyebrow { color: var(--gold-veil); }
+
+.hero-landing .hero-title {
+  color: #FFFCF6;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero-landing .hero-subtitle {
+  margin-bottom: var(--space-8);
+  color: rgba(255, 252, 246, 0.86);
+}
+
+.hero-landing .btn-secondary {
+  background: rgba(255, 252, 246, 0.1);
+  color: #FFFCF6;
+  border-color: rgba(255, 252, 246, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero-landing .btn-secondary:hover {
+    background: rgba(255, 252, 246, 0.2);
+    border-color: #FFFCF6;
+    color: #FFFCF6;
+  }
+}
+
+.hero-landing .btn { min-width: 220px; }
+
+/* Lo que da confianza, en una línea debajo de los botones. */
+.hero-confianza {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-6);
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  list-style: none;
+  animation-delay: 460ms;
+}
+.hero-confianza li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: rgba(255, 252, 246, 0.9);
+}
+.hero-confianza i { color: var(--gold-lite); font-size: 13px; }
+
+/* "Mira el taller ↓" al pie del hero. */
+.hero-bajar {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-6);
+  z-index: 1;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: var(--space-1) var(--space-3);
+  transform: translateX(-50%);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 252, 246, 0.75);
+}
+.hero-bajar i { transform: rotate(90deg); font-size: 12px; }
+.hero-bajar:focus-visible { outline: 2px solid var(--gold-veil); outline-offset: 4px; border-radius: var(--r-sm); }
+@media (hover: hover) and (pointer: fine) {
+  .hero-bajar:hover { color: #FFFCF6; }
+}
+
+@media (max-width: 639px) {
+  .hero-landing .btn { min-width: 0; }
+  .hero-confianza { flex-direction: column; align-items: center; gap: var(--space-2); }
+}
+
+@media (min-width: 768px) {
+  .hero.hero-landing { min-height: calc(100svh - 72px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fondo-video { display: none; }
+}
+
+/* ============================================================
+   47. Bloques tipo landing del inicio
+   ------------------------------------------------------------
+   Sólo dos: "El taller" (frase grande, collage y tres puntos) y la
+   franja oscura de Navidad con su galería escalonada. El resto de
+   la página conserva su estilo.
+   ============================================================ */
+
+.lnd {
+  position: relative;
+  padding: clamp(80px, 12vw, 144px) 0;
+}
+
+.lnd-envoltura {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.lnd-eyebrow {
+  display: block;
+  margin-bottom: var(--space-6);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.lnd-enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--accion);
+}
+.lnd-enlace i { font-size: 12px; transition: transform var(--dur-base) var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .lnd-enlace:hover i { transform: translateX(4px); }
+}
+
+/* --- El taller --- */
+
+.lnd-taller { background: var(--bg); }
+
+.lnd-frase {
+  max-width: 22ch;
+  margin: 0 0 clamp(48px, 8vw, 96px);
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 6.4vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.lnd-frase-suave {
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.lnd-taller-grid {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.lnd-collage {
+  position: relative;
+  padding-right: 22%;
+  padding-bottom: 14%;
+}
+.lnd-collage img { display: block; object-fit: cover; box-shadow: var(--shadow-3); }
+.lnd-collage-a {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-xl);
+}
+/* La segunda foto en arco, como una vela vista de frente. */
+.lnd-collage-b {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  aspect-ratio: 3 / 5;
+  border-radius: 999px 999px var(--r-lg) var(--r-lg);
+  border: 6px solid var(--bg);
+}
+
+.lnd-puntos {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-self: center;
+}
+.lnd-puntos li {
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--line-strong);
+}
+.lnd-puntos li:last-child { border-bottom: 1px solid var(--line-strong); }
+.lnd-puntos h3 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--ink);
+}
+.lnd-puntos p {
+  max-width: 34rem;
+  margin: 0;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.lnd-puntos .lnd-enlace { margin-top: var(--space-2); }
+
+@media (min-width: 900px) {
+  .lnd-envoltura { padding: 0 var(--space-8); }
+  .lnd-taller-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: clamp(64px, 9vw, 140px);
+    align-items: center;
+  }
+}
+
+/* --- Franja oscura de Navidad --- */
+
+.lnd-oscuro {
+  background: #1E1410;
+  color: #F3EADA;
+  overflow: hidden;
+}
+
+.lnd-oscuro .lnd-eyebrow { color: var(--gold-veil); }
+
+.lnd-oscuro-cabeza {
+  display: grid;
+  gap: var(--space-6);
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.lnd-titulo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #FFFCF6;
+}
+.lnd-titulo em { color: var(--gold-veil); font-weight: 500; }
+
+.lnd-oscuro-lado p {
+  max-width: 26rem;
+  margin: 0;
+  line-height: 1.7;
+  color: rgba(243, 234, 218, 0.78);
+}
+
+.lnd-flechas { display: none; gap: var(--space-2); margin-top: var(--space-6); }
+.lnd-flecha {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid rgba(243, 234, 218, 0.35);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: #F3EADA;
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.lnd-flecha[data-dir="-1"] i { transform: rotate(180deg); }
+@media (hover: hover) and (pointer: fine) {
+  .lnd-flecha:hover { background: rgba(243, 234, 218, 0.1); border-color: #F3EADA; }
+}
+
+/* Galería: se desliza de lado, las fotos a distintas alturas. */
+.lnd-galeria {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding: 0 var(--space-4) var(--space-8);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--space-4);
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.lnd-galeria::-webkit-scrollbar { display: none; }
+
+.lnd-pieza {
+  flex: none;
+  width: min(68vw, 300px);
+  scroll-snap-align: start;
+}
+.lnd-pieza:nth-child(3n+2) { margin-top: 56px; }
+.lnd-pieza:nth-child(3n) { margin-top: 20px; width: min(74vw, 340px); }
+
+.lnd-foto {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.lnd-foto img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  transition: transform 500ms var(--ease-suave);
+}
+.lnd-pie {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+.lnd-pie strong {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #FFFCF6;
+}
+.lnd-pie span {
+  flex: none;
+  font-size: var(--text-micro);
+  color: rgba(243, 234, 218, 0.62);
+}
+
+.lnd-pieza-final { align-self: center; width: auto; margin-top: 0 !important; }
+.lnd-todo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 56px;
+  padding: 0 var(--space-8);
+  border: 1px solid rgba(243, 234, 218, 0.4);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: #FFFCF6;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lnd-foto:hover img { transform: scale(1.02); }
+  .lnd-foto:hover .lnd-pie span { color: var(--gold-veil); }
+  .lnd-todo:hover { background: rgba(243, 234, 218, 0.1); border-color: #FFFCF6; }
+}
+
+.lnd-foto:focus-visible,
+.lnd-todo:focus-visible,
+.lnd-flecha:focus-visible { outline: 2px solid var(--gold-veil); outline-offset: 4px; border-radius: var(--r-lg); }
+
+@media (min-width: 900px) {
+  .lnd-oscuro-cabeza {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: var(--space-16);
+  }
+  .lnd-flechas { display: flex; }
+  /* La galería arranca alineada con el texto y sale por la derecha. */
+  .lnd-galeria {
+    gap: var(--space-12);
+    padding-left: max(var(--space-8), calc((100vw - 76rem) / 2 + var(--space-8)));
+    scroll-padding-inline: max(var(--space-8), calc((100vw - 76rem) / 2 + var(--space-8)));
+  }
+  .lnd-pieza { width: 320px; }
+  .lnd-pieza:nth-child(3n+2) { margin-top: 96px; }
+  .lnd-pieza:nth-child(3n) { margin-top: 32px; width: 380px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lnd-foto img, .lnd-enlace i { transition: none; }
+  .lnd-foto:hover img, .lnd-enlace:hover i { transform: none; }
+}
+
+/* ============================================================
+   48. Contacto tipo landing
+   ------------------------------------------------------------
+   Franja oscura con los dos WhatsApp, el lema con envíos y pagos
+   en crema (reutiliza .lnd-frase y .lnd-puntos del inicio) y las
+   redes como lista grande.
+   ============================================================ */
+
+.ctc { padding: 0; background: var(--bg); }
+
+.ctc-cabeza {
+  position: relative;
+  padding: clamp(80px, 12vw, 144px) 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 85% 30%, rgba(199, 155, 74, 0.18), rgba(30, 20, 16, 0) 70%),
+    #1E1410;
+  color: #F3EADA;
+  overflow: hidden;
+}
+.ctc-cabeza .lnd-eyebrow { color: var(--gold-veil); }
+
+.ctc-cabeza-grid {
+  display: grid;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.ctc-intro {
+  max-width: 28rem;
+  margin: var(--space-6) 0 0;
+  line-height: 1.7;
+  color: rgba(243, 234, 218, 0.8);
+}
+
+.ctc-wa { display: grid; gap: var(--space-3); }
+
+.ctc-wa-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 88px;
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid rgba(243, 234, 218, 0.18);
+  border-radius: var(--r-xl);
+  background: rgba(243, 234, 218, 0.05);
+  color: #FFFCF6;
+  transition: background-color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-press) var(--ease-out);
+}
+.ctc-wa-link:active { transform: scale(0.98); }
+
+.ctc-wa-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px; height: 52px;
+  border-radius: var(--r-full);
+  background: #25D366;
+  color: #FFFFFF;
+  font-size: 26px;
+}
+.ctc-wa-icono i { color: inherit !important; }
+
+.ctc-wa-texto { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.ctc-wa-numero {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.ctc-wa-accion { font-size: var(--text-small); color: rgba(243, 234, 218, 0.7); }
+.ctc-wa-flecha { font-size: 16px; color: var(--gold-veil); transition: transform var(--dur-base) var(--ease-out); }
+
+@media (hover: hover) and (pointer: fine) {
+  .ctc-wa-link:hover { background: rgba(243, 234, 218, 0.1); border-color: rgba(243, 234, 218, 0.4); }
+  .ctc-wa-link:hover .ctc-wa-flecha { transform: translateX(4px); }
+}
+
+.ctc-cuerpo { padding: clamp(80px, 12vw, 144px) 0 var(--space-12); }
+
+.ctc-cuerpo-grid { display: grid; gap: var(--space-12); }
+
+.ctc-lema { margin-bottom: var(--space-6); max-width: 14ch; }
+.ctc-texto { max-width: 26rem; margin: 0; line-height: 1.7; color: var(--ink-2); }
+
+.ctc-pagos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ctc-pagos li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-1) var(--space-4) var(--space-1) var(--space-1);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-full);
+  background: var(--surface);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--ink);
+}
+.ctc-pago-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: var(--r-full);
+  background: var(--gold-mist);
+  color: var(--gold-deep);
+}
+.ctc-pago-icono img { width: 22px; height: 22px; object-fit: contain; }
+
+/* Redes: filas grandes separadas por filetes. */
+.ctc-redes { margin-top: clamp(64px, 10vw, 120px); }
+.ctc-red {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-1) var(--space-4);
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+.ctc-red:last-child { border-bottom: 1px solid var(--line-strong); }
+.ctc-red-nombre {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+.ctc-red-nombre i { font-size: 0.6em; color: var(--gold-deep); }
+.ctc-red-cuenta { grid-column: 1; font-size: var(--text-small); color: var(--ink-3); }
+.ctc-red-flecha {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 18px;
+  color: var(--gold-deep);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .ctc-red:hover .ctc-red-nombre { color: var(--gold-deep); }
+  .ctc-red:hover .ctc-red-flecha { transform: translate(3px, -3px); }
+}
+
+.ctc-pie {
+  margin: var(--space-16) 0 0;
+  font-size: var(--text-micro);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+.ctc-wa-link:focus-visible,
+.ctc-red:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: var(--r-lg); }
+
+@media (min-width: 900px) {
+  .ctc-cabeza-grid { grid-template-columns: 7fr 5fr; gap: clamp(64px, 8vw, 120px); }
+  .ctc-cuerpo-grid { grid-template-columns: 5fr 6fr; gap: clamp(64px, 9vw, 140px); align-items: start; }
+  .ctc-red { grid-template-columns: 1fr auto auto; }
+  .ctc-red-cuenta { grid-column: 2; grid-row: 1; }
+  .ctc-red-flecha { grid-column: 3; grid-row: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctc-wa-link, .ctc-wa-flecha, .ctc-red-flecha { transition: none; }
+  .ctc-wa-link:active, .ctc-wa-link:hover .ctc-wa-flecha, .ctc-red:hover .ctc-red-flecha { transform: none; }
+}
+
+/* ============================================================
+   49. Antetítulos
+   ------------------------------------------------------------
+   Antes: mayúsculas diminutas con mucho espaciado, el antetítulo de
+   plantilla. Ahora: cursiva de la marca, en oro, con un filete corto
+   delante, como se rotula a mano.
+   ============================================================ */
+
+:is(.hero-eyebrow, .section-eyebrow, .lnd-eyebrow, .vid-eyebrow) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+:is(.hero-eyebrow, .section-eyebrow, .lnd-eyebrow, .vid-eyebrow)::before {
+  content: "";
+  flex: none;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.promo-eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.promo-novedades .promo-eyebrow { letter-spacing: 0; }
+
+/* ============================================================
+   50. Elige tu deseo tipo landing
+   ------------------------------------------------------------
+   A un lado se eligen las palabras; al otro, en una vitrina oscura,
+   se arman las velas con la palabra de abajo arriba, como las de
+   verdad. Sin bucles de animación: sólo la vela nueva sube al llegar.
+   ============================================================ */
+
+.dsw {
+  padding: clamp(80px, 12vw, 144px) 0;
+  background: var(--bg);
+}
+
+.dsw-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* En el celular la vitrina va justo debajo de las palabras, para ver
+   las velas mientras se eligen. */
+.dsw-texto { display: contents; }
+.dsw-texto > .lnd-eyebrow { order: 1; margin-bottom: 0; }
+.dsw-titulo { order: 2; }
+.dsw-intro { order: 3; }
+.dsw .deseos-lista { order: 4; }
+.dsw .deseo-cuenta { order: 5; }
+.dsw-vitrina { order: 6; }
+.dsw-acciones { order: 7; }
+.dsw .deseos-donde { order: 8; }
+.dsw-catalogos { order: 9; }
+
+.dsw-titulo { color: var(--ink); }
+.dsw-titulo em { color: var(--gold); }
+
+.dsw-intro {
+  max-width: 30rem;
+  margin: 0;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.dsw .deseos-lista {
+  justify-content: flex-start;
+  max-width: none;
+  margin: 0;
+}
+.dsw .deseo-cuenta { justify-content: flex-start; margin: 0; }
+
+.dsw-acciones .btn { width: 100%; }
+.dsw .deseos-donde { margin: 0; text-align: left; }
+.dsw-catalogos { justify-content: flex-start; margin: 0; }
+.dsw-catalogos .btn {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  background-image: none;
+  border: 1px solid var(--line-strong);
+  color: var(--ink) !important;
+  font-size: var(--text-small);
+  box-shadow: none;
+}
+.dsw-catalogos .btn::after { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .dsw-catalogos .btn:hover { background: var(--gold-mist); border-color: var(--gold); color: var(--gold-deep) !important; }
+}
+
+/* --- La vitrina --- */
+
+.dsw-vitrina {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 300px;
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  border-radius: var(--r-xl);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 70%, rgba(255, 196, 102, 0.22), rgba(30, 20, 16, 0) 70%),
+    linear-gradient(180deg, #2A1C15 0%, #1E1410 100%);
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+}
+
+.dsw-velas {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(4px, 1.2vw, 10px);
+  height: 82%;
+  padding: 0 var(--space-2);
+}
+
+.dsw-vela {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 46px;
+  min-width: 0;
+  height: var(--alto, 90%);
+}
+.dsw-muestra .dsw-vela { opacity: 0.4; }
+
+/* Llama y pabilo: estáticos, con su brillo. */
+.dsw-llama {
+  position: relative;
+  flex: none;
+  width: 9px;
+  height: 15px;
+  margin-bottom: 7px;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(circle at 50% 70%, #FFF6D6 0%, #FFD36B 45%, #F08A24 100%);
+  box-shadow: 0 0 12px 4px rgba(255, 190, 90, 0.45), 0 0 28px 10px rgba(255, 170, 60, 0.18);
+}
+.dsw-llama::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 1.5px;
+  height: 7px;
+  transform: translateX(-50%);
+  background: #3A2A20;
+}
+
+.dsw-cuerpo {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 7px 7px 4px 4px;
+  background: linear-gradient(90deg, #E9E1D2 0%, #FFFDF8 35%, #FBF6EC 65%, #DCD2C0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* El remate de color que chorrea, como en las velas de deseo. */
+.dsw-cuerpo::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 22%;
+  background: var(--tinta);
+  clip-path: polygon(0 0, 100% 0, 100% 62%, 86% 78%, 72% 60%, 58% 92%, 44% 70%, 30% 100%, 16% 72%, 0 86%);
+}
+.dsw-palabra {
+  position: relative;
+  margin-top: 18%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-body);
+  font-size: clamp(11px, 2.6vw, 16px);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--tinta);
+}
+
+.dsw-vela.nueva { animation: dsw-sube 420ms var(--ease-suave) both; }
+@keyframes dsw-sube {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* La base de madera. */
+.dsw-base {
+  height: 18px;
+  margin: 0 calc(var(--space-2) * -1);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #A5743F 0%, #7D532A 55%, #5C3B1C 100%);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.6), inset 0 2px 0 rgba(255, 220, 170, 0.25);
+}
+
+.dsw-pista {
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-6);
+  right: var(--space-6);
+  margin: 0;
+  font-size: var(--text-small);
+  text-align: center;
+  color: rgba(243, 234, 218, 0.75);
+}
+
+.dsw-ejemplos { margin-top: clamp(64px, 9vw, 112px); }
+
+@media (min-width: 900px) {
+  .dsw-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 7vw, 112px);
+    align-items: center;
+  }
+  .dsw-texto { display: flex; flex-direction: column; gap: var(--space-6); }
+  .dsw-vitrina { height: 460px; padding: var(--space-12) var(--space-8) var(--space-8); }
+  .dsw-acciones .btn { width: auto; min-width: 280px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsw-vela.nueva { animation: none; }
+}
+
+/* ============================================================
+   51. Personalizadas tipo landing
+   ------------------------------------------------------------
+   Título grande con tres pasos numerados y los dos trabajos en
+   video escalonados al lado. El formulario no cambia, sólo su marco.
+   ============================================================ */
+
+.pz {
+  padding: 0 0 clamp(80px, 12vw, 144px);
+  background: var(--bg-2);
+}
+
+.pz-grid { display: grid; gap: var(--space-12); }
+
+.pz-titulo { color: var(--ink); }
+.pz-titulo em { color: var(--gold); }
+
+.pz-intro {
+  max-width: 32rem;
+  margin: var(--space-6) 0 0;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.pz-pasos {
+  margin: var(--space-8) 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+.pz-pasos li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--line-strong);
+}
+.pz-pasos li:last-child { border-bottom: 1px solid var(--line-strong); }
+.pz-num {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.6;
+}
+.pz-pasos h3 {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.6vw, 1.5rem);
+  font-weight: 600;
+  color: var(--ink);
+}
+.pz-pasos p { margin: 0; line-height: 1.6; color: var(--ink-2); }
+
+/* Los dos videos, el segundo más abajo. */
+#personalizadas .pz-reels.reel-rail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.pz-reels .reel:nth-child(2) { margin-top: var(--space-12); }
+
+.pz-form {
+  max-width: 48rem;
+  margin: clamp(64px, 9vw, 112px) auto 0;
+}
+.pz-form .panel {
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-3);
+}
+
+@media (min-width: 900px) {
+  .pz-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 7vw, 112px);
+    align-items: center;
+  }
+  #personalizadas .pz-reels.reel-rail { gap: var(--space-6); }
+  .pz-reels .reel:nth-child(2) { margin-top: var(--space-24); }
+}
+
+/* ============================================================
+   52. Tipografía
+   ------------------------------------------------------------
+   tailwind.css y styles.css traen Playfair y Montserrat escritos a
+   mano en .font-playfair / .font-montserrat: aquí se reconducen a las
+   variables. Fraunces con "SOFT" a media: remates redondeados, de
+   vela hecha a mano, sin perder la elegancia del título.
+   ============================================================ */
+
+.font-playfair { font-family: var(--font-display) !important; }
+.font-montserrat { font-family: var(--font-body) !important; }
+
+h1, h2, h3, h4,
+.font-playfair,
+:is(.hero-title, .section-title, .lnd-titulo, .lnd-frase, .vid-titulo, .panel-title,
+    .hero-eyebrow, .section-eyebrow, .lnd-eyebrow, .vid-eyebrow, .promo-eyebrow) {
+  font-variation-settings: "SOFT" 50;
+}
+
+/* ============================================================
+   53. Capas de video de fondo
+   ------------------------------------------------------------
+   Contacto, Navidad y Personalizadas llevan un video de fondo. La
+   foto pinta primero; el video se pide sólo cuando la sección se ve
+   (app.js: initCapasFondo) y se pausa al salir. En pantallas anchas
+   va la versión desenfocada: el original es vertical y se pixelaría.
+   ============================================================ */
+
+.capa-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.capa-fondo-img,
+.capa-fondo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.capa-fondo-video { opacity: 0; transition: opacity 900ms var(--ease-suave); }
+.capa-fondo-video.lista { opacity: 1; }
+.capa-fondo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--velo, linear-gradient(180deg, rgba(24, 14, 10, 0.72), rgba(24, 14, 10, 0.82)));
+}
+/* El contenido va encima de la capa. */
+.capa-fondo ~ * { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .capa-fondo-video { display: none; }
+}
+
+/* Contacto: portada a pantalla casi completa. */
+.ctc-cabeza {
+  display: flex;
+  align-items: center;
+  min-height: calc(92svh - 64px);
+  --velo:
+    radial-gradient(ellipse 80% 70% at 30% 50%, rgba(24, 14, 10, 0.82), rgba(24, 14, 10, 0.55) 75%),
+    linear-gradient(180deg, rgba(24, 14, 10, 0.35), rgba(24, 14, 10, 0.75));
+}
+.ctc-cabeza > .lnd-envoltura { width: 100%; }
+.ctc-wa-link {
+  background: rgba(30, 20, 16, 0.45);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Navidad: el video, muy oscurecido, sólo da vida al fondo. */
+.lnd-oscuro { --velo: linear-gradient(180deg, rgba(30, 20, 16, 0.86), rgba(30, 20, 16, 0.92)); }
+
+/* --- Personalizadas: cabecera oscura con video --- */
+
+.pz-cabeza {
+  position: relative;
+  padding: clamp(96px, 14vw, 168px) 0 clamp(80px, 12vw, 144px);
+  color: #F3EADA;
+  overflow: hidden;
+  --velo:
+    radial-gradient(ellipse 75% 70% at 25% 50%, rgba(24, 14, 10, 0.85), rgba(24, 14, 10, 0.6) 80%),
+    linear-gradient(180deg, rgba(24, 14, 10, 0.4), rgba(24, 14, 10, 0.8));
+}
+.pz-cabeza .pz-texto { max-width: 44rem; }
+.pz-cabeza .lnd-eyebrow { color: var(--gold-veil); }
+.pz-cabeza .pz-titulo { color: #FFFCF6; }
+.pz-cabeza .pz-titulo em { color: var(--gold-veil); }
+.pz-cabeza .pz-intro { color: rgba(243, 234, 218, 0.82); }
+.pz-cabeza .pz-pasos li { border-color: rgba(243, 234, 218, 0.22); }
+.pz-cabeza .pz-num { color: var(--gold-veil); }
+.pz-cabeza .pz-pasos h3 { color: #FFFCF6; }
+.pz-cabeza .pz-pasos p { color: rgba(243, 234, 218, 0.75); }
+.pz-cabeza .pz-ir { color: var(--gold-veil); }
+@media (min-width: 900px) {
+  .pz-cabeza .pz-pasos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+  .pz-cabeza .pz-pasos li,
+  .pz-cabeza .pz-pasos li:last-child { border-bottom: 0; grid-template-columns: 1fr; gap: var(--space-2); }
+}
+
+.pz-cuerpo {
+  display: grid;
+  gap: var(--space-12);
+  padding-top: clamp(64px, 9vw, 112px);
+}
+.pz-cuerpo .pz-form { margin: 0; max-width: none; }
+@media (min-width: 900px) {
+  .pz-cuerpo { grid-template-columns: 7fr 5fr; gap: clamp(48px, 6vw, 96px); align-items: start; }
+}
+
+/* --- Formulario: como una hoja de pedido, no como un formulario de
+   plantilla. Campos con sólo la línea de abajo, etiquetas numeradas
+   en la letra de los títulos y opciones como fichas. --- */
+
+.pz-form .panel {
+  padding: clamp(28px, 5vw, 56px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-2);
+}
+.pz-form .panel-title {
+  margin: 0 0 var(--space-8);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 600;
+  text-align: left;
+  color: var(--ink);
+}
+.pz-form form { counter-reset: campo; }
+.pz-form form > div { margin: 0 !important; padding: var(--space-6) 0 0; }
+.pz-form .form-label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+.pz-form form > div:not(:last-child) > .form-label::before {
+  counter-increment: campo;
+  content: "0" counter(campo);
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold);
+}
+.pz-form .form-input {
+  width: 100%;
+  padding: var(--space-3) 0;
+  border: 0;
+  border-bottom: 1.5px solid var(--line-strong);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  color: var(--ink);
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+.pz-form textarea.form-input { resize: vertical; }
+.pz-form .form-input::placeholder { color: var(--ink-3); opacity: 0.7; }
+.pz-form .form-input:focus {
+  outline: none;
+  border-bottom-color: var(--gold-deep);
+  box-shadow: 0 1.5px 0 0 var(--gold-deep);
+}
+.pz-form .choice-btn {
+  flex: 1;
+  min-height: 48px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.pz-form .choice-btn[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--gold-ink);
+}
+.pz-form .btn-whatsapp { min-height: 56px; font-size: 1.0625rem; }
+
+/* Los dos trabajos al lado del formulario. */
+#personalizadas .pz-cuerpo .pz-reels.reel-rail { max-width: 460px; }
+
+/* --- Velas de la vitrina más reales ---
+   Cera con volumen (luz a la izquierda, sombra a la derecha), remate de
+   color con brillo, llama con su núcleo azul y halo en la pared, pabilo
+   quemado, sombra sobre la madera y madera con vetas. Todo estático. */
+
+.dsw-vitrina {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 55%, rgba(255, 186, 96, 0.20), rgba(30, 20, 16, 0) 70%),
+    radial-gradient(ellipse 120% 80% at 50% 100%, #2B1C14 0%, #1A110D 70%);
+}
+
+.dsw-vela::before {
+  /* El halo de la llama sobre la pared. */
+  content: "";
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 190, 100, 0.22) 0%, rgba(255, 160, 60, 0.08) 40%, rgba(255, 160, 60, 0) 70%);
+  pointer-events: none;
+}
+.dsw-vela::after {
+  /* Sombra de la vela sobre la madera. */
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 130%;
+  height: 10px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 70%);
+  z-index: -1;
+}
+.dsw-muestra .dsw-vela::before { opacity: 0.5; }
+
+.dsw-llama {
+  width: 11px;
+  height: 22px;
+  margin-bottom: 6px;
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  background:
+    radial-gradient(ellipse 40% 30% at 50% 82%, rgba(90, 140, 255, 0.85) 0%, rgba(90, 140, 255, 0) 100%),
+    radial-gradient(ellipse 55% 70% at 50% 68%, #FFFDF2 0%, #FFE9A8 30%, #FFC24D 58%, rgba(240, 120, 30, 0.85) 82%, rgba(240, 120, 30, 0) 100%);
+  box-shadow:
+    0 0 10px 3px rgba(255, 196, 100, 0.55),
+    0 0 26px 10px rgba(255, 160, 60, 0.22);
+  filter: blur(0.2px);
+}
+.dsw-llama::after {
+  width: 2px;
+  height: 7px;
+  bottom: -6px;
+  border-radius: 1px;
+  background: linear-gradient(180deg, #1A100A, #4A3426);
+  transform: translateX(-50%) rotate(-6deg);
+}
+
+.dsw-cuerpo {
+  border-radius: 9px 9px 5px 5px / 6px 6px 4px 4px;
+  background:
+    radial-gradient(ellipse 90% 18% at 50% 2%, rgba(255, 214, 150, 0.45), rgba(255, 214, 150, 0) 100%),
+    linear-gradient(90deg,
+      #CFC4AF 0%, #EDE5D5 12%, #FFFDF7 30%, #FBF6EA 48%, #F1E9DA 66%, #DCD0BA 86%, #B9AC95 100%);
+  box-shadow: inset 0 -12px 18px -12px rgba(80, 60, 30, 0.35);
+}
+.dsw-cuerpo::before {
+  height: 24%;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--tinta) 70%, #000) 0%,
+      var(--tinta) 22%,
+      color-mix(in srgb, var(--tinta) 65%, #fff) 38%,
+      var(--tinta) 55%,
+      color-mix(in srgb, var(--tinta) 75%, #000) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 58%, 92% 64%, 86% 92%, 79% 66%, 68% 60%, 60% 100%, 52% 70%, 40% 62%, 31% 88%, 24% 64%, 12% 60%, 6% 80%, 0 70%);
+}
+.dsw-palabra {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55), 0 -0.5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.dsw-base {
+  height: 22px;
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(60, 35, 15, 0) 0px, rgba(60, 35, 15, 0) 18px,
+      rgba(60, 35, 15, 0.18) 19px, rgba(60, 35, 15, 0) 22px,
+      rgba(255, 220, 170, 0.08) 34px, rgba(60, 35, 15, 0) 40px),
+    linear-gradient(180deg, #B07D46 0%, #8C5F32 40%, #6A4422 75%, #4E3118 100%);
+  box-shadow:
+    0 14px 26px -10px rgba(0, 0, 0, 0.7),
+    inset 0 2px 0 rgba(255, 220, 170, 0.35),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.dsw-velas { position: relative; z-index: 1; }
+
+/* ============================================================
+   54. Movimiento con el scroll
+   ------------------------------------------------------------
+   1) La cinta de fotos: dos filas que se deslizan solas en sentidos
+      contrarios. Sólo mueve transform (lo hace la tarjeta gráfica) y
+      app.js la pausa cuando no se ve.
+   2) Profundidad: las fotos avanzan a distinta velocidad al bajar.
+      Va atado al scroll con animation-timeline, sin JavaScript; donde
+      el navegador no lo soporta, simplemente no se mueven.
+   ============================================================ */
+
+.cinta {
+  display: grid;
+  gap: var(--space-4);
+  padding: clamp(40px, 6vw, 72px) 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+.cinta-fila {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.cinta-pista {
+  display: flex;
+  width: max-content;
+  animation: cinta-corre 70s linear infinite;
+}
+.cinta-copia { display: flex; }
+.cinta-inversa .cinta-pista { animation-direction: reverse; animation-duration: 80s; }
+.cinta.pausada .cinta-pista { animation-play-state: paused; }
+.cinta img {
+  flex: none;
+  width: 150px;
+  height: 188px;
+  margin-right: var(--space-4);
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+}
+@keyframes cinta-corre { to { transform: translateX(-50%); } }
+@media (min-width: 900px) {
+  .cinta img { width: 210px; height: 262px; margin-right: var(--space-6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinta-pista { animation: none; }
+  .cinta-fila { overflow-x: auto; }
+  .cinta-copia { display: none; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* La portada se aleja al bajar. */
+    .hero-landing .hero-inner {
+      animation: hero-se-va linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 70vh;
+    }
+    .hero-landing .hero-fondo-img,
+    .hero-landing .hero-fondo-video {
+      animation: fondo-se-acerca linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+
+    /* Collage del inicio y fotos de los videos: dos velocidades. */
+    .lnd-collage-a, .vid-foto-a {
+      animation: sube-lento linear both;
+      animation-timeline: view();
+    }
+    .lnd-collage-b, .vid-foto-b {
+      animation: sube-rapido linear both;
+      animation-timeline: view();
+    }
+
+    /* Galería de Navidad y trabajos personalizados: entran con zoom
+       y las piezas alternas flotan a otra velocidad. */
+    .lnd-foto img, .pz-reels .reel, .dsw-vitrina {
+      animation: entra-zoom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+    .lnd-pieza:nth-child(even) {
+      animation: sube-lento linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+@keyframes hero-se-va { to { opacity: 0.15; translate: 0 -60px; scale: 0.96; } }
+@keyframes fondo-se-acerca { to { scale: 1.12; } }
+@keyframes sube-lento { from { translate: 0 40px; } to { translate: 0 -40px; } }
+@keyframes sube-rapido { from { translate: 0 110px; } to { translate: 0 -110px; } }
+@keyframes entra-zoom { from { scale: 0.9; opacity: 0.4; } to { scale: 1; opacity: 1; } }
+
+/* En el celular ya están la barra de abajo (con Inicio) y la burbuja de
+   WhatsApp: la flecha de volver arriba sobraba y saturaba la pantalla. */
+@media (max-width: 767px) {
+  .scroll-top { display: none !important; }
+}
+
+/* --- Celular más despejado --- */
+@media (max-width: 767px) {
+  /* El logo ya está en la cabecera: en la portada sobraba. */
+  .hero-landing .hero-logo { display: none; }
+  .hero.hero-landing { padding-top: var(--space-12); padding-bottom: calc(var(--space-16) + var(--space-4)); }
+  .hero-landing .hero-title { font-size: clamp(2.25rem, 10vw, 2.75rem); margin-bottom: var(--space-4); }
+  .hero-landing .hero-subtitle { font-size: 0.9375rem; line-height: 1.6; margin-bottom: var(--space-6); }
+  .hero-landing .hero-actions .btn { min-height: 50px; font-size: 0.9375rem; }
+  .hero-confianza { flex-direction: row; gap: var(--space-2) var(--space-4); margin-top: var(--space-6); }
+  .hero-confianza li { font-size: 0.8125rem; }
+}
+
+/* En Contacto ya están los dos WhatsApp grandes: la burbuja estorbaba. */
+body.sin-burbuja .wa-burbuja { opacity: 0; pointer-events: none; transform: scale(0.8); }
+.wa-burbuja { transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }
+
+/* ============================================================
+   55. Pulido final
+   ------------------------------------------------------------
+   Fuera los adornos de plantilla (destellos junto a los títulos,
+   aros flotando en el fondo, círculo que sigue al mouse) y el botón
+   de cada producto pasa a ser una ficha discreta: con 30 tarjetas,
+   30 botones vino a todo el ancho pesaban más que las fotos.
+   ============================================================ */
+
+.titulo-destellos,
+.cursor-elena { display: none !important; }
+
+.section:not(.hero)::after { display: none; }
+.section:not(.hero)::before { animation: none; }
+
+.producto-body .btn-primary {
+  align-self: flex-start;
+  width: auto;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-6);
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--line-strong);
+  color: var(--ink) !important;
+  font-size: var(--text-small);
+  font-weight: 600;
+  box-shadow: none;
+}
+.producto-body .btn-primary::after { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .producto-body .btn-primary:hover {
+    background: var(--ink) !important;
+    border-color: var(--ink);
+    color: var(--gold-ink) !important;
+  }
+}
+.producto-body h3 { font-weight: 600; letter-spacing: -0.005em; }
+
+/* ============================================================
+   56. Letra del sistema
+   ------------------------------------------------------------
+   Una sola familia sans para todo, la del propio teléfono: limpia,
+   sin aire de plantilla y sin descargar fuentes. Los títulos se
+   distinguen por peso y tamaño; lo que iba en cursiva queda recto y
+   en dorado.
+   ============================================================ */
+
+:root {
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+h1, h2, h3, h4,
+:is(.hero-title, .section-title, .lnd-titulo, .lnd-frase, .vid-titulo, .panel-title,
+    .cuenta-titulo, .promo-titulo, .dsw-titulo, .pz-titulo) {
+  font-variation-settings: normal;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+:is(.hero-title, .lnd-titulo, .lnd-frase, .vid-titulo) { line-height: 1.05; }
+
+:is(.lnd-titulo, .vid-titulo, .lnd-frase, .ctc-lema) em,
+.lnd-frase-suave {
+  font-style: normal;
+  font-weight: 700;
+}
+
+:is(.hero-eyebrow, .section-eyebrow, .lnd-eyebrow, .vid-eyebrow, .promo-eyebrow) {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0;
+  font-variation-settings: normal;
+}
+
+.pz-num, .ctc-wa-numero, .ctc-red-nombre, .lnd-pie strong, .pz-pasos h3,
+.lnd-puntos h3, .producto-body h3 {
+  font-style: normal;
+  font-variation-settings: normal;
+  letter-spacing: -0.015em;
+}
+.pz-num { font-weight: 700; }
+
+/* ============================================================
+   57. Personalizadas: videos grandes y formulario sencillo
+   ============================================================ */
+
+.pz-cuerpo { align-items: start; }
+
+#personalizadas .pz-cuerpo .pz-reels.reel-rail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+#personalizadas .pz-reels .reel,
+#personalizadas .pz-reels .reel:nth-child(2) {
+  margin-top: 0;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-2);
+}
+
+@media (min-width: 900px) {
+  .pz-cuerpo { grid-template-columns: 1fr 1fr; gap: clamp(32px, 4vw, 64px); }
+  #personalizadas .pz-cuerpo .pz-reels.reel-rail { gap: var(--space-6); position: sticky; top: 100px; }
+}
+
+#form-personalizada { scroll-margin-top: 96px; }
+.pz-form { scroll-margin-top: 96px; }
+
+.pz-form .panel {
+  padding: clamp(24px, 4vw, 44px);
+  border: 0;
+  box-shadow: var(--shadow-2);
+}
+.pz-form .panel-title {
+  margin-bottom: var(--space-2);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+}
+.pz-form form > div { padding-top: var(--space-6); }
+.pz-form form > div:not(:last-child) > .form-label::before { content: none; }
+.pz-form .form-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.pz-form .form-input,
+.pz-form textarea.form-input {
+  padding: 14px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  background: var(--bg-2);
+  font-size: 1rem;
+  transition: border-color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.pz-form .form-input:focus {
+  border-color: var(--gold);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(168, 129, 60, 0.15);
+}
+.pz-form .choice-btn {
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  background: var(--bg-2);
+  color: var(--ink);
+}
+.pz-form .choice-btn i { display: none; }
+.pz-form .btn-whatsapp { border-radius: var(--r-md); }
+
+/* ============================================================
+   58. Fondos más visibles, antetítulos sin filete, contacto vivo
+   ============================================================ */
+
+/* Antetítulos: sin la rayita delante. */
+:is(.hero-eyebrow, .section-eyebrow, .lnd-eyebrow, .vid-eyebrow)::before { content: none; }
+
+/* Velos más claros: el video se ve, y sólo se oscurece donde va el texto. */
+.hero-fondo::after {
+  background:
+    linear-gradient(180deg, rgba(24, 14, 10, 0.55) 0%, rgba(24, 14, 10, 0.4) 45%, rgba(24, 14, 10, 0.6) 100%);
+}
+.ctc-cabeza {
+  --velo:
+    linear-gradient(90deg, rgba(24, 14, 10, 0.78) 0%, rgba(24, 14, 10, 0.5) 50%, rgba(24, 14, 10, 0.35) 100%);
+}
+.lnd-oscuro {
+  --velo: linear-gradient(180deg, rgba(30, 20, 16, 0.72) 0%, rgba(30, 20, 16, 0.6) 50%, rgba(30, 20, 16, 0.78) 100%);
+}
+.pz-cabeza {
+  --velo:
+    linear-gradient(90deg, rgba(24, 14, 10, 0.8) 0%, rgba(24, 14, 10, 0.55) 55%, rgba(24, 14, 10, 0.3) 100%);
+}
+@media (max-width: 899px) {
+  .ctc-cabeza, .pz-cabeza {
+    --velo: linear-gradient(180deg, rgba(24, 14, 10, 0.55) 0%, rgba(24, 14, 10, 0.72) 100%);
+  }
+}
+
+/* Contacto: dos fotos bajo el lema. */
+.ctc-fotos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  max-width: 26rem;
+  margin-top: var(--space-8);
+}
+.ctc-fotos img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-2);
+}
+.ctc-fotos img:nth-child(2) { margin-top: var(--space-12); }
+
+/* Redes: tarjetas oscuras en vez de filas de texto. */
+.ctc-redes {
+  display: grid;
+  gap: var(--space-3);
+}
+.ctc-redes > .lnd-eyebrow { margin-bottom: var(--space-2); }
+.ctc-red,
+.ctc-red:last-child {
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border: 0;
+  border-radius: var(--r-xl);
+  background: #1E1410;
+  color: #FFFCF6;
+  transition: transform var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.ctc-red-nombre { grid-column: 1 / 3; font-size: clamp(1.375rem, 3vw, 1.75rem); color: #FFFCF6; }
+.ctc-red-nombre i {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: var(--r-full);
+  background: rgba(243, 234, 218, 0.1); color: var(--gold-veil); font-size: 18px;
+}
+.ctc-red-cuenta { grid-column: 1 / 3; grid-row: 2; padding-left: 56px; color: rgba(243, 234, 218, 0.65); }
+.ctc-red-flecha { grid-column: 3; grid-row: 1 / span 2; color: var(--gold-veil); }
+@media (hover: hover) and (pointer: fine) {
+  .ctc-red:hover { transform: translateY(-3px); background: #2A1C15; }
+  .ctc-red:hover .ctc-red-nombre { color: #FFFCF6; }
+}
+@media (min-width: 900px) {
+  .ctc-redes { grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  .ctc-redes > .lnd-eyebrow { grid-column: 1 / -1; }
+  .ctc-red, .ctc-red:last-child { grid-template-columns: auto 1fr auto; }
+  .ctc-red-cuenta { grid-column: 1 / 3; grid-row: 2; }
+  .ctc-red-flecha { grid-column: 3; grid-row: 1; }
+}
+
+.cinta-contacto { padding-top: clamp(56px, 8vw, 96px); padding-bottom: 0; }
+
+/* Elige tu deseo: ejemplos grandes, como un catálogo corto. */
+.dsw-ejemplos-cabeza {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  margin-bottom: var(--space-6);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--line-strong);
+}
+.dsw-ejemplos-titulo {
+  margin: 0;
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.dsw-ejemplos-texto { margin: 0; font-size: var(--text-small); color: var(--ink-3); }
+
+.dsw .deseos-velas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  max-width: none;
+  margin: 0;
+}
+.dsw .deseo-vela { display: block !important; text-align: left; }
+.dsw .deseo-vela-foto {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-1);
+}
+.dsw .deseo-vela-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease-suave); }
+.dsw .deseo-vela-nombre {
+  display: block;
+  margin-top: var(--space-3);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-align: left;
+  color: var(--ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .dsw .deseo-vela:hover .deseo-vela-foto img { transform: scale(1.04); }
+}
+@media (min-width: 900px) {
+  .dsw .deseos-velas { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-6); }
+}
+
+/* ============================================================
+   59. Personalizadas: una sola tarjeta
+   ------------------------------------------------------------
+   Antes: dos videos sueltos con un hueco debajo y un formulario en
+   caja blanca aparte. Ahora una tarjeta partida: lado oscuro con los
+   trabajos y las ocasiones, lado claro con el formulario.
+   ============================================================ */
+
+.pz-cuerpo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 0;
+  margin-top: clamp(48px, 7vw, 88px);
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 30px 70px -30px rgba(60, 40, 20, 0.35);
+}
+
+.pz-lado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: clamp(28px, 5vw, 56px);
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(199, 155, 74, 0.22), rgba(30, 20, 16, 0) 70%),
+    #1E1410;
+  color: #F3EADA;
+}
+.pz-lado-eyebrow {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--gold-veil);
+}
+.pz-lado-titulo {
+  margin: 0;
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #FFFCF6;
+}
+
+#personalizadas .pz-lado .pz-reels.reel-rail {
+  position: static;
+  gap: var(--space-4);
+}
+#personalizadas .pz-lado .reel { box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.7); }
+
+.pz-ocasiones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pz-ocasiones li {
+  padding: 6px 14px;
+  border: 1px solid rgba(243, 234, 218, 0.22);
+  border-radius: var(--r-full);
+  font-size: 0.8125rem;
+  color: rgba(243, 234, 218, 0.85);
+}
+
+/* El formulario ya no es otra caja: es la mitad clara de la tarjeta. */
+.pz-cuerpo .pz-form .panel {
+  height: 100%;
+  margin: 0;
+  padding: clamp(28px, 5vw, 56px);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--surface) !important;
+}
+.pz-cuerpo .pz-form .panel-title {
+  margin-bottom: var(--space-1);
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  letter-spacing: -0.025em;
+}
+.pz-form .form-input,
+.pz-form textarea.form-input {
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  background: #F4EFE6 !important;
+  padding: 15px 18px;
+}
+.pz-form .form-input:hover { background: #EFE8DC !important; }
+.pz-form .form-input:focus {
+  border-color: var(--gold) !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 0 0 4px rgba(168, 129, 60, 0.14);
+}
+.pz-form .form-label { font-size: 0.875rem; color: var(--ink-2); }
+.pz-form .choice-btn {
+  min-height: 50px;
+  border: 1px solid transparent !important;
+  border-radius: 14px !important;
+  background: #F4EFE6 !important;
+  color: var(--ink) !important;
+  font-weight: 600;
+}
+.pz-form .choice-btn[aria-pressed="true"] {
+  background: var(--ink) !important;
+  color: var(--gold-ink) !important;
+}
+.pz-form .btn-whatsapp { min-height: 58px; border-radius: 14px; margin-top: var(--space-2); }
+
+@media (min-width: 900px) {
+  .pz-cuerpo { grid-template-columns: 1fr 1fr; align-items: stretch; }
+}
+
+/* Personalizadas en vino: el color de los botones de compra, en vez del
+   café oscuro que ya llevan Contacto y Navidad. */
+.pz-cabeza {
+  --velo:
+    linear-gradient(90deg, rgba(58, 12, 22, 0.86) 0%, rgba(70, 16, 28, 0.62) 55%, rgba(70, 16, 28, 0.4) 100%);
+}
+@media (max-width: 899px) {
+  .pz-cabeza { --velo: linear-gradient(180deg, rgba(70, 16, 28, 0.62) 0%, rgba(50, 10, 18, 0.82) 100%); }
+}
+.pz-cabeza .pz-pasos li { border-color: rgba(255, 220, 200, 0.2); }
+.pz-lado {
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 0%, rgba(217, 160, 90, 0.28), rgba(110, 27, 39, 0) 70%),
+    linear-gradient(160deg, #7A1F2E 0%, #5A1420 55%, #3E0D16 100%);
+}
+.pz-ocasiones li { border-color: rgba(255, 225, 205, 0.28); }
+
+/* La cinta del contacto ahora va al final, antes del pie. */
+.cinta-contacto { padding: var(--space-12) 0 var(--space-4); }
+.ctc-cuerpo { padding-bottom: 0; }
+.ctc-pie { margin-top: var(--space-8); padding-bottom: var(--space-8); }
+
+#personalizadas .pz-form input.form-input,
+#personalizadas .pz-form textarea.form-input {
+  border: 1px solid transparent !important;
+  background: #F4EFE6 !important;
+  border-radius: 14px !important;
+}
+#personalizadas .pz-form input.form-input:focus,
+#personalizadas .pz-form textarea.form-input:focus {
+  border-color: var(--gold) !important;
+  background: #FFFFFF !important;
+}
+@media (max-width: 899px) {
+  .pz-cuerpo { margin-left: var(--space-4); margin-right: var(--space-4); border-radius: 22px; }
+}
+
+/* ============================================================
+   60. Novedades y Promociones
+   ============================================================ */
+
+/* Novedades: la cuenta atrás queda en una franja vino bajo los videos. */
+.novedades .cuenta-atras {
+  padding: clamp(64px, 9vw, 112px) 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 85% 20%, rgba(217, 160, 90, 0.25), rgba(110, 27, 39, 0) 70%),
+    linear-gradient(160deg, #7A1F2E 0%, #5A1420 55%, #3E0D16 100%);
+}
+.novedades .cuenta-atras::before, .novedades .cuenta-atras::after { display: none; }
+.novedades .cuenta-fecha { color: var(--gold-veil); font-weight: 600; }
+.novedades .cuenta-titulo { color: #FFFCF6; font-size: clamp(2rem, 4.6vw, 3.25rem); }
+.novedades .cuenta-titulo :is(em, strong, span) { color: var(--gold-veil); }
+.novedades .cuenta-texto { color: rgba(255, 240, 230, 0.82); }
+.novedades .cuenta-boton {
+  background: #FFFCF6 !important;
+  background-image: none !important;
+  color: #5A1420 !important;
+}
+.novedades .cuenta-boton::after { display: none; }
+.novedades .cuenta-fotos { border-radius: var(--r-xl); box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.6); }
+
+/* Promociones: tarjeta partida, foto grande a la izquierda. */
+.promo-carrusel {
+  border: 0;
+  border-radius: 28px;
+  box-shadow: 0 30px 70px -30px rgba(60, 40, 20, 0.35);
+}
+.promo-carrusel::before { display: none; }
+.promo-slide,
+.promo-slide:is(*) { padding: 0 !important; align-items: stretch; }
+.promo-cuerpo {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "icon" "copy" "action";
+  gap: 0;
+  width: 100%;
+  max-width: none;
+}
+.promo-fotos {
+  width: 100%;
+  height: 240px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.promo-icono {
+  width: 100%;
+  height: 240px;
+  border: 0;
+  border-radius: 0;
+  font-size: 56px;
+  background:
+    radial-gradient(ellipse 70% 70% at 50% 40%, rgba(217, 160, 90, 0.35), rgba(110, 27, 39, 0) 70%),
+    linear-gradient(160deg, #7A1F2E, #3E0D16);
+  color: var(--gold-veil);
+}
+.promo-copy {
+  padding: var(--space-8) var(--space-8) var(--space-4);
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+.promo-titulo {
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem) !important;
+  line-height: 1.08 !important;
+  text-align: left !important;
+  color: var(--ink);
+}
+.promo-texto { text-align: left !important; font-size: 1rem; color: var(--ink-2); max-width: 34rem; }
+.promo-accion {
+  justify-self: start;
+  margin: 0 var(--space-8) var(--space-8);
+  background: var(--accion) !important;
+  background-image: var(--grad-accion) !important;
+  border: 0 !important;
+  color: var(--gold-ink) !important;
+}
+.promo-puntos { margin-top: var(--space-2); }
+
+@media (min-width: 768px) {
+  .promo-cuerpo {
+    grid-template-columns: 42% minmax(0, 1fr);
+    grid-template-areas: "icon copy" "icon action";
+    grid-template-rows: 1fr auto;
+    min-height: 340px;
+  }
+  .promo-fotos, .promo-icono { height: 100%; min-height: 340px; }
+  .promo-copy { align-self: end; padding: var(--space-12) var(--space-12) var(--space-6); }
+  .promo-accion { margin: 0 var(--space-12) var(--space-12); }
+}
+
+/* ============================================================
+   61. Redes al final del contacto
+   ------------------------------------------------------------
+   Franja oscura de cierre. Cada red lleva su color de marca sólo en
+   el círculo del icono y en un resplandor suave de su esquina.
+   ============================================================ */
+
+.ctc-redes-banda {
+  margin-top: var(--space-12);
+  padding: clamp(56px, 8vw, 96px) 0;
+  background: #1A120E;
+}
+.ctc-redes-banda + .lnd-envoltura .ctc-pie { color: var(--ink-3); }
+.ctc-redes { margin-top: 0; gap: var(--space-4); }
+.ctc-redes-cabeza { margin-bottom: var(--space-4); }
+.ctc-redes-titulo {
+  margin: 0 0 var(--space-2);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #FFFCF6;
+}
+.ctc-redes-texto { margin: 0; color: rgba(243, 234, 218, 0.7); }
+
+.ctc-red,
+.ctc-red:last-child {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  overflow: hidden;
+  border: 1px solid rgba(243, 234, 218, 0.1);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  isolation: isolate;
+}
+.ctc-red::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -30%;
+  z-index: -1;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--red-brillo);
+  filter: blur(40px);
+  opacity: 0.45;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.ctc-red[data-red="instagram"] { --red-color: linear-gradient(45deg, #F58529, #DD2A7B 50%, #8134AF); --red-brillo: #DD2A7B; }
+.ctc-red[data-red="tiktok"]    { --red-color: linear-gradient(45deg, #25F4EE, #000 50%, #FE2C55); --red-brillo: #25F4EE; }
+.ctc-red[data-red="facebook"]  { --red-color: linear-gradient(45deg, #1877F2, #3B8BFF); --red-brillo: #1877F2; }
+
+.ctc-red-nombre {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFCF6;
+}
+.ctc-red-nombre i,
+.ctc-red-nombre i.fab {
+  width: 52px;
+  height: 52px;
+  background: var(--red-color);
+  color: #FFFFFF !important;
+  font-size: 22px;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.6);
+}
+.ctc-red-cuenta { padding: 0; font-size: 0.9375rem; color: rgba(243, 234, 218, 0.7); }
+.ctc-red-seguir {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: 10px 18px;
+  border-radius: var(--r-full);
+  background: #FFFCF6;
+  color: #1A120E;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.ctc-red-seguir i { font-size: 11px; transition: transform var(--dur-base) var(--ease-out); }
+
+@media (hover: hover) and (pointer: fine) {
+  .ctc-red:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.07); }
+  .ctc-red:hover::before { opacity: 0.75; }
+  .ctc-red:hover .ctc-red-seguir i { transform: translateX(3px); }
+}
+@media (min-width: 900px) {
+  .ctc-redes { grid-template-columns: repeat(3, 1fr); }
+  .ctc-redes-cabeza { grid-column: 1 / -1; }
+}
+
+@media (max-width: 899px) {
+  .ctc-red,
+  .ctc-red:last-child {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: var(--space-4);
+    row-gap: 2px;
+    padding: var(--space-4) var(--space-4) var(--space-4) var(--space-4);
+    border-radius: 20px;
+  }
+  .ctc-red-nombre { display: contents; }
+  .ctc-red-nombre i, .ctc-red-nombre i.fab { grid-column: 1; grid-row: 1 / span 2; width: 48px; height: 48px; font-size: 20px; }
+  .ctc-red-nombre { font-size: 1.25rem; }
+  .ctc-red-cuenta { grid-column: 2; grid-row: 2; font-size: 0.8125rem; }
+  .ctc-red-seguir { grid-column: 3; grid-row: 1 / span 2; margin: 0; padding: 8px 14px; }
+  .ctc-red::before { width: 45%; top: -60%; right: -10%; }
+}
+
+/* Personalizadas: cabecera centrada, con las ocasiones como fichas. */
+.pz-cabeza .pz-texto {
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.pz-cabeza .pz-intro { max-width: 38rem; margin-left: auto; margin-right: auto; font-size: 1.0625rem; }
+.pz-ocasiones-cabeza {
+  justify-content: center;
+  margin: var(--space-8) 0 var(--space-8);
+}
+.pz-ocasiones-cabeza li {
+  padding: 8px 16px;
+  border-color: rgba(255, 230, 210, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-size: 0.875rem;
+  color: #FFF6EC;
+}
+.pz-ir-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: 0 var(--space-8);
+  border-radius: var(--r-full);
+  background: #FFFCF6;
+  color: #5A1420;
+  font-weight: 700;
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.6);
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.pz-ir-boton i { font-size: 12px; }
+.pz-ir-boton:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .pz-ir-boton:hover { transform: translateY(-2px); }
+}
+.pz-cabeza { --velo: radial-gradient(ellipse 80% 75% at 50% 50%, rgba(58, 12, 22, 0.86), rgba(70, 16, 28, 0.62) 80%); }
+@media (max-width: 899px) {
+  .pz-cabeza { --velo: linear-gradient(180deg, rgba(70, 16, 28, 0.7) 0%, rgba(50, 10, 18, 0.85) 100%); }
+}
+.pz-lado-nota { margin: auto 0 0; font-size: 0.9375rem; color: rgba(255, 236, 222, 0.75); }
+
+/* ============================================================
+   62. Ventana de producto
+   ------------------------------------------------------------
+   El fondo de la ventana estaba pintado de blanco entero: no se veía
+   la página detrás. Ahora se oscurece con desenfoque y la hoja entra
+   subiendo. En computador es una tarjeta centrada en dos columnas:
+   la foto grande a la izquierda y la compra a la derecha.
+   ============================================================ */
+
+#product-modal { background: transparent !important; border-radius: 0; }
+#product-overlay {
+  background: rgba(20, 13, 10, 0.55) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+#product-modal:not(.hidden) #product-overlay { animation: modal-fondo 260ms var(--ease-out) both; }
+#product-modal:not(.hidden) .product-modal-sheet { animation: modal-sube 420ms var(--ease-suave) both; }
+#product-modal.saliendo #product-overlay { animation: modal-fondo-sale 200ms var(--ease-out) both; }
+#product-modal.saliendo .product-modal-sheet { animation: modal-baja 200ms var(--ease-out) both; }
+
+@keyframes modal-fondo { from { opacity: 0; } }
+@keyframes modal-fondo-sale { to { opacity: 0; } }
+@keyframes modal-sube { from { opacity: 0; transform: translateY(48px) scale(0.98); } }
+@keyframes modal-baja { to { opacity: 0; transform: translateY(24px) scale(0.98); } }
+
+.product-modal-sheet {
+  background: var(--surface) !important;
+  box-shadow: 0 -20px 60px -20px rgba(0, 0, 0, 0.45) !important;
+}
+#product-modal-content { background: transparent !important; }
+
+.ficha { position: relative; max-width: none; gap: 0; }
+.ficha-cerrar {
+  position: absolute !important;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 3;
+  width: 44px; height: 44px;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-radius: var(--r-full) !important;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.35) !important;
+}
+.ficha-foto {
+  position: relative;
+  margin: calc(var(--space-4) * -1) calc(var(--space-4) * -1) 0;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.ficha-foto img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  object-fit: cover;
+}
+.ficha-foto .producto-zoom { top: var(--space-3); left: var(--space-3); right: auto; }
+.ficha-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+}
+.ficha-cabecera { padding: 0; text-align: left; }
+.ficha-marca { display: block; margin-bottom: var(--space-1); font-size: 0.8125rem; font-weight: 600; color: var(--gold-deep); }
+.ficha-nombre { font-size: clamp(1.625rem, 3vw, 2.125rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; }
+.ficha-titulo { font-size: 0.875rem !important; font-weight: 600; letter-spacing: 0 !important; text-transform: none !important; color: var(--ink) !important; }
+
+.ficha-specs { border: 0 !important; border-radius: 14px !important; background: #F4EFE6; overflow: hidden; }
+.ficha-spec, .ficha-spec:nth-child(odd) { background: transparent; border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+
+.ficha-tipo, .ficha-opcion {
+  border: 1.5px solid var(--line) !important;
+  border-radius: 14px !important;
+  background: var(--surface) !important;
+}
+.ficha-tipo.active, .ficha-opcion.active {
+  border-color: var(--ink) !important;
+  background: var(--surface) !important;
+  box-shadow: 0 0 0 1px var(--ink) !important;
+}
+.ficha-opcion-precio { font-size: 1.125rem !important; font-weight: 700 !important; color: var(--ink) !important; }
+
+.ficha-total {
+  align-items: baseline;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.ficha-total-etiqueta { text-transform: none !important; letter-spacing: 0 !important; font-size: 0.9375rem !important; }
+.ficha-total-valor { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: -0.02em; color: var(--ink) !important; }
+#ficha-agregar { min-height: 56px; border-radius: 14px; font-size: 1rem; }
+#ficha-agregar:disabled { opacity: 0.45; }
+
+@media (min-width: 768px) {
+  .product-modal-sheet {
+    top: 50% !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    width: min(1040px, calc(100vw - 48px));
+    max-height: min(88dvh, 760px) !important;
+    transform: translate(-50%, -50%);
+    border-radius: 28px !important;
+    overflow: hidden !important;
+    display: flex;
+  }
+  #product-modal:not(.hidden) .product-modal-sheet { animation-name: modal-aparece; }
+  #product-modal.saliendo .product-modal-sheet { animation-name: modal-desaparece; }
+  #product-modal-content { padding: 0 !important; width: 100%; overflow-y: auto; }
+  .ficha { display: grid; grid-template-columns: 1.05fr 1fr; min-height: 100%; }
+  .ficha-foto { margin: 0; height: 100%; position: sticky; top: 0; max-height: min(88dvh, 760px); }
+  .ficha-foto img { height: 100%; aspect-ratio: auto; }
+  .ficha-info { padding: var(--space-12) var(--space-12) var(--space-8); }
+}
+@keyframes modal-aparece { from { opacity: 0; transform: translate(-50%, calc(-50% + 32px)) scale(0.97); } to { transform: translate(-50%, -50%); } }
+@keyframes modal-desaparece { to { opacity: 0; transform: translate(-50%, calc(-50% + 16px)) scale(0.98); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #product-modal:not(.hidden) #product-overlay,
+  #product-modal:not(.hidden) .product-modal-sheet { animation: none; }
+}
+
+/* ============================================================
+   63. Contacto: mosaico de videos y fotos que se turnan
+   ------------------------------------------------------------
+   Los videos son verticales: tres lado a lado llenan la pantalla
+   ancha sin estirarse, así que se ven nítidos y con poco velo.
+   En el celular queda sólo el primero.
+   ============================================================ */
+
+.capa-mosaico { display: grid; grid-template-columns: 1fr; }
+.capa-mosaico .capa-fondo-video {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+.capa-mosaico .capa-fondo-video:not(:first-child) { display: none; }
+@media (min-width: 900px) {
+  .capa-mosaico { grid-template-columns: repeat(3, 1fr); gap: 4px; background: #1A120E; }
+  .capa-mosaico .capa-fondo-video:not(:first-child) { display: block; }
+}
+.ctc-cabeza {
+  --velo:
+    linear-gradient(90deg, rgba(20, 12, 9, 0.72) 0%, rgba(20, 12, 9, 0.42) 55%, rgba(20, 12, 9, 0.22) 100%);
+}
+@media (max-width: 899px) {
+  .ctc-cabeza { --velo: linear-gradient(180deg, rgba(20, 12, 9, 0.45) 0%, rgba(20, 12, 9, 0.7) 100%); }
+}
+
+.ctc-fotos { align-items: start; }
+.ctc-foto-marco {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-2);
+}
+.ctc-foto-marco:nth-child(2) { margin-top: var(--space-12); }
+.ctc-fotos .ctc-foto-marco img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 900ms var(--ease-suave), transform 3600ms linear;
+}
+.ctc-fotos .ctc-foto-marco img.activa { opacity: 1; transform: scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .ctc-fotos .ctc-foto-marco img { transition: none; transform: none; }
+}
+
+/* Logo de la cabecera más nítido y el nombre con más presencia. */
+.brand-mark { image-rendering: auto; filter: drop-shadow(0 1px 1px rgba(90, 60, 20, 0.25)); }
+.brand-name { font-weight: 700 !important; letter-spacing: -0.01em; }
+
+/* ============================================================
+   64. Vitrina de deseos más cálida
+   ------------------------------------------------------------
+   Luces desenfocadas de fondo (como velas lejos), velas un poco más
+   anchas, su reflejo en la madera y la pista como ficha. Sin elegir
+   nada, las velas de muestra ya se ven enteras, no apagadas.
+   ============================================================ */
+
+.dsw-vitrina {
+  background:
+    radial-gradient(circle at 14% 24%, rgba(255, 196, 110, 0.35) 0 3px, rgba(255, 196, 110, 0) 22px),
+    radial-gradient(circle at 82% 18%, rgba(255, 210, 140, 0.28) 0 4px, rgba(255, 210, 140, 0) 30px),
+    radial-gradient(circle at 70% 40%, rgba(255, 170, 90, 0.18) 0 2px, rgba(255, 170, 90, 0) 18px),
+    radial-gradient(circle at 26% 46%, rgba(255, 220, 160, 0.16) 0 2px, rgba(255, 220, 160, 0) 16px),
+    radial-gradient(circle at 92% 58%, rgba(255, 190, 120, 0.2) 0 3px, rgba(255, 190, 120, 0) 26px),
+    radial-gradient(ellipse 65% 50% at 50% 62%, rgba(255, 176, 86, 0.32), rgba(30, 20, 16, 0) 72%),
+    linear-gradient(180deg, #2E1E16 0%, #1B120D 70%, #120C09 100%);
+  border: 1px solid rgba(255, 220, 170, 0.08);
+}
+.dsw-vitrina::after {
+  /* reflejo cálido sobre la madera */
+  content: "";
+  position: absolute;
+  left: 10%; right: 10%;
+  bottom: calc(var(--space-6) + 4px);
+  height: 30px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 190, 100, 0.35), rgba(255, 190, 100, 0) 70%);
+  pointer-events: none;
+}
+.dsw-muestra .dsw-vela { opacity: 0.92; }
+.dsw-muestra .dsw-vela::before { opacity: 1; }
+.dsw-vela { flex-basis: 56px; }
+.dsw-palabra { font-size: clamp(12px, 2.8vw, 17px); }
+
+.dsw-pista {
+  left: 50%;
+  right: auto;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 8px 16px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 225, 190, 0.18);
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-size: 0.8125rem;
+  color: #FFF1DE;
+}
+@media (min-width: 900px) {
+  .dsw-vela { flex-basis: 70px; }
+}
+
+.hero-bajar { text-transform: none; letter-spacing: 0; font-size: 0.875rem; }
+
+/* Envíos y pagos del contacto: más grandes y legibles. */
+.ctc-puntos li { padding: var(--space-8) 0; }
+.ctc-puntos h3 { font-size: clamp(1.75rem, 3.4vw, 2.25rem) !important; margin-bottom: var(--space-2); }
+.ctc-puntos p { font-size: 1.0625rem; line-height: 1.6; }
+.ctc-pagos { gap: var(--space-3); margin-top: var(--space-4); }
+.ctc-pagos li {
+  min-height: 56px;
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-1);
+}
+.ctc-pago-icono { width: 42px; height: 42px; font-size: 18px; }
+.ctc-pago-icono img { width: 28px; height: 28px; }
+
+/* ============================================================
+   65. Vitrina viva
+   ------------------------------------------------------------
+   Llamas que titilan, halo que respira, chispas que suben y velas
+   nuevas que caen con rebote y se encienden. Sólo transform y
+   opacity, y todo en pausa cuando la vitrina no se ve (.viva lo
+   pone app.js), para que el celular no trabaje de más.
+   ============================================================ */
+
+.dsw-vitrina:not(.viva) *,
+.dsw-vitrina:not(.viva) *::before,
+.dsw-vitrina:not(.viva) *::after { animation-play-state: paused !important; }
+
+.dsw-llama {
+  transform-origin: 50% 100%;
+  animation: llama-titila 1.6s ease-in-out infinite alternate;
+}
+.dsw-vela:nth-child(2n) .dsw-llama { animation-duration: 1.25s; animation-delay: -0.4s; }
+.dsw-vela:nth-child(3n) .dsw-llama { animation-duration: 1.9s; animation-delay: -0.9s; }
+@keyframes llama-titila {
+  0%   { transform: scale(1, 1) rotate(-1deg); }
+  30%  { transform: scale(0.94, 1.08) rotate(1.5deg); }
+  55%  { transform: scale(1.04, 0.95) rotate(-2deg); }
+  80%  { transform: scale(0.97, 1.05) rotate(1deg); }
+  100% { transform: scale(1.02, 0.98) rotate(0deg); }
+}
+
+.dsw-vela::before { animation: halo-respira 3.2s ease-in-out infinite alternate; }
+.dsw-vela:nth-child(2n)::before { animation-delay: -1.3s; }
+@keyframes halo-respira {
+  from { opacity: 0.75; transform: translateX(-50%) scale(0.92); }
+  to   { opacity: 1;    transform: translateX(-50%) scale(1.08); }
+}
+
+/* Chispas que suben desde la madera */
+.dsw-chispas { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.dsw-chispas span {
+  position: absolute;
+  bottom: 18%;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #FFD58A;
+  box-shadow: 0 0 6px 2px rgba(255, 190, 90, 0.6);
+  opacity: 0;
+  animation: chispa-sube 6s linear infinite;
+}
+.dsw-chispas span:nth-child(1) { left: 22%; animation-delay: 0s; }
+.dsw-chispas span:nth-child(2) { left: 38%; animation-delay: 1.4s; animation-duration: 7s; }
+.dsw-chispas span:nth-child(3) { left: 51%; animation-delay: 2.6s; }
+.dsw-chispas span:nth-child(4) { left: 64%; animation-delay: 0.8s; animation-duration: 8s; }
+.dsw-chispas span:nth-child(5) { left: 78%; animation-delay: 3.4s; }
+.dsw-chispas span:nth-child(6) { left: 30%; animation-delay: 4.2s; animation-duration: 7.5s; }
+.dsw-chispas span:nth-child(7) { left: 70%; animation-delay: 5s; }
+.dsw-chispas span:nth-child(8) { left: 45%; animation-delay: 3s; animation-duration: 9s; }
+@keyframes chispa-sube {
+  0%   { opacity: 0; transform: translate(0, 0) scale(1); }
+  12%  { opacity: 1; }
+  60%  { opacity: 0.7; transform: translate(10px, -200px) scale(0.8); }
+  100% { opacity: 0; transform: translate(-6px, -360px) scale(0.4); }
+}
+
+/* Vela nueva: cae con rebote y su llama se enciende */
+.dsw-vela.nueva { animation: vela-cae 620ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.dsw-vela.nueva .dsw-llama {
+  animation: llama-enciende 520ms 380ms ease-out both, llama-titila 1.6s 900ms ease-in-out infinite alternate;
+}
+@keyframes vela-cae { from { opacity: 0; transform: translateY(-60px); } 60% { opacity: 1; } to { transform: none; } }
+@keyframes llama-enciende { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: scale(1); } }
+
+/* Al pasar el mouse por la vitrina, las velas se levantan un poco */
+@media (hover: hover) and (pointer: fine) {
+  .dsw-vela { transition: transform 300ms var(--ease-suave); }
+  .dsw-vela:hover { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsw-llama, .dsw-vela::before, .dsw-chispas span,
+  .dsw-vela.nueva, .dsw-vela.nueva .dsw-llama { animation: none !important; }
+  .dsw-chispas { display: none; }
 }

@@ -2174,10 +2174,18 @@ const promociones = [
 // resto. Ahora es una portada alojada aquí que abre el video en TikTok.
 // Las portadas se regeneran con herramientas/portadas-tiktok.py
 const videos = [
-  { plataforma: "local", titulo: "Nuestras velas", videoSrc: "assets/productos/Videos/velas.mp4" },
-  { plataforma: "local", titulo: "Aromas y fragancias", videoSrc: "assets/productos/Videos/aro.mp4" },
-  { plataforma: "local", titulo: "Colección especial", videoSrc: "assets/productos/Videos/al.mp4" },
-  { plataforma: "local", titulo: "Velas artesanales", videoSrc: "assets/productos/Videos/vel.mp4" },
+  // Los -web.mp4 salen de los originales con ffmpeg (-crf 28 -an +faststart).
+  { plataforma: "local", titulo: "Navidad 2026: latas de regalo", videoSrc: "assets/productos/Videos/comercial-navidad-2026-9x16-instagram-web.mp4" },
+  { plataforma: "local", titulo: "Temporada navideña", videoSrc: "assets/productos/Videos/temporada-navidena-web.mp4" },
+  { plataforma: "local", titulo: "Souvenirs de Navidad", videoSrc: "assets/productos/Videos/suvenirs-navidad-web.mp4" },
+  { plataforma: "local", titulo: "Cajas de estrellas navideñas", videoSrc: "assets/productos/Videos/cajas-estrellas-navidad-web.mp4" },
+  { plataforma: "local", titulo: "Velas de la Virgen en colores", videoSrc: "assets/productos/Videos/velas-virgen-colores-web.mp4" },
+  { plataforma: "local", titulo: "Velas degradé", videoSrc: "assets/productos/Videos/velas-degrade-web.mp4" },
+  // Antes "Aromas y fragancias" (aro.mp4): era el mismo clip, en menos resolución.
+  { plataforma: "local", titulo: "En producción", videoSrc: "assets/productos/Videos/taller-produccion-web.mp4" },
+  { plataforma: "local", titulo: "Nuestras velas", videoSrc: "assets/productos/Videos/velas-web.mp4" },
+  { plataforma: "local", titulo: "Colección especial", videoSrc: "assets/productos/Videos/al-web.mp4" },
+  { plataforma: "local", titulo: "Velas artesanales", videoSrc: "assets/productos/Videos/vel-web.mp4" },
   { plataforma: "tiktok", titulo: "Pregunta ya por nuestro kit", url: "https://www.tiktok.com/@velas.elena/video/7684359342010748180",
     portada: "assets/productos/Videos/tiktok/7684359342010748180.jpg" },
   { plataforma: "tiktok", titulo: "Somos mayoristas, emprende con nosotros", url: "https://www.tiktok.com/@velas.elena/video/7685743973889035538",
@@ -2230,6 +2238,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initPromociones();
   initCuentaAtras();
   initDeseos();
+  initHeroFondo();
+  initCapasFondo();
+  initLanding();
   initVideos();
   initMouseWheelScroll();
   initSearch();
@@ -3097,7 +3108,7 @@ function renderProductos() {
           onclick="abrirModalProducto('${producto.id}')"
           class="btn btn-primary ripple-effect"
         >
-          Ver Precios
+          Ver precios
         </button>
       </div>
     </div>
@@ -3179,7 +3190,7 @@ function renderProductos() {
           onclick="abrirModalProductoGrupo('${imagen}')"
           class="btn btn-primary ripple-effect"
         >
-          Ver Precios
+          Ver precios
         </button>
       </div>
     </div>
@@ -3208,7 +3219,7 @@ function renderProductos() {
           onclick="abrirModalProducto('${productoPrincipal.id}')"
           class="btn btn-primary ripple-effect"
         >
-          Ver Precios
+          Ver precios
         </button>
       </div>
     </div>
@@ -3354,7 +3365,7 @@ function abrirModalProductoGrupo(imagen) {
           <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="ampliarImagenProducto('${imagen}', 'Productos Disponibles')"><i class="fas fa-expand"></i></button>
         <img 
           src="${imagen}" 
-          alt="Productos"
+          alt="${productosGrupo.map(p => p.nombre).join(', ')}"
           class="w-full h-auto max-h-[500px] md:max-h-[600px] object-contain mx-auto rounded-lg transition-transform duration-300 group-hover:scale-105"
           style=""
           onerror="this.style.filter='grayscale(100%) opacity(0.5)'; this.style.padding='20px';"
@@ -3560,19 +3571,23 @@ function renderFichaProducto(producto) {
 
   return `
     <div class="ficha">
-      <div class="ficha-cabecera">
-        <h3 class="ficha-nombre">${producto.nombre}</h3>
-        <button onclick="cerrarModalProducto()" class="ficha-cerrar" aria-label="Cerrar">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
+      <button onclick="cerrarModalProducto()" class="ficha-cerrar" aria-label="Cerrar">
+        <i class="fas fa-times"></i>
+      </button>
 
-      <div class="modal-media modal-media-lg" id="product-image-container">
+      <!-- En computador la foto ocupa media ventana; en el celular va arriba. -->
+      <div class="ficha-foto" id="product-image-container">
         <button type="button" class="producto-zoom" aria-label="Ampliar imagen"
                 onclick="ampliarImagenProducto('${producto.imagen}', '${producto.nombre.replace(/'/g, "\\'")}')">
           <i class="fas fa-expand"></i>
         </button>
-        <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" decoding="async">
+        <img src="${producto.imagen}" alt="${producto.nombre}" decoding="async">
+      </div>
+
+      <div class="ficha-info">
+      <div class="ficha-cabecera">
+        <span class="ficha-marca">Elena Velas y Aromas</span>
+        <h3 class="ficha-nombre">${producto.nombre}</h3>
       </div>
 
       ${ambos ? '' : `<span class="ficha-etiqueta">${hayDetal ? 'Venta al detal' : 'Venta al por mayor'}</span>`}
@@ -3590,6 +3605,7 @@ function renderFichaProducto(producto) {
       <button type="button" id="ficha-agregar" class="btn btn-primary btn-block"${arranca ? '' : ' disabled'}>
         ${arranca ? 'Agregar al carrito' : 'Elige una presentación'}
       </button>
+      </div>
     </div>`;
 }
 
@@ -4528,16 +4544,21 @@ function abrirModalProducto(productoId) {
 
 function cerrarModalProducto() {
   const modal = document.getElementById('product-modal');
-  if (modal) {
-    modal.classList.add('hidden');
-  }
-  document.body.style.overflow = '';
-  
-  // Limpiar el contenido del modal para evitar acumulación de listeners
   const content = document.getElementById('product-modal-content');
-  if (content) {
-    content.innerHTML = '';
-  }
+  document.body.style.overflow = '';
+  if (!modal || modal.classList.contains('hidden')) return;
+
+  // Sale con un fundido corto; la entrada la hace el CSS al quitar "hidden".
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const terminar = () => {
+    modal.classList.add('hidden');
+    modal.classList.remove('saliendo');
+    // Limpiar el contenido del modal para evitar acumulación de listeners
+    if (content) content.innerHTML = '';
+  };
+  if (reducido) { terminar(); return; }
+  modal.classList.add('saliendo');
+  setTimeout(terminar, 200);
 }
 
 // Función para ampliar imagen del producto
@@ -4681,11 +4702,13 @@ function proximaFechaEspecial(ahora) {
 // Fotos que se van turnando en un marco (cuenta atrás y promociones).
 // Sólo la primera se descarga al abrir la página; cada una de las demás
 // se pide justo antes de que le toque salir.
+// alt: un texto para todas o una lista con el de cada foto.
 function imagenesTurnantes(fotos, alt) {
   return fotos.map((src, i) => {
     const mini = miniatura(src);
     const fuente = i === 0 ? `src="${mini}"` : `data-turno="${mini}"`;
-    return `<img ${fuente} data-original="${src}" alt="${alt}" class="${i === 0 ? 'activa' : ''}" decoding="async">`;
+    const texto = Array.isArray(alt) ? (alt[i] || '') : alt;
+    return `<img ${fuente} data-original="${src}" alt="${texto}" class="${i === 0 ? 'activa' : ''}" decoding="async">`;
   }).join('');
 }
 
@@ -4715,7 +4738,7 @@ function ponerFotosCuenta(fotos, nombre) {
   fotosCuentaActuales = clave;
   clearInterval(fotosCuentaTimer);
   marco.hidden = fotos.length === 0;
-  marco.innerHTML = imagenesTurnantes(fotos, fotos.length > 1 ? '' : nombre);
+  marco.innerHTML = imagenesTurnantes(fotos, nombre || 'Velas hechas a mano por Elena Velas y Aromas');
   if (fotos.length < 2) return;
   marco.setAttribute('aria-label', 'Fotos de velas para la fecha');
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -4746,7 +4769,8 @@ function initCuentaAtras() {
     // Las fotos de la fecha o, si no tiene, la de su vela (o la primera de su categoría).
     const vela = (f.producto && buscarProducto(f.producto)) ||
       (productos[categoryMap[f.filtro]] || obtenerTodosLosProductos())[0];
-    ponerFotosCuenta(f.fotos || (vela && vela.imagen ? [vela.imagen] : []), vela ? vela.nombre : '');
+    ponerFotosCuenta(f.fotos || (vela && vela.imagen ? [vela.imagen] : []),
+      f.fotos ? `Velas para ${f.nombre}` : (vela ? vela.nombre : ''));
 
     // Días de calendario, no de 24 horas: el 6 a las 11 p. m. ya es "mañana".
     const hoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate());
@@ -4817,34 +4841,93 @@ function initDeseos() {
   const rejilla = document.getElementById('deseos-velas');
   const catalogos = document.getElementById('deseos-catalogos');
   if (!lista || !rejilla || !catalogos) return;
-  let elegido = null;
+  // Los paquetes casi siempre son de 10 velas, una palabra en cada una.
+  const MAX_DESEOS = 10;
+  // En el orden en que se tocaron, que es el que verá el taller.
+  let elegidos = [];
 
   lista.innerHTML = DESEOS.map(d => `
     <button type="button" class="deseo-chip" aria-pressed="false" data-deseo="${d}">${d}</button>
   `).join('');
 
-  lista.addEventListener('click', e => {
-    const chip = e.target.closest('.deseo-chip');
-    if (!chip) return;
-    elegido = chip.dataset.deseo;
+  // La vitrina: una vela por deseo. Sin elegir nada se ven tres de
+  // muestra, tenues, para que se entienda qué va a pasar.
+  const palabra = document.getElementById('deseo-palabra');
+  const pista = document.getElementById('deseo-pista');
+  const COLORES_VELA = ['#B3263A', '#7A3E9D', '#D9822B', '#2F7D5B', '#C2185B', '#1F6FA8', '#8A5A12', '#3B8F3B', '#D24E2A', '#5A4FB3'];
+  const velaHTML = (d, i, extra) =>
+    `<span class="dsw-vela${extra}" style="--tinta:${COLORES_VELA[i % COLORES_VELA.length]};--alto:${86 + (i * 37 % 5) * 3}%">` +
+    `<span class="dsw-llama" aria-hidden="true"></span><span class="dsw-cuerpo"><span class="dsw-palabra">${d}</span></span></span>`;
+  let ultimo = null;
+  const cuenta = document.getElementById('deseo-cuenta');
+  const textoPedir = document.getElementById('deseo-pedir-texto');
+
+  function pintarElegidos() {
     lista.querySelectorAll('.deseo-chip').forEach(c => {
-      const activo = c === chip;
+      const activo = elegidos.includes(c.dataset.deseo);
       c.classList.toggle('active', activo);
       c.setAttribute('aria-pressed', String(activo));
+      // Con 10 ya elegidos, el resto espera a que se quite alguno.
+      c.disabled = !activo && elegidos.length >= MAX_DESEOS;
     });
-    const palabra = document.getElementById('deseo-palabra');
-    palabra.textContent = elegido;
-    palabra.hidden = false;
-    palabra.classList.remove('aparece'); void palabra.offsetWidth; palabra.classList.add('aparece');
-    document.getElementById('deseo-pista').hidden = true;
-    document.getElementById('deseo-pedir-texto').textContent = 'Pedir mi vela de ' + elegido;
+
+    const n = elegidos.length;
+    pista.hidden = n > 0;
+    palabra.classList.toggle('dsw-muestra', n === 0);
+    palabra.setAttribute('aria-label', n ? 'Tus velas: ' + elegidos.join(', ') : 'Ejemplo de velas con deseo');
+    palabra.innerHTML = n
+      ? elegidos.map((d, i) => velaHTML(d, i, d === ultimo ? ' nueva' : '')).join('')
+      : ['Amor', 'Salud', 'Paz'].map((d, i) => velaHTML(d, i, '')).join('');
+    if (cuenta) {
+      cuenta.hidden = n === 0;
+      cuenta.querySelector('span').textContent = n === MAX_DESEOS
+        ? `Tienes los ${MAX_DESEOS} deseos. Toca uno para quitarlo.`
+        : `${n} de ${MAX_DESEOS} deseos elegidos`;
+    }
+    textoPedir.textContent = n === 0 ? 'Pedir por WhatsApp'
+      : n === 1 ? 'Pedir mi vela de ' + elegidos[0]
+      : `Pedir mis ${n} deseos`;
+  }
+
+  lista.addEventListener('click', e => {
+    const chip = e.target.closest('.deseo-chip');
+    if (!chip || chip.disabled) return;
+    const deseo = chip.dataset.deseo;
+    if (elegidos.includes(deseo)) {
+      elegidos = elegidos.filter(d => d !== deseo);
+      ultimo = null;
+    } else {
+      elegidos.push(deseo);
+      ultimo = deseo;
+    }
+    pintarElegidos();
   });
+
+  const borrar = document.getElementById('deseo-borrar');
+  if (borrar) borrar.addEventListener('click', () => {
+    elegidos = [];
+    pintarElegidos();
+  });
+
+  pintarElegidos();
+
+  // Las llamas y las chispas sólo se mueven mientras la vitrina se ve.
+  const vitrina = document.getElementById('deseo-elegido');
+  if (vitrina && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => vitrina.classList.toggle('viva', e.isIntersecting))
+      .observe(vitrina);
+  }
 
   const pedir = document.getElementById('deseo-pedir');
   if (pedir) pedir.addEventListener('click', () => {
-    const mensaje = elegido
-      ? `¡Hola! Quiero una vela con el deseo *${elegido}*. ¿Qué opciones tienen?`
-      : '¡Hola! Quiero una vela con un deseo escrito. ¿Qué opciones tienen?';
+    const n = elegidos.length;
+    const mensaje = n === 0
+      ? '¡Hola! Quiero una vela con un deseo escrito. ¿Qué opciones tienen?'
+      : n === 1
+        ? `¡Hola! Quiero una vela con el deseo *${elegidos[0]}*. ¿Qué opciones tienen?`
+        : `¡Hola! Quiero velas con estos ${n} deseos:\n` +
+          elegidos.map((d, i) => `${i + 1}. *${d}*`).join('\n') +
+          '\n¿Qué opciones tienen?';
     window.open(WHATSAPP_API + encodeURIComponent(mensaje), '_blank');
   });
 
@@ -4871,7 +4954,14 @@ function initDeseos() {
 function renderVelasDeDeseo() {
   const rejilla = document.getElementById('deseos-velas');
   if (!rejilla) return;
-  const velas = velasDeDeseo().slice(0, 8);
+  // Sin repetir: la hoja trae la misma vela en dos catálogos.
+  const vistos = new Set();
+  const velas = velasDeDeseo().filter(p => {
+    const clave = p.nombre.trim().toLowerCase();
+    if (vistos.has(clave)) return false;
+    vistos.add(clave);
+    return true;
+  }).slice(0, 8);
   const seccion = document.getElementById('deseos');
   if (seccion) seccion.hidden = velas.length === 0;
   // Un botón por cada catálogo que tiene velas de deseo.
@@ -4884,7 +4974,7 @@ function renderVelasDeDeseo() {
   }
   rejilla.innerHTML = velas.map(p => `
     <button type="button" class="deseo-vela" data-id="${p.id}" aria-label="Ver ${p.nombre}">
-      <span class="deseo-vela-foto"><img src="${miniatura(p.imagen)}" data-original="${p.imagen}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>
+      <span class="deseo-vela-foto"><img src="${miniatura(p.imagen)}" data-original="${p.imagen}" alt="${p.nombre}" loading="lazy" decoding="async" onerror="this.remove()"></span>
       <span class="deseo-vela-nombre">${p.nombre}</span>
     </button>
   `).join('');
@@ -4984,7 +5074,7 @@ function marcoFotosPromo(promo) {
   if (!fotos.length) {
     return `<span class="promo-icono" aria-hidden="true"><i class="${promo.icon || 'fas fa-gift'}"></i></span>`;
   }
-  return `<span class="promo-fotos" aria-hidden="true">${imagenesTurnantes(fotos.map(p => p.imagen), '')}</span>`;
+  return `<span class="promo-fotos" aria-hidden="true">${imagenesTurnantes(fotos.map(p => p.imagen), fotos.map(p => p.nombre))}</span>`;
 }
 
 let fotosPromoTimer = null;
@@ -5176,98 +5266,353 @@ function actualizarCarrusel() {
   actualizarPromoPuntos();
 }
 
+// Fondo del hero: la foto ya está; el video llega después de cargar la
+// página y sólo corre mientras el hero se ve.
+function initHeroFondo() {
+  const video = document.querySelector('.hero-fondo-video');
+  if (!video || !video.dataset.src) return;
+  const red = navigator.connection || {};
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducido || red.saveData === true || /2g/.test(red.effectiveType || '')) return;
+
+  const arrancar = () => {
+    const ancho = video.dataset.srcAncho && window.matchMedia('(min-width: 900px)').matches;
+    video.src = ancho ? video.dataset.srcAncho : video.dataset.src;
+    video.addEventListener('playing', () => video.classList.add('lista'), { once: true });
+    // Si falla, la foto de debajo sigue ahí.
+    video.addEventListener('error', () => video.remove(), { once: true });
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {});
+
+    if (!('IntersectionObserver' in window)) return;
+    new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        if (e.isIntersecting) { const q = video.play(); if (q && q.catch) q.catch(() => {}); }
+        else video.pause();
+      });
+    }, { threshold: 0.05 }).observe(video.closest('.hero') || video);
+  };
+
+  if (document.readyState === 'complete') arrancar();
+  else window.addEventListener('load', arrancar, { once: true });
+}
+
+// Videos de fondo de Contacto, Navidad y Personalizadas. Pesan entre 200
+// y 800 KB: no se piden hasta que su sección aparece en pantalla, y se
+// pausan al salir. Sin movimiento o con ahorro de datos, sólo la foto.
+function initCapasFondo() {
+  const videos = document.querySelectorAll('.capa-fondo-video');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+  const red = navigator.connection || {};
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducido || red.saveData === true || /2g/.test(red.effectiveType || '')) return;
+  const ancho = window.matchMedia('(min-width: 900px)').matches;
+
+  const obs = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => {
+      // Una capa puede traer varios videos (el mosaico del contacto).
+      e.target.querySelectorAll('.capa-fondo-video').forEach(video => {
+        if (getComputedStyle(video).display === 'none') return;
+        if (!e.isIntersecting) { video.pause(); return; }
+        if (!video.getAttribute('src')) {
+          video.src = (ancho && video.dataset.srcAncho) || video.dataset.src;
+          video.addEventListener('playing', () => video.classList.add('lista'), { once: true });
+          video.addEventListener('error', () => video.remove(), { once: true });
+        }
+        const p = video.play();
+        if (p && p.catch) p.catch(() => {});
+      });
+    });
+  }, { threshold: 0.05 });
+  new Set([...videos].map(v => v.closest('.capa-fondo').parentElement)).forEach(c => obs.observe(c));
+}
+
+// Bloques tipo landing del inicio: la galería de Navidad abre cada
+// producto; si la hoja lo cambió de id, lleva al catálogo de Navidad.
+function initLanding() {
+  const anio = document.getElementById('ctc-anio');
+  if (anio) anio.textContent = new Date().getFullYear();
+
+  // Las fotos del contacto se van turnando, cada marco a su ritmo, y sólo
+  // mientras se ven.
+  const marcos = document.querySelectorAll('.ctc-foto-marco');
+  if (marcos.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let visibles = false;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { visibles = e.isIntersecting; })
+        .observe(marcos[0].parentElement);
+    }
+    marcos.forEach((marco, n) => {
+      const fotos = marco.querySelectorAll('img');
+      if (fotos.length < 2) return;
+      let actual = 0;
+      setTimeout(() => setInterval(() => {
+        if (!visibles || document.hidden) return;
+        fotos[actual].classList.remove('activa');
+        actual = (actual + 1) % fotos.length;
+        fotos[actual].classList.add('activa');
+      }, 3600), n * 1800);
+    });
+  }
+
+  // Mientras se ven los WhatsApp grandes del contacto, la burbuja se esconde.
+  const cabezaContacto = document.querySelector('.ctc-cabeza');
+  if (cabezaContacto && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => document.body.classList.toggle('sin-burbuja', e.isIntersecting))
+      .observe(cabezaContacto);
+  }
+
+  // La cinta de fotos sólo corre mientras se ve: una animación en bucle
+  // fuera de pantalla seguiría gastando batería.
+  if ('IntersectionObserver' in window) {
+    document.querySelectorAll('.cinta').forEach(cinta => {
+      cinta.classList.add('pausada');
+      new IntersectionObserver(([e]) => cinta.classList.toggle('pausada', !e.isIntersecting))
+        .observe(cinta);
+    });
+  }
+
+  const galeria = document.getElementById('lnd-galeria');
+  if (!galeria) return;
+
+  const irACatalogo = (categoria) => {
+    mostrarSeccion('productos');
+    state.categoriaActual = categoria;
+    renderCategorias();
+    renderProductos();
+    const destino = document.getElementById('productos');
+    if (destino) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  galeria.addEventListener('click', e => {
+    const foto = e.target.closest('[data-producto]');
+    if (foto) {
+      const existe = obtenerTodosLosProductos().some(p => p.id === foto.dataset.producto);
+      if (existe) abrirModalProducto(foto.dataset.producto);
+      else irACatalogo('navidad');
+      return;
+    }
+    const todo = e.target.closest('[data-categoria]');
+    if (todo) irACatalogo(todo.dataset.categoria);
+  });
+
+  // Flechas para quien usa mouse: en táctil basta con deslizar.
+  document.querySelectorAll('.lnd-flecha').forEach(boton => {
+    boton.addEventListener('click', () => {
+      const paso = Math.max(galeria.clientWidth * 0.7, 280);
+      galeria.scrollBy({ left: paso * Number(boton.dataset.dir), behavior: 'smooth' });
+    });
+  });
+}
+
 // Videos
 function initVideos() {
   renderVideos();
   initLazyVideos();
 }
 
+// El video principal de #videos: se descarga y suena sólo mientras está en
+// pantalla. Las miniaturas nunca descargan video, sólo su póster.
 function initLazyVideos() {
-  const videoContainers = document.querySelectorAll('.video-container-lazy');
-  
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const container = entry.target;
-        const videoSrc = container.getAttribute('data-video-src');
-        const placeholder = container.querySelector('.video-placeholder');
-        const video = container.querySelector('video');
-        
-        if (video && videoSrc && !video.src && placeholder) {
-          // Sólo al pulsar: antes se descargaba con sólo asomar en pantalla,
-          // y estos videos pesan hasta 7,7 MB.
-          placeholder.addEventListener('click', () => {
-            video.src = videoSrc;
-            video.load();
-            placeholder.classList.add('hidden');
-            video.classList.remove('hidden');
-            video.play().catch(() => {});
-          }, { once: true });
-          videoObserver.unobserve(container);
-        }
-      }
-    });
-  }, {
-    rootMargin: '50px'
+  const seccion = document.getElementById('videos');
+  const marco = document.getElementById('vid-marco');
+  const carril = document.getElementById('vid-carril');
+  if (!seccion) return;
+
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hayObserver = 'IntersectionObserver' in window;
+
+  // Aparición del texto y la media al entrar en pantalla.
+  const aparecen = seccion.querySelectorAll('.vid-aparece');
+  if (reducido || !hayObserver) {
+    aparecen.forEach(el => el.classList.add('vid-visible'));
+  } else {
+    const obsAparece = new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('vid-visible');
+        obsAparece.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+    aparecen.forEach(el => obsAparece.observe(el));
+  }
+
+  const video = marco && marco.querySelector('.vid-video');
+  const poster = marco && marco.querySelector('.vid-poster');
+  const control = marco && marco.querySelector('.vid-control');
+  const sonido = marco && marco.querySelector('.vid-sonido');
+  if (!video || !control) return;
+
+  // Los navegadores no dejan arrancar un video con sonido: empieza en
+  // silencio y este botón lo activa. Desde ahí, los que se elijan suenan.
+  let conSonido = false;
+  function pintarSonido() {
+    if (!sonido) return;
+    marco.classList.toggle('vid-con-sonido', conSonido);
+    sonido.setAttribute('aria-pressed', String(conSonido));
+    sonido.setAttribute('aria-label', conSonido ? 'Silenciar video' : 'Activar sonido');
+    sonido.querySelector('.vid-sonido-texto').textContent = conSonido ? 'Sonido activado' : 'Activar sonido';
+  }
+  if (sonido) sonido.addEventListener('click', () => {
+    conSonido = !conSonido;
+    video.muted = !conSonido;
+    if (conSonido && video.paused) { pausadoPorUsuario = false; reproducir(); }
+    pintarSonido();
   });
-  
-  videoContainers.forEach(container => {
-    videoObserver.observe(container);
+
+  let enPantalla = false;
+  // Con movimiento reducido arranca en pausa: se ve el póster y el botón.
+  let pausadoPorUsuario = reducido;
+
+  function pintarControl() {
+    const sonando = !video.paused;
+    marco.classList.toggle('vid-sonando', sonando);
+    control.setAttribute('aria-label', sonando ? 'Pausar video' : 'Reproducir video');
+    control.setAttribute('aria-pressed', sonando ? 'false' : 'true');
+  }
+
+  function cargar() {
+    if (!video.getAttribute('src')) {
+      video.src = video.dataset.src;
+      video.load();
+    }
+  }
+
+  function reproducir() {
+    cargar();
+    const p = video.play();
+    if (p && p.catch) p.catch(pintarControl);
+  }
+
+  video.addEventListener('play', pintarControl);
+  video.addEventListener('pause', pintarControl);
+  // Si el video falla, se retira y queda visible el póster de debajo.
+  video.addEventListener('error', () => {
+    marco.classList.add('vid-fallo');
+    pintarControl();
   });
+
+  control.addEventListener('click', () => {
+    if (video.paused) {
+      pausadoPorUsuario = false;
+      reproducir();
+    } else {
+      pausadoPorUsuario = true;
+      video.pause();
+    }
+  });
+
+  if (hayObserver) {
+    const obsVideo = new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        enPantalla = e.isIntersecting;
+        if (enPantalla && !pausadoPorUsuario) reproducir();
+        else if (!enPantalla && !video.paused) video.pause();
+      });
+    }, { threshold: 0.35 });
+    obsVideo.observe(marco);
+  } else if (!pausadoPorUsuario) {
+    reproducir();
+  }
+
+  // Miniaturas propias: cambian el video principal con un fundido.
+  if (!carril) return;
+  carril.addEventListener('click', (ev) => {
+    const mini = ev.target.closest('.vid-mini[data-indice]');
+    if (!mini || mini.getAttribute('aria-pressed') === 'true') return;
+    const elegido = videos[Number(mini.dataset.indice)];
+    if (!elegido || !elegido.videoSrc) return;
+
+    carril.querySelectorAll('.vid-mini[data-indice]').forEach(m =>
+      m.setAttribute('aria-pressed', m === mini ? 'true' : 'false'));
+
+    const cambiar = () => {
+      video.pause();
+      marco.classList.remove('vid-fallo');
+      video.dataset.src = elegido.videoSrc;
+      video.removeAttribute('src');
+      video.poster = mini.dataset.poster;
+      video.setAttribute('aria-label', elegido.titulo);
+      video.muted = !conSonido;
+      if (poster) poster.src = mini.dataset.poster;
+      if (enPantalla && !pausadoPorUsuario) reproducir();
+      else video.load();
+      marco.classList.remove('vid-cambiando');
+      pintarControl();
+    };
+
+    if (reducido) { cambiar(); return; }
+    marco.classList.add('vid-cambiando');
+    setTimeout(cambiar, 260);
+  });
+
+  pintarControl();
+  pintarSonido();
 }
 
 function renderVideos() {
-  const container = document.getElementById('videos-container');
-  if (!container) return;
+  const marco = document.getElementById('vid-marco');
+  const carril = document.getElementById('vid-carril');
+  const botonWa = document.getElementById('vid-whatsapp');
+  if (!marco || !carril) return;
 
-  const conContenido = videos.filter(v => v.videoSrc || v.url);
-
-  if (!conContenido.length) {
-    container.innerHTML = `
-      <div class="reel-vacio">
-        <i class="fas fa-video"></i>
-        <p>Pronto publicaremos nuevos videos.</p>
-      </div>`;
-    return;
+  if (botonWa) {
+    botonWa.href = WHATSAPP_API + encodeURIComponent('Hola, vi sus videos y quiero hacer un pedido');
   }
 
-  container.innerHTML = conContenido.map(video => {
-    // Video propio: se descarga sólo al pulsar, nunca antes.
-    if (video.videoSrc) {
-      const base = video.videoSrc.split('/').pop().replace(/\.mp4$/i, '');
-      const poster = 'assets/productos/Videos/posters/' + base + '.jpg';
+  // Los -web.mp4 son la versión comprimida del mismo video: comparten póster.
+  const posterDe = (src) => 'assets/productos/Videos/posters/' +
+    src.split('/').pop().replace(/(-web)?\.mp4$/i, '') + '.jpg';
+
+  const principal = videos.find(v => v.plataforma === 'local' && v.videoSrc);
+  const iconoPlay = '<svg class="vid-icono-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
+  const iconoPausa = '<svg class="vid-icono-pausa" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>';
+  const iconoMudo = '<svg class="vid-icono-mudo" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l5-4v14l-5-4H4z"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+  const iconoSonido = '<svg class="vid-icono-sonido" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l5-4v14l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+
+  if (principal) {
+    const poster = posterDe(principal.videoSrc);
+    marco.innerHTML = `
+      <img class="vid-poster" src="${poster}" alt="Portada del video: ${principal.titulo}" decoding="async">
+      <video class="vid-video" muted loop playsinline preload="none"
+             poster="${poster}" data-src="${principal.videoSrc}"
+             aria-label="${principal.titulo}"></video>
+      <button type="button" class="vid-control" aria-label="Reproducir video" aria-pressed="true">
+        ${iconoPlay}${iconoPausa}
+      </button>
+      <button type="button" class="vid-sonido" aria-pressed="false">
+        ${iconoMudo}${iconoSonido}<span class="vid-sonido-texto">Activar sonido</span>
+      </button>`;
+  } else {
+    marco.closest('.vid-media')?.classList.add('vid-sin-video');
+  }
+
+  carril.innerHTML = videos.map((video, i) => {
+    if (video.plataforma === 'local' && video.videoSrc) {
+      const poster = posterDe(video.videoSrc);
+      const activo = video === principal;
       return `
-      <article class="reel video-container-lazy" data-video-src="${video.videoSrc}">
-        <img class="reel-poster" src="${poster}" alt="" loading="lazy" decoding="async"
-             onerror="this.remove()">
-        <button type="button" class="reel-lanzador video-placeholder" aria-label="Reproducir: ${video.titulo}">
-          <span class="reel-play"><i class="fas fa-play"></i></span>
+      <div role="listitem" class="vid-item">
+        <button type="button" class="vid-mini" data-indice="${i}" data-poster="${poster}"
+                aria-pressed="${activo}">
+          <img src="${poster}" alt="Video de velas: ${video.titulo}" loading="lazy" decoding="async">
+          <span class="vid-mini-titulo">${video.titulo}</span>
         </button>
-        <video class="reel-video video-el hidden" preload="none" playsinline controls
-               aria-label="${video.titulo}">
-          Tu navegador no soporta videos HTML5.
-        </video>
-        <div class="reel-pie">
-          <h3 class="reel-titulo">${video.titulo}</h3>
-        </div>
-      </article>`;
+      </div>`;
     }
-
-    // Video de TikTok: portada alojada aquí que abre el original.
-    return `
-      <a class="reel reel-enlace" href="${video.url}" target="_blank" rel="noopener noreferrer"
-         aria-label="Ver en TikTok: ${video.titulo}">
-        <img class="reel-poster" src="${video.portada}" alt="" loading="lazy" decoding="async"
-             onerror="this.remove()">
-        <span class="reel-red"><i class="fab fa-tiktok" aria-hidden="true"></i></span>
-        <span class="reel-play"><i class="fas fa-play"></i></span>
-        <div class="reel-pie">
-          <h3 class="reel-titulo">${video.titulo}</h3>
-        </div>
-      </a>`;
+    if (video.url) {
+      return `
+      <div role="listitem" class="vid-item">
+        <a class="vid-mini vid-mini-tiktok" href="${video.url}" target="_blank" rel="noopener noreferrer"
+           aria-label="Ver en TikTok: ${video.titulo}">
+          <img src="${video.portada}" alt="Video de TikTok: ${video.titulo}" loading="lazy" decoding="async">
+          <span class="vid-mini-red"><i class="fab fa-tiktok" aria-hidden="true"></i></span>
+          <span class="vid-mini-titulo" aria-hidden="true">${video.titulo}</span>
+        </a>
+      </div>`;
+    }
+    return '';
   }).join('');
-
-  if (typeof refrescarMovimiento === 'function') refrescarMovimiento(container);
 }
 
 // Búsqueda mejorada
@@ -5426,7 +5771,7 @@ function initNavegacionSecciones() {
   const hash = window.location.hash.replace('#', '') || 'inicio';
   
   // Si el hash es 'videos', redirigir a inicio (los videos están en inicio)
-  const hashFinal = hash === 'videos' ? 'inicio' : hash;
+  const hashFinal = hash === 'videos' ? 'novedades' : hash;
   mostrarSeccion(hashFinal);
   
   // Escuchar cambios en los enlaces del menú
@@ -5435,11 +5780,21 @@ function initNavegacionSecciones() {
     enlace.addEventListener('click', (e) => {
       e.preventDefault();
       let hash = enlace.getAttribute('href').replace('#', '');
-      
+
+      // Un ancla dentro de una sección (el formulario, por ejemplo) no es
+      // una sección: se baja hasta ella sin cambiar de página.
+      const destino = document.getElementById(hash);
+      if (destino && !destino.classList.contains('page-section') && destino.closest('.page-section')) {
+        const seccion = destino.closest('.page-section');
+        if (seccion.style.display === 'none' || seccion.hidden) mostrarSeccion(seccion.id);
+        setTimeout(() => destino.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+        return;
+      }
+
       // Si el enlace es a videos, cambiar a inicio
       if (hash === 'videos') {
-        hash = 'inicio';
-        // Scroll a videos dentro de inicio
+        hash = 'novedades';
+        // Scroll a videos dentro de Novedades
         setTimeout(() => {
           const videosSection = document.getElementById('videos');
           if (videosSection) {
@@ -5467,7 +5822,7 @@ function initNavegacionSecciones() {
   window.addEventListener('hashchange', () => {
     let hash = window.location.hash.replace('#', '') || 'inicio';
     if (hash === 'videos') {
-      hash = 'inicio';
+      hash = 'novedades';
       setTimeout(() => {
         const videosSection = document.getElementById('videos');
         if (videosSection) {
@@ -5481,7 +5836,9 @@ function initNavegacionSecciones() {
 
 function mostrarSeccion(seccionId) {
   // Lista de secciones válidas
-  const secciones = ['inicio', 'productos', 'personalizadas', 'deseos', 'contacto', 'videos'];
+  const secciones = ['inicio', 'productos', 'novedades', 'personalizadas', 'deseos', 'contacto'];
+  // Los videos y la cuenta atrás viven ahora en Novedades.
+  if (seccionId === 'videos' || seccionId === 'cuenta-atras') seccionId = 'novedades';
   
   // Si la sección no es válida, usar 'inicio'
   if (!secciones.includes(seccionId)) {
