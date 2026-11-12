@@ -4132,8 +4132,34 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   border-color: var(--gold-deep);
   color: var(--gold-ink);
 }
+.deseo-chip:disabled { opacity: 0.45; cursor: not-allowed; }
 @media (hover: hover) and (pointer: fine) {
-  .deseo-chip:hover:not(.active) { border-color: var(--gold); color: var(--gold-deep); background: var(--gold-mist); }
+  .deseo-chip:hover:not(.active):not(:disabled) { border-color: var(--gold); color: var(--gold-deep); background: var(--gold-mist); }
+}
+
+/* "3 de 10 deseos elegidos · Borrar" */
+.deseo-cuenta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: calc(var(--space-8) * -1 + var(--space-3)) 0 var(--space-4);
+  font-size: var(--text-small);
+  color: var(--ink-2);
+}
+.deseo-cuenta[hidden] { display: none; }
+.deseo-borrar {
+  min-height: 44px;
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--gold-deep);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 /* La palabra elegida, grande, como irá escrita en la vela. */
@@ -4153,6 +4179,22 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   font-weight: 700;
   line-height: 1.1;
   color: var(--gold-deep);
+}
+/* Varios deseos: más pequeños y separados por un punto dorado. */
+.deseo-palabra.varias {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 44rem;
+  margin: 0 auto;
+  column-gap: var(--space-3);
+  row-gap: var(--space-1);
+  font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+}
+.deseo-palabra.varias span:not(:last-child)::after {
+  content: "·";
+  margin-left: var(--space-3);
+  color: var(--gold-lite);
 }
 .deseo-palabra.aparece { animation: deseo-aparece var(--dur-lenta) var(--ease-suave) both; }
 @keyframes deseo-aparece {
@@ -4262,4 +4304,439 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 @media (prefers-reduced-motion: reduce) {
   .deseo-palabra.aparece { animation: none; }
+}
+
+/* ============================================================
+   46. Hero tipo landing
+   ------------------------------------------------------------
+   El taller lleno de velas de fondo, oscurecido con el vino y el
+   tostado de la marca para que el texto crema se lea encima. La
+   foto pinta al instante; el video la cubre cuando ya está sonando.
+   ============================================================ */
+
+.hero.hero-landing {
+  min-height: calc(100svh - 64px);
+  padding: var(--space-16) var(--space-4) calc(var(--space-16) + var(--space-8));
+  background: #1E1410;
+  color: var(--gold-ink);
+}
+
+/* Las capas del hero anterior ya no van: el fondo es la foto. */
+.hero-landing::before { display: none; }
+
+.hero-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.hero-fondo-img,
+.hero-fondo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+.hero-fondo-video { opacity: 0; transition: opacity 900ms var(--ease-suave); }
+.hero-fondo-video.lista { opacity: 1; }
+
+/* Velo: más oscuro en el centro, donde va el texto, y abajo, donde la
+   página sigue en crema. */
+.hero-fondo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 48%, rgba(24, 14, 10, 0.72) 0%, rgba(24, 14, 10, 0.45) 70%, rgba(24, 14, 10, 0.35) 100%),
+    linear-gradient(180deg, rgba(88, 21, 32, 0.35) 0%, rgba(24, 14, 10, 0) 40%, rgba(24, 14, 10, 0.55) 100%);
+}
+
+.hero-landing .hero-inner { max-width: 46rem; }
+
+.hero-landing .hero-logo {
+  width: clamp(72px, 16vw, 96px);
+  filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.45));
+}
+
+.hero-landing .hero-eyebrow { color: var(--gold-veil); }
+
+.hero-landing .hero-title {
+  color: #FFFCF6;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero-landing .hero-subtitle {
+  margin-bottom: var(--space-8);
+  color: rgba(255, 252, 246, 0.86);
+}
+
+.hero-landing .btn-secondary {
+  background: rgba(255, 252, 246, 0.1);
+  color: #FFFCF6;
+  border-color: rgba(255, 252, 246, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero-landing .btn-secondary:hover {
+    background: rgba(255, 252, 246, 0.2);
+    border-color: #FFFCF6;
+    color: #FFFCF6;
+  }
+}
+
+.hero-landing .btn { min-width: 220px; }
+
+/* Lo que da confianza, en una línea debajo de los botones. */
+.hero-confianza {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-6);
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  list-style: none;
+  animation-delay: 460ms;
+}
+.hero-confianza li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: rgba(255, 252, 246, 0.9);
+}
+.hero-confianza i { color: var(--gold-lite); font-size: 13px; }
+
+/* "Mira el taller ↓" al pie del hero. */
+.hero-bajar {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-6);
+  z-index: 1;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: var(--space-1) var(--space-3);
+  transform: translateX(-50%);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 252, 246, 0.75);
+}
+.hero-bajar i { transform: rotate(90deg); font-size: 12px; }
+.hero-bajar:focus-visible { outline: 2px solid var(--gold-veil); outline-offset: 4px; border-radius: var(--r-sm); }
+@media (hover: hover) and (pointer: fine) {
+  .hero-bajar:hover { color: #FFFCF6; }
+}
+
+@media (max-width: 639px) {
+  .hero-landing .btn { min-width: 0; }
+  .hero-confianza { flex-direction: column; align-items: center; gap: var(--space-2); }
+}
+
+@media (min-width: 768px) {
+  .hero.hero-landing { min-height: calc(100svh - 72px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fondo-video { display: none; }
+}
+
+/* ============================================================
+   47. Bloques tipo landing del inicio
+   ------------------------------------------------------------
+   Sólo dos: "El taller" (frase grande, collage y tres puntos) y la
+   franja oscura de Navidad con su galería escalonada. El resto de
+   la página conserva su estilo.
+   ============================================================ */
+
+.lnd {
+  position: relative;
+  padding: clamp(80px, 12vw, 144px) 0;
+}
+
+.lnd-envoltura {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.lnd-eyebrow {
+  display: block;
+  margin-bottom: var(--space-6);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.lnd-enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--accion);
+}
+.lnd-enlace i { font-size: 12px; transition: transform var(--dur-base) var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .lnd-enlace:hover i { transform: translateX(4px); }
+}
+
+/* --- El taller --- */
+
+.lnd-taller { background: var(--bg); }
+
+.lnd-frase {
+  max-width: 22ch;
+  margin: 0 0 clamp(48px, 8vw, 96px);
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 6.4vw, 4.75rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.lnd-frase-suave {
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.lnd-taller-grid {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.lnd-collage {
+  position: relative;
+  padding-right: 22%;
+  padding-bottom: 14%;
+}
+.lnd-collage img { display: block; object-fit: cover; box-shadow: var(--shadow-3); }
+.lnd-collage-a {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-xl);
+}
+/* La segunda foto en arco, como una vela vista de frente. */
+.lnd-collage-b {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  aspect-ratio: 3 / 5;
+  border-radius: 999px 999px var(--r-lg) var(--r-lg);
+  border: 6px solid var(--bg);
+}
+
+.lnd-puntos {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-self: center;
+}
+.lnd-puntos li {
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--line-strong);
+}
+.lnd-puntos li:last-child { border-bottom: 1px solid var(--line-strong); }
+.lnd-puntos h3 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--ink);
+}
+.lnd-puntos p {
+  max-width: 34rem;
+  margin: 0;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.lnd-puntos .lnd-enlace { margin-top: var(--space-2); }
+
+@media (min-width: 900px) {
+  .lnd-envoltura { padding: 0 var(--space-8); }
+  .lnd-taller-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: clamp(64px, 9vw, 140px);
+    align-items: center;
+  }
+}
+
+/* --- Franja oscura de Navidad --- */
+
+.lnd-oscuro {
+  background: #1E1410;
+  color: #F3EADA;
+  overflow: hidden;
+}
+
+.lnd-oscuro .lnd-eyebrow { color: var(--gold-veil); }
+
+.lnd-oscuro-cabeza {
+  display: grid;
+  gap: var(--space-6);
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.lnd-titulo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #FFFCF6;
+}
+.lnd-titulo em { color: var(--gold-veil); font-weight: 500; }
+
+.lnd-oscuro-lado p {
+  max-width: 26rem;
+  margin: 0;
+  line-height: 1.7;
+  color: rgba(243, 234, 218, 0.78);
+}
+
+.lnd-flechas { display: none; gap: var(--space-2); margin-top: var(--space-6); }
+.lnd-flecha {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid rgba(243, 234, 218, 0.35);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: #F3EADA;
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.lnd-flecha[data-dir="-1"] i { transform: rotate(180deg); }
+@media (hover: hover) and (pointer: fine) {
+  .lnd-flecha:hover { background: rgba(243, 234, 218, 0.1); border-color: #F3EADA; }
+}
+
+/* Galería: se desliza de lado, las fotos a distintas alturas. */
+.lnd-galeria {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding: 0 var(--space-4) var(--space-8);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--space-4);
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.lnd-galeria::-webkit-scrollbar { display: none; }
+
+.lnd-pieza {
+  flex: none;
+  width: min(68vw, 300px);
+  scroll-snap-align: start;
+}
+.lnd-pieza:nth-child(3n+2) { margin-top: 56px; }
+.lnd-pieza:nth-child(3n) { margin-top: 20px; width: min(74vw, 340px); }
+
+.lnd-foto {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.lnd-foto img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  transition: transform 500ms var(--ease-suave);
+}
+.lnd-pie {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+.lnd-pie strong {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #FFFCF6;
+}
+.lnd-pie span {
+  flex: none;
+  font-size: var(--text-micro);
+  color: rgba(243, 234, 218, 0.62);
+}
+
+.lnd-pieza-final { align-self: center; width: auto; margin-top: 0 !important; }
+.lnd-todo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 56px;
+  padding: 0 var(--space-8);
+  border: 1px solid rgba(243, 234, 218, 0.4);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: #FFFCF6;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lnd-foto:hover img { transform: scale(1.02); }
+  .lnd-foto:hover .lnd-pie span { color: var(--gold-veil); }
+  .lnd-todo:hover { background: rgba(243, 234, 218, 0.1); border-color: #FFFCF6; }
+}
+
+.lnd-foto:focus-visible,
+.lnd-todo:focus-visible,
+.lnd-flecha:focus-visible { outline: 2px solid var(--gold-veil); outline-offset: 4px; border-radius: var(--r-lg); }
+
+@media (min-width: 900px) {
+  .lnd-oscuro-cabeza {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: var(--space-16);
+  }
+  .lnd-flechas { display: flex; }
+  /* La galería arranca alineada con el texto y sale por la derecha. */
+  .lnd-galeria {
+    gap: var(--space-12);
+    padding-left: max(var(--space-8), calc((100vw - 76rem) / 2 + var(--space-8)));
+    scroll-padding-inline: max(var(--space-8), calc((100vw - 76rem) / 2 + var(--space-8)));
+  }
+  .lnd-pieza { width: 320px; }
+  .lnd-pieza:nth-child(3n+2) { margin-top: 96px; }
+  .lnd-pieza:nth-child(3n) { margin-top: 32px; width: 380px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lnd-foto img, .lnd-enlace i { transition: none; }
+  .lnd-foto:hover img, .lnd-enlace:hover i { transform: none; }
 }

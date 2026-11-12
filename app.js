@@ -2176,8 +2176,14 @@ const promociones = [
 const videos = [
   // Los -web.mp4 salen de los originales con ffmpeg (-crf 28 -an +faststart).
   { plataforma: "local", titulo: "Navidad 2026: latas de regalo", videoSrc: "assets/productos/Videos/comercial-navidad-2026-9x16-instagram-web.mp4" },
+  { plataforma: "local", titulo: "Temporada navideña", videoSrc: "assets/productos/Videos/temporada-navidena-web.mp4" },
+  { plataforma: "local", titulo: "Souvenirs de Navidad", videoSrc: "assets/productos/Videos/suvenirs-navidad-web.mp4" },
+  { plataforma: "local", titulo: "Cajas de estrellas navideñas", videoSrc: "assets/productos/Videos/cajas-estrellas-navidad-web.mp4" },
+  { plataforma: "local", titulo: "Velas de la Virgen en colores", videoSrc: "assets/productos/Videos/velas-virgen-colores-web.mp4" },
+  { plataforma: "local", titulo: "Velas degradé", videoSrc: "assets/productos/Videos/velas-degrade-web.mp4" },
+  // Antes "Aromas y fragancias" (aro.mp4): era el mismo clip, en menos resolución.
+  { plataforma: "local", titulo: "En producción en el taller", videoSrc: "assets/productos/Videos/taller-produccion-web.mp4" },
   { plataforma: "local", titulo: "Nuestras velas", videoSrc: "assets/productos/Videos/velas-web.mp4" },
-  { plataforma: "local", titulo: "Aromas y fragancias", videoSrc: "assets/productos/Videos/aro-web.mp4" },
   { plataforma: "local", titulo: "Colección especial", videoSrc: "assets/productos/Videos/al-web.mp4" },
   { plataforma: "local", titulo: "Velas artesanales", videoSrc: "assets/productos/Videos/vel-web.mp4" },
   { plataforma: "tiktok", titulo: "Pregunta ya por nuestro kit", url: "https://www.tiktok.com/@velas.elena/video/7684359342010748180",
@@ -2232,6 +2238,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initPromociones();
   initCuentaAtras();
   initDeseos();
+  initHeroFondo();
+  initLanding();
   initVideos();
   initMouseWheelScroll();
   initSearch();
@@ -4819,34 +4827,74 @@ function initDeseos() {
   const rejilla = document.getElementById('deseos-velas');
   const catalogos = document.getElementById('deseos-catalogos');
   if (!lista || !rejilla || !catalogos) return;
-  let elegido = null;
+  // Los paquetes casi siempre son de 10 velas, una palabra en cada una.
+  const MAX_DESEOS = 10;
+  // En el orden en que se tocaron, que es el que verá el taller.
+  let elegidos = [];
 
   lista.innerHTML = DESEOS.map(d => `
     <button type="button" class="deseo-chip" aria-pressed="false" data-deseo="${d}">${d}</button>
   `).join('');
 
-  lista.addEventListener('click', e => {
-    const chip = e.target.closest('.deseo-chip');
-    if (!chip) return;
-    elegido = chip.dataset.deseo;
+  const palabra = document.getElementById('deseo-palabra');
+  const pista = document.getElementById('deseo-pista');
+  const cuenta = document.getElementById('deseo-cuenta');
+  const textoPedir = document.getElementById('deseo-pedir-texto');
+
+  function pintarElegidos() {
     lista.querySelectorAll('.deseo-chip').forEach(c => {
-      const activo = c === chip;
+      const activo = elegidos.includes(c.dataset.deseo);
       c.classList.toggle('active', activo);
       c.setAttribute('aria-pressed', String(activo));
+      // Con 10 ya elegidos, el resto espera a que se quite alguno.
+      c.disabled = !activo && elegidos.length >= MAX_DESEOS;
     });
-    const palabra = document.getElementById('deseo-palabra');
-    palabra.textContent = elegido;
-    palabra.hidden = false;
+
+    const n = elegidos.length;
+    palabra.hidden = n === 0;
+    pista.hidden = n > 0;
+    palabra.classList.toggle('varias', n > 1);
+    palabra.innerHTML = elegidos.map(d => `<span>${d}</span>`).join('');
+    if (cuenta) {
+      cuenta.hidden = n === 0;
+      cuenta.querySelector('span').textContent = n === MAX_DESEOS
+        ? `Tienes los ${MAX_DESEOS} deseos. Toca uno para quitarlo.`
+        : `${n} de ${MAX_DESEOS} deseos elegidos`;
+    }
+    textoPedir.textContent = n === 0 ? 'Pedir por WhatsApp'
+      : n === 1 ? 'Pedir mi vela de ' + elegidos[0]
+      : `Pedir mis ${n} deseos`;
+  }
+
+  lista.addEventListener('click', e => {
+    const chip = e.target.closest('.deseo-chip');
+    if (!chip || chip.disabled) return;
+    const deseo = chip.dataset.deseo;
+    if (elegidos.includes(deseo)) {
+      elegidos = elegidos.filter(d => d !== deseo);
+    } else {
+      elegidos.push(deseo);
+    }
+    pintarElegidos();
     palabra.classList.remove('aparece'); void palabra.offsetWidth; palabra.classList.add('aparece');
-    document.getElementById('deseo-pista').hidden = true;
-    document.getElementById('deseo-pedir-texto').textContent = 'Pedir mi vela de ' + elegido;
+  });
+
+  const borrar = document.getElementById('deseo-borrar');
+  if (borrar) borrar.addEventListener('click', () => {
+    elegidos = [];
+    pintarElegidos();
   });
 
   const pedir = document.getElementById('deseo-pedir');
   if (pedir) pedir.addEventListener('click', () => {
-    const mensaje = elegido
-      ? `¡Hola! Quiero una vela con el deseo *${elegido}*. ¿Qué opciones tienen?`
-      : '¡Hola! Quiero una vela con un deseo escrito. ¿Qué opciones tienen?';
+    const n = elegidos.length;
+    const mensaje = n === 0
+      ? '¡Hola! Quiero una vela con un deseo escrito. ¿Qué opciones tienen?'
+      : n === 1
+        ? `¡Hola! Quiero una vela con el deseo *${elegidos[0]}*. ¿Qué opciones tienen?`
+        : `¡Hola! Quiero velas con estos ${n} deseos:\n` +
+          elegidos.map((d, i) => `${i + 1}. *${d}*`).join('\n') +
+          '\n¿Qué opciones tienen?';
     window.open(WHATSAPP_API + encodeURIComponent(mensaje), '_blank');
   });
 
@@ -5176,6 +5224,72 @@ function actualizarCarrusel() {
   
   slides.style.transform = `translateX(-${state.currentPromoSlide * 100}%)`;
   actualizarPromoPuntos();
+}
+
+// Fondo del hero: la foto ya está; el video llega después de cargar la
+// página y sólo corre mientras el hero se ve.
+function initHeroFondo() {
+  const video = document.querySelector('.hero-fondo-video');
+  if (!video || !video.dataset.src) return;
+  const red = navigator.connection || {};
+  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducido || red.saveData === true || /2g/.test(red.effectiveType || '')) return;
+
+  const arrancar = () => {
+    video.src = video.dataset.src;
+    video.addEventListener('playing', () => video.classList.add('lista'), { once: true });
+    // Si falla, la foto de debajo sigue ahí.
+    video.addEventListener('error', () => video.remove(), { once: true });
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {});
+
+    if (!('IntersectionObserver' in window)) return;
+    new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        if (e.isIntersecting) { const q = video.play(); if (q && q.catch) q.catch(() => {}); }
+        else video.pause();
+      });
+    }, { threshold: 0.05 }).observe(video.closest('.hero') || video);
+  };
+
+  if (document.readyState === 'complete') arrancar();
+  else window.addEventListener('load', arrancar, { once: true });
+}
+
+// Bloques tipo landing del inicio: la galería de Navidad abre cada
+// producto; si la hoja lo cambió de id, lleva al catálogo de Navidad.
+function initLanding() {
+  const galeria = document.getElementById('lnd-galeria');
+  if (!galeria) return;
+
+  const irACatalogo = (categoria) => {
+    mostrarSeccion('productos');
+    state.categoriaActual = categoria;
+    renderCategorias();
+    renderProductos();
+    const destino = document.getElementById('productos');
+    if (destino) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  galeria.addEventListener('click', e => {
+    const foto = e.target.closest('[data-producto]');
+    if (foto) {
+      const existe = obtenerTodosLosProductos().some(p => p.id === foto.dataset.producto);
+      if (existe) abrirModalProducto(foto.dataset.producto);
+      else irACatalogo('navidad');
+      return;
+    }
+    const todo = e.target.closest('[data-categoria]');
+    if (todo) irACatalogo(todo.dataset.categoria);
+  });
+
+  // Flechas para quien usa mouse: en táctil basta con deslizar.
+  document.querySelectorAll('.lnd-flecha').forEach(boton => {
+    boton.addEventListener('click', () => {
+      const paso = Math.max(galeria.clientWidth * 0.7, 280);
+      galeria.scrollBy({ left: paso * Number(boton.dataset.dir), behavior: 'smooth' });
+    });
+  });
 }
 
 // Videos
