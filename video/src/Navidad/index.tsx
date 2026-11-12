@@ -140,6 +140,55 @@ const Titulo: React.FC = () => {
 };
 
 
+// ───────────────────────── Fondo navideño ─────────────────────────
+const Festivo: React.FC<{ rojo: boolean }> = ({ rojo }) => (
+  <AbsoluteFill
+    style={{
+      background: rojo
+        ? "radial-gradient(ellipse at 50% 35%, #b3202e 0%, #7d1220 45%, #3e0810 100%)"
+        : "radial-gradient(ellipse at 50% 35%, #2f7a52 0%, #1d5236 45%, #0b2617 100%)",
+    }}
+  >
+    <Bokeh seed={rojo ? "r" : "v"} count={18} opacity={0.5} />
+    <Snow count={55} seed={rojo ? "r" : "v"} opacity={0.75} />
+  </AbsoluteFill>
+);
+
+/** Borde de bastón de caramelo (rojo, blanco y verde) con luces doradas. */
+const Guirnalda: React.FC = () => {
+  const f = useCurrentFrame();
+  const { u, width, height } = useLayout();
+  const b = 16 * u;
+  const rayas = "repeating-linear-gradient(45deg, #c8202e 0 14px, #fffaf0 14px 26px, #1f7a4a 26px 40px, #fffaf0 40px 52px)";
+  const luces = Array.from({ length: 18 }, (_, i) => i);
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      <AbsoluteFill style={{ border: `${b}px solid transparent`, borderImage: `${rayas} 1`, boxSizing: "border-box" }} />
+      {luces.map((i) => {
+        const top = i < 9;
+        const x = ((i % 9) + 0.5) / 9;
+        const on = 0.55 + 0.45 * Math.sin(f / 8 + i * 1.7);
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: x * width - 7 * u,
+              top: top ? b + 4 * u : height - b - 18 * u,
+              width: 14 * u,
+              height: 14 * u,
+              borderRadius: "50%",
+              background: ["#ffd36b", "#ff5a5a", "#7dffb0"][i % 3],
+              boxShadow: `0 0 ${18 * u}px ${6 * u}px rgba(255,210,120,${0.5 * on})`,
+              opacity: on,
+            }}
+          />
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
 // ───────────────────────── Fotos completas (sin recorte) ─────────────────────────
 /** La foto entera dentro de un marco, sobre una versión desenfocada de sí misma; cámara lenta sobre el marco. */
 const FotoCompleta: React.FC<{ t: Toma; i: number; n: number; dur: number; intro?: string }> = ({ t, i, n, dur, intro }) => {
@@ -147,7 +196,7 @@ const FotoCompleta: React.FC<{ t: Toma; i: number; n: number; dur: number; intro
   const { u, width, height, wide } = useLayout();
   const p = interpolate(f, [0, dur], [0, 1], { ...clamp, easing: Easing.inOut(Easing.sin) });
   // área disponible para la foto (vertical: arriba, dejando abajo la zona de texto y la interfaz de Instagram)
-  const area = wide ? { x: width * 0.38, y: height * 0.07, w: width * 0.58, h: height * 0.86 } : { x: width * 0.04, y: height * 0.08, w: width * 0.92, h: height * 0.57 };
+  const area = wide ? { x: width * 0.33, y: height * 0.06, w: width * 0.64, h: height * 0.88 } : { x: width * 0.035, y: height * 0.045, w: width * 0.93, h: height * 0.67 };
   let w = area.w;
   let h = w / t.ratio;
   if (h > area.h) {
@@ -161,8 +210,7 @@ const FotoCompleta: React.FC<{ t: Toma; i: number; n: number; dur: number; intro
   const a = (d: number) => interpolate(f, [d, d + 16], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
   return (
     <AbsoluteFill style={{ background: P.noche, overflow: "hidden" }}>
-      <Img src={foto(t.foto)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "blur(38px) brightness(.5) saturate(1.2)", transform: `scale(${1.25 + p * 0.05})` }} />
-      <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(5,3,1,.55) 100%)" }} />
+      <Festivo rojo={i % 2 === 0} />
       <div
         style={{
           position: "absolute",
@@ -173,7 +221,9 @@ const FotoCompleta: React.FC<{ t: Toma; i: number; n: number; dur: number; intro
           transform: `translateX(${drift}px) scale(${s})`,
           borderRadius: 18 * u,
           overflow: "hidden",
-          boxShadow: `0 30px 80px rgba(0,0,0,.6), 0 0 0 ${2 * u}px rgba(216,189,138,.55)`,
+          border: `${10 * u}px solid #fffaf0`,
+          boxShadow: `0 30px 70px rgba(0,0,0,.55), 0 0 0 ${3 * u}px ${P.champagne}`,
+          boxSizing: "content-box",
         }}
       >
         <Img src={foto(t.foto)} style={{ width: "100%", height: "100%", filter: "brightness(1.04) contrast(1.04) saturate(1.06)" }} />
@@ -182,7 +232,7 @@ const FotoCompleta: React.FC<{ t: Toma; i: number; n: number; dur: number; intro
       <AbsoluteFill
         style={{
           justifyContent: wide ? "center" : "flex-start",
-          padding: wide ? `0 ${width * 0.64}px 0 ${width * 0.05}px` : `${height * 0.675}px ${60 * u}px 0`,
+          padding: wide ? `0 ${width * 0.64}px 0 ${width * 0.05}px` : `${height * 0.742}px ${50 * u}px 0`,
           textAlign: wide ? "left" : "center",
           alignItems: wide ? "flex-start" : "center",
         }}
@@ -202,7 +252,7 @@ const FotoCompleta: React.FC<{ t: Toma; i: number; n: number; dur: number; intro
           <span style={{ fontFamily: FONT_BODY, fontWeight: 500, fontSize: 27 * u, color: P.blancoCalido, marginLeft: 6 * u }}>{t.detalle}</span>
         </div>
       </AbsoluteFill>
-      <Grade strength={0.4} />
+      <Guirnalda />
     </AbsoluteFill>
   );
 };
