@@ -3,6 +3,12 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "pagina-m-vil-elena.vercel.app" }],
+      "destination": "https://www.velasyaromaselena.com/",
+      "permanent": true
+    },
+    {
       "source": "/:ruta*",
       "has": [{ "type": "host", "value": "pagina-m-vil-elena.vercel.app" }],
       "destination": "https://www.velasyaromaselena.com/:ruta*",
