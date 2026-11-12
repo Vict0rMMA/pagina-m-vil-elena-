@@ -928,7 +928,7 @@ input:focus, textarea:focus, select:focus {
   align-items: stretch;
   justify-content: space-around;
   height: 64px;
-  /* Cinco botones; el margen lateral reducido sigue dando aire en 320 px. */
+  /* Seis botones: el margen lateral se reduce para que quepan en 320 px. */
   padding: 0 var(--space-1);
 }
 
