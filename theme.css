@@ -6618,3 +6618,84 @@ h1, h2, h3, h4,
 }
 .ctc-pago-icono { width: 42px; height: 42px; font-size: 18px; }
 .ctc-pago-icono img { width: 28px; height: 28px; }
+
+/* ============================================================
+   65. Vitrina viva
+   ------------------------------------------------------------
+   Llamas que titilan, halo que respira, chispas que suben y velas
+   nuevas que caen con rebote y se encienden. Sólo transform y
+   opacity, y todo en pausa cuando la vitrina no se ve (.viva lo
+   pone app.js), para que el celular no trabaje de más.
+   ============================================================ */
+
+.dsw-vitrina:not(.viva) *,
+.dsw-vitrina:not(.viva) *::before,
+.dsw-vitrina:not(.viva) *::after { animation-play-state: paused !important; }
+
+.dsw-llama {
+  transform-origin: 50% 100%;
+  animation: llama-titila 1.6s ease-in-out infinite alternate;
+}
+.dsw-vela:nth-child(2n) .dsw-llama { animation-duration: 1.25s; animation-delay: -0.4s; }
+.dsw-vela:nth-child(3n) .dsw-llama { animation-duration: 1.9s; animation-delay: -0.9s; }
+@keyframes llama-titila {
+  0%   { transform: scale(1, 1) rotate(-1deg); }
+  30%  { transform: scale(0.94, 1.08) rotate(1.5deg); }
+  55%  { transform: scale(1.04, 0.95) rotate(-2deg); }
+  80%  { transform: scale(0.97, 1.05) rotate(1deg); }
+  100% { transform: scale(1.02, 0.98) rotate(0deg); }
+}
+
+.dsw-vela::before { animation: halo-respira 3.2s ease-in-out infinite alternate; }
+.dsw-vela:nth-child(2n)::before { animation-delay: -1.3s; }
+@keyframes halo-respira {
+  from { opacity: 0.75; transform: translateX(-50%) scale(0.92); }
+  to   { opacity: 1;    transform: translateX(-50%) scale(1.08); }
+}
+
+/* Chispas que suben desde la madera */
+.dsw-chispas { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.dsw-chispas span {
+  position: absolute;
+  bottom: 18%;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #FFD58A;
+  box-shadow: 0 0 6px 2px rgba(255, 190, 90, 0.6);
+  opacity: 0;
+  animation: chispa-sube 6s linear infinite;
+}
+.dsw-chispas span:nth-child(1) { left: 22%; animation-delay: 0s; }
+.dsw-chispas span:nth-child(2) { left: 38%; animation-delay: 1.4s; animation-duration: 7s; }
+.dsw-chispas span:nth-child(3) { left: 51%; animation-delay: 2.6s; }
+.dsw-chispas span:nth-child(4) { left: 64%; animation-delay: 0.8s; animation-duration: 8s; }
+.dsw-chispas span:nth-child(5) { left: 78%; animation-delay: 3.4s; }
+.dsw-chispas span:nth-child(6) { left: 30%; animation-delay: 4.2s; animation-duration: 7.5s; }
+.dsw-chispas span:nth-child(7) { left: 70%; animation-delay: 5s; }
+.dsw-chispas span:nth-child(8) { left: 45%; animation-delay: 3s; animation-duration: 9s; }
+@keyframes chispa-sube {
+  0%   { opacity: 0; transform: translate(0, 0) scale(1); }
+  12%  { opacity: 1; }
+  60%  { opacity: 0.7; transform: translate(10px, -200px) scale(0.8); }
+  100% { opacity: 0; transform: translate(-6px, -360px) scale(0.4); }
+}
+
+/* Vela nueva: cae con rebote y su llama se enciende */
+.dsw-vela.nueva { animation: vela-cae 620ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.dsw-vela.nueva .dsw-llama {
+  animation: llama-enciende 520ms 380ms ease-out both, llama-titila 1.6s 900ms ease-in-out infinite alternate;
+}
+@keyframes vela-cae { from { opacity: 0; transform: translateY(-60px); } 60% { opacity: 1; } to { transform: none; } }
+@keyframes llama-enciende { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: scale(1); } }
+
+/* Al pasar el mouse por la vitrina, las velas se levantan un poco */
+@media (hover: hover) and (pointer: fine) {
+  .dsw-vela { transition: transform 300ms var(--ease-suave); }
+  .dsw-vela:hover { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsw-llama, .dsw-vela::before, .dsw-chispas span,
+  .dsw-vela.nueva, .dsw-vela.nueva .dsw-llama { animation: none !important; }
+  .dsw-chispas { display: none; }
+}

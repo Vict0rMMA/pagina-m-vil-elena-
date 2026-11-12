@@ -4911,6 +4911,13 @@ function initDeseos() {
 
   pintarElegidos();
 
+  // Las llamas y las chispas sólo se mueven mientras la vitrina se ve.
+  const vitrina = document.getElementById('deseo-elegido');
+  if (vitrina && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => vitrina.classList.toggle('viva', e.isIntersecting))
+      .observe(vitrina);
+  }
+
   const pedir = document.getElementById('deseo-pedir');
   if (pedir) pedir.addEventListener('click', () => {
     const n = elegidos.length;
