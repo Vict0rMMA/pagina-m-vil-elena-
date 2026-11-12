@@ -1,6 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:ruta*",
+      "has": [{ "type": "host", "value": "pagina-m-vil-elena.vercel.app" }],
+      "destination": "https://www.velasyaromaselena.com/:ruta*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
