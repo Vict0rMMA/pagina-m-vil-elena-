@@ -175,7 +175,7 @@ export const Finale: React.FC = () => {
               boxShadow: "0 10px 40px rgba(232,199,122,.4)",
             }}
           >
-            https://pagina-m-vil-elena.vercel.app/#inicio
+            https://www.velasyaromaselena.com
           </div>
           {/* Espacio reservado: logotipo y acceso a WhatsApp (sin números inventados) */}
           <div style={{ display: "flex", alignItems: "center", gap: 36 * u, opacity: foot, marginTop: 8 * u }}>

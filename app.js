@@ -6220,6 +6220,8 @@ function comprarPorWhatsApp() {
   });
   
   mensaje += `💰 Total: $${total.toLocaleString('es-CO')}\n\n`;
+  // Con sesión iniciada (cuenta.js), van también los datos de envío.
+  if (typeof window.datosEnvioCliente === 'function') mensaje += window.datosEnvioCliente();
   mensaje += `Gracias por tu atención.`;
   
   const url = WHATSAPP_API + encodeURIComponent(mensaje);

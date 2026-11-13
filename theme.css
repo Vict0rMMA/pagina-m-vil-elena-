@@ -6699,3 +6699,186 @@ h1, h2, h3, h4,
   .dsw-vela.nueva, .dsw-vela.nueva .dsw-llama { animation: none !important; }
   .dsw-chispas { display: none; }
 }
+
+/* ============================================================
+   66. Barra de abajo del celular
+   ------------------------------------------------------------
+   La sección activa lleva una ficha suave detrás del ícono, el
+   Carrito va en un círculo vino (es el botón que vende) con su
+   número bien visible, y cada toque se hunde un poco.
+   ============================================================ */
+
+#bottom-dock .dock-item i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 28px;
+  border-radius: var(--r-full);
+  transition: background-color var(--dur-base) var(--ease-out), transform var(--dur-press) var(--ease-out);
+}
+#bottom-dock a.active i { background: var(--gold-mist); }
+#bottom-dock a.active span { font-weight: 700; }
+#bottom-dock .dock-item:active i { transform: scale(0.88); }
+
+#cart-button-dock { color: var(--accion) !important; }
+#cart-button-dock i {
+  width: 40px;
+  height: 40px;
+  margin-top: -14px;
+  border-radius: 50%;
+  background: var(--grad-accion);
+  color: var(--gold-ink) !important;
+  font-size: 16px;
+  box-shadow: 0 8px 18px -8px rgba(110, 27, 39, 0.8), 0 0 0 4px rgba(247, 244, 238, 0.95);
+}
+#cart-button-dock span:not(.cart-badge) { font-weight: 700; }
+#cart-count-dock {
+  position: absolute;
+  top: -2px;
+  left: calc(50% + 2px);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: var(--r-full);
+  background: var(--gold-deep) !important;
+  color: var(--gold-ink) !important;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  box-shadow: 0 0 0 2px #F7F4EE;
+}
+@media (prefers-reduced-motion: reduce) {
+  #bottom-dock .dock-item:active i { transform: none; }
+}
+
+/* ============================================================
+   67. Mi cuenta
+   ============================================================ */
+
+.cuenta-btn { position: relative; }
+.cuenta-btn svg { display: block; }
+.cuenta-inicial { display: none; }
+.cuenta-btn.con-sesion svg { display: none; }
+.cuenta-btn.con-sesion .cuenta-inicial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--grad-accion);
+  color: var(--gold-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.cuenta-modal { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; justify-content: center; }
+.cuenta-modal.hidden { display: none; }
+.cuenta-fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 13, 10, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  animation: modal-fondo 260ms var(--ease-out) both;
+}
+.cuenta-hoja {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  max-height: 92dvh;
+  overflow-y: auto;
+  padding: var(--space-8) var(--space-6) calc(var(--space-8) + env(safe-area-inset-bottom, 0px));
+  border-radius: 24px 24px 0 0;
+  background: var(--surface);
+  box-shadow: 0 -20px 60px -20px rgba(0, 0, 0, 0.45);
+  animation: modal-sube 420ms var(--ease-suave) both;
+}
+@media (min-width: 768px) {
+  .cuenta-modal { align-items: center; }
+  .cuenta-hoja { border-radius: 24px; padding: var(--space-12) var(--space-8) var(--space-8); }
+}
+.cuenta-cerrar {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bg-2);
+  color: var(--ink-2);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.cuenta-titulo { margin: 0 0 var(--space-2); font-size: 1.625rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+.cuenta-texto { margin: 0 0 var(--space-6); font-size: 0.9375rem; line-height: 1.6; color: var(--ink-2); }
+.cuenta-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 54px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: #FFFFFF;
+  color: #1F1F1F;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .cuenta-google:hover { background: #F7F7F7; } }
+.cuenta-o {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-6) 0;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+.cuenta-o::before, .cuenta-o::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.cuenta-form { display: flex; flex-direction: column; gap: var(--space-2); }
+.cuenta-form label { margin-top: var(--space-2); font-size: 0.875rem; font-weight: 600; color: var(--ink-2); }
+.cuenta-form input {
+  min-height: 50px;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: #F4EFE6;
+  color: var(--ink);
+  font-size: 16px;
+}
+.cuenta-form input:focus { outline: none; border-color: var(--gold); background: #FFFFFF; box-shadow: 0 0 0 4px rgba(168, 129, 60, 0.14); }
+.cuenta-form .btn { margin-top: var(--space-4); min-height: 54px; border-radius: 14px; }
+.cuenta-salir {
+  display: block;
+  margin: var(--space-6) auto 0;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 0;
+  background: none;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.cuenta-aviso {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 12px;
+  background: var(--gold-mist);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.cuenta-aviso[data-tipo="error"] { background: #FBE9E7; color: #8A2A1F; }
+.cuenta-aviso[data-tipo="ok"] { background: #E6F2EA; color: #1C5C34; }
+@media (prefers-reduced-motion: reduce) {
+  .cuenta-fondo, .cuenta-hoja { animation: none; }
+}

@@ -4,7 +4,7 @@ export const FPS = 30;
 export const DURATION = 750; // 25 s
 export const CUTS = [120, 260, 410, 575]; // cortes musicales (frames)
 export const OV = 12; // frames de solapamiento entre tomas
-export const WEB_URL = "pagina-m-vil-elena.vercel.app";
+export const WEB_URL = "velasyaromaselena.com";
 export const SOCIAL = [
   { id: "wa", label: "+57 300 822 0389" },
   { id: "ig", label: "@velasyaromaselena" },
