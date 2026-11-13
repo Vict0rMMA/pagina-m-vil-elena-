@@ -150,7 +150,10 @@
 
   function pintarPerfil() {
     const nombre = (perfil && perfil.nombre) || '';
-    $('cuenta-nombre-actual').textContent = nombre ? 'Hola, ' + nombre.split(' ')[0] : 'Hola';
+    // "VICTOR MANUEL" o "victor" -> "Victor"
+    const primero = nombre.trim().split(/\s+/)[0] || '';
+    const bonito = primero ? primero.charAt(0).toUpperCase() + primero.slice(1).toLowerCase() : '';
+    $('cuenta-nombre-actual').textContent = bonito ? 'Hola, ' + bonito : 'Hola';
     $('cuenta-correo-actual').textContent = usuario ? (usuario.email || '') : '';
     campos.forEach(c => { $('perfil-' + c).value = (perfil && perfil[c]) || ''; });
   }
@@ -245,7 +248,8 @@
     const recuperando = !vistaNueva.hidden;
     vistaEntrar.hidden = dentro || recuperando;
     vistaPerfil.hidden = !dentro || recuperando;
-    $('cuenta-sub').textContent = dentro ? 'Tu cuenta Elena' : 'Compra más rápido la próxima vez';
+    $('cuenta-sub').textContent = 'Compra más rápido la próxima vez';
+    modal.classList.toggle('con-sesion', dentro);
     boton.classList.toggle('con-sesion', dentro);
     boton.setAttribute('aria-label', dentro ? 'Mi cuenta' : 'Entrar a mi cuenta');
     const nombre = (perfil && perfil.nombre) || (usuario && usuario.email) || '';
