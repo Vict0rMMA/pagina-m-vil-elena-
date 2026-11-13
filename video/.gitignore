@@ -1,0 +1,25 @@
+node_modules
+dist
+.DS_Store
+.env
+
+# Ignore the output video from Git but not videos you import into src/.
+out
+
+# Video personal de cumpleaños (fuera del repo)
+public/cumple/
+src/Cumple/
+src/cumple.ts
+scripts/make-audio-cumple.py
+public/audio/cumple.mp3
+public/grado/
+src/Grado/
+src/grado.ts
+scripts/make-audio-grado.py
+public/audio/grado.mp3
+public/lunes/
+src/Lunes/
+src/lunes.ts
+scripts/make-audio-lunes.py
+public/audio/lunes.mp3
+public/navidad/referencias/
