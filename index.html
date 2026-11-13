@@ -184,13 +184,15 @@
                      vería pixelado, así que ahí va una versión desenfocada a
                      propósito, como un fondo de foto. -->
                 <picture>
-                    <source media="(min-width: 900px)" srcset="assets/productos/Videos/posters/taller-produccion-suave.jpg">
-                    <img class="hero-fondo-img" src="assets/productos/Videos/posters/taller-produccion-hd.jpg"
-                         alt="Estantería llena de velas navideñas de colores" width="720" height="1280" fetchpriority="high" decoding="async">
+                    <source media="(min-width: 900px)" srcset="assets/videos/posters/portada-taller-16x9.webp">
+                    <img class="hero-fondo-img" src="assets/videos/posters/portada-taller-9x16.webp"
+                         alt="Velas artesanales de Navidad sobre madera" width="720" height="1280" fetchpriority="high" decoding="async">
                 </picture>
+                <!-- Videos animados con las fotos reales (herramientas/videos-animados.py):
+                     vertical en el celular, tres paneles en pantalla ancha. -->
                 <video class="hero-fondo-video" muted loop playsinline preload="none"
-                       data-src="assets/productos/Videos/taller-produccion-web.mp4"
-                       data-src-ancho="assets/productos/Videos/taller-produccion-suave-web.mp4"></video>
+                       data-src="assets/videos/portada-taller-9x16.mp4"
+                       data-src-ancho="assets/videos/portada-taller-16x9.mp4"></video>
             </div>
             <div class="hero-inner">
                 <img src="assets/logos/elena-marca-nitida.png" alt="Logo de Elena Velas y Aromas: una vela encendida" class="hero-logo" width="118" height="118" loading="eager" aria-hidden="true">
@@ -401,11 +403,11 @@
         <section class="inicio-section lnd lnd-oscuro" aria-labelledby="lnd-navidad-titulo">
             <div class="capa-fondo" aria-hidden="true">
                 <picture>
-                    <source media="(min-width: 900px)" srcset="assets/productos/Videos/posters/velas-virgen-suave.jpg">
-                    <img class="capa-fondo-img" src="assets/productos/Videos/posters/velas-virgen-suave.jpg" alt="Velas de colores al aire libre" loading="lazy" decoding="async">
+                    <source media="(min-width: 900px)" srcset="assets/videos/posters/navidad-vitrina-16x9.webp">
+                    <img class="capa-fondo-img" src="assets/videos/posters/navidad-vitrina-9x16.webp" alt="Fotos de velas navideñas flotando sobre fondo oscuro" loading="lazy" decoding="async">
                 </picture>
                 <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       data-src="assets/productos/Videos/velas-virgen-suave-web.mp4" data-src-ancho="assets/productos/Videos/velas-virgen-suave-web.mp4"></video>
+                       data-src="assets/videos/navidad-vitrina-9x16.mp4" data-src-ancho="assets/videos/navidad-vitrina-16x9.mp4"></video>
             </div>
             <div class="lnd-envoltura lnd-oscuro-cabeza">
                 <div data-revelar>
@@ -462,11 +464,11 @@
             <div class="pz-cabeza">
             <div class="capa-fondo" aria-hidden="true">
                 <picture>
-                    <source media="(min-width: 900px)" srcset="assets/productos/Videos/posters/personalizadas-fondo-suave.jpg">
-                    <img class="capa-fondo-img" src="assets/productos/Videos/posters/personalizadas-fondo.jpg" alt="Velas personalizadas de bautizo y quince años" loading="lazy" decoding="async">
+                    <source media="(min-width: 900px)" srcset="assets/videos/posters/personalizadas-16x9.webp">
+                    <img class="capa-fondo-img" src="assets/videos/posters/personalizadas-9x16.webp" alt="Velas personalizadas de bautizo y quince años" loading="lazy" decoding="async">
                 </picture>
                 <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       data-src="assets/productos/Videos/personalizadas-fondo-web.mp4" data-src-ancho="assets/productos/Videos/personalizadas-fondo-suave-web.mp4"></video>
+                       data-src="assets/videos/personalizadas-9x16.mp4" data-src-ancho="assets/videos/personalizadas-16x9.mp4"></video>
             </div>
                 <div class="lnd-envoltura">
                     <div class="pz-texto">
@@ -694,8 +696,8 @@
             <div class="ctc-cabeza">
             <div class="capa-fondo capa-mosaico" aria-hidden="true">
                 <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       poster="assets/productos/Videos/posters/velas-encendidas.jpg"
-                       data-src="assets/productos/Videos/velas-encendidas-web.mp4"></video>
+                       poster="assets/videos/posters/contacto-luz-9x16.webp"
+                       data-src="assets/videos/contacto-luz-9x16.mp4"></video>
                 <video class="capa-fondo-video" muted loop playsinline preload="none"
                        poster="assets/productos/Videos/posters/cajas-estrellas-navidad.jpg"
                        data-src="assets/productos/Videos/cajas-estrellas-navidad-web.mp4"></video>
@@ -953,7 +955,7 @@
     </div>
     
     <!-- Scripts -->
-    <script src="app.js?v=20261112-vitrina"></script>
+    <script src="app.js?v=20261112-videos"></script>
     <script src="motion.js?v=20261010-dock" defer></script>
     <script>
       // Registrar el Service Worker.

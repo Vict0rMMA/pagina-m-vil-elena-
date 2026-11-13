@@ -2176,6 +2176,9 @@ const promociones = [
 const videos = [
   // Los -web.mp4 salen de los originales con ffmpeg (-crf 28 -an +faststart).
   { plataforma: "local", titulo: "Navidad 2026: latas de regalo", videoSrc: "assets/productos/Videos/comercial-navidad-2026-9x16-instagram-web.mp4" },
+  // Promocional animado con las fotos reales: herramientas/videos-animados.py
+  { plataforma: "local", titulo: "Velas y Aromas Elena", videoSrc: "assets/videos/promocional-elena-9x16.mp4",
+    poster: "assets/videos/posters/promocional-elena-9x16.webp" },
   { plataforma: "local", titulo: "Temporada navideña", videoSrc: "assets/productos/Videos/temporada-navidena-web.mp4" },
   { plataforma: "local", titulo: "Souvenirs de Navidad", videoSrc: "assets/productos/Videos/suvenirs-navidad-web.mp4" },
   { plataforma: "local", titulo: "Cajas de estrellas navideñas", videoSrc: "assets/productos/Videos/cajas-estrellas-navidad-web.mp4" },
@@ -5561,8 +5564,9 @@ function renderVideos() {
   }
 
   // Los -web.mp4 son la versión comprimida del mismo video: comparten póster.
-  const posterDe = (src) => 'assets/productos/Videos/posters/' +
-    src.split('/').pop().replace(/(-web)?\.mp4$/i, '') + '.jpg';
+  // Un video con `poster` propio (los de assets/videos) usa el suyo.
+  const posterDe = (video) => video.poster || ('assets/productos/Videos/posters/' +
+    video.videoSrc.split('/').pop().replace(/(-web)?\.mp4$/i, '') + '.jpg');
 
   const principal = videos.find(v => v.plataforma === 'local' && v.videoSrc);
   const iconoPlay = '<svg class="vid-icono-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
@@ -5571,7 +5575,7 @@ function renderVideos() {
   const iconoSonido = '<svg class="vid-icono-sonido" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h3l5-4v14l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
 
   if (principal) {
-    const poster = posterDe(principal.videoSrc);
+    const poster = posterDe(principal);
     marco.innerHTML = `
       <img class="vid-poster" src="${poster}" alt="Portada del video: ${principal.titulo}" decoding="async">
       <video class="vid-video" muted loop playsinline preload="none"
@@ -5589,7 +5593,7 @@ function renderVideos() {
 
   carril.innerHTML = videos.map((video, i) => {
     if (video.plataforma === 'local' && video.videoSrc) {
-      const poster = posterDe(video.videoSrc);
+      const poster = posterDe(video);
       const activo = video === principal;
       return `
       <div role="listitem" class="vid-item">

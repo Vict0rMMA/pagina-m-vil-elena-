@@ -59,6 +59,7 @@ pagina-movil-elena/
 └── 📂 assets/
     ├── 📂 logos/              # Logos de la empresa
     ├── 📂 icons/              # Íconos PWA
+    ├── 📂 videos/             # Videos animados (fondos y promocional) + posters/
     └── 📂 productos/          # Imágenes de productos
         ├── Amor-y-amistad/
         ├── Baby-Shower/
@@ -327,6 +328,24 @@ extensión `.webp`). Las tarjetas del catálogo, las promociones, "Elige tu
 deseo", la cuenta atrás y el carrito usan la miniatura; la ficha ampliada usa
 la original. Si una miniatura falta, la página carga la original sola, así que
 olvidarlo no rompe nada: sólo hace esa foto más pesada.
+
+### Videos animados
+
+Los fondos en video de la portada, la franja de Navidad, Personalizadas y el
+primer cuadro del mosaico de Contacto, y el promocional de la galería, salen
+de las fotos reales de `assets/productos/Navidad-2026/` y de los dos videos de
+`Videos-Velas-Personalizadas/`. Todos llevan la marca de agua (la vela del
+logo con "Velas y Aromas Elena"). Se generan con Pillow y ffmpeg, sin instalar
+nada más:
+
+```bash
+python herramientas/videos-animados.py                      # todos
+python herramientas/videos-animados.py promocional-elena-9x16
+```
+
+Quedan en `assets/videos/` (MP4 H.264, sin audio, con +faststart) y su primer
+cuadro en `assets/videos/posters/` (WebP). Cada fondo tiene versión `9x16`
+para el celular y `16x9` para pantallas de 900 px o más.
 
 ---
 
