@@ -15,13 +15,53 @@
   const LLAVE_PUBLICA = 'sb_publishable_ET6eHk9oBgI-CzFNfstuGA_1Jd6I9qT';
   const CLAVE_CARRITO = 'elena-velas-carrito';
 
+  const LIBRERIA = 'assets/vendor/supabase-js-2.117.3.js';
+
   const boton = document.getElementById('cuenta-button');
   const modal = document.getElementById('cuenta-modal');
-  if (!boton || !modal || !window.supabase || !window.supabase.createClient) {
-    if (boton) boton.hidden = true;
-    return;
+  if (!boton || !modal) return;
+
+  // La librería de Supabase pesa 56 KB: sólo se descarga si el cliente ya
+  // tiene sesión en este celular, si vuelve de Google o del correo, o
+  // cuando toca "Mi cuenta". Quien sólo mira la tienda no la descarga.
+  const conSesion = Object.keys(localStorage).some(k => /^sb-.*-auth-token$/.test(k));
+  const vuelve = /[?&]code=|[#&](access_token|error)=|type=recovery/.test(window.location.search + window.location.hash);
+
+  let cargando = null;
+  function cargarLibreria() {
+    if (window.supabase && window.supabase.createClient) return Promise.resolve();
+    if (cargando) return cargando;
+    cargando = new Promise((ok, mal) => {
+      const s = document.createElement('script');
+      s.src = LIBRERIA;
+      s.onload = ok;
+      s.onerror = mal;
+      document.head.appendChild(s);
+    });
+    return cargando;
   }
 
+  if (conSesion || vuelve) {
+    cargarLibreria().then(iniciar, () => { boton.hidden = true; });
+  } else {
+    // Mientras tanto, el botón ya abre la ventana; al tocarlo carga lo demás.
+    boton.addEventListener('click', function primerToque() {
+      boton.removeEventListener('click', primerToque);
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      modal.querySelectorAll('[data-cerrar]').forEach(b => b.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, { once: true }));
+      cargarLibreria().then(iniciar, () => {
+        const aviso = document.getElementById('cuenta-aviso');
+        aviso.textContent = 'No se pudo cargar. Revisa tu conexión e intenta otra vez.';
+        aviso.hidden = false;
+      });
+    });
+  }
+
+  function iniciar() {
   const sb = window.supabase.createClient(URL_SUPABASE, LLAVE_PUBLICA, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' }
   });
@@ -298,4 +338,5 @@
 
   ponerModo('entrar');
   pintarSesion();
+  }
 })();

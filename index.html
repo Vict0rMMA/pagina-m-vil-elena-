@@ -65,6 +65,8 @@
          servidos desde el propio dominio. -->
     <link rel="preload" as="font" type="font/woff2"
           href="assets/fonts/fa-solid-900-subset.woff2?v=0ac11b72" crossorigin>
+    <link rel="preload" as="image" href="assets/videos/posters/portada-taller-9x16.webp" media="(max-width: 899px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/videos/posters/portada-taller-16x9.webp" media="(min-width: 900px)" fetchpriority="high">
     <link rel="stylesheet" href="iconos.css?v=20261025-dock">
 
     <!-- Tailwind precompilado.
@@ -78,7 +80,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css?v=20261112-fondos">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261113-cuenta3">
+    <link rel="stylesheet" href="theme.css?v=20261114-rapida">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -152,7 +154,7 @@
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <a href="#inicio" class="brand" aria-label="Elena Velas y Aromas - inicio">
-                    <img src="assets/logos/elena-marca-nitida.png" alt="Logo de Elena Velas y Aromas" class="brand-mark" loading="eager" width="34" height="34" aria-hidden="true">
+                    <img src="assets/logos/elena-marca-96.webp" alt="Logo de Elena Velas y Aromas" class="brand-mark" loading="eager" width="34" height="34" aria-hidden="true">
                     <span class="brand-text">
                         <span class="brand-name">Elena</span>
                         <span class="brand-tag">Velas y Aromas</span>
@@ -223,7 +225,7 @@
                        data-src-ancho="assets/videos/portada-taller-16x9.mp4"></video>
             </div>
             <div class="hero-inner">
-                <img src="assets/logos/elena-marca-nitida.png" alt="Logo de Elena Velas y Aromas: una vela encendida" class="hero-logo" width="118" height="118" loading="eager" aria-hidden="true">
+                <img src="assets/logos/elena-marca-240.webp" alt="Logo de Elena Velas y Aromas: una vela encendida" class="hero-logo" width="118" height="118" loading="eager" aria-hidden="true">
                 <span class="hero-eyebrow">Hechas a mano en Medellín</span>
                 <!-- El nombre ya está en el logo de arriba: el titular dice qué se vende. -->
                 <h1 class="hero-title">Velas artesanales para regalar y emprender</h1>
@@ -258,12 +260,21 @@
                 </h2>
                 <div class="lnd-taller-grid">
                     <div class="lnd-collage" data-revelar>
-                        <img class="lnd-collage-a" src="assets/mini/Navidad-2026/pino-grande.webp"
-                             alt="Dos velas en forma de pino, una roja y una blanca, sobre un tronco de madera"
-                             width="600" height="800" loading="lazy" decoding="async">
-                        <img class="lnd-collage-b" src="assets/productos/Videos/posters/velas-palabras.jpg"
-                             alt="Velas con palabras escritas: Uni&oacute;n, Alegr&iacute;a, Fe, Paz y Salud"
-                             width="480" height="586" loading="lazy" decoding="async">
+                        <div class="lnd-collage-a lnd-turno">
+                            <img src="assets/mini/Navidad-2026/pino-grande.webp" loading="lazy" alt="Velas en forma de pino, roja y blanca, sobre madera" width="600" height="800" decoding="async" class="activa">
+                            <img data-src="assets/mini/Navidad-2026/bola-navidad.webp" alt="Velas bola de Navidad verde y roja con relieve de renos" width="600" height="800" decoding="async">
+                            <img data-src="assets/mini/Navidad-2026/angel.webp" alt="Velas en forma de ángel, grande y pequeño" width="600" height="800" decoding="async">
+                            <img data-src="assets/mini/Navidad-2026/pesebre-casa.webp" alt="Vela pesebre casa en caja de regalo" width="600" height="800" decoding="async">
+                            <img data-src="assets/mini/Navidad-2026/peonia-grande.webp" alt="Velas peonía en cajas de regalo" width="600" height="800" decoding="async">
+                            <img data-src="assets/mini/Navidad-2026/muneco-nieve.webp" alt="Vela muñeco de nieve" width="600" height="800" decoding="async">
+                        </div>
+                        <div class="lnd-collage-b lnd-turno">
+                            <img src="assets/productos/Videos/posters/velas-palabras.jpg" loading="lazy" alt="Velas con palabras escritas: Unión, Alegría, Fe, Paz y Salud" width="480" height="586" decoding="async" class="activa">
+                            <img data-src="assets/mini/Navidad-2026/vela-marcada.webp" alt="Velas blancas marcadas con deseos en dorado" width="480" height="586" decoding="async">
+                            <img data-src="assets/mini/Navidad-2026/vela-degrade-pequena.webp" alt="Velas degradé de colores con nombres" width="480" height="586" decoding="async">
+                            <img data-src="assets/mini/Navidad-2026/kit-12-deseos.webp" alt="Kit de 12 velas de deseos con estrellas" width="480" height="586" decoding="async">
+                            <img data-src="assets/mini/Navidad-2026/vela-papa-noel.webp" alt="Velas Papá Noel" width="480" height="586" decoding="async">
+                        </div>
                     </div>
                     <ul class="lnd-puntos">
                         <li data-revelar>
@@ -724,13 +735,13 @@
             <div class="ctc-cabeza">
             <div class="capa-fondo capa-mosaico" aria-hidden="true">
                 <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       poster="assets/videos/posters/contacto-luz-9x16.webp"
+                       data-poster="assets/videos/posters/contacto-luz-9x16.webp"
                        data-src="assets/videos/contacto-luz-9x16.mp4"></video>
                 <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       poster="assets/productos/Videos/posters/cajas-estrellas-navidad.jpg"
+                       data-poster="assets/productos/Videos/posters/cajas-estrellas-navidad.jpg"
                        data-src="assets/productos/Videos/cajas-estrellas-navidad-web.mp4"></video>
                 <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       poster="assets/productos/Videos/posters/velas-degrade.jpg"
+                       data-poster="assets/productos/Videos/posters/velas-degrade.jpg"
                        data-src="assets/productos/Videos/velas-degrade-web.mp4"></video>
             </div>
                 <div class="lnd-envoltura ctc-cabeza-grid">
@@ -989,7 +1000,7 @@
             <button type="button" class="cuenta-cerrar" data-cerrar aria-label="Cerrar">&times;</button>
 
             <div class="cuenta-cabeza">
-                <img src="assets/logos/elena-marca-nitida.png" alt="" width="56" height="56" class="cuenta-logo">
+                <img src="assets/logos/elena-marca-96.webp" alt="" width="56" height="56" class="cuenta-logo" loading="lazy">
                 <h2 id="cuenta-titulo" class="cuenta-titulo">Entra a tu cuenta</h2>
                 <p class="cuenta-sub" id="cuenta-sub">Compra m&aacute;s r&aacute;pido la pr&oacute;xima vez</p>
             </div>
@@ -1092,10 +1103,9 @@
     <script defer src="/_vercel/insights/script.js"></script>
 
     <!-- Scripts -->
-    <script src="app.js?v=20261113-mejoras"></script>
+    <script src="app.js?v=20261114-rapida"></script>
     <script src="motion.js?v=20261010-dock" defer></script>
-    <script src="assets/vendor/supabase-js-2.117.3.js" defer></script>
-    <script src="cuenta.js?v=20261113-cuenta3" defer></script>
+    <script src="cuenta.js?v=20261114-rapida" defer></script>
     <script>
       // Registrar el Service Worker.
       //

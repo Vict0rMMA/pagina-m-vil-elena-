@@ -3107,6 +3107,7 @@ function renderProductos() {
         <h3>
           ${producto.nombre}
         </h3>
+        ${htmlPrecioTarjeta(producto)}
         <button 
           onclick="abrirModalProducto('${producto.id}')"
           class="btn btn-primary ripple-effect"
@@ -3189,6 +3190,7 @@ function renderProductos() {
         <h3>
           ${tituloTarjeta}
         </h3>
+        ${htmlPrecioTarjeta(productosGrupo)}
         <button 
           onclick="abrirModalProductoGrupo('${imagen}')"
           class="btn btn-primary ripple-effect"
@@ -3218,6 +3220,7 @@ function renderProductos() {
         <h3>
           ${productoPrincipal.nombre}
         </h3>
+        ${htmlPrecioTarjeta(productoPrincipal)}
         <button 
           onclick="abrirModalProducto('${productoPrincipal.id}')"
           class="btn btn-primary ripple-effect"
@@ -3478,6 +3481,47 @@ function filtrarYMostrarProductos() {
 
 function formatearPesos(valor) {
   return '$' + Number(valor).toLocaleString('es-CO');
+}
+
+// Precio más bajo de un producto (o de varios con la misma foto), para la
+// tarjeta del catálogo. Primero el de detal; si sólo se vende por mayor,
+// el de mayor con su aviso. Los productos guardan el precio de tres
+// formas (ficha, precios bolsa/caja y tamaños): se miran todas.
+function numerosDe(valor) {
+  if (typeof valor === 'number') return valor > 0 ? [valor] : [];
+  if (Array.isArray(valor)) return valor.flatMap(numerosDe);
+  if (valor && typeof valor === 'object') {
+    if (typeof valor.precio === 'number') return numerosDe(valor.precio);
+    return Object.values(valor).flatMap(numerosDe);
+  }
+  return [];
+}
+
+function preciosPorTipo(producto, tipo) {
+  if (producto.ficha) return numerosDe(preciosDeFicha(producto.ficha)[tipo]);
+  if (producto.precios) return numerosDe(producto.precios[tipo]);
+  if (producto.tamanos && producto.tamanos.length) {
+    if (producto.tamanos.some(t => t.detal || t.mayorista)) {
+      return numerosDe(producto.tamanos.map(t => t[tipo]));
+    }
+    // Tamaños con un solo precio: son de detal.
+    return tipo === 'detal' ? numerosDe(producto.tamanos.map(t => t.precio)) : [];
+  }
+  return [];
+}
+
+function etiquetaPrecio(productos) {
+  const lista = Array.isArray(productos) ? productos : [productos];
+  const detal = lista.flatMap(p => preciosPorTipo(p, 'detal'));
+  if (detal.length) return { texto: formatearPesos(Math.min(...detal)), nota: 'Desde' };
+  const mayor = lista.flatMap(p => preciosPorTipo(p, 'mayorista'));
+  if (mayor.length) return { texto: formatearPesos(Math.min(...mayor)), nota: 'Por mayor desde' };
+  return null;
+}
+
+function htmlPrecioTarjeta(productos) {
+  const e = etiquetaPrecio(productos);
+  return e ? `<p class="producto-precio"><span>${e.nota}</span> ${e.texto}</p>` : '';
 }
 
 /** Devuelve las dos listas de precios, venga la ficha en formato nuevo o viejo. */
@@ -4709,7 +4753,7 @@ function proximaFechaEspecial(ahora) {
 function imagenesTurnantes(fotos, alt) {
   return fotos.map((src, i) => {
     const mini = miniatura(src);
-    const fuente = i === 0 ? `src="${mini}"` : `data-turno="${mini}"`;
+    const fuente = i === 0 ? `src="${mini}" loading="lazy"` : `data-turno="${mini}"`;
     const texto = Array.isArray(alt) ? (alt[i] || '') : alt;
     return `<img ${fuente} data-original="${src}" alt="${texto}" class="${i === 0 ? 'activa' : ''}" decoding="async">`;
   }).join('');
@@ -5305,7 +5349,18 @@ function initHeroFondo() {
 // pausan al salir. Sin movimiento o con ahorro de datos, sólo la foto.
 function initCapasFondo() {
   const videos = document.querySelectorAll('.capa-fondo-video');
-  if (!videos.length || !('IntersectionObserver' in window)) return;
+  if (!videos.length) return;
+  const conPoster = [...videos].filter(v => v.dataset.poster);
+  const ponerPoster = (v) => { if (v.dataset.poster) { v.poster = v.dataset.poster; delete v.dataset.poster; } };
+  if (!('IntersectionObserver' in window)) { conPoster.forEach(ponerPoster); return; }
+  if (conPoster.length) {
+    const obsPoster = new IntersectionObserver(entradas => entradas.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('video[data-poster]').forEach(ponerPoster);
+      obsPoster.unobserve(e.target);
+    }), { rootMargin: '300px 0px' });
+    new Set(conPoster.map(v => v.closest('.capa-fondo').parentElement)).forEach(c => obsPoster.observe(c));
+  }
   const red = navigator.connection || {};
   const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reducido || red.saveData === true || /2g/.test(red.effectiveType || '')) return;
@@ -5335,6 +5390,32 @@ function initCapasFondo() {
 function initLanding() {
   const anio = document.getElementById('ctc-anio');
   if (anio) anio.textContent = new Date().getFullYear();
+
+  // Collage de "Nuestra esencia": las dos fotos se van turnando rápido,
+  // cada una a su ritmo, sólo mientras se ven. Cada foto se descarga
+  // justo antes de que le toque salir.
+  const turnos = document.querySelectorAll('.lnd-turno');
+  if (turnos.length && 'IntersectionObserver' in window &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let visible = false;
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.2 })
+      .observe(turnos[0].parentElement);
+    const preparar = (img) => { if (img && img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } };
+    turnos.forEach((marco, n) => {
+      const fotos = marco.querySelectorAll('img');
+      if (fotos.length < 2) return;
+      let actual = 0;
+      setTimeout(() => setInterval(() => {
+        if (!visible || document.hidden) return;
+        const sig = (actual + 1) % fotos.length;
+        preparar(fotos[sig]);
+        preparar(fotos[(sig + 1) % fotos.length]);
+        fotos[actual].classList.remove('activa');
+        fotos[sig].classList.add('activa');
+        actual = sig;
+      }, 2200), n * 1100);
+    });
+  }
 
   // Las fotos del contacto se van turnando, cada marco a su ritmo, y sólo
   // mientras se ven.
@@ -5577,9 +5658,9 @@ function renderVideos() {
   if (principal) {
     const poster = posterDe(principal);
     marco.innerHTML = `
-      <img class="vid-poster" src="${poster}" alt="Portada del video: ${principal.titulo}" decoding="async">
+      <img class="vid-poster" src="${poster}" alt="Portada del video: ${principal.titulo}" loading="lazy" decoding="async">
       <video class="vid-video" muted loop playsinline preload="none"
-             poster="${poster}" data-src="${principal.videoSrc}"
+             data-src="${principal.videoSrc}"
              aria-label="${principal.titulo}"></video>
       <button type="button" class="vid-control" aria-label="Reproducir video" aria-pressed="true">
         ${iconoPlay}${iconoPausa}
