@@ -2205,34 +2205,6 @@ const videos = [
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-  // Inicializar partículas laterales
-  initSideParticles();
-  
-  // Mostrar elementos de fondo después de que cargue la página
-  setTimeout(() => {
-    const catalogParticles = document.getElementById('catalog-particles-container');
-    const sideParticlesLeft = document.getElementById('side-particles-left');
-    const sideParticlesRight = document.getElementById('side-particles-right');
-    
-    if (catalogParticles) catalogParticles.classList.add('loaded');
-    if (sideParticlesLeft) sideParticlesLeft.classList.add('loaded');
-    if (sideParticlesRight) sideParticlesRight.classList.add('loaded');
-  }, 300);
-  
-  // Manejar redimensionamiento de ventana
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      const leftContainer = document.getElementById('side-particles-left');
-      const rightContainer = document.getElementById('side-particles-right');
-      if (leftContainer && rightContainer) {
-        leftContainer.innerHTML = '';
-        rightContainer.innerHTML = '';
-        initSideParticles();
-      }
-    }, 250);
-  });
   initDarkMode();
   initMobileMenu();
   initCarrito();
@@ -2249,7 +2221,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initAnimations();
   initBottomDock();
-  initWhatsApp();
   initPersonalizadas();
   initScrollToTop();
   initLazyVideosPersonalizadas();
@@ -2429,24 +2400,6 @@ function actualizarContadorCarrito() {
     }
   });
   
-}
-
-function generarMensajeWhatsApp() {
-  if (state.carrito.length === 0) {
-    return 'Hola, me interesa conocer más sobre sus productos';
-  }
-  
-  let mensaje = 'Hola, me interesa comprar los siguientes productos:\n\n';
-  state.carrito.forEach((item, index) => {
-    mensaje += `${index + 1}. ${item.nombre}`;
-    if (item.tamano) mensaje += ` - Tamaño: ${item.tamano}`;
-    if (item.presentacion) mensaje += ` - Presentación: ${item.presentacion}`;
-    if (item.cantidad > 1) mensaje += ` (x${item.cantidad})`;
-    mensaje += `\n`;
-  });
-  mensaje += `\nTotal: $${state.carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toLocaleString('es-CO')}`;
-  
-  return mensaje;
 }
 
 function agregarAlCarrito(productoId, tipoCompra, presentacion, precio) {
@@ -2997,36 +2950,6 @@ function aplicarTemaCatalogo(filtro) {
     void fondo.offsetWidth;
     fondo.classList.add('cambio');
   }
-}
-
-function filtrarProductos() {
-  let productosFiltrados = obtenerTodosLosProductos();
-  
-  // Si no hay productos, retornar array vacío
-  if (!productosFiltrados || productosFiltrados.length === 0) {
-    return [];
-  }
-  
-  // Filtro por categoría
-  if (state.categoriaActual && state.categoriaActual !== 'todas') {
-    productosFiltrados = productosFiltrados.filter(p => {
-      if (!p || !p.categoria) return false;
-      return p.categoria === state.categoriaActual;
-    });
-  }
-  
-  // Filtro por búsqueda
-  if (state.busqueda && state.busqueda.trim() !== '') {
-    const busquedaLower = state.busqueda.toLowerCase().trim();
-    productosFiltrados = productosFiltrados.filter(p => {
-      if (!p) return false;
-      return (p.nombre && p.nombre.toLowerCase().includes(busquedaLower)) ||
-             (p.descripcion && p.descripcion.toLowerCase().includes(busquedaLower)) ||
-             (p.fragancias && Array.isArray(p.fragancias) && p.fragancias.some(f => f && f.toLowerCase().includes(busquedaLower)));
-    });
-  }
-  
-  return productosFiltrados;
 }
 
 // Función para obtener el data-category del producto
@@ -5856,11 +5779,6 @@ function initBottomDock() {
   }, { passive: true });
 }
 
-// WhatsApp
-function initWhatsApp() {
-  // Los links ya están configurados en el HTML
-}
-
 // Botón Volver Arriba
 function initScrollToTop() {
   const scrollButton = document.getElementById('scroll-to-top');
@@ -6348,152 +6266,6 @@ function comprarPorWhatsApp() {
   
   const url = WHATSAPP_API + encodeURIComponent(mensaje);
   window.open(url, '_blank');
-}
-
-// Partículas doradas flotantes
-function initParticles() {
-  const container = document.getElementById('particles-container');
-  if (!container) return;
-  
-  const particleCount = 30;
-  
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.animationDelay = Math.random() * 15 + 's';
-    particle.style.animationDuration = (10 + Math.random() * 10) + 's';
-    container.appendChild(particle);
-  }
-}
-
-// Partículas laterales para los márgenes
-function initSideParticles() {
-  const leftContainer = document.getElementById('side-particles-left');
-  const rightContainer = document.getElementById('side-particles-right');
-  
-  if (!leftContainer || !rightContainer) return;
-  
-  // Solo mostrar en pantallas medianas y grandes
-  if (window.innerWidth < 768) {
-    leftContainer.style.display = 'none';
-    rightContainer.style.display = 'none';
-    return;
-  }
-  
-  const particleCount = 20; // 20 partículas por lado
-  
-  // Partículas lado izquierdo
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'side-particle';
-    particle.style.width = (2 + Math.random() * 4) + 'px';
-    particle.style.height = particle.style.width;
-    particle.style.opacity = 0.3 + Math.random() * 0.4;
-    particle.style.animationDelay = Math.random() * 20 + 's';
-    particle.style.animationDuration = (15 + Math.random() * 15) + 's';
-    particle.style.left = (10 + Math.random() * 20) + '%'; // Entre 10% y 30% desde el borde
-    leftContainer.appendChild(particle);
-  }
-  
-  // Partículas lado derecho
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'side-particle';
-    particle.style.width = (2 + Math.random() * 4) + 'px';
-    particle.style.height = particle.style.width;
-    particle.style.opacity = 0.3 + Math.random() * 0.4;
-    particle.style.animationDelay = Math.random() * 20 + 's';
-    particle.style.animationDuration = (15 + Math.random() * 15) + 's';
-    particle.style.right = (10 + Math.random() * 20) + '%'; // Entre 10% y 30% desde el borde
-    rightContainer.appendChild(particle);
-  }
-}
-
-// Banners de catálogo
-function initCatalogoBanners() {
-  renderCatalogoBanners();
-}
-
-function renderCatalogoBanners() {
-  const container = document.getElementById('catalog-banners');
-  if (!container) return;
-  
-  const catalogs = [
-    {
-      id: 'amorYAmistad',
-      nombre: 'Catálogo de Amor y Amistad',
-      icon: 'fas fa-heart',
-      color: 'glow-gold',
-      bgColor: 'rgba(255, 215, 0, 0.1)'
-    },
-    {
-      id: 'babyShower',
-      nombre: 'Baby Shower',
-      icon: 'fas fa-baby',
-      color: 'glow-pink',
-      bgColor: 'rgba(255, 105, 180, 0.1)',
-      descripcion: 'Velas especiales para celebrar la llegada de tu bebé. Diseños tiernos y únicos.'
-    },
-    {
-      id: 'primeraComunion',
-      nombre: 'Primera Comunión',
-      icon: 'fas fa-cross',
-      color: 'glow-blue',
-      bgColor: 'rgba(92, 138, 255, 0.1)',
-      descripcion: 'Velas especiales para celebrar la Primera Comunión. Diseños religiosos y elegantes.'
-    },
-    {
-      id: 'navidad',
-      nombre: 'Navidad',
-      icon: 'fas fa-snowflake',
-      color: 'glow-red',
-      bgColor: 'rgba(255, 0, 0, 0.1)',
-      descripcion: 'Velas navideñas para crear el ambiente perfecto en las fiestas.'
-    }
-  ];
-  
-  container.innerHTML = catalogs.map(cat => {
-    const productos = obtenerProductosPorCategoria(cat.id);
-    if (productos.length === 0) return '';
-    
-    return `
-      <div class="catalog-banner" id="banner-${cat.id}" style="background: ${cat.bgColor};">
-        <div class="flex items-center justify-center mb-4">
-          <i class="${cat.icon} text-4xl ${cat.color} mr-4"></i>
-          <h3 class="font-playfair text-3xl font-bold ${cat.color}">${cat.nombre}</h3>
-        </div>
-        ${cat.descripcion ? `<p class="text-white/90 text-center mb-6">${cat.descripcion}</p>` : ''}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          ${productos.slice(0, 3).map(p => `
-            <div class="bg-gray-900 rounded-xl p-3 border border-yellow-500/20 hover:border-yellow-500/50 transition cursor-pointer" onclick="abrirModalProducto('${p.id}')">
-              <div class="bg-gray-800 rounded-lg p-2 mb-2 flex items-center justify-center h-32">
-                <img src="${miniatura(p.imagen)}" data-original="${p.imagen}" alt="${p.nombre}" class="max-w-full max-h-full w-auto h-auto object-contain" loading="lazy" decoding="async" onerror="this.parentElement.parentElement.style.display='none'">
-              </div>
-              <h4 class="font-bold text-white mb-2 text-sm text-center">${p.nombre}</h4>
-            </div>
-          `).filter(html => html !== '').join('')}
-        </div>
-        <div class="text-center mt-6">
-          <button onclick="mostrarTodosProductos('${cat.id}')" class="px-8 py-3 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full font-semibold transition-all">
-            Ver Todos los Productos
-          </button>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function obtenerProductosPorCategoria(categoriaId) {
-  let catMap = {
-    'amorYAmistad': 'amorYAmistad',
-    'babyShower': 'celebracion',
-    'primeraComunion': 'primeraComunion',
-    'navidad': 'navidad'
-  };
-  
-  const categoriaReal = catMap[categoriaId] || categoriaId;
-  return productos[categoriaReal] || [];
 }
 
 function mostrarCatalogo(categoriaId) {

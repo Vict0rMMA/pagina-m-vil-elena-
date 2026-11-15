@@ -112,132 +112,36 @@ input::placeholder {
 /* Fondo claro por defecto (dark mode opcional) */
 
 /* Efecto Glow para textos dorados - Estilo del logo */
-.glow-gold {
-  color: #D4AF37;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 600;
-}
+
 
 /* Efecto Glow púrpura para título */
-.glow-purple {
-  color: #a855f7;
-  animation: pulse-glow 2s ease-in-out infinite;
-}
 
-@keyframes pulse-glow-purple {
-}
 
 /* Sparkle animation */
-.fa-sparkles {
-  animation: sparkle 2s ease-in-out infinite;
-}
 
-@keyframes sparkle-icon {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.1) rotate(180deg);
-  }
-}
-
-.glow-pink {
-  color: #FF69B4;
-}
-
-.glow-blue {
-  color: #5C8AFF;
-}
-
-.glow-red {
-  color: #FF0000;
-}
 
 /* Partículas doradas flotantes */
-.particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
 
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: float 15s infinite;
-}
 
-@keyframes float-particle {
-  0% {
-    transform: translateY(100vh) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(-100vh) translateX(100px) rotate(360deg);
-    opacity: 0;
-  }
-}
+
 
 /* Banner dorado */
-.golden-banner {
-  border-radius: 50px;
-  padding: 1rem 2rem;
-}
+
 
 /* Cards de estadísticas */
-.stats-card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.stats-card:hover {
-  transform: translateY(-5px);
-}
+
+
 
 /* Botones de categoría con colores */
-.category-btn-gold {
-  transition: all 0.3s ease;
-}
 
-.category-btn-gold:hover {
-  transform: translateY(-2px);
-}
+
+
 
 /* Banner de catálogo individual */
-.catalog-banner {
-  border-radius: 12px;
-  padding: 2rem;
-  margin: 2rem 0;
-  border: 2px solid rgba(255, 215, 0, 0.3);
-  position: relative;
-  overflow: hidden;
-}
 
-.catalog-banner::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  animation: rotate 20s linear infinite;
-}
+
+
 
 @keyframes rotate {
   0% { transform: rotate(0deg); }
@@ -377,8 +281,7 @@ img {
 }
 
 /* Imágenes de productos con aspect ratio fijo y mejor visibilidad */
-#products-grid img,
-.catalog-banner img {
+#products-grid img{
   aspect-ratio: 4/3;
   object-fit: cover;
   width: 100%;
@@ -386,8 +289,7 @@ img {
   border-radius: 8px;
 }
 
-#products-grid img:hover,
-.catalog-banner img:hover {
+#products-grid img:hover{
   transform: scale(1.05);
 }
 
@@ -419,9 +321,7 @@ img {
 }
 
 /* Glassmorphism para cards */
-.glass-card {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
+
 
 /* Mejoras de Touch Targets (mínimo 44x44px) */
 button,
@@ -531,23 +431,12 @@ textarea {
 }
 
 /* Mejoras para Cards */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.card-hover:hover {
-  transform: translateY(-4px);
-}
+
+
 
 /* Spinner para Loading */
-.spinner {
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top: 3px solid white;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
-}
+
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -555,9 +444,7 @@ textarea {
 }
 
 /* Mejoras para el carrito */
-.cart-item-enter {
-  animation: slideInRight 0.3s ease-out;
-}
+
 
 @keyframes slideInRight {
   from {
@@ -671,20 +558,11 @@ button {
   overflow-wrap: anywhere;
 }
 
-.from-cream-50 {
-  --tw-gradient-from: #FFF8DC;
-  --tw-gradient-to: rgba(255, 248, 220, 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
 
-.via-amber-50 {
-  --tw-gradient-to: rgba(255, 251, 235, 0);
-  --tw-gradient-stops: var(--tw-gradient-from), #F5E6D3, var(--tw-gradient-to);
-}
 
-.to-warm-beige {
-  --tw-gradient-to: #F5E6D3;
-}
+
+
+
 
 /* Cards de productos con fondo gris elegante */
 .producto {
@@ -732,33 +610,7 @@ select:focus {
 }
 
 /* Animación suave para el logo */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.02);
-  }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 3s ease-in-out infinite;
-}
-
 /* Animación para emojis en el hero */
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.1) rotate(5deg);
-  }
-}
-
 #inicio p span:last-child {
   animation-delay: 1s;
 }
@@ -798,26 +650,15 @@ a.bg-yellow-600:hover {
 }
 
 /* Estilos mejorados para el botón de cambio de tema */
-#theme-toggle {
-  border: 1px solid rgba(209, 213, 219, 0.6) !important;
-  transition: all 0.3s ease;
-}
 
-#theme-toggle:hover {
-  transform: scale(1.05);
-}
 
-.dark #theme-toggle {
-  border-color: rgba(75, 85, 99, 0.6) !important;
-}
 
-#theme-toggle i {
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
 
-#theme-toggle:hover i {
-  transform: scale(1.1);
-}
+
+
+
+
+
 
 .skeleton {
   background: linear-gradient(
@@ -861,17 +702,6 @@ a.bg-yellow-600:hover {
 }
 
 /* Animaciones de entrada mejoradas para productos */
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
 /* Animaciones de entrada mejoradas para productos */
 .producto-item {
@@ -932,18 +762,9 @@ a.bg-yellow-600:hover {
 }
 
 /* Estilos para el modal de producto */
-.product-modal-image {
-  max-width: 100%;
-  max-height: 500px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
 
-.product-modal-image:hover {
-  transform: scale(1.02);
-}
+
+
 
 /* Contenedor de imagen del modal agrupado */
 #product-image-container-grupo {
@@ -986,96 +807,25 @@ a.bg-yellow-600:hover {
   }
 }
 
-.skeleton-text {
-  height: 20px;
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 25%,
-    #e0e0e0 50%,
-    #f0f0f0 75%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
-  border-radius: 0.5rem;
-  margin-bottom: 0.5rem;
-}
 
-.dark .skeleton-text {
-  background: linear-gradient(
-    90deg,
-    #2d2d2d 25%,
-    #3d3d3d 50%,
-    #2d2d2d 75%
-  );
-  background-size: 200% 100%;
-}
 
-.skeleton-button {
-  height: 44px;
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 25%,
-    #e0e0e0 50%,
-    #f0f0f0 75%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
-  border-radius: 9999px;
-  margin-top: 0.75rem;
-}
 
-.dark .skeleton-button {
-  background: linear-gradient(
-    90deg,
-    #2d2d2d 25%,
-    #3d3d3d 50%,
-    #2d2d2d 75%
-  );
-  background-size: 200% 100%;
-}
+
+
+
+
 
 /* Animación shimmer para promociones */
-@keyframes shimmer-skew15 {
-  0% {
-    transform: translateX(-100%) skewX(-15deg);
-  }
-  100% {
-    transform: translateX(200%) skewX(-15deg);
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 3s infinite;
-}
-
 /* Animación de texto dorado brillante */
-@keyframes shimmer-text {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
 /* Mejoras para el carrusel de promociones */
 #promo-carousel {
   border-radius: 1.5rem;
   overflow: hidden;
 }
 
-.promo-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
 
-.promo-indicator.active,
-.promo-indicator:hover {
-  transform: scale(1.2);
-}
+
+
 
 /* Ocultar skeleton cuando la imagen carga */
 .producto-item img.loaded + .skeleton-image,
@@ -1084,53 +834,16 @@ a.bg-yellow-600:hover {
 }
 
 /* Badge de "Doble clic" elegante y discreto */
-.double-click-badge {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  opacity: 0.6;
-  transform: translateY(0);
-  transition: all 0.3s ease;
-  pointer-events: none;
-  z-index: 20;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
 
-.producto:hover .double-click-badge,
-.producto-item:hover .double-click-badge {
-  opacity: 1;
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: scale(1.05);
-}
 
-.double-click-badge i {
-  font-size: 0.65rem;
-  color: #FFD700;
-}
+
+
+
 
 /* Badge en modales - más visible */
-#product-image-container .double-click-badge,
-#product-image-container-grupo .double-click-badge {
-  opacity: 0.75;
-  bottom: 12px;
-  left: 12px;
-  font-size: 0.75rem;
-  padding: 8px 12px;
-}
 
-#product-image-container:hover .double-click-badge,
-#product-image-container-grupo:hover .double-click-badge {
-  opacity: 1;
-  transform: scale(1.05);
-}
+
+
 
 /* Animación fade-in para precios */
 @keyframes fade-in {
@@ -1144,9 +857,7 @@ a.bg-yellow-600:hover {
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out forwards;
-}
+
 
 /* Botones de tipo de compra */
 .tipo-compra-btn {
@@ -1171,13 +882,9 @@ a.bg-yellow-600:hover {
 }
 
 /* Botones de precio */
-.precio-btn {
-  transition: all 0.3s ease;
-}
 
-.precio-btn:hover {
-  transform: scale(1.02);
-}
+
+
 
 /* Mejoras para imágenes en tarjetas de productos */
 .producto img {
@@ -1202,27 +909,13 @@ a.bg-yellow-600:hover {
 }
 
 /* Estilos para videos */
-#videos-container iframe {
-  width: 100%;
-  border-radius: 0.75rem;
-  min-height: 400px;
-}
 
-@media (max-width: 768px) {
-  #videos-container iframe {
-    min-height: 300px;
-  }
-}
 
-#videos-container .video-card {
-  aspect-ratio: 9/16;
-  max-width: 100%;
-}
 
-#videos-container embed {
-  width: 100%;
-  border-radius: 0.75rem;
-}
+
+
+
+
 
 #form-personalizada input:invalid:not(:placeholder-shown),
 #form-personalizada textarea:invalid:not(:placeholder-shown) {
@@ -1305,13 +998,6 @@ button:active, .btn:active {
 }
 
 /* Efecto de pulso en botones importantes */
-@keyframes pulse-glow {
-}
-
-.button-pulse {
-  animation: pulse-glow 2s infinite;
-}
-
 /* Notificación de éxito */
 .notification-success {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -1374,7 +1060,7 @@ button:active, .btn:active {
   overflow: hidden;
 }
 
-.border-\[#D4AF37\]:hover, .border-yellow-500:hover {
+ .border-yellow-500:hover {
   border-color: var(--gold-light) !important;
 }
 
@@ -1391,21 +1077,9 @@ section {
 }
 
 /* Bordes dorados sutiles en elementos importantes */
-.glow-gold {
-  position: relative;
-}
 
-.glow-gold::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  border-radius: 1px;
-  opacity: 0.6;
-}
+
+
 
 /* Brillo sutil en logos y títulos */
 h1, h2.font-playfair {
@@ -1432,65 +1106,18 @@ h1::before, h2.font-playfair::before {
 }
 
 /* Partículas laterales para los márgenes */
-.side-particles-container {
-  position: fixed;
-  top: 0;
-  width: 150px;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
 
-.side-particles-container.loaded {
-  opacity: 1;
-}
 
-#side-particles-left {
-  left: 0;
-}
 
-#side-particles-right {
-  right: 0;
-}
 
-.side-particle {
-  position: absolute;
-  border-radius: 50%;
-  animation: float-side 20s infinite ease-in-out;
-}
 
-@keyframes float-side {
-  0% {
-    transform: translateY(100vh) translateX(0) scale(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.7;
-    transform: translateY(90vh) translateX(10px) scale(1);
-  }
-  50% {
-    transform: translateY(50vh) translateX(-5px) scale(1.2);
-    opacity: 0.5;
-  }
-  90% {
-    opacity: 0.7;
-    transform: translateY(10vh) translateX(5px) scale(1);
-  }
-  100% {
-    transform: translateY(-10vh) translateX(0) scale(0);
-    opacity: 0;
-  }
-}
+
+
+
+
 
 /* Ocultar en móviles */
-@media (max-width: 767px) {
-  .side-particles-container {
-    display: none !important;
-  }
-}
+
 
 /* Modal de Confirmación */
 #confirm-modal .rounded-3xl {
@@ -1509,21 +1136,6 @@ h1::before, h2.font-playfair::before {
 }
 
 /* Partículas doradas sutiles en fondo */
-@keyframes float-soft {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
-}
-
-.particle-gold {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: float 6s infinite ease-in-out;
-  pointer-events: none;
-}
-
 /* Mejora en el logo con efecto sutil */
 header img {
   transition: all 0.3s ease;
@@ -1534,22 +1146,13 @@ header img:hover {
 }
 
 /* Cards con efecto de vidrio sutil */
-.glass-effect {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
 
-.dark .glass-effect {
-  border-color: rgba(255, 255, 255, 0.05);
-}
 
-#imagen-preview img {
-  object-fit: contain;
-  padding: 0.5rem;
-}
 
-#imagen-preview button:hover {
-  transform: scale(1.05);
-}
+
+
+
+
 
 /* Animación para errores del formulario */
 @keyframes shake {
@@ -1630,259 +1233,62 @@ header img:hover {
 }
 
 /* Partículas animadas para Hero */
-#particles-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-}
 
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.6;
-  animation: float 15s infinite ease-in-out;
-}
 
-.particle::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0.3;
-  }
-  25% {
-    transform: translateY(-20px) translateX(10px) scale(1.1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(-40px) translateX(-10px) scale(0.9);
-    opacity: 0.8;
-  }
-  75% {
-    transform: translateY(-20px) translateX(5px) scale(1.05);
-    opacity: 0.5;
-  }
-}
 
-.particle-small {
-  width: 4px;
-  height: 4px;
-}
 
-.particle-medium {
-  width: 6px;
-  height: 6px;
-}
-
-.particle-large {
-  width: 8px;
-  height: 8px;
-}
 
 /* Variaciones de animación para diferentes partículas */
-.particle:nth-child(3n) {
-  animation-duration: 18s;
-  animation-delay: -2s;
-}
 
-.particle:nth-child(3n+1) {
-  animation-duration: 20s;
-  animation-delay: -4s;
-}
 
-.particle:nth-child(3n+2) {
-  animation-duration: 16s;
-  animation-delay: -6s;
-}
+
+
+
 
 /* Velas Animadas de Fondo */
 /* #candles-container - Deshabilitado porque se ve mal al inicio */
-#candles-container {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
 
-#candles-container.loaded {
-  display: none !important;
-}
 
-.candle-floating {
-  position: absolute;
-  bottom: -50px;
-  opacity: 0.25;
-  animation: floatCandle 20s infinite ease-in-out;
-}
 
-.candle-floating:nth-child(odd) {
-  animation-duration: 25s;
-  animation-direction: reverse;
-}
 
-.candle-floating:nth-child(3n) {
-  animation-duration: 18s;
-}
 
-.candle-floating:nth-child(4n) {
-  animation-duration: 22s;
-  animation-direction: reverse;
-}
+
+
+
+
+
+
 
 /* Animaciones para velas del Hero */
-@keyframes fadeInCandle {
-  from {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes floatCandleHero {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(10px, -15px) scale(1.05);
-  }
-  50% {
-    transform: translate(-5px, -25px) scale(0.95);
-  }
-  75% {
-    transform: translate(-10px, -10px) scale(1.02);
-  }
-}
-
 /* Velas del Hero - deshabilitadas */
-#hero-candles-container {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
 
-#catalog-candles-container {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
 
-#catalog-particles-container {
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
 
-#catalog-particles-container.loaded {
-  opacity: 1;
-}
 
-#hero-candles-container svg {
-  animation: candleGlow 2s ease-in-out infinite;
-}
 
-@keyframes candleGlow {
-}
 
-@keyframes floatCandle {
-  0% {
-    transform: translateY(0) translateX(0) rotate(0deg);
-    opacity: 0.2;
-  }
-  10% {
-    opacity: 0.3;
-  }
-  50% {
-    transform: translateY(-80vh) translateX(20px) rotate(5deg);
-    opacity: 0.35;
-  }
-  90% {
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateY(-100vh) translateX(-20px) rotate(-5deg);
-    opacity: 0.15;
-  }
-}
+
+
+
 
 /* Estilos de la vela SVG */
-.candle-svg {
-  width: 40px;
-  height: 80px;
-}
+
 
 /* Animación de la llama */
-.candle-flame {
-  animation: flicker 1.5s infinite ease-in-out;
-  transform-origin: center bottom;
-}
 
-.candle-flame path {
-  fill: url(#flameGradient);
-}
 
-@keyframes flicker {
-  0%, 100% {
-    transform: scaleY(1) scaleX(1);
-    opacity: 1;
-  }
-  25% {
-    transform: scaleY(1.1) scaleX(0.95);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scaleY(0.95) scaleX(1.05);
-    opacity: 0.85;
-  }
-  75% {
-    transform: scaleY(1.05) scaleX(0.98);
-    opacity: 0.95;
-  }
-}
+
 
 /* Variaciones de tamaño para las velas */
-.candle-small {
-  width: 30px;
-  height: 60px;
-  opacity: 0.2;
-}
 
-.candle-medium {
-  width: 40px;
-  height: 80px;
-  opacity: 0.25;
-}
 
-.candle-large {
-  width: 50px;
-  height: 100px;
-  opacity: 0.22;
-}
+
+
+
 
 /* Responsive - menos velas en móviles */
-@media (max-width: 768px) {
-  .candle-floating {
-    opacity: 0.15;
-  }
-  
-  .candle-small,
-  .candle-medium,
-  .candle-large {
-    opacity: 0.15;
-  }
-}
+
 
 /* Sección videos */
 

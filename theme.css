@@ -109,28 +109,12 @@ body, p, span, li, h1, h2, h3, h4, h5, h6,
   text-shadow: none;
 }
 
-.glow-gold, .glow-purple, .glow-pink, .glow-blue, .glow-red {
-  background: none;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-  -webkit-text-fill-color: currentColor;
-  color: var(--gold-deep);
-  text-shadow: none;
-  filter: none;
-  animation: none;
-}
 
-.glow-gold-container, .golden-banner {
-  box-shadow: var(--shadow-1);
-  animation: none;
-}
+
+
 
 /* Partículas y destellos: ruido visual permanente. */
-#particles-container,
-#catalog-particles-container,
-.side-particles-container,
-.particles,
-.particle { display: none !important; }
+
 
 /* El escalonado llegaba a 0.55s; la última tarjeta tardaba medio segundo. */
 .producto-item:nth-child(1) { animation-delay: 0ms; }
@@ -204,7 +188,7 @@ img { -webkit-user-drag: none; }
    3. Controles táctiles
    ============================================================ */
 
-button, a, [role="button"], .tappable, .filter-btn, .producto {
+button, a, [role="button"], .filter-btn, .producto {
   touch-action: manipulation; /* elimina la espera de 300ms por doble tap */
 }
 
@@ -574,7 +558,7 @@ header.site-header.desplazada {
 }
 
 .hero-actions { display: flex; flex-direction: column; align-items: stretch; gap: var(--space-3); }
-.hero-links { display: flex; justify-content: center; gap: var(--space-6); margin-top: var(--space-6); }
+
 
 @media (min-width: 640px) {
   .hero-actions { flex-direction: row; justify-content: center; align-items: center; }
@@ -691,7 +675,7 @@ header.site-header.desplazada {
 .producto .btn { width: 100%; margin-top: auto; }
 
 /* La insignia "Doble clic" era un patrón de escritorio. */
-.double-click-badge { display: none !important; }
+
 
 .producto-zoom {
   position: absolute;
@@ -1004,7 +988,7 @@ input:focus, textarea:focus, select:focus {
   -webkit-overflow-scrolling: touch;
 }
 
-#cart-modal .border-b, #product-modal .border-b,
+
 #cart-modal .border-t, #product-modal .border-t { border-color: var(--line) !important; }
 
 #cart-modal h3, #product-modal h3 { color: var(--ink) !important; }
@@ -1104,10 +1088,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* Un solo panel de la página lleva el acento. */
-.panel-accent {
-  background: var(--gold-mist) !important;
-  border-color: var(--gold-veil);
-}
+
 
 .panel-title {
   margin: 0 0 var(--space-6);
@@ -1130,28 +1111,9 @@ input:focus, textarea:focus, select:focus {
   transform: none !important;
 }
 
-.info-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px; height: 48px;
-  margin: 0 auto;
-  border-radius: var(--r-full);
-  background: var(--surface);
-  border: 1px solid var(--gold-veil);
-  color: var(--gold-deep);
-  font-size: 18px;
-}
 
-.info-title {
-  margin: var(--space-4) 0 var(--space-3);
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  font-weight: 600;
-  color: var(--ink) !important;
-  text-align: center;
-  text-shadow: none !important;
-}
+
+
 
 /* Cajas internas translúcidas heredadas del diseño anterior */
 .info-card .bg-white\/10, .info-card .bg-white\/5, .info-card .bg-black\/20,
@@ -1256,8 +1218,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* Todo lo que latía o brillaba en bucle sin motivo. */
-.animate-pulse, .animate-pulse-slow, .animate-bounce,
-.fa-sparkles, [class*="shimmer"] { animation: none !important; }
+ [class*="shimmer"] { animation: none !important; }
 
 /* El contador del carrito sí debe latir: confirma que se añadió algo. */
 .cart-icon-bounce { animation: elena-bump 320ms var(--ease-out); }
@@ -1298,7 +1259,7 @@ input:focus, textarea:focus, select:focus {
    casos donde harían fallar el contraste.
    ============================================================ */
 
-.bg-yellow-500, .bg-yellow-600, .bg-yellow-400 {
+.bg-yellow-500, .bg-yellow-600{
   background: var(--gold-deep) !important;
   background-image: none !important;
   color: var(--gold-ink) !important;
@@ -1338,7 +1299,7 @@ input:focus, textarea:focus, select:focus {
   background: var(--gold-mist) !important;
 }
 
-.text-yellow-300, .text-yellow-400, .text-yellow-500, .text-yellow-600 {
+ .text-yellow-400, .text-yellow-500, .text-yellow-600 {
   color: var(--gold-deep) !important;
   text-shadow: none !important;
   font-weight: 600;
@@ -1352,7 +1313,7 @@ input:focus, textarea:focus, select:focus {
 .border-gray-200, .border-gray-300, .border-gray-600, .border-gray-700 { border-color: var(--line) !important; }
 
 /* Texto */
-.text-gray-900, .text-gray-800 { color: var(--ink) !important; }
+ .text-gray-800 { color: var(--ink) !important; }
 .text-gray-700, .text-gray-600, .text-gray-300 { color: var(--ink-2) !important; }
 .text-gray-500, .text-gray-400 { color: var(--ink-3) !important; }
 
@@ -1378,7 +1339,6 @@ input:focus, textarea:focus, select:focus {
 .bg-yellow-500 .text-white, .bg-yellow-600 .text-white,
 .bg-yellow-500 i, .bg-yellow-600 i,
 button.bg-yellow-500, button.bg-yellow-600,
-.video-play, .video-play i,
 .cart-badge, #cart-count, #cart-count-dock,
 .filter-btn.active, .filter-btn.active i {
   color: var(--gold-ink) !important;
@@ -1397,10 +1357,7 @@ a.btn-whatsapp, button.btn-whatsapp {
 }
 
 /* El panel de acento va sobre crema dorada: tinta oscura. */
-.panel-accent, .panel-accent p, .panel-accent .text-white,
-.panel-accent .text-gray-800, .panel-accent .text-gray-900 {
-  color: var(--ink) !important;
-}
+
 
 /* ============================================================
    21. Formulario de velas personalizadas
@@ -1486,15 +1443,13 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    ============================================================ */
 
 /* Tintes claros: eran texto sobre fondo oscuro, ahora ilegibles. */
-.text-green-100, .text-green-200, .text-green-300, .text-green-400, .text-green-500,
-.text-red-100, .text-red-300,
-.text-blue-400, .text-purple-400, .text-pink-400,
-.text-emerald-300, .text-teal-300, .text-indigo-400 {
+ .text-green-400,
+.text-blue-400, .text-purple-400{
   color: var(--ink-2) !important;
 }
 
 /* Iconos decorativos de color: pasan al acento de la marca. */
-.text-green-600, .text-blue-600, .text-purple-600, .text-emerald-600, .text-teal-600 {
+.text-green-600, .text-blue-600, .text-purple-600{
   color: var(--gold-deep) !important;
 }
 
@@ -1513,14 +1468,14 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 /* --- Lo que sí es estado, se conserva como estado --- */
 
 /* Errores de formulario y acción de borrar. */
-.text-red-400, .text-red-500, .text-red-600, .text-red-700 { color: var(--danger) !important; }
+.text-red-400, .text-red-600{ color: var(--danger) !important; }
 
 .bg-red-50, .bg-red-100, .bg-red-900\/20, .bg-red-900\/30, .bg-red-900\/40 {
   background-color: #FBEDEB !important;
   background-image: none !important;
 }
 
-.bg-red-500, .bg-red-600 {
+.bg-red-500{
   background-color: var(--danger) !important;
   background-image: none !important;
   color: #FFFFFF !important;
@@ -1820,45 +1775,13 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 /* Capa 2 — dos velos que respiran muy despacio: dan profundidad
    sin que se perciba un elemento concreto moviéndose. */
-.hero-halo {
-  position: absolute;
-  inset: -12% -20%;
-  pointer-events: none;
-  z-index: -2;
-}
 
-.hero-halo::before,
-.hero-halo::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.5;
-  will-change: transform;
-}
 
-.hero-halo::before {
-  width: 46vmax; height: 46vmax;
-  top: -14%; left: -8%;
-  background: radial-gradient(circle, rgba(217, 192, 138, 0.42), transparent 66%);
-  animation: elena-deriva-a 26s ease-in-out infinite alternate;
-}
 
-.hero-halo::after {
-  width: 38vmax; height: 38vmax;
-  bottom: -18%; right: -6%;
-  background: radial-gradient(circle, rgba(199, 155, 74, 0.26), transparent 66%);
-  animation: elena-deriva-b 32s ease-in-out infinite alternate;
-}
 
-@keyframes elena-deriva-a {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to   { transform: translate3d(4%, 5%, 0) scale(1.1); }
-}
-@keyframes elena-deriva-b {
-  from { transform: translate3d(0, 0, 0) scale(1.06); }
-  to   { transform: translate3d(-5%, -4%, 0) scale(1); }
-}
+
+
+
 
 /* Capa 3 — el lienzo de motas. */
 .hero-ambiente {
@@ -1872,31 +1795,14 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 /* Destellos visibles sólo al llegar: un toque de magia, no una capa que
    compita con el catálogo. */
-.hero-destellos {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
 
-.hero-destellos span {
-  position: absolute;
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #D3A94F;
-  box-shadow: 0 0 0 4px rgba(211, 169, 79, 0.10), 0 0 20px rgba(211, 169, 79, 0.70);
-  opacity: 0.32;
-  will-change: transform, opacity;
-  animation: elena-destello 3s linear infinite;
-}
 
-.hero-destellos span:nth-child(1) { top: 23%; left: 16%; animation-delay: 0ms; }
-.hero-destellos span:nth-child(2) { top: 63%; left: 10%; animation-delay: 750ms; }
-.hero-destellos span:nth-child(3) { top: 31%; right: 14%; animation-delay: 1500ms; }
-.hero-destellos span:nth-child(4) { top: 72%; right: 18%; animation-delay: 2250ms; }
+
+
+
+
+
+
 
 @keyframes elena-destello {
   0%, 100% { opacity: 0.18; transform: scale(0.92); }
@@ -1904,10 +1810,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 }
 
 /* En equipos modestos se quedan sólo el halo estático y el degradado. */
-.equipo-modesto .hero-halo::before,
-.equipo-modesto .hero-halo::after { animation: none; }
+
 .equipo-modesto .hero-ambiente { display: none; }
-.equipo-modesto .hero-destellos span { animation: none; }
+
 
 /* ============================================================
    25. Aparición al entrar en pantalla
@@ -1940,7 +1845,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 .hero-title     { animation-delay: 210ms; }
 .hero-subtitle  { animation-delay: 300ms; }
 .hero-actions   { animation-delay: 380ms; }
-.hero-links     { animation-delay: 460ms; }
+
 
 @keyframes elena-entrada {
   from { opacity: 0; transform: translate3d(0, 16px, 0); }
@@ -1970,8 +1875,8 @@ textarea.form-input { min-height: 120px; resize: vertical; }
     animation: elena-fundido var(--dur-base) var(--ease-out) both !important;
   }
   .hero-logo { animation: elena-fundido var(--dur-base) var(--ease-out) both !important; }
-  .hero-halo::before, .hero-halo::after { animation: none; }
-  .hero-destellos span { animation: none; }
+  
+  
 
   [data-revelar] {
     transform: none;
@@ -2263,8 +2168,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    tapaban la imagen y había que descubrir que aquello se deslizaba.
    Con diez videos y tarjetas verticales, una rejilla los enseña todos
    de una vez y se lee como una galería. */
-.reel-rail,
-#videos-container {
+.reel-rail{
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-3);
@@ -2272,9 +2176,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   margin: 0 auto;
 }
 
-@media (min-width: 560px)  { .reel-rail, #videos-container { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); } }
-@media (min-width: 900px)  { .reel-rail, #videos-container { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (min-width: 1200px) { .reel-rail, #videos-container { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+@media (min-width: 560px)  { .reel-rail{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); } }
+@media (min-width: 900px)  { .reel-rail{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .reel-rail{ grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 
 /* Los ejemplos personalizados son sólo dos y acompañan al formulario:
    no deben ocupar el ancho de una galería de diez. */
@@ -2400,29 +2304,13 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   text-shadow: 0 1px 3px rgba(18, 16, 14, 0.85);
 }
 
-.reel-enlace { display: flex; align-items: center; justify-content: center; }
-.reel-enlace .reel-play { position: relative; z-index: 3; }
+
+
 
 /* Insignia de la red. Antes cada TikTok llegaba con su propia botonera
    (me gusta, comentarios, compartir, "Watch now"): ahora basta el logo
    para decir de dónde sale el video. */
-.reel-red {
-  position: absolute;
-  top: var(--space-2);
-  right: var(--space-2);
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: var(--r-full);
-  background: rgba(18, 16, 14, 0.62);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  color: #FFFCF6;
-  font-size: 11px;
-}
+
 
 /* En una rejilla de tarjetas pequeñas el círculo de 56px tapaba media
    portada. Se queda a la mitad y sin borde, que a este tamaño ensuciaba. */
@@ -2436,14 +2324,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   .reel-play { width: 52px; height: 52px; font-size: 16px; }
 }
 
-.reel-vacio {
-  grid-column: 1 / -1;
-  padding: var(--space-16) var(--space-4);
-  text-align: center;
-  color: var(--ink-3);
-}
-.reel-vacio i { font-size: 28px; display: block; margin-bottom: var(--space-3); }
-.reel-vacio p { color: var(--ink-2); margin: 0; }
+
+
+
 
 /* ============================================================
    29. Redes sociales
@@ -2453,22 +2336,11 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    tenue y en el icono, al pasar el cursor.
    ============================================================ */
 
-.social-intro {
-  margin: calc(var(--space-4) * -1) 0 var(--space-6);
-  text-align: center;
-  font-size: var(--text-small);
-  color: var(--ink-2) !important;
-}
 
-.social-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
-}
 
-@media (min-width: 720px) {
-  .social-grid { grid-template-columns: repeat(3, 1fr); }
-}
+
+
+
 
 .social-link {
   position: relative;
@@ -2506,60 +2378,17 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   background: linear-gradient(135deg, rgba(24, 119, 242, 0.12), rgba(24, 119, 242, 0.04));
 }
 
-.social-icono {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px; height: 44px;
-  flex: 0 0 auto;
-  border-radius: var(--r-full);
-  /* El oro de la marca, sólido: en móvil no hay hover que lo revele. */
-  background: var(--gold-deep);
-  background-image: var(--grad-gold);
-  border: 1px solid transparent;
-  color: var(--gold-ink);
-  font-size: 18px;
-  box-shadow: var(--shadow-1);
-  transition: transform var(--dur-base) var(--ease-suave),
-              box-shadow var(--dur-base) var(--ease-suave);
-}
 
-.social-icono i { color: inherit !important; }
 
-.social-texto {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
 
-.social-nombre {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: 600;
-  color: var(--ink) !important;
-}
 
-.social-cuenta {
-  font-family: var(--font-body);
-  font-size: var(--text-micro);
-  color: var(--ink-3) !important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 
-.social-flecha {
-  position: relative;
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--ink-3);
-  opacity: 0;
-  transform: translate(-4px, 4px);
-  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-suave);
-}
+
+
+
+
+
+
 
 .social-link:active { transform: scale(0.99); }
 
@@ -2570,74 +2399,35 @@ textarea.form-input { min-height: 120px; resize: vertical; }
     box-shadow: var(--shadow-2);
   }
   .social-link:hover::before { opacity: 1; }
-  .social-link:hover .social-icono { transform: scale(1.08); box-shadow: var(--shadow-2); }
-  .social-link:hover .social-flecha { opacity: 1; transform: none; }
+  
+  
 }
 
 /* Bloque social: una pequeÃ±a tarjeta editorial, con cada red reconocible. */
-.social-panel {
-  padding: clamp(28px, 5vw, 40px) !important;
-  border-color: #E5DAC9 !important;
-  background: radial-gradient(circle at 6% 100%, rgba(211, 173, 104, 0.13), transparent 24%), #FFFEFC !important;
-}
 
-.social-eyebrow {
-  display: block;
-  margin-bottom: 12px;
-  color: #8A5B12;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-align: center;
-  text-transform: uppercase;
-}
 
-.social-panel .panel-title { margin-bottom: 12px; line-height: 1.2; }
-.social-panel .social-intro { margin: 0 0 28px; line-height: 1.55; }
-.social-panel .social-grid { gap: 14px; }
 
-.social-panel .social-link {
-  min-height: 92px;
-  padding: 16px;
-  border-radius: 18px;
-  border-color: #E9E0D4;
-  background: #FFFFFF;
-  box-shadow: 0 7px 18px rgba(70, 47, 16, 0.06);
-}
 
-.social-panel .social-icono {
-  width: 52px;
-  height: 52px;
-  font-size: 21px;
-  color: #FFFFFF;
-  box-shadow: none;
-}
 
-.social-panel .social-nombre { font-size: 1rem; }
-.social-panel .social-cuenta { margin-top: 2px; font-size: 12px; }
-.social-panel .social-flecha { color: var(--ink-2); }
 
-.social-panel .social-link[data-red="instagram"] .social-icono {
-  background: linear-gradient(135deg, #8B3BBB, #E34076 55%, #F6AA38);
-}
 
-.social-panel .social-link[data-red="tiktok"] .social-icono { background: #171717; }
-.social-panel .social-link[data-red="facebook"] .social-icono { background: #1877F2; }
 
-@media (hover: hover) and (pointer: fine) {
-  .social-panel .social-link:hover {
-    transform: translateY(-3px);
-    border-color: #D5B77D;
-    box-shadow: 0 12px 24px rgba(70, 47, 16, 0.11);
-  }
-}
 
-@media (max-width: 559px) {
-  .social-panel { padding: 26px 18px !important; }
-  .social-panel .social-link { min-height: 82px; }
-  .social-panel .social-icono { width: 48px; height: 48px; }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ============================================================
    30. Ajustes finos sobre reglas heredadas
@@ -3021,154 +2811,40 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 /* --- Tarjetas de envíos y pagos --- */
 
-.dato-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-8) var(--space-6);
-  text-align: center;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--bg);
-  transition:
-    transform var(--dur-base) var(--ease-suave),
-    border-color var(--dur-base) var(--ease-out),
-    box-shadow var(--dur-base) var(--ease-suave);
-}
 
-@media (hover: hover) and (pointer: fine) {
-  .dato-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--gold-veil);
-    box-shadow: var(--shadow-2);
-  }
-  .dato-card:hover .dato-icono { transform: scale(1.06) rotate(-3deg); }
-}
+
+
 
 /* El icono lleva el oro sólido: es el ancla visual de la tarjeta. */
-.dato-icono {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px; height: 56px;
-  border-radius: var(--r-full);
-  background: var(--gold-deep);
-  background-image: var(--grad-gold);
-  color: var(--gold-ink);
-  font-size: 21px;
-  box-shadow: var(--shadow-1);
-  transition: transform var(--dur-base) var(--ease-suave);
-}
 
-.dato-titulo {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink) !important;   /* 16.9:1 */
-}
+
+
 
 /* Dato principal: barra con acento, no un recuadro pálido. */
-.dato-destacado {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  width: 100%;
-  margin: 0;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--gold-veil);
-  border-left: 3px solid var(--gold-deep);
-  border-radius: var(--r-md);
-  background: var(--gold-mist);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--ink) !important;   /* 15.4:1 sobre el crema dorado */
-}
 
-.dato-destacado i { color: var(--gold-deep); font-size: 14px; flex: 0 0 auto; }
+
+
 
 /* --- Chips de garantías --- */
 
-.dato-chips,
-.dato-pagos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-2);
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
 
-.dato-chips li {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-full);
-  background: var(--surface);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: 600;
-  color: var(--ink) !important;   /* antes iba a 11px y en gris claro */
-  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-press) var(--ease-out);
-}
 
-.dato-chips li i { color: var(--gold-deep); font-size: 12px; }
 
-@media (hover: hover) and (pointer: fine) {
-  .dato-chips li:hover { border-color: var(--gold); transform: translateY(-1px); }
-}
+
+
+
+
 
 /* --- Medios de pago --- */
 
-.dato-pagos { gap: var(--space-3); }
 
-.dato-pagos li {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-full);
-  background: var(--surface);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: 600;
-  color: var(--ink) !important;
-  transition: border-color var(--dur-fast) var(--ease-out),
-              box-shadow var(--dur-base) var(--ease-suave),
-              transform var(--dur-press) var(--ease-out);
-}
 
-.dato-pago-icono {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px; height: 30px;
-  flex: 0 0 auto;
-  border-radius: var(--r-full);
-  background: var(--surface-2);
-  color: var(--gold-deep);
-  font-size: 13px;
-  overflow: hidden;
-}
-.dato-pago-icono img { width: 22px; height: 22px; object-fit: contain; }
 
-@media (hover: hover) and (pointer: fine) {
-  .dato-pagos li:hover {
-    border-color: var(--gold);
-    box-shadow: var(--shadow-1);
-    transform: translateY(-2px);
-  }
-}
+
+
+
+
+
 
 /* --- Panel de envíos: rejilla de las dos tarjetas --- */
 
@@ -3184,13 +2860,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 /* --- Lema de marca --- */
 
-.panel-accent .panel-title { margin-bottom: var(--space-4); }
 
-.panel-accent p {
-  font-size: var(--text-body);
-  line-height: 1.8;
-  color: var(--ink-2) !important;   /* 6.6:1 sobre el crema dorado */
-}
+
+
 
 /* --- Bloque final "Estamos aquí para ti" --- */
 
@@ -3200,10 +2872,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 
 #contacto .border-t { border-top-color: var(--line) !important; }
 
-#contacto .text-center.mt-12 p {
-  font-size: var(--text-small);
-  color: var(--ink-3) !important;   /* 5.2:1, antes 1.2:1 */
-}
+
 
 /* ============================================================
    33. Carrusel: avance automático
@@ -3324,15 +2993,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    37. Contacto directo por WhatsApp
    ============================================================ */
 
-.wa-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
-}
 
-@media (min-width: 560px) {
-  .wa-grid { grid-template-columns: repeat(2, 1fr); }
-}
+
+
 
 .wa-link {
   display: flex;
@@ -3384,71 +3047,22 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 .wa-link:active { transform: scale(0.99); }
 
 /* VersiÃ³n destacada del bloque de contacto. */
-.wa-panel {
-  position: relative;
-  overflow: hidden;
-  padding: clamp(28px, 5vw, 42px) !important;
-  border-color: #E5DAC9 !important;
-  background:
-    radial-gradient(circle at 100% 0%, rgba(218, 183, 114, 0.16), transparent 32%),
-    #FFFEFC !important;
-}
 
-.wa-panel::after {
-  position: absolute;
-  right: -28px;
-  bottom: -42px;
-  width: 140px;
-  height: 140px;
-  border: 1px solid rgba(22, 123, 66, 0.13);
-  border-radius: 50%;
-  content: "";
-  pointer-events: none;
-}
 
-.wa-eyebrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 14px;
-  color: #167B42;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
 
-.wa-panel .panel-title {
-  margin-bottom: 12px;
-  line-height: 1.2;
-}
 
-.wa-panel .social-intro {
-  margin: 0 0 28px;
-  line-height: 1.55;
-}
-.wa-panel .wa-grid { gap: var(--space-4); position: relative; z-index: 1; }
 
-.wa-panel .wa-link {
-  min-height: 84px;
-  padding: 14px 16px;
-  border-color: #D9E9DE;
-  border-radius: 18px;
-  background: #FFFFFF;
-  box-shadow: 0 8px 20px rgba(22, 123, 66, 0.08);
-}
 
-.wa-panel .wa-icono {
-  width: 52px;
-  height: 52px;
-  background: linear-gradient(145deg, #20A95B, #11723B);
-  font-size: 24px;
-  box-shadow: 0 7px 14px rgba(18, 117, 62, 0.25);
-}
 
-.wa-detalle { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+
+
+
+
+
+
+
+
+
 
 .wa-accion {
   color: var(--ink-3);
@@ -3456,18 +3070,9 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   font-size: 12px;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .wa-panel .wa-link:hover {
-    border-color: #83CBA1;
-    box-shadow: 0 12px 24px rgba(22, 123, 66, 0.14);
-  }
-}
 
-@media (max-width: 559px) {
-  .wa-panel { padding: 26px 18px !important; }
-  .wa-panel .wa-link { min-height: 78px; }
-  .wa-panel .wa-icono { width: 48px; height: 48px; font-size: 22px; }
-}
+
+
 
 @media (hover: hover) and (pointer: fine) {
   .wa-link:hover {
@@ -4260,44 +3865,23 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   margin-bottom: var(--space-12);
 }
 
-.deseos-velas-titulo {
-  margin: 0 0 var(--space-4);
-  font-size: var(--text-micro);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-align: center;
-  color: var(--ink-3);
-}
+
 .deseos-accion .btn { min-width: 200px; }
 .deseos-accion { margin-bottom: var(--space-4); }
 
 /* "o pídela directo" entre dos rayitas, para que el botón de WhatsApp se
    lea como otro camino y no como un botón más de la fila. */
-.deseos-o {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  max-width: 22rem;
-  margin: 0 auto var(--space-4);
-  font-size: var(--text-small);
-  color: var(--ink-3);
-}
-.deseos-o::before, .deseos-o::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--line-strong);
-}
-.deseos-whatsapp { display: flex; justify-content: center; margin-bottom: var(--space-12); }
-.deseos-whatsapp .btn { min-width: min(100%, 320px); }
+
+
+
+
 
 @media (max-width: 767px) {
   .deseos-velas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
   .deseo-chip { padding: var(--space-2) var(--space-3); }
   .deseos-accion { margin-bottom: var(--space-4); }
-  .deseos-whatsapp { margin-bottom: var(--space-8); }
-  .deseos-whatsapp .btn { width: 100%; }
+  
+  
   .deseos-accion { gap: var(--space-2); }
   .deseos-accion .btn { min-width: 0; flex: 1 1 auto; padding-left: var(--space-4); padding-right: var(--space-4); }
   /* En el celular bastan cuatro ejemplos: ocho alargaban la sección. */
@@ -4886,16 +4470,10 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 }
 .ctc-red-nombre i { font-size: 0.6em; color: var(--gold-deep); }
 .ctc-red-cuenta { grid-column: 1; font-size: var(--text-small); color: var(--ink-3); }
-.ctc-red-flecha {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  font-size: 18px;
-  color: var(--gold-deep);
-  transition: transform var(--dur-base) var(--ease-out);
-}
+
 @media (hover: hover) and (pointer: fine) {
   .ctc-red:hover .ctc-red-nombre { color: var(--gold-deep); }
-  .ctc-red:hover .ctc-red-flecha { transform: translate(3px, -3px); }
+  
 }
 
 .ctc-pie {
@@ -4914,12 +4492,12 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   .ctc-cuerpo-grid { grid-template-columns: 5fr 6fr; gap: clamp(64px, 9vw, 140px); align-items: start; }
   .ctc-red { grid-template-columns: 1fr auto auto; }
   .ctc-red-cuenta { grid-column: 2; grid-row: 1; }
-  .ctc-red-flecha { grid-column: 3; grid-row: 1; }
+  
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ctc-wa-link, .ctc-wa-flecha, .ctc-red-flecha { transition: none; }
-  .ctc-wa-link:active, .ctc-wa-link:hover .ctc-wa-flecha, .ctc-red:hover .ctc-red-flecha { transform: none; }
+  .ctc-wa-link, .ctc-wa-flecha{ transition: none; }
+  .ctc-wa-link:active, .ctc-wa-link:hover .ctc-wa-flecha{ transform: none; }
 }
 
 /* ============================================================
@@ -5176,7 +4754,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   background: var(--bg-2);
 }
 
-.pz-grid { display: grid; gap: var(--space-12); }
+
 
 .pz-titulo { color: var(--ink); }
 .pz-titulo em { color: var(--gold); }
@@ -5188,34 +4766,12 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   color: var(--ink-2);
 }
 
-.pz-pasos {
-  margin: var(--space-8) 0 var(--space-4);
-  padding: 0;
-  list-style: none;
-}
-.pz-pasos li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-4);
-  padding: var(--space-6) 0;
-  border-top: 1px solid var(--line-strong);
-}
-.pz-pasos li:last-child { border-bottom: 1px solid var(--line-strong); }
-.pz-num {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-style: italic;
-  color: var(--gold);
-  line-height: 1.6;
-}
-.pz-pasos h3 {
-  margin: 0 0 var(--space-1);
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.6vw, 1.5rem);
-  font-weight: 600;
-  color: var(--ink);
-}
-.pz-pasos p { margin: 0; line-height: 1.6; color: var(--ink-2); }
+
+
+
+
+
+
 
 /* Los dos videos, el segundo más abajo. */
 #personalizadas .pz-reels.reel-rail {
@@ -5238,11 +4794,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 }
 
 @media (min-width: 900px) {
-  .pz-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(48px, 7vw, 112px);
-    align-items: center;
-  }
+  
   #personalizadas .pz-reels.reel-rail { gap: var(--space-6); }
   .pz-reels .reel:nth-child(2) { margin-top: var(--space-24); }
 }
@@ -5340,20 +4892,12 @@ h1, h2, h3, h4,
 .pz-cabeza .pz-titulo { color: #FFFCF6; }
 .pz-cabeza .pz-titulo em { color: var(--gold-veil); }
 .pz-cabeza .pz-intro { color: rgba(243, 234, 218, 0.82); }
-.pz-cabeza .pz-pasos li { border-color: rgba(243, 234, 218, 0.22); }
-.pz-cabeza .pz-num { color: var(--gold-veil); }
-.pz-cabeza .pz-pasos h3 { color: #FFFCF6; }
-.pz-cabeza .pz-pasos p { color: rgba(243, 234, 218, 0.75); }
+
+
+
+
 .pz-cabeza .pz-ir { color: var(--gold-veil); }
-@media (min-width: 900px) {
-  .pz-cabeza .pz-pasos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-8);
-  }
-  .pz-cabeza .pz-pasos li,
-  .pz-cabeza .pz-pasos li:last-child { border-bottom: 0; grid-template-columns: 1fr; gap: var(--space-2); }
-}
+
 
 .pz-cuerpo {
   display: grid;
@@ -5738,13 +5282,13 @@ h1, h2, h3, h4,
   font-variation-settings: normal;
 }
 
-.pz-num, .ctc-wa-numero, .ctc-red-nombre, .lnd-pie strong, .pz-pasos h3,
+ .ctc-wa-numero, .ctc-red-nombre, .lnd-pie strong,
 .lnd-puntos h3, .producto-body h3 {
   font-style: normal;
   font-variation-settings: normal;
   letter-spacing: -0.015em;
 }
-.pz-num { font-weight: 700; }
+
 
 /* ============================================================
    57. Personalizadas: videos grandes y formulario sencillo
@@ -5887,7 +5431,7 @@ h1, h2, h3, h4,
   background: rgba(243, 234, 218, 0.1); color: var(--gold-veil); font-size: 18px;
 }
 .ctc-red-cuenta { grid-column: 1 / 3; grid-row: 2; padding-left: 56px; color: rgba(243, 234, 218, 0.65); }
-.ctc-red-flecha { grid-column: 3; grid-row: 1 / span 2; color: var(--gold-veil); }
+
 @media (hover: hover) and (pointer: fine) {
   .ctc-red:hover { transform: translateY(-3px); background: #2A1C15; }
   .ctc-red:hover .ctc-red-nombre { color: #FFFCF6; }
@@ -5897,7 +5441,7 @@ h1, h2, h3, h4,
   .ctc-redes > .lnd-eyebrow { grid-column: 1 / -1; }
   .ctc-red, .ctc-red:last-child { grid-template-columns: auto 1fr auto; }
   .ctc-red-cuenta { grid-column: 1 / 3; grid-row: 2; }
-  .ctc-red-flecha { grid-column: 3; grid-row: 1; }
+  
 }
 
 .cinta-contacto { padding-top: clamp(56px, 8vw, 96px); padding-bottom: 0; }
@@ -6079,7 +5623,7 @@ h1, h2, h3, h4,
 @media (max-width: 899px) {
   .pz-cabeza { --velo: linear-gradient(180deg, rgba(70, 16, 28, 0.62) 0%, rgba(50, 10, 18, 0.82) 100%); }
 }
-.pz-cabeza .pz-pasos li { border-color: rgba(255, 220, 200, 0.2); }
+
 .pz-lado {
   background:
     radial-gradient(ellipse 90% 60% at 15% 0%, rgba(217, 160, 90, 0.28), rgba(110, 27, 39, 0) 70%),
