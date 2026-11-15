@@ -4835,9 +4835,10 @@ function initDeseos() {
   // muestra, tenues, para que se entienda qué va a pasar.
   const palabra = document.getElementById('deseo-palabra');
   const pista = document.getElementById('deseo-pista');
-  const COLORES_VELA = ['#B3263A', '#7A3E9D', '#D9822B', '#2F7D5B', '#C2185B', '#1F6FA8', '#8A5A12', '#3B8F3B', '#D24E2A', '#5A4FB3'];
+  // Los colores vivos de las franjas de las velas de Noche de Velitas.
+  const COLORES_VELA = ['#F26B1D', '#1E88E5', '#2BB24C', '#F2C318', '#EC5A9B', '#8E44AD', '#E53935', '#9CCC2E', '#12A39A', '#4FB3E8'];
   const velaHTML = (d, i, extra) =>
-    `<span class="dsw-vela${extra}" style="--tinta:${COLORES_VELA[i % COLORES_VELA.length]};--alto:${86 + (i * 37 % 5) * 3}%">` +
+    `<span class="dsw-vela${extra}" style="--tinta:${COLORES_VELA[i % COLORES_VELA.length]};--alto:${90 + (i * 37 % 4) * 3}%;--letras:${d.length}">` +
     `<span class="dsw-llama" aria-hidden="true"></span><span class="dsw-cuerpo"><span class="dsw-palabra">${d}</span></span></span>`;
   let ultimo = null;
   const cuenta = document.getElementById('deseo-cuenta');
