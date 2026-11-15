@@ -14,7 +14,7 @@
     <title>Velas artesanales en Medellín para Navidad | Elena Velas y Aromas</title>
     <meta name="description" content="Velas artesanales hechas a mano en Medellín: Navidad, comunión, baby shower y personalizadas. Detal y por mayor con envíos a toda Colombia.">
     <meta name="author" content="Elena Velas y Aromas">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     
     <!-- Vista previa al compartir el enlace.
          Antes apuntaba a elenavelasyaromas.com, que no existe, y a una
@@ -28,18 +28,18 @@
     <meta property="og:url" content="https://www.velasyaromaselena.com/">
     <meta property="og:title" content="Elena Velas y Aromas | Velas artesanales en Medellín">
     <meta property="og:description" content="Velas artesanales hechas a mano en Medellín para Navidad y todo el año. Detal y por mayor, con envíos a toda Colombia.">
-    <meta property="og:image" content="https://www.velasyaromaselena.com/assets/compartir.jpg">
+    <meta property="og:image" content="https://www.velasyaromaselena.com/assets/google-16x9.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Velas artesanales Elena sobre una base de madera">
+    <meta property="og:image:height" content="675">
+    <meta property="og:image:alt" content="Velas artesanales de Elena Velas y Aromas con su logo">
 
     <link rel="image_src" href="https://www.velasyaromaselena.com/assets/google-1x1.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Elena Velas y Aromas | Velas artesanales en Medellín">
     <meta name="twitter:description" content="Velas artesanales hechas a mano en Medellín para Navidad y todo el año. Detal y por mayor, con envíos a toda Colombia.">
-    <meta name="twitter:image" content="https://www.velasyaromaselena.com/assets/compartir.jpg">
-    <meta name="twitter:image:alt" content="Velas artesanales Elena sobre una base de madera">
+    <meta name="twitter:image" content="https://www.velasyaromaselena.com/assets/google-16x9.jpg">
+    <meta name="twitter:image:alt" content="Velas artesanales de Elena Velas y Aromas con su logo">
 
     <!-- PWA -->
     <!-- theme-color = el color del borde superior de la página, no el de marca -->
@@ -80,7 +80,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css?v=20261115-limpio">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261115-limpio">
+    <link rel="stylesheet" href="theme.css?v=20261115-google">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -213,11 +213,7 @@
                 <!-- El video es vertical: en pantallas anchas se estiraría y se
                      vería pixelado, así que ahí va una versión desenfocada a
                      propósito, como un fondo de foto. -->
-                <picture>
-                    <source media="(min-width: 900px)" srcset="assets/videos/posters/portada-taller-16x9.webp">
-                    <img class="hero-fondo-img" src="assets/videos/posters/portada-taller-9x16.webp"
-                         alt="Velas artesanales de Navidad sobre madera" width="720" height="1280" fetchpriority="high" decoding="async">
-                </picture>
+                <div class="hero-fondo-img" role="presentation"></div>
                 <!-- Videos animados con las fotos reales (herramientas/videos-animados.py):
                      vertical en el celular, tres paneles en pantalla ancha. -->
                 <video class="hero-fondo-video" muted loop playsinline preload="none"

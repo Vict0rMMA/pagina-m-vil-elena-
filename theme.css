@@ -6873,3 +6873,40 @@ input#product-search::-webkit-search-cancel-button { -webkit-appearance: none; a
 .sin-resultados { max-width: 28rem; margin: 0 auto; padding: var(--space-12) var(--space-4); text-align: center; }
 .sin-resultados-titulo { margin: 0 0 var(--space-2); font-size: 1.25rem; font-weight: 700; color: var(--ink); }
 .sin-resultados-texto { margin: 0 0 var(--space-6); font-size: 0.9375rem; line-height: 1.6; color: var(--ink-2); }
+
+/* La foto de la portada, como fondo (ver index.html): mismas versiones
+   para celular y computador que el <link rel="preload"> de la cabecera. */
+.hero-fondo-img {
+  background: #1E1410 url("assets/videos/posters/portada-taller-9x16.webp") 50% 40% / cover no-repeat;
+}
+@media (min-width: 900px) {
+  .hero-fondo-img { background-image: url("assets/videos/posters/portada-taller-16x9.webp"); }
+}
+
+/* ============================================================
+   72. Vitrina de deseos: velas delgadas
+   ------------------------------------------------------------
+   Velas tipo cirio, finas y altas, con aire entre ellas. Si se eligen
+   muchas, se encogen un poco en lugar de ensancharse.
+   ============================================================ */
+.dsw-velas { gap: clamp(10px, 3.2vw, 26px); padding: 0 var(--space-4); }
+.dsw-vela { flex: 0 1 34px; min-width: 18px; }
+.dsw-cuerpo { border-radius: 6px 6px 3px 3px / 4px 4px 3px 3px; }
+.dsw-cuerpo::before { height: 16%; }
+.dsw-palabra {
+  margin-top: 12%;
+  font-size: clamp(10px, 2.4vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.dsw-llama { width: 9px; height: 18px; }
+.dsw-vela::before { width: 90px; height: 90px; top: -28px; }
+.dsw-vela::after { width: 160%; height: 8px; }
+@media (min-width: 900px) {
+  .dsw-vela { flex-basis: 42px; }
+  .dsw-velas { height: 78%; }
+}
+@media (max-width: 899px) {
+  .dsw-velas { height: 68%; }
+  .dsw-pista { top: var(--space-4); font-size: 0.75rem; padding: 6px 12px; }
+}
