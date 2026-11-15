@@ -80,7 +80,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css?v=20261112-fondos">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261114-rapida">
+    <link rel="stylesheet" href="theme.css?v=20261114-buscar">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -699,7 +699,7 @@
                 <div class="search-field">
                     <i class="fas fa-search"></i>
                     <input 
-                        type="text" 
+                        type="search" 
                         id="product-search" 
                         placeholder="Buscar productos"
                         autocomplete="off"
@@ -708,7 +708,12 @@
                         enterkeyhint="search"
                         aria-label="Buscar productos"
                     >
+                    <button type="button" id="product-search-limpiar" class="search-limpiar" aria-label="Borrar búsqueda" hidden>&times;</button>
                 </div>
+                <p id="busqueda-resumen" class="busqueda-resumen" aria-live="polite" hidden>
+                    <span></span>
+                    <button type="button" id="busqueda-borrar">Borrar</button>
+                </p>
                 
                 <!-- Category Filters -->
                 <div id="category-filters" role="tablist" aria-label="Categor&iacute;as">
@@ -1103,7 +1108,7 @@
     <script defer src="/_vercel/insights/script.js"></script>
 
     <!-- Scripts -->
-    <script src="app.js?v=20261114-rapida"></script>
+    <script src="app.js?v=20261114-buscar"></script>
     <script src="motion.js?v=20261010-dock" defer></script>
     <script src="cuenta.js?v=20261114-rapida" defer></script>
     <script>

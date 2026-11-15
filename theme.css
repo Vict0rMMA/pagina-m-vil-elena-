@@ -7276,3 +7276,56 @@ h1, h2, h3, h4,
   .lnd-puntos li::before { transform: scaleX(1); transition: none; }
   .lnd-puntos li h3, .lnd-puntos li p, .lnd-puntos li .lnd-enlace { opacity: 1; transform: none; transition: none; }
 }
+
+/* ============================================================
+   71. Buscador
+   ============================================================ */
+input#product-search { padding-right: 52px; }
+input#product-search::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.search-limpiar {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 1.375rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.search-limpiar[hidden] { display: none; }
+@media (hover: hover) and (pointer: fine) { .search-limpiar:hover { background: var(--bg-2); color: var(--ink); } }
+
+.busqueda-resumen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: calc(var(--space-4) * -1) auto var(--space-6);
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.busqueda-resumen[hidden] { display: none; }
+.busqueda-resumen button {
+  min-height: 36px;
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--gold-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.sin-resultados { max-width: 28rem; margin: 0 auto; padding: var(--space-12) var(--space-4); text-align: center; }
+.sin-resultados-titulo { margin: 0 0 var(--space-2); font-size: 1.25rem; font-weight: 700; color: var(--ink); }
+.sin-resultados-texto { margin: 0 0 var(--space-6); font-size: 0.9375rem; line-height: 1.6; color: var(--ink-2); }

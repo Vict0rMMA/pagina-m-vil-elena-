@@ -3089,7 +3089,7 @@ function renderProductos() {
       const dataCategory = getProductCategory(producto);
       
       return `
-    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${producto.imagen}" data-nombre="${producto.nombre.toLowerCase()}" data-descripcion="${producto.descripcion ? producto.descripcion.toLowerCase() : ''}">
+    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${producto.imagen}" data-nombre="${producto.nombre.toLowerCase()}" data-buscar="${textoBusqueda(producto)}" data-descripcion="${producto.descripcion ? producto.descripcion.toLowerCase() : ''}">
       <div class="producto-media">
         <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="event.stopPropagation(); ampliarImagenProducto('${producto.imagen}', '${producto.nombre}')"><i class="fas fa-expand"></i></button>
         <div class="skeleton-image absolute inset-0"></div>
@@ -3173,7 +3173,7 @@ function renderProductos() {
         }
         
         return `
-    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${tituloTarjeta.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
+    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${tituloTarjeta.toLowerCase()}" data-buscar="${textoBusqueda(productosGrupo)}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
       <div class="producto-media">
         <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="event.stopPropagation(); ampliarImagenProducto('${imagen}', '${tituloTarjeta}')"><i class="fas fa-expand"></i></button>
         <div class="skeleton-image absolute inset-0"></div>
@@ -3203,7 +3203,7 @@ function renderProductos() {
     } else {
       // Producto único - mostrar normalmente
       return `
-    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${productoPrincipal.nombre.toLowerCase()}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
+    <div class="producto producto-item" data-category="${dataCategory}" data-imagen="${imagen}" data-nombre="${productoPrincipal.nombre.toLowerCase()}" data-buscar="${textoBusqueda(productoPrincipal)}" data-descripcion="${productoPrincipal.descripcion ? productoPrincipal.descripcion.toLowerCase() : ''}">
       <div class="producto-media">
         <button type="button" class="producto-zoom" aria-label="Ampliar imagen" onclick="event.stopPropagation(); ampliarImagenProducto('${imagen}', '${productoPrincipal.nombre}')"><i class="fas fa-expand"></i></button>
         <div class="skeleton-image absolute inset-0"></div>
@@ -3395,75 +3395,50 @@ window.abrirModalProductoGrupo = abrirModalProductoGrupo;
 function filtrarYMostrarProductos() {
   const container = document.getElementById('products-grid');
   const noResults = document.getElementById('no-results');
-  
+
   if (!container) return;
-  
+
   // Determinar el filtro activo
-  const filterActual = state.categoriaActual === 'todas' ? 'todas' : 
+  const filterActual = state.categoriaActual === 'todas' ? 'todas' :
                       (categoryToFilter[state.categoriaActual] || 'todas');
-  
-  // Obtener búsqueda actual
-  const busquedaLower = state.busqueda ? state.busqueda.toLowerCase().trim() : '';
-  
-  // Obtener todos los productos
+
+  const busqueda = (state.busqueda || '').trim();
   const productos = container.querySelectorAll('.producto');
-  
   let productosVisibles = 0;
-  
+
   productos.forEach(producto => {
-    const productCategory = producto.dataset.category || '';
-    const productNombre = producto.dataset.nombre || '';
-    const productDescripcion = producto.dataset.descripcion || '';
-    
-    // Verificar filtro de categoría
     // productCategory puede traer varias etiquetas ("navidad suvenirs").
     const pasaCategoria = filterActual === 'todas' ||
-                          productCategory.split(' ').indexOf(filterActual) !== -1;
-    
-    // Verificar filtro de búsqueda
-    const pasaBusqueda = !busquedaLower || 
-                         productNombre.includes(busquedaLower) || 
-                         productDescripcion.includes(busquedaLower);
-    
-    // Debe mostrarse si pasa ambos filtros
+                          (producto.dataset.category || '').split(' ').indexOf(filterActual) !== -1;
+    const pasaBusqueda = coincideBusqueda(producto.dataset.buscar || producto.dataset.nombre || '', busqueda);
     const debeMostrarse = pasaCategoria && pasaBusqueda;
-    
-    if (debeMostrarse) {
-      productosVisibles++;
-      // Mostrar con animación fade-in
-      producto.style.display = '';
-      producto.style.opacity = '0';
-      producto.style.transition = 'opacity 0.3s ease-in-out';
-      
-      // Trigger reflow para iniciar animación
-      void producto.offsetWidth;
-      
-      setTimeout(() => {
-        producto.style.opacity = '1';
-      }, 10);
-    } else {
-      // Ocultar con animación fade-out
-      producto.style.transition = 'opacity 0.3s ease-in-out';
-      producto.style.opacity = '0';
-      
-      setTimeout(() => {
-        producto.style.display = 'none';
-      }, 300);
-    }
+    producto.style.display = debeMostrarse ? '' : 'none';
+    producto.style.opacity = '';
+    if (debeMostrarse) productosVisibles++;
   });
-  
+
+  const resumen = document.getElementById('busqueda-resumen');
+  if (resumen) {
+    resumen.hidden = !busqueda;
+    if (busqueda) {
+      resumen.querySelector('span').textContent = productosVisibles === 1
+        ? '1 resultado para “' + busqueda + '”'
+        : productosVisibles + ' resultados para “' + busqueda + '”';
+    }
+  }
+
   // Mostrar/ocultar mensaje de no resultados
   if (productosVisibles === 0) {
     container.classList.add('hidden');
     if (noResults) {
       noResults.classList.remove('hidden');
       noResults.innerHTML = `
-        <div class="text-center py-12">
-          <i class="fas fa-search text-6xl text-gray-300 dark:text-gray-600 mb-4"></i>
-          <p class="text-xl text-gray-600 dark:text-gray-400 mb-2">No se encontraron productos</p>
-          <p class="text-gray-500 dark:text-gray-500">Intenta con otros términos de búsqueda</p>
-        </div>
-      `;
+        <div class="sin-resultados">
+          <p class="sin-resultados-titulo">No encontramos “${(state.busqueda || '').trim().replace(/[<>]/g, '')}”</p>
+          <p class="sin-resultados-texto">Prueba con otra palabra, como “ángel”, “pesebre” o “comunión”. O escríbenos y te ayudamos a encontrarla.</p>
+          <a class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer"
+             href="${WHATSAPP_API + encodeURIComponent('Hola, estoy buscando: ' + (state.busqueda || '').trim())}">Preguntar por WhatsApp</a>
+        </div>`;
     }
   } else {
     container.classList.remove('hidden');
@@ -3481,6 +3456,42 @@ function filtrarYMostrarProductos() {
 
 function formatearPesos(valor) {
   return '$' + Number(valor).toLocaleString('es-CO');
+}
+
+// ---------- Buscador ----------
+// Sin tildes, sin mayúsculas y en singular: "Ángeles" y "angel" se
+// encuentran igual. Cada tarjeta lleva en data-buscar el texto de todos
+// sus productos (nombre, descripción, catálogo, fragancias y colores).
+function normalizarBusqueda(texto) {
+  return String(texto || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9ñ]+/g, ' ').trim();
+}
+
+function raizPalabra(p) {
+  if (p.length > 4 && /[^aeiou]es$/.test(p)) return p.slice(0, -2);
+  if (p.length > 3 && p.endsWith('s')) return p.slice(0, -1);
+  return p;
+}
+
+function textoBusqueda(productos) {
+  const lista = Array.isArray(productos) ? productos : [productos];
+  const partes = [];
+  lista.forEach(p => {
+    if (!p) return;
+    partes.push(p.nombre, p.descripcion, p.categoria, NOMBRE_CATALOGO[p.categoria], getProductCategory(p));
+    (p.fragancias || []).forEach(f => partes.push(f));
+    if (p.ficha) (p.ficha.colores || []).forEach(c => partes.push(c.nombre));
+  });
+  return normalizarBusqueda(partes.join(' ')).split(' ').map(raizPalabra).join(' ');
+}
+
+// Cada palabra escrita debe aparecer (al inicio de alguna palabra del
+// producto): "vela roj" encuentra "Vela Roja".
+function coincideBusqueda(indice, busqueda) {
+  if (!busqueda) return true;
+  const palabras = ' ' + indice;
+  return normalizarBusqueda(busqueda).split(' ').filter(Boolean).map(raizPalabra)
+    .every(w => palabras.includes(' ' + w));
 }
 
 // Precio más bajo de un producto (o de varios con la misma foto), para la
@@ -5721,11 +5732,41 @@ function initSearch() {
       }
     });
     
-    searchInput.addEventListener('input', (e) => {
-      state.busqueda = e.target.value;
-      
-      renderProductos();
+    const limpiar = document.getElementById('product-search-limpiar');
+    let espera = null;
+    const aplicar = () => {
+      state.busqueda = searchInput.value;
+      if (limpiar) limpiar.hidden = !searchInput.value;
+      // Al buscar se mira todo el catálogo, no sólo la categoría abierta.
+      if (state.busqueda.trim() && state.categoriaActual !== 'todas') {
+        state.categoriaActual = 'todas';
+        renderCategorias();
+        renderProductos();
+        return;
+      }
+      filtrarYMostrarProductos();
+    };
+    searchInput.addEventListener('input', () => {
+      clearTimeout(espera);
+      espera = setTimeout(aplicar, 160);
     });
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        clearTimeout(espera);
+        aplicar();
+        searchInput.blur();
+        const grid = document.getElementById('products-grid');
+        if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (e.key === 'Escape') {
+        searchInput.value = '';
+        aplicar();
+      }
+    });
+    const borrar = () => { searchInput.value = ''; aplicar(); searchInput.focus(); };
+    if (limpiar) limpiar.addEventListener('click', borrar);
+    const resumenBorrar = document.getElementById('busqueda-borrar');
+    if (resumenBorrar) resumenBorrar.addEventListener('click', borrar);
   }
 }
 
