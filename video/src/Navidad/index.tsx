@@ -15,6 +15,7 @@ import { FONT_BODY, FONT_DISPLAY } from "../Anuncio/theme";
 import { COLECCION, MARCA, PALETA as P, PRODUCTOS } from "./coleccion";
 import { CatalogoComp } from "./catalogo";
 import { CollageComps } from "./collage";
+import { PerfilComps } from "./perfil";
 import { Bokeh, FPS, Flare, GoldDust, Grade, Snow, clamp, useLayout } from "./fx";
 
 const DURATION = 1500; // 50 s
@@ -359,6 +360,7 @@ export const NavidadComps: React.FC = () => (
     <Composition id="Navidad2026-9x16" component={Comercial} durationInFrames={DURATION} fps={FPS} width={1080} height={1920} />
     <CatalogoComp />
     <CollageComps />
+    <PerfilComps />
   </>
 );
 
