@@ -1608,13 +1608,13 @@ section.vid-seccion {
 
 /* --- Entrada al hacer scroll --- */
 
-.vid-aparece {
+.js-anima .vid-aparece {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 400ms var(--ease-suave), transform 400ms var(--ease-suave);
 }
 .vid-aparece-tarde { transition-delay: 120ms; }
-.vid-aparece.vid-visible { opacity: 1; transform: none; }
+.js-anima .vid-aparece.vid-visible { opacity: 1; transform: none; }
 
 /* --- Escritorio --- */
 

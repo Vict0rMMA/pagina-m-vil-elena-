@@ -34,7 +34,8 @@
     cargando = new Promise((ok, mal) => {
       const s = document.createElement('script');
       s.src = LIBRERIA;
-      s.onload = ok;
+      // En navegadores muy viejos la librería carga pero no se define.
+      s.onload = () => (window.supabase && window.supabase.createClient ? ok() : mal());
       s.onerror = mal;
       document.head.appendChild(s);
     });

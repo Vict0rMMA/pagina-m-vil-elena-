@@ -17,6 +17,10 @@
 (function () {
   'use strict';
 
+  // Lo que "aparece al bajar" sólo se esconde si este archivo corrió: en
+  // un navegador que no lo ejecute, todo queda visible en vez de invisible.
+  document.documentElement.classList.add('js-anima');
+
   // matchMedia no está en todos los entornos; sin él se asume movimiento normal.
   const reducido = typeof window.matchMedia === 'function'
     ? window.matchMedia('(prefers-reduced-motion: reduce)')

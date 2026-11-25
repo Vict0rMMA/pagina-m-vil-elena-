@@ -2669,7 +2669,7 @@ function renderCarrito() {
         </div>
         <p class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Tu carrito está vacío</p>
         <p class="text-gray-500 dark:text-gray-400 mb-6">Agrega productos para comenzar</p>
-        <button onclick="cerrarCarrito(); document.getElementById('productos')?.scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
+        <button onclick="cerrarCarrito(); (document.getElementById('productos')||{scrollIntoView(){}}).scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
           Ver Productos
         </button>
       </div>
@@ -3225,7 +3225,7 @@ function abrirModalProductoGrupo(imagen) {
         p.id !== prod.id && 
         p.nombre.toLowerCase().includes('mayorista')
       );
-      tamanosMayorista = productoMayorista?.tamanos || [];
+      tamanosMayorista = (productoMayorista && productoMayorista.tamanos) || [];
     }
     
     return `
@@ -3730,8 +3730,8 @@ function abrirModalProducto(productoId) {
          (!esMayorista && p.nombre.toLowerCase().includes('mayorista')))
       );
       
-      tamanosDetal = esMayorista ? (productoCorrespondiente?.tamanos || []) : tamanos;
-      tamanosMayorista = esMayorista ? tamanos : (productoCorrespondiente?.tamanos || []);
+      tamanosDetal = esMayorista ? ((productoCorrespondiente && productoCorrespondiente.tamanos) || []) : tamanos;
+      tamanosMayorista = esMayorista ? tamanos : ((productoCorrespondiente && productoCorrespondiente.tamanos) || []);
       tieneAmbos = tamanosDetal.length > 0 && tamanosMayorista.length > 0;
     }
     
@@ -5604,7 +5604,7 @@ function renderVideos() {
         ${iconoMudo}${iconoSonido}<span class="vid-sonido-texto">Activar sonido</span>
       </button>`;
   } else {
-    marco.closest('.vid-media')?.classList.add('vid-sin-video');
+    if (marco.closest('.vid-media')) marco.closest('.vid-media').classList.add('vid-sin-video');
   }
 
   carril.innerHTML = videos.map((video, i) => {
@@ -5854,7 +5854,8 @@ function initNavegacionSecciones() {
       const mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
         mobileMenu.classList.add('hidden');
-        const icon = document.getElementById('mobile-menu-button')?.querySelector('i');
+        const botonMenu = document.getElementById('mobile-menu-button');
+        const icon = botonMenu && botonMenu.querySelector('i');
         if (icon) {
           icon.classList.add('fa-bars');
           icon.classList.remove('fa-times');
@@ -6321,13 +6322,13 @@ function mostrarToastProducto(producto) {
           <p class="text-sm font-semibold text-gray-800 dark:text-white truncate">¡Agregado!</p>
         </div>
         <p class="text-xs text-gray-600 dark:text-gray-300 truncate mb-2">${producto.nombre}</p>
-        <button onclick="abrirCarrito(); document.getElementById('product-toast')?.remove();" 
+        <button onclick="abrirCarrito(); var t=document.getElementById('product-toast'); if(t) t.remove();" 
                 class="btn btn-primary btn-block">
           <i class="fas fa-shopping-cart"></i>
           Ver Carrito
         </button>
       </div>
-      <button onclick="document.getElementById('product-toast')?.remove();" 
+      <button onclick="var t=document.getElementById('product-toast'); if(t) t.remove();" 
               class="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
         <i class="fas fa-times text-sm"></i>
       </button>

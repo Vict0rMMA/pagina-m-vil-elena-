@@ -1821,7 +1821,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
    corto (14px) a propósito — a partir de ahí se nota el truco.
    ============================================================ */
 
-[data-revelar] {
+.js-anima [data-revelar] {
   opacity: 0;
   transform: translate3d(0, 14px, 0);
   transition:
@@ -1830,7 +1830,7 @@ textarea.form-input { min-height: 120px; resize: vertical; }
   will-change: opacity, transform;
 }
 
-[data-revelar].visible {
+.js-anima [data-revelar].visible {
   opacity: 1;
   transform: none;
   will-change: auto;   /* se libera en cuanto termina */
@@ -6790,13 +6790,12 @@ h1, h2, h3, h4,
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, var(--gold) 0%, var(--line-strong) 60%, var(--line) 100%);
-  transform: scaleX(0);
   transform-origin: left;
   transition: transform 900ms var(--ease-suave);
 }
-.lnd-puntos li h3,
-.lnd-puntos li p,
-.lnd-puntos li .lnd-enlace {
+.js-anima .lnd-puntos li h3,
+.js-anima .lnd-puntos li p,
+.js-anima .lnd-puntos li .lnd-enlace {
   opacity: 0;
   transform: translateX(-14px);
   transition: opacity 600ms var(--ease-suave), transform 600ms var(--ease-suave);
@@ -6956,3 +6955,6 @@ input#product-search::-webkit-search-cancel-button { -webkit-appearance: none; a
   .dsw-velas { gap: 18px; height: 74%; }
   .dsw-palabra { font-size: min(19px, 62cqh / (var(--letras, 6) * 0.62)); }
 }
+
+.js-anima .lnd-puntos li::before { transform: scaleX(0); }
+.js-anima .lnd-puntos li.visible::before { transform: scaleX(1); }
