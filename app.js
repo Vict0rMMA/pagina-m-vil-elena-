@@ -2669,7 +2669,7 @@ function renderCarrito() {
         </div>
         <p class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Tu carrito está vacío</p>
         <p class="text-gray-500 dark:text-gray-400 mb-6">Agrega productos para comenzar</p>
-        <button onclick="cerrarCarrito(); (document.getElementById('productos')||{scrollIntoView(){}}).scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
+        <button onclick="cerrarCarrito(); (document.getElementById('productos')||{scrollIntoView(){}}).scrollIntoView({behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth')})" class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all">
           Ver Productos
         </button>
       </div>
@@ -2821,7 +2821,7 @@ function initProductos() {
       const productsSection = document.getElementById('productos');
       if (productsSection) {
         setTimeout(() => {
-          productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          productsSection.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
         }, 100);
       }
     });
@@ -4799,7 +4799,7 @@ function initCuentaAtras() {
     renderCategorias();
     renderProductos();
     const destino = document.getElementById('productos');
-    if (destino) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (destino) destino.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
   });
 }
 
@@ -4939,7 +4939,7 @@ function initDeseos() {
     renderCategorias();
     renderProductos();
     const destino = document.getElementById('productos');
-    if (destino) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (destino) destino.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
   });
 
   rejilla.addEventListener('click', e => {
@@ -5009,7 +5009,7 @@ function cablearAccionesPromo() {
     }
 
     const seccion = document.getElementById(destino);
-    if (seccion) seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (seccion) seccion.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
   });
 }
 
@@ -5418,7 +5418,7 @@ function initLanding() {
     renderCategorias();
     renderProductos();
     const destino = document.getElementById('productos');
-    if (destino) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (destino) destino.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
   };
 
   galeria.addEventListener('click', e => {
@@ -5437,7 +5437,7 @@ function initLanding() {
   document.querySelectorAll('.lnd-flecha').forEach(boton => {
     boton.addEventListener('click', () => {
       const paso = Math.max(galeria.clientWidth * 0.7, 280);
-      galeria.scrollBy({ left: paso * Number(boton.dataset.dir), behavior: 'smooth' });
+      galeria.scrollBy({ left: paso * Number(boton.dataset.dir), behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth') });
     });
   });
 }
@@ -5699,7 +5699,7 @@ function initSearch() {
         aplicar();
         searchInput.blur();
         const grid = document.getElementById('products-grid');
-        if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (grid) grid.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
       } else if (e.key === 'Escape') {
         searchInput.value = '';
         aplicar();
@@ -5771,7 +5771,7 @@ function initBottomDock() {
           e.preventDefault();
           const target = document.querySelector(href);
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
           }
         }
       }
@@ -5786,6 +5786,7 @@ function initBottomDock() {
   window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
+    if (document.documentElement.classList.contains('liviano')) return;
     if (scrollTop > lastScrollTop && scrollTop > 100) {
       // Scrolling down - ocultar dock
       dock.style.transform = 'translateY(100%)';
@@ -5818,7 +5819,7 @@ function initScrollToTop() {
   scrollButton.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth')
     });
     
     // Animación de vibración (si está disponible)
@@ -5850,7 +5851,7 @@ function initNavegacionSecciones() {
       if (destino && !destino.classList.contains('page-section') && destino.closest('.page-section')) {
         const seccion = destino.closest('.page-section');
         if (seccion.style.display === 'none' || seccion.hidden) mostrarSeccion(seccion.id);
-        setTimeout(() => destino.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+        setTimeout(() => destino.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' }), 60);
         return;
       }
 
@@ -5861,12 +5862,12 @@ function initNavegacionSecciones() {
         setTimeout(() => {
           const videosSection = document.getElementById('videos');
           if (videosSection) {
-            videosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            videosSection.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
           }
         }, 100);
       }
       
-      mostrarSeccion(hash);
+      mostrarSeccion(hash, true);
       
       // Cerrar menú móvil si está abierto
       const mobileMenu = document.getElementById('mobile-menu');
@@ -5890,7 +5891,7 @@ function initNavegacionSecciones() {
       setTimeout(() => {
         const videosSection = document.getElementById('videos');
         if (videosSection) {
-          videosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          videosSection.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
         }
       }, 100);
     }
@@ -5898,7 +5899,7 @@ function initNavegacionSecciones() {
   });
 }
 
-function mostrarSeccion(seccionId) {
+function mostrarSeccion(seccionId, desdeToque) {
   // Lista de secciones válidas
   const secciones = ['inicio', 'productos', 'novedades', 'personalizadas', 'deseos', 'contacto'];
   // Los videos y la cuenta atrás viven ahora en Novedades.
@@ -5934,12 +5935,7 @@ function mostrarSeccion(seccionId) {
     seccionActiva.style.display = '';
     
     // Scroll suave al inicio de la sección
-    setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }, 50);
+    window.scrollTo(0, 0);
   }
   
   // Actualizar estado
@@ -5947,7 +5943,8 @@ function mostrarSeccion(seccionId) {
   
   // Actualizar URL sin recargar
   if (window.location.hash !== `#${seccionId}`) {
-    window.history.pushState(null, '', `#${seccionId}`);
+    if (desdeToque) window.history.pushState(null, '', `#${seccionId}`);
+    else window.history.replaceState(null, '', `#${seccionId}`);
   }
   
   // Resaltar enlace activo en el menú
@@ -6140,7 +6137,7 @@ function initPersonalizadas() {
 
     if (hayErrores) {
       const primero = document.querySelector('.field-error:not(.hidden)');
-      if (primero) primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (primero) primero.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'center' });
       return;
     }
 
@@ -6299,7 +6296,7 @@ function comprarPorWhatsApp() {
 function mostrarCatalogo(categoriaId) {
   const banner = document.getElementById(`banner-${categoriaId}`);
   if (banner) {
-    banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    banner.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth'), block: 'start' });
   } else {
     mostrarTodosProductos(categoriaId);
   }
@@ -6315,7 +6312,7 @@ function mostrarTodosProductos(categoriaId) {
   renderProductos();
   const productsSection = document.getElementById('productos');
   if (productsSection) {
-    productsSection.scrollIntoView({ behavior: 'smooth' });
+    productsSection.scrollIntoView({ behavior: (document.documentElement.classList.contains('liviano') ? 'auto' : 'smooth') });
   }
 }
 

@@ -7006,3 +7006,25 @@ input#product-search::-webkit-search-cancel-button { -webkit-appearance: none; a
 /* Fotos del catálogo: aparecen con un fundido suave sobre el crema. */
 .producto-img { transition: opacity 280ms var(--ease-out); }
 .pz-ocasiones-cabeza li { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+/* ============================================================
+   75. Modo liviano (celulares y tabletas)
+   ------------------------------------------------------------
+   html.liviano lo pone index.html en pantallas táctiles: nada se
+   anima, nada se difumina por detrás y todo se ve de una vez. Lo
+   importante en el celular es poder navegar, no el movimiento.
+   ============================================================ */
+html.liviano *, html.liviano *::before, html.liviano *::after {
+  animation-duration: 0.01ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html.liviano { scroll-behavior: auto !important; overscroll-behavior-y: auto; }
+html.liviano body { overscroll-behavior-y: auto; }
+html.liviano #bottom-dock { transform: none !important; }
+html.liviano #bottom-dock, html.liviano .mobile-dock, html.liviano header, html.liviano nav { background-color: #faf6ef !important; }

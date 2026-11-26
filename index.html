@@ -78,15 +78,32 @@
     <link rel="stylesheet" href="tailwind.css?v=20261010-dock">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=20261125-android">
+    <link rel="stylesheet" href="styles.css?v=20261126-liviano">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261125-android">
+    <link rel="stylesheet" href="theme.css?v=20261126-liviano">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
          dark: de Tailwind llegue a pintarse. -->
     <script>
       document.documentElement.classList.remove('dark');
+      // Modo liviano en celulares y tabletas: sin animaciones, sin videos de
+      // fondo y sin desplazamientos suaves. Todo el sitio ya respeta
+      // "reducir movimiento", así que en celular se responde siempre que sí.
+      (function () {
+        var mm = window.matchMedia;
+        if (typeof mm !== 'function') return;
+        var cel = mm.call(window, '(pointer: coarse)').matches || mm.call(window, '(max-width: 899px)').matches;
+        if (!cel) return;
+        document.documentElement.classList.add('liviano');
+        var nada = function () {};
+        window.matchMedia = function (q) {
+          if (/prefers-reduced-motion:\s*reduce/.test(q)) {
+            return { matches: true, media: q, onchange: null, addEventListener: nada, removeEventListener: nada, addListener: nada, removeListener: nada };
+          }
+          return mm.call(window, q);
+        };
+      })();
     </script>
     
     <!-- Schema.org -->
@@ -1104,9 +1121,9 @@
     <script defer src="/_vercel/insights/script.js"></script>
 
     <!-- Scripts -->
-    <script src="app.js?v=20261125-android"></script>
-    <script src="motion.js?v=20261125-android" defer></script>
-    <script src="cuenta.js?v=20261125-android" defer></script>
+    <script src="app.js?v=20261126-liviano"></script>
+    <script src="motion.js?v=20261126-liviano" defer></script>
+    <script src="cuenta.js?v=20261126-liviano" defer></script>
     <script>
       // Registrar el Service Worker.
       //
