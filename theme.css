@@ -7138,3 +7138,7 @@ html.liviano .hero-pase img { transform: none; transition: opacity 1200ms ease !
   .hero-pase::after { content: ""; position: absolute; inset: 0; background: rgba(20, 12, 9, 0.28); }
   .hero-fondo-img::after { content: ""; position: absolute; inset: 0; background: rgba(20, 12, 9, 0.28); }
 }
+
+/* Catálogo: el celular no dibuja las tarjetas que están fuera de pantalla
+   (85 tarjetas de una vez trababan los teléfonos lentos). */
+#products-grid > .producto { content-visibility: auto; contain-intrinsic-size: auto 360px; }

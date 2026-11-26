@@ -6068,8 +6068,12 @@ function mostrarSeccion(seccionId, desdeToque) {
     // Asegurar que los productos se rendericen cuando se muestra la sección
     setTimeout(() => {
       // Si el contenedor está visible, renderizar productos
+      // Sólo si el catálogo aún no está armado: rehacer las 85 tarjetas en
+      // cada visita congelaba los celulares lentos casi 2 segundos.
       const productsSection = document.getElementById('productos');
-      if (productsSection && productsSection.style.display !== 'none') {
+      const grid = document.getElementById('products-grid');
+      const yaArmado = grid && grid.querySelector('.producto');
+      if (productsSection && productsSection.style.display !== 'none' && !yaArmado) {
         renderProductos();
         renderCategorias();
       }
