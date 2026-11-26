@@ -2226,6 +2226,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLazyVideosPersonalizadas();
   initNavegacionSecciones();
   initAtrasCierraCapas();
+  initAutoActualizar();
   
 });
 
@@ -5917,6 +5918,49 @@ function initNavegacionSecciones() {
     }
     mostrarSeccion(hash);
   });
+}
+
+// Actualización sola: si se publicó una versión nueva mientras la página
+// estaba abierta (o guardada en el celular), se carga sin que la persona
+// recargue. No interrumpe: espera a que cambie de sección o vuelva a la
+// pestaña, y nunca con una ventana abierta o escribiendo en un campo.
+function initAutoActualizar() {
+  const guion = document.querySelector('script[src*="app.js?v="]');
+  const version = guion ? guion.getAttribute('src').split('v=')[1] : '';
+  if (!version || !window.fetch) return;
+  let pendiente = false;
+  let ultima = 0;
+  const ocupado = () => {
+    const el = document.activeElement;
+    if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return true;
+    return !!document.querySelector('#product-modal:not(.hidden), #cart-modal:not(.hidden), #confirm-modal:not(.hidden), #cuenta-modal:not(.hidden), #image-zoom-modal:not(.hidden)');
+  };
+  const recargar = () => { if (pendiente && !ocupado()) location.reload(); };
+  const revisar = () => {
+    if (pendiente || document.hidden) return;
+    const ahora = Date.now();
+    if (ahora - ultima < 60000) return;
+    ultima = ahora;
+    fetch('/?version=' + ahora, { cache: 'no-store', headers: { Accept: 'text/html' } })
+      .then(r => (r.ok ? r.text() : ''))
+      .then(html => {
+        const m = html.match(/app\.js\?v=([^"'&]+)/);
+        if (m && m[1] !== version) pendiente = true;
+      })
+      .catch(() => {});
+  };
+  // Al volver a la pestaña o a la app: si hay versión nueva, se carga ya.
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) return;
+    if (pendiente) recargar(); else revisar();
+  });
+  // Al cambiar de sección también (la página va a cambiar de todos modos).
+  window.addEventListener('hashchange', () => setTimeout(recargar, 50));
+  document.addEventListener('click', (e) => {
+    if (e.target.closest && e.target.closest('a[href^="#"]')) setTimeout(recargar, 80);
+  });
+  setInterval(revisar, 3 * 60000);
+  setTimeout(revisar, 20000);
 }
 
 // Botón "atrás" del celular con una ventana abierta (ficha, carrito,
