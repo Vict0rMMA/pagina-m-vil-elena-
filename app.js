@@ -3102,7 +3102,8 @@ function renderProductos() {
         <div class="skeleton-image absolute inset-0"></div>
         <img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-          data-src="${imagen}"
+          data-src="${miniatura(imagen)}"
+          data-original="${imagen}"
           alt="${nombresProductos}"
           class="producto-img"
           decoding="async"
@@ -3132,7 +3133,8 @@ function renderProductos() {
         <div class="skeleton-image absolute inset-0"></div>
         <img
           src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
-          data-src="${imagen}"
+          data-src="${miniatura(imagen)}"
+          data-original="${imagen}"
           alt="${productoPrincipal.nombre}"
           class="producto-img"
           decoding="async"
@@ -3338,6 +3340,22 @@ function filtrarYMostrarProductos() {
     producto.style.display = debeMostrarse ? '' : 'none';
     producto.style.opacity = '';
     if (debeMostrarse) productosVisibles++;
+  });
+
+  // Las primeras fotos visibles se piden de inmediato (no esperan al
+  // observador): así no quedan recuadros vacíos al cambiar de categoría.
+  let primeras = 0;
+  productos.forEach(producto => {
+    if (primeras >= 4 || producto.style.display === 'none') return;
+    const img = producto.querySelector('img[data-src]');
+    if (img) {
+      img.loading = 'eager';
+      img.setAttribute('fetchpriority', 'high');
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+      img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+    }
+    primeras++;
   });
 
   const resumen = document.getElementById('busqueda-resumen');
@@ -4838,7 +4856,7 @@ function initDeseos() {
   // Los colores vivos de las franjas de las velas de Noche de Velitas.
   const COLORES_VELA = ['#F26B1D', '#1E88E5', '#2BB24C', '#F2C318', '#EC5A9B', '#8E44AD', '#E53935', '#9CCC2E', '#12A39A', '#4FB3E8'];
   const velaHTML = (d, i, extra) =>
-    `<span class="dsw-vela${extra}" style="--tinta:${COLORES_VELA[i % COLORES_VELA.length]};--alto:${90 + (i * 37 % 4) * 3}%;--letras:${d.length}">` +
+    `<span class="dsw-vela${extra}" style="--tinta:${COLORES_VELA[i % COLORES_VELA.length]};--alto:${90 + (i * 37 % 4) * 3}%;--letras:${d.length};--fs:${Math.min(15, Math.round(150 / Math.max(d.length, 3)))}px">` +
     `<span class="dsw-llama" aria-hidden="true"></span><span class="dsw-cuerpo"><span class="dsw-palabra">${d}</span></span></span>`;
   let ultimo = null;
   const cuenta = document.getElementById('deseo-cuenta');
@@ -5973,6 +5991,14 @@ function actualizarMenuActivo(seccionId) {
 const IMAGEN_MAX_MB = 8;
 
 function initPersonalizadas() {
+  // Las etiquetas de ocasiones abren WhatsApp con la ocasión ya escrita.
+  document.querySelectorAll('.pz-ocasion').forEach(boton => {
+    boton.addEventListener('click', () => {
+      const ocasion = boton.textContent.trim().toLowerCase();
+      window.open(WHATSAPP_API + encodeURIComponent('Hola, quiero una vela personalizada para ' + ocasion), '_blank');
+    });
+  });
+
   const form = document.getElementById('form-personalizada');
   if (!form) return;
 
