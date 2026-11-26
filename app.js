@@ -2225,6 +2225,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollToTop();
   initLazyVideosPersonalizadas();
   initNavegacionSecciones();
+  initAtrasCierraCapas();
   
 });
 
@@ -5897,6 +5898,55 @@ function initNavegacionSecciones() {
     }
     mostrarSeccion(hash);
   });
+}
+
+// Botón "atrás" del celular con una ventana abierta (ficha, carrito,
+// cuenta, foto ampliada): la cierra, en vez de cambiar de sección por
+// debajo y dejar la página bloqueada.
+function initAtrasCierraCapas() {
+  const ids = ['image-zoom-modal', 'confirm-modal', 'product-modal', 'cart-modal', 'cuenta-modal'];
+  const abierta = () => {
+    for (let i = 0; i < ids.length; i++) {
+      const m = document.getElementById(ids[i]);
+      if (m && !m.hidden && !m.classList.contains('hidden')) return m;
+    }
+    return null;
+  };
+  let marcada = false;
+  let ignorar = false;
+  const revisar = () => {
+    const m = abierta();
+    if (m && !marcada) {
+      history.pushState({ capa: 1 }, '', location.href);
+      marcada = true;
+    } else if (!m && marcada) {
+      // Se cerró con la X: se quita la entrada que se había agregado.
+      marcada = false;
+      ignorar = true;
+      history.back();
+    }
+  };
+  const cerrar = (m) => {
+    if (m.id === 'product-modal') cerrarModalProducto();
+    else if (m.id === 'cart-modal') cerrarCarrito();
+    else if (m.id === 'image-zoom-modal') cerrarImagenAmpliada();
+    else document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    if (!abierta()) document.body.style.overflow = '';
+  };
+  ids.forEach(id => {
+    const m = document.getElementById(id);
+    if (m && 'MutationObserver' in window) new MutationObserver(revisar).observe(m, { attributes: true, attributeFilter: ['class', 'hidden'] });
+  });
+  // La foto ampliada se crea al vuelo: se revisa también después de cada toque.
+  document.addEventListener('click', () => setTimeout(revisar, 80), true);
+  window.addEventListener('popstate', (e) => {
+    if (ignorar) { ignorar = false; e.stopImmediatePropagation(); return; }
+    const m = abierta();
+    if (!m) return;
+    e.stopImmediatePropagation();
+    marcada = false;
+    cerrar(m);
+  }, true);
 }
 
 function mostrarSeccion(seccionId, desdeToque) {
