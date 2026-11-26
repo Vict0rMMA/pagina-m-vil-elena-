@@ -5270,30 +5270,44 @@ function actualizarCarrusel() {
 // Fondo del hero: la foto ya está; el video llega después de cargar la
 // página y sólo corre mientras el hero se ve.
 function initHeroFondo() {
-  const video = document.querySelector('.hero-fondo-video');
-  if (!video || !video.dataset.src) return;
-  const red = navigator.connection || {};
-  const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reducido || red.saveData === true || /2g/.test(red.effectiveType || '')) return;
-
+  // Portada: la primera foto es el fondo (precargado); encima se turnan las
+  // demás con un fundido. Cada una se pide justo antes de su turno y sólo
+  // avanza mientras la portada se ve.
+  const capas = document.querySelectorAll('.hero-pase img');
+  if (!capas.length) return;
+  const ancho = window.matchMedia('(min-width: 900px)').matches;
+  const hero = document.querySelector('.hero') || capas[0].closest('section');
+  let visible = true;
+  let actual = 0;
+  if ('IntersectionObserver' in window && hero) {
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(hero);
+  }
+  const preparar = (img) => { if (img && !img.getAttribute('src')) img.src = ancho ? img.dataset.ancho : img.dataset.cel; };
+  const lista = (img) => img.complete && img.naturalWidth > 0;
   const arrancar = () => {
-    const ancho = video.dataset.srcAncho && window.matchMedia('(min-width: 900px)').matches;
-    video.src = ancho ? video.dataset.srcAncho : video.dataset.src;
-    video.addEventListener('playing', () => video.classList.add('lista'), { once: true });
-    // Si falla, la foto de debajo sigue ahí.
-    video.addEventListener('error', () => video.remove(), { once: true });
-    const p = video.play();
-    if (p && p.catch) p.catch(() => {});
-
-    if (!('IntersectionObserver' in window)) return;
-    new IntersectionObserver((entradas) => {
-      entradas.forEach(e => {
-        if (e.isIntersecting) { const q = video.play(); if (q && q.catch) q.catch(() => {}); }
-        else video.pause();
-      });
-    }, { threshold: 0.05 }).observe(video.closest('.hero') || video);
+    preparar(capas[0]);
+    setInterval(() => {
+      if (!visible || document.hidden) return;
+      const sig = (actual + 1) % (capas.length + 1);
+      if (sig > 0) {
+        const img = capas[sig - 1];
+        if (!lista(img)) { preparar(img); return; }
+        img.classList.add('activa');
+        preparar(capas[sig]);
+      } else {
+        // Vuelta a la primera: las de abajo se quitan sin fundido (están
+        // tapadas) y la de encima se desvanece sobre el fondo.
+        for (let k = 0; k < capas.length - 1; k++) {
+          capas[k].style.transition = 'none';
+          capas[k].classList.remove('activa');
+          void capas[k].offsetWidth;
+          capas[k].style.transition = '';
+        }
+        capas[capas.length - 1].classList.remove('activa');
+      }
+      actual = sig;
+    }, 4500);
   };
-
   if (document.readyState === 'complete') arrancar();
   else window.addEventListener('load', arrancar, { once: true });
 }
@@ -5341,6 +5355,11 @@ function initCapasFondo() {
 
 // Bloques tipo landing del inicio: la galería de Navidad abre cada
 // producto; si la hoja lo cambió de id, lleva al catálogo de Navidad.
+// Las fotos que se turnan (esencia y contacto) se mueven siempre, también
+// en el modo liviano y con "reducir movimiento": es un fundido cada pocos
+// segundos y sólo mientras se ven, no pesa. Lo pidió la dueña.
+function quietoReal() { return false; }
+
 function initLanding() {
   const anio = document.getElementById('ctc-anio');
   if (anio) anio.textContent = new Date().getFullYear();
@@ -5350,7 +5369,7 @@ function initLanding() {
   // justo antes de que le toque salir.
   const turnos = document.querySelectorAll('.lnd-turno');
   if (turnos.length && 'IntersectionObserver' in window &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      !quietoReal()) {
     let visible = false;
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.2 })
       .observe(turnos[0].parentElement);
@@ -5374,7 +5393,7 @@ function initLanding() {
   // Las fotos del contacto se van turnando, cada marco a su ritmo, y sólo
   // mientras se ven.
   const marcos = document.querySelectorAll('.ctc-foto-marco');
-  if (marcos.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (marcos.length && !quietoReal()) {
     let visibles = false;
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(([e]) => { visibles = e.isIntersecting; })

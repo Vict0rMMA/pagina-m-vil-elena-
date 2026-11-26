@@ -65,8 +65,8 @@
          servidos desde el propio dominio. -->
     <link rel="preload" as="font" type="font/woff2"
           href="assets/fonts/fa-solid-900-subset.woff2?v=0ac11b72" crossorigin>
-    <link rel="preload" as="image" href="assets/videos/posters/portada-taller-9x16.webp" media="(max-width: 899px)" fetchpriority="high">
-    <link rel="preload" as="image" href="assets/videos/posters/portada-taller-16x9.webp" media="(min-width: 900px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/portada/cel-1.webp" media="(max-width: 899px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/portada/ancho-1.webp" media="(min-width: 900px)" fetchpriority="high">
     <link rel="stylesheet" href="iconos.css?v=20261025-dock">
 
     <!-- Tailwind precompilado.
@@ -78,9 +78,9 @@
     <link rel="stylesheet" href="tailwind.css?v=20261010-dock">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=20261126-atras">
+    <link rel="stylesheet" href="styles.css?v=20261126-portada">
     <!-- Sistema de diseño: se carga al final y manda sobre lo anterior -->
-    <link rel="stylesheet" href="theme.css?v=20261126-atras">
+    <link rel="stylesheet" href="theme.css?v=20261126-portada">
     
     <!-- La identidad visual es la crema del logo, así que el sitio es claro
          siempre. Se limpia antes de renderizar para que ninguna variante
@@ -94,6 +94,7 @@
         var mm = window.matchMedia;
         if (typeof mm !== 'function') return;
         var cel = mm.call(window, '(pointer: coarse)').matches || mm.call(window, '(max-width: 899px)').matches;
+        window.__quietoReal = mm.call(window, '(prefers-reduced-motion: reduce)').matches;
         if (!cel) return;
         document.documentElement.classList.add('liviano');
         var nada = function () {};
@@ -233,9 +234,12 @@
                 <div class="hero-fondo-img" role="presentation"></div>
                 <!-- Videos animados con las fotos reales (herramientas/videos-animados.py):
                      vertical en el celular, tres paneles en pantalla ancha. -->
-                <video class="hero-fondo-video" muted loop playsinline preload="none"
-                       data-src="assets/videos/portada-taller-9x16.mp4"
-                       data-src-ancho="assets/videos/portada-taller-16x9.mp4"></video>
+                <!-- Fotos de producto que se van turnando con un fundido. -->
+                <div class="hero-pase">
+                    <img data-cel="assets/portada/cel-2.webp" data-ancho="assets/portada/ancho-2.webp" alt="" decoding="async">
+                    <img data-cel="assets/portada/cel-3.webp" data-ancho="assets/portada/ancho-3.webp" alt="" decoding="async">
+                    <img data-cel="assets/portada/cel-4.webp" data-ancho="assets/portada/ancho-4.webp" alt="" decoding="async">
+                </div>
             </div>
             <div class="hero-inner">
                 <img src="assets/logos/elena-marca-240.webp" alt="Logo de Elena Velas y Aromas: una vela encendida" class="hero-logo" width="118" height="118" loading="eager" aria-hidden="true">
@@ -436,7 +440,7 @@
                         <div class="dsw-chispas" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
                         <div class="dsw-velas" id="deseo-palabra" aria-live="polite"></div>
                         <div class="dsw-base" aria-hidden="true"></div>
-                        <p class="deseo-pista dsw-pista" id="deseo-pista">Toca un deseo y mira c&oacute;mo queda escrito en tu vela.</p>
+                        <p class="deseo-pista dsw-pista" id="deseo-pista">Elige tus deseos y aqu&iacute; los ver&aacute;s escritos en tus velas</p>
                     </div>
                 </div>
 
@@ -752,15 +756,10 @@
                  con envíos y pagos en crema, y las redes como lista grande. -->
             <div class="ctc-cabeza">
             <div class="capa-fondo capa-mosaico" aria-hidden="true">
-                <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       data-poster="assets/videos/posters/contacto-luz-9x16.webp"
-                       data-src="assets/videos/contacto-luz-9x16.mp4"></video>
-                <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       data-poster="assets/productos/Videos/posters/cajas-estrellas-navidad.jpg"
-                       data-src="assets/productos/Videos/cajas-estrellas-navidad-web.mp4"></video>
-                <video class="capa-fondo-video" muted loop playsinline preload="none"
-                       data-poster="assets/productos/Videos/posters/velas-degrade.jpg"
-                       data-src="assets/productos/Videos/velas-degrade-web.mp4"></video>
+                <picture>
+                    <source media="(min-width: 900px)" srcset="assets/contacto-fondo-ancho.webp">
+                    <img class="capa-fondo-img" src="assets/contacto-fondo-cel.webp" alt="" loading="lazy" decoding="async">
+                </picture>
             </div>
                 <div class="lnd-envoltura ctc-cabeza-grid">
                     <div data-revelar>
@@ -1121,9 +1120,9 @@
     <script defer src="/_vercel/insights/script.js"></script>
 
     <!-- Scripts -->
-    <script src="app.js?v=20261126-atras"></script>
-    <script src="motion.js?v=20261126-atras" defer></script>
-    <script src="cuenta.js?v=20261126-atras" defer></script>
+    <script src="app.js?v=20261126-portada"></script>
+    <script src="motion.js?v=20261126-portada" defer></script>
+    <script src="cuenta.js?v=20261126-portada" defer></script>
     <script>
       // Registrar el Service Worker.
       //

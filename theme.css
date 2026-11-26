@@ -6875,10 +6875,10 @@ input#product-search::-webkit-search-cancel-button { -webkit-appearance: none; a
 /* La foto de la portada, como fondo (ver index.html): mismas versiones
    para celular y computador que el <link rel="preload"> de la cabecera. */
 .hero-fondo-img {
-  background: #1E1410 url("assets/videos/posters/portada-taller-9x16.webp") 50% 40% / cover no-repeat;
+  background: #1E1410 url("assets/portada/cel-1.webp") 50% 45% / cover no-repeat;
 }
 @media (min-width: 900px) {
-  .hero-fondo-img { background-image: url("assets/videos/posters/portada-taller-16x9.webp"); }
+  .hero-fondo-img { background-image: url("assets/portada/ancho-1.webp"); }
 }
 
 /* ============================================================
@@ -7028,3 +7028,113 @@ html.liviano { scroll-behavior: auto !important; overscroll-behavior-y: auto; }
 html.liviano body { overscroll-behavior-y: auto; }
 html.liviano #bottom-dock { transform: none !important; }
 html.liviano #bottom-dock, html.liviano .mobile-dock, html.liviano header, html.liviano nav { background-color: #faf6ef !important; }
+
+/* ============================================================
+   76. Contacto con fotos de producto y movimiento en "Nuestra esencia"
+   ============================================================ */
+.capa-mosaico { display: block; background: #1A120E; }
+.capa-mosaico picture { position: absolute; inset: 0; }
+.ctc-cabeza {
+  --velo: linear-gradient(90deg, rgba(20, 12, 9, 0.86) 0%, rgba(20, 12, 9, 0.62) 50%, rgba(20, 12, 9, 0.5) 100%);
+}
+@media (max-width: 899px) {
+  .ctc-cabeza { --velo: linear-gradient(180deg, rgba(20, 12, 9, 0.62) 0%, rgba(20, 12, 9, 0.8) 100%); }
+}
+/* En el modo liviano siguen moviéndose la cinta y las fotos que se turnan. */
+html.liviano .cinta-pista { animation-duration: 70s !important; animation-iteration-count: infinite !important; }
+html.liviano .cinta-inversa .cinta-pista { animation-duration: 80s !important; }
+html.liviano .lnd-collage .lnd-turno img,
+html.liviano .ctc-fotos .ctc-foto-marco img { transition-duration: 600ms !important; }
+/* La cinta de fotos se mueve siempre (también con "reducir movimiento"):
+   sólo se desliza y se pausa fuera de pantalla. */
+.cinta .cinta-pista {
+  animation-name: cinta-corre !important;
+  animation-duration: 70s !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+  animation-delay: 0s !important;
+}
+.cinta .cinta-inversa .cinta-pista, .cinta-inversa .cinta-pista { animation-duration: 80s !important; animation-direction: reverse !important; }
+.cinta .cinta-fila { overflow: hidden !important; }
+.cinta .cinta-copia { display: flex !important; }
+.cinta.pausada .cinta-pista { animation-play-state: paused !important; }
+.lnd-collage .lnd-turno img, .ctc-fotos .ctc-foto-marco img { transition: opacity 600ms ease !important; }
+
+/* ============================================================
+   77. Portada con fotos que se turnan
+   ------------------------------------------------------------
+   Fundido lento entre fotos de producto, con un acercamiento suave
+   en computador. En el celular sólo el fundido (lo más liviano).
+   Se mueve también con "reducir movimiento": lo pidió la dueña.
+   ============================================================ */
+.hero-pase { position: absolute; inset: 0; }
+.hero-pase img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 1400ms ease, transform 6000ms linear !important;
+}
+.hero-pase img.activa { opacity: 1; transform: scale(1); }
+html.liviano .hero-pase img { transform: none; transition: opacity 1200ms ease !important; }
+
+/* ============================================================
+   78. Velas de deseo más bonitas
+   ------------------------------------------------------------
+   Cera marfil con volumen, una banda de color lisa que abraza la vela
+   con filos dorados, y la palabra en blanco. El mensaje de arriba es
+   texto suave, sin cajita.
+   ============================================================ */
+.dsw-cuerpo {
+  border-radius: 7px 7px 4px 4px / 5px 5px 3px 3px;
+  background:
+    radial-gradient(ellipse 140% 22% at 50% 0%, rgba(255, 206, 130, 0.4), rgba(255, 206, 130, 0) 100%),
+    linear-gradient(90deg, #D8CDB9 0%, #F1EADD 14%, #FFFDF8 34%, #FCF7EE 56%, #EDE4D3 78%, #CDBFA6 100%);
+  box-shadow: inset 0 -14px 16px -14px rgba(80, 60, 30, 0.4), 0 6px 14px -6px rgba(0, 0, 0, 0.55);
+}
+.dsw-cuerpo::after {
+  /* El borde de cera derretida arriba. */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 6%;
+  right: 6%;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 40%, #FFF8E8 0%, #EADFC9 70%, rgba(234, 223, 201, 0) 100%);
+  pointer-events: none;
+}
+.dsw-cuerpo::before {
+  inset: 15% 0 11% 0 !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  clip-path: none !important;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 20%, rgba(255, 255, 255, 0.3) 36%, rgba(255, 255, 255, 0) 52%, rgba(0, 0, 0, 0.28) 100%),
+    var(--tinta) !important;
+  box-shadow: inset 0 2px 0 #E4C677, inset 0 -2px 0 #E4C677, inset 0 3px 0 rgba(0, 0, 0, 0.15), inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+}
+.dsw-palabra {
+  color: #FFFFFF !important;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45) !important;
+  letter-spacing: 0.01em;
+}
+.dsw-pista {
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  color: rgba(236, 214, 172, 0.82) !important;
+}
+@media (max-width: 899px) {
+  .hero-pase::after { content: ""; position: absolute; inset: 0; background: rgba(20, 12, 9, 0.28); }
+  .hero-fondo-img::after { content: ""; position: absolute; inset: 0; background: rgba(20, 12, 9, 0.28); }
+}
